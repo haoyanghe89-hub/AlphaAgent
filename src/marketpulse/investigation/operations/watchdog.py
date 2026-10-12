@@ -149,6 +149,13 @@ class RecoveryWatchdog:
                 )
             ).all()
         for run in runs:
+            if run.workflow_version in {
+                "quant-backtest-readiness-v1",
+                "quant-history-acquisition-v1",
+            }:
+                # Finished input admission is not a failed model execution.
+                # It requires new historical data, not an automatic web retry.
+                continue
             if run.status in _ACTIVE:
                 # Offline recording uses LIVE mode with a historical synthetic clock.
                 # It has a separate executor and must never be stopped by this service.

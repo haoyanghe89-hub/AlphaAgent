@@ -9,6 +9,7 @@ test('chart presentation uses supplied cells, preserves gaps and respects reduce
   assert.equal(option.series.length,2)
   assert.deepEqual(option.series[0].data,[10.123456789,null])
   assert.equal(option.series[1].yAxisIndex,1)
+  assert.deepEqual(option.series[1].data, [-30, null])
   assert.equal(option.series[0].connectNulls,false)
 })
 test('supplier disclosure never becomes independent PE or PB', () => {

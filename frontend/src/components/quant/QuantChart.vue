@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useTheme } from '../../composables/useTheme.js'
 import { chartOptions, seriesLabel } from '../../utils/quantChartOptions.js'
+import { cssChartPalette } from '../../utils/prototypeChartOptions.js'
 const props = defineProps({ exhibit: { type: Object, required: true } })
 const emit = defineEmits(['cell'])
 const root = ref(null), error = ref(''), adjustment = ref('raw')
@@ -12,8 +13,10 @@ let chart, observer, media, disposed = false
 function render() {
   if (!chart) return
   const style = getComputedStyle(document.documentElement)
-  chart.setOption(chartOptions(props.exhibit, { adjustment: adjustment.value, reducedMotion: media.matches, accent: style.getPropertyValue('--accent').trim(), text: style.getPropertyValue('--text-muted').trim(), border: style.getPropertyValue('--border-default').trim() }), true)
+  chart.setOption(chartOptions(props.exhibit, { adjustment: adjustment.value, reducedMotion: media.matches, palette: cssChartPalette(style) }), true)
   root.value.dataset.chartAnimation = String(chart.getOption().animation)
+  const option = chart.getOption()
+  root.value.dataset.chartStyle = JSON.stringify({ color: option.color, grid: option.grid[0], legend: option.legend[0], textStyle: option.textStyle, tooltip: option.tooltip[0] })
 }
 onMounted(async () => {
   media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -36,7 +39,7 @@ onUnmounted(() => { disposed = true; observer?.disconnect(); media?.removeEventL
     <p v-if="exhibit.drawdown" class="muted">当前运行口径的最大回撤峰值 {{ exhibit.drawdown.peak_date || '缺失' }} · 谷值 {{ exhibit.drawdown.trough_date || '缺失' }} · {{ exhibit.drawdown.recovery_date ? '恢复于 ' + exhibit.drawdown.recovery_date : '未观察到恢复日（或无回撤）' }}</p>
     <div ref="root" class="chart-canvas" role="img" :aria-label="exhibit.title + '；可展开原值表进行键盘访问'" :data-chart-kind="exhibit.kind"></div>
     <p v-if="error" role="alert">{{ error }}</p>
-    <details class="chart-data"><summary>原值与证据定位</summary><div class="chart-table-scroll" tabindex="0" aria-label="原值数据表，可水平滚动"><table><thead><tr><th>序列 / 报告期</th><th>冻结原值 / 单位</th><th>定位</th></tr></thead><tbody><template v-for="series in selectedSeries" :key="series.name"><tr v-for="point in series.points" :key="point.metric_path"><td>{{ seriesLabel(series.name) }}<br>{{ point.x }}</td><td>{{ point.value ?? '缺失' }} {{ series.unit }}<small v-if="point.missing_reason"><br>{{ point.missing_reason }}</small></td><td><button class="quiet-button" @click="emit('cell', point.metric_path)">{{ point.metric_path }}</button></td></tr></template></tbody></table></div></details>
+    <details class="chart-data"><summary>原值与证据定位</summary><p class="muted">{{ exhibit.note }} · 研究时点 {{ exhibit.asof }}</p><div class="chart-table-scroll" tabindex="0" aria-label="原值数据表，可水平滚动"><table><thead><tr><th>序列 / 报告期</th><th>冻结原值 / 单位</th><th>定位</th></tr></thead><tbody><template v-for="series in selectedSeries" :key="series.name"><tr v-for="point in series.points" :key="point.metric_path"><td>{{ seriesLabel(series.name) }}<br>{{ point.x }}</td><td>{{ point.value ?? '缺失' }} {{ series.unit }}<small v-if="point.missing_reason"><br>{{ point.missing_reason }}</small></td><td><button class="quiet-button" @click="emit('cell', point.metric_path)">{{ point.metric_path }}</button></td></tr></template></tbody></table></div></details>
   </figure>
 </template>
 <style scoped>

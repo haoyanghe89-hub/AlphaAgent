@@ -14,9 +14,9 @@ from marketpulse.investigation.validation.profiles import QuantitativeProfile
 
 from .contracts import digest
 from .domain import FrozenModel
-from .evidence import ComputationEvidence, build_computation_evidence
+from .evidence import ComputationEvidence, computation_evidence_cells
 from .storage.models import QuantReportMaterialRow
-from .validation import ComputationValidation, verify_computation_claim
+from .validation import ComputationValidation, verify_computation_claims
 
 
 class QuantClaim(FrozenModel):
@@ -50,6 +50,7 @@ class QuantReportMaterial(FrozenModel):
 
 
 LABELS = {
+    "dcf_per_share": "DCF条件情景每股估算（非目标价，基于年报期末输入）",
     "sharpe": "夏普比率",
     "beta": "Beta",
     "correlation": "相关系数",
@@ -111,6 +112,7 @@ async def build_material(service, *, job_id) -> QuantReportMaterial:
     instrument_name = manifest["instrument"]["name"]
     claims, limits, diagnostics = [], {}, []
     scalar_names = {
+        "dcf_per_share",
         "sharpe",
         "beta",
         "correlation",
@@ -130,6 +132,14 @@ async def build_material(service, *, job_id) -> QuantReportMaterial:
         "pe_disclosed_relative_difference",
         "pb_disclosed_relative_difference",
     }
+    evidence_cells = computation_evidence_cells(bundle)
+    claimed = tuple(
+        evidence
+        for cell, evidence in zip(bundle.values, evidence_cells, strict=True)
+        if cell.name in scalar_names and cell.value is not None
+    )
+    checked = await verify_computation_claims(service, job_id=job_id, evidence=claimed)
+    validations = {e.metric_path: v for e, v in zip(claimed, checked, strict=True)}
     for index, cell in enumerate(bundle.values):
         if cell.name not in scalar_names:
             continue
@@ -141,8 +151,8 @@ async def build_material(service, *, job_id) -> QuantReportMaterial:
             limits[key] = reason
             diagnostics.append(f"{cell.name}: {cell.missing_reason}")
             continue
-        evidence = build_computation_evidence(bundle, metric_path=f"/values/{index}")
-        validation = await verify_computation_claim(service, job_id=job_id, evidence=evidence)
+        evidence = evidence_cells[index]
+        validation = validations[evidence.metric_path]
         profile = QuantitativeProfile.evaluate_computation(validation)
         if profile.recommended_status != validation.status:
             raise ValueError("quantitative profile disagrees with deterministic gate")

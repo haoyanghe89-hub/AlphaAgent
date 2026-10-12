@@ -98,8 +98,15 @@ class CitationValidator:
         now: datetime,
     ) -> list[ReportValidationFinding]:
         findings: list[ReportValidationFinding] = []
+        computation_batch = None
+        if snapshot.semantic_payload.quantitative_material is not None:
+            from marketpulse.quant.citations import _ComputationCitationBatch
+
+            computation_batch = _ComputationCitationBatch(self._quant_service)
         for citation in citations:
-            failure = self._validate_one(session, citation=citation, snapshot=snapshot)
+            failure = self._validate_one(
+                session, citation=citation, snapshot=snapshot, computation_batch=computation_batch
+            )
             if failure is not None:
                 code, detail = failure
                 findings.append(
@@ -119,7 +126,12 @@ class CitationValidator:
         return findings
 
     def _validate_one(
-        self, session: Session, *, citation: Citation, snapshot: ReportInputSnapshot
+        self,
+        session: Session,
+        *,
+        citation: Citation,
+        snapshot: ReportInputSnapshot,
+        computation_batch=None,
     ) -> tuple[str, str] | None:
         if citation.report_input_snapshot_hash != snapshot.snapshot_hash:
             return "CITATION_SNAPSHOT_BINDING", "citation not bound to current snapshot"
@@ -150,6 +162,7 @@ class CitationValidator:
                         created_at=citation.created_at,
                     ),
                     ordinal=citation.display_ordinal,
+                    batch=computation_batch,
                 )
                 if expected.citation_hash != citation.citation_hash:
                     raise ValueError("citation drift")

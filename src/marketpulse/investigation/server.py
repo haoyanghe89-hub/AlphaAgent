@@ -7,6 +7,7 @@ the two Phase 5 routers required by the local console.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 from collections.abc import AsyncIterator
@@ -104,6 +105,16 @@ def create_app(
                     live_runner,
                     Path(os.getenv("QUANT_CALL_JOURNAL_ROOT", "data/quant-call-journal")),
                 )
+            from marketpulse.quant.live.store import ResearchStore
+
+            research_root = Path(
+                os.getenv("QUANT_CALL_JOURNAL_ROOT", "data/quant-call-journal")
+            ).parent
+            app.state.research_store = ResearchStore(
+                sessions, live_runner.blobs, research_root / "live-research"
+            )
+            app.state.research_jobs = {}
+            app.state.research_store.interrupt_abandoned()
             live_runner.recover_interrupted()
             app.state.live_investigation = live_runner
             replay_runner = east_palestine_replay
@@ -127,6 +138,12 @@ def create_app(
             try:
                 yield
             finally:
+                for task in list(app.state.research_jobs.values()):
+                    task.cancel()
+                if app.state.research_jobs:
+                    await asyncio.gather(
+                        *list(app.state.research_jobs.values()), return_exceptions=True
+                    )
                 await watchdog.close()
                 await live_runner.shutdown()
 
@@ -147,6 +164,14 @@ def create_app(
     from marketpulse.quant.api import router as quant_router
 
     app.include_router(quant_router)
+    from marketpulse.quant.live.research_api import compat_router
+    from marketpulse.quant.live.research_api import router as research_router
+
+    app.include_router(research_router)
+    app.include_router(compat_router)
+    from marketpulse.quant.completion import router as completion_router
+
+    app.include_router(completion_router)
     app.include_router(review_router)
 
     @app.get("/api/health")

@@ -150,12 +150,15 @@ class ReportInputSemanticPayload(DomainModel):
     sources: tuple[SnapshotSource, ...] = ()
     limitations: tuple[NonEmptyText, ...] = ()
     quantitative_material: str | None = None
+    comparison_material: str | None = None
 
     @model_serializer(mode="wrap")
     def compatible_serialization(self, handler):
         value = handler(self)
         if self.quantitative_material is None:
             value.pop("quantitative_material", None)
+        if self.comparison_material is None:
+            value.pop("comparison_material", None)
         return value
 
 
@@ -213,6 +216,8 @@ class ReportInputSnapshot(DomainModel):
 
 def compute_snapshot_hash(payload: ReportInputSemanticPayload) -> str:
     """Hash the complete canonical semantic payload."""
+    if payload.comparison_material is not None:
+        return canonical_hash("quant-comparison-input-snapshot-v1", payload)
     domain = (
         "quant-report-input-snapshot-v2"
         if payload.quantitative_material is not None
@@ -267,6 +272,9 @@ def compute_source_state_fingerprint(payload: ReportInputSemanticPayload) -> str
     if payload.quantitative_material is not None:
         material["quantitative_material"] = payload.quantitative_material
         return canonical_hash("quant-report-source-state-v2", material)
+    if payload.comparison_material is not None:
+        material["comparison_material"] = payload.comparison_material
+        return canonical_hash("quant-comparison-source-state-v1", material)
     return canonical_hash(SOURCE_STATE_HASH_DOMAIN, material)
 
 

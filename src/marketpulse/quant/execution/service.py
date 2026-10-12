@@ -241,7 +241,7 @@ class QuantService:
             row.status = "CANCELLED" if error == "CancelledError" else "FAILED"
             row.error_code, row.lease_until, row.lease_token = error, None, None
 
-    def input_for(self, job_id):
+    def input_for(self, job_id, *, require_current_environment=True):
         with self.sessions() as session:
             row = session.get(ComputeJobRow, job_id)
             if not row:
@@ -255,7 +255,7 @@ class QuantService:
             raise ValueError("frozen input drift")
         current = json.loads(environment(self.root))
         pinned = json.loads(request.environment_json)
-        if (
+        if require_current_environment and (
             current["source_tree_hash"] != pinned["source_tree_hash"]
             or current["lock_hash"] != pinned["lock_hash"]
         ):

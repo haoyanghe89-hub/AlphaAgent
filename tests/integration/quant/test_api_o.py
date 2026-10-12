@@ -66,9 +66,10 @@ def test_start_query_unverified_locators_eventloop_and_archive(tmp_path, monkeyp
         with app.state.inv_sessions() as session:
             assert (
                 session.execute(text("select version_num from alembic_version")).scalar_one()
-                == "20261004_09"
+                == "20261010_10"
             )
         payload = freeze_inputs(app)
+        payload["question"] = "全面分析平安银行的历史收益与估值"
         assert client.get("/api/quant/instruments?q=000001").json()[0]["instrument_id"] == ID
         assert (
             client.post("/api/quant/runs", json={**payload, "date_end": "2024-06-13"}).status_code
@@ -89,6 +90,15 @@ def test_start_query_unverified_locators_eventloop_and_archive(tmp_path, monkeyp
                 break
             time.sleep(0.2)
         assert detail["run"]["status"] == "COMPLETED", detail
+        assert detail["plan"]["question"] == payload["question"]
+        assert [node["stage"] for node in detail["process"]] == [
+            "planner",
+            "data",
+            "analyst",
+            "verifier",
+            "writer",
+        ]
+        assert all(node["status"] == "COMPLETED" for node in detail["process"])
         assert detail["report_id"] and detail["values"] and 1 <= len(detail["charts"]) <= 3
         assert all(
             v["status"] == "UNVERIFIED"
@@ -103,6 +113,13 @@ def test_start_query_unverified_locators_eventloop_and_archive(tmp_path, monkeyp
         assert citation.status_code == 200, citation.text
         assert citation.json()["evidence"]["locator_type"] == "COMPUTATION_CELL"
         assert citation.json()["claim"]["validation_status"] == "UNVERIFIED"
+        overview = client.get("/api/quant/overview").json()
+        assert overview["mode"] == "historical_frozen" and not overview["indices"]
+        stock = overview["stocks"][0]
+        assert stock["run_id"] == started["run_id"]
+        price = stock["quote"]
+        assert price["value"] == "99" and price["status"] == "UNVERIFIED"
+        assert price in detail["values"] and price["cell_hash"]
         assert (
             client.get("/api/quant/runs?status=COMPLETED&limit=1").json()[0]["run_id"]
             == started["run_id"]
@@ -140,3 +157,6 @@ def test_cancel_acquisition_persists_partial_report(tmp_path, monkeypatch):
         detail = client.get("/api/quant/runs/" + result["run_id"]).json()
         assert detail["report_id"] and detail["run"]["status"] == "COMPLETED"
         assert not detail["values"]
+        assert detail["process"][1]["status"] == "DEGRADED"
+        assert detail["process"][-1]["status"] == "COMPLETED"
+        assert detail["process"][2]["status"] == "NOT_RECORDED"

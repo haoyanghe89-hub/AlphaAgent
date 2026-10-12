@@ -6,7 +6,7 @@ from sqlalchemy import select
 
 from marketpulse.investigation.persistence.models import ClaimRow, ValidationResultRow
 
-from .evidence import build_computation_evidence
+from .evidence import computation_evidence_cells
 from .execution.service import check_bundle, check_input_binding
 from .reporting import load_material
 from .storage.models import ComputeJobRow, SnapshotOwnershipRow
@@ -30,19 +30,19 @@ def presentation(service, run_id):
             raise ValueError("job/material mismatch")
         bundle = service.bundle_for(job.job_id)
         check_bundle(bundle)
-        check_input_binding(bundle, service.input_for(job.job_id))
+        checked_input = service.input_for(job.job_id, require_current_environment=False)
+        check_input_binding(bundle, checked_input)
         if (
             bundle.output_hash != material.output_hash
             or bundle.manifest_hash != material.manifest_hash
         ):
             raise ValueError("material artifact hash mismatch")
-        from marketpulse.investigation.persistence.models import InvestigationRunRow
+        from marketpulse.investigation.persistence.models import InvestigationRunRow, ReportRow
 
         owner = session.get(InvestigationRunRow, run_id).investigation_id
         for snapshot_id in bundle.input_snapshot_ids:
             if not session.get(SnapshotOwnershipRow, (owner, snapshot_id)):
                 raise PermissionError("input ownership missing")
-            service.store.load(snapshot_id)
         statuses = {}
         for claim in material.claims:
             persisted = session.scalar(
@@ -68,7 +68,14 @@ def presentation(service, run_id):
             statuses[claim.evidence.metric_path] = claim.validation.status
         from .storage.models import QuantCitationRow
 
-        citations = session.scalars(select(QuantCitationRow)).all()
+        # Identical followups may share a computation artifact. Their report
+        # citations remain bound to the original run/version, never its sibling.
+        citations = session.scalars(
+            select(QuantCitationRow)
+            .join(ReportRow, QuantCitationRow.report_id == ReportRow.report_id)
+            .where(ReportRow.run_id == run_id)
+            .order_by(ReportRow.version)
+        ).all()
         citation_by_path = {
             c.payload.get("canonical_locator", {}).get("metric_path"): c.citation_id
             for c in citations
@@ -77,9 +84,9 @@ def presentation(service, run_id):
     values = []
     manifest = json.loads(bundle.manifest_json)
     providers = {s["snapshot_id"]: s["provider"] for s in manifest["inputs"]}
-    for index, value in enumerate(bundle.values):
+    proofs = computation_evidence_cells(bundle)
+    for index, (value, ev) in enumerate(zip(bundle.values, proofs, strict=True)):
         path = f"/values/{index}"
-        ev = build_computation_evidence(bundle, metric_path=path)
         values.append(
             dict(
                 **value.model_dump(mode="json"),
@@ -164,9 +171,89 @@ def presentation(service, run_id):
         charts[0]["drawdown"] = {
             k: drawdown[k] for k in ("peak_date", "trough_date", "recovery_date", "metric_path")
         }
+    klines = []
+    for adjustment in ("qfq", "raw", "hfq"):
+        by_kind = {
+            kind: [v for v in values if v["name"] == f"chart_kline_{kind}_{adjustment}"]
+            for kind in ("open", "close", "low", "high", "volume", "ma20", "ma60")
+        }
+        if not by_kind["open"]:
+            continue
+
+        def column(kind, by_kind=by_kind):
+            return [float(v["value"]) if v["value"] is not None else None for v in by_kind[kind]]
+
+        klines.append(
+            dict(
+                kind="kline",
+                adjustment=adjustment,
+                title="日K线（冻结历史，"
+                + {"qfq": "前复权", "raw": "未复权", "hfq": "后复权"}[adjustment]
+                + "）+ MA20/MA60",
+                x=[v["row_keys"][0] for v in by_kind["open"]],
+                ohlc=[
+                    list(row)
+                    for row in zip(
+                        *(column(k) for k in ("open", "close", "low", "high")), strict=True
+                    )
+                ],
+                ma20=column("ma20"),
+                ma60=column("ma60"),
+                volume=[v / 100 if v is not None else None for v in column("volume")],
+                cells=by_kind,
+                artifact_id=bundle.artifact_id,
+                note="开高低收取自冻结原始行情；均线由离线计算器计算。成交量原值为股，图中转换为手（100股）；缺项与均线预热期留空。",
+            )
+        )
+    dcf_values = {v["name"].removeprefix("dcf_"): v for v in values if v["name"].startswith("dcf_")}
+    sensitivities = [v for v in values if v["name"] == "chart_dcf_sensitivity"]
+    dcf = dict(
+        cells=dcf_values,
+        sensitivity=sensitivities,
+        assumptions=manifest["spec"].get("dcf"),
+        note=(
+            "5+5年 FCFF 增长情景与永续终值；以年报期末为估值基准，非当前目标价。"
+            "营运资本使用现金流附注代理，债务与少数权益用账面值；未剥离财务子公司、"
+            "未归一化营运资本释放，未加入非经营性投资公允价值。每股分母为年末发行股数"
+            "减公司回购专户股数，未模拟未来稀释。与参考价的数据时点不同，不代表当前低估或预期收益。"
+        ),
+        source_url=None,
+        input_check="UNAVAILABLE",
+    )
+    source = next(
+        (
+            s
+            for s in checked_input.snapshots
+            if s.result.request.normalizer_version == "dcf-official-v1"
+        ),
+        None,
+    )
+    if source:
+        row = json.loads(source.result.records_json)[0]
+        dcf.update(
+            source_url=row["source_url"],
+            document_sha256=row["document_sha256"],
+            base_date=row["period_end"],
+            published_at=row["available_at"],
+            input_check=json.loads(source.result.crosscheck_json).get("status", "UNAVAILABLE"),
+        )
+    from .execution.environment import environment
+
+    pinned_environment = json.loads(checked_input.environment_json)
+    current_environment = json.loads(environment(service.root))
+    same_environment = all(
+        pinned_environment[k] == current_environment[k] for k in ("source_tree_hash", "lock_hash")
+    )
     return dict(
+        environment=dict(
+            recorded=pinned_environment,
+            matches_current=same_environment,
+            note="历史产物与冻结输入已通过完整性校验；复算需要生成时环境。",
+        ),
         values=values,
         charts=charts[:3],
+        klines=klines,
+        dcf=dcf,
         gaps=material.limitations,
         evidence_count=len(material.claims),
         citation_count=len(citation_by_path),

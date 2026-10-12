@@ -71,6 +71,11 @@ class CitationFactory:
         claim_keys = {claim.stable_key for claim in snapshot.semantic_payload.claims}
         ordinal = 0
         finding_seq = 0
+        computation_batch = None
+        if snapshot.semantic_payload.quantitative_material is not None:
+            from marketpulse.quant.citations import _ComputationCitationBatch
+
+            computation_batch = _ComputationCitationBatch(self._quant_service)
         for section in draft.sections:
             for unit in section.units:
                 if unit.content_class is not ContentClass.FACTUAL_ASSERTION:
@@ -101,6 +106,7 @@ class CitationFactory:
                         unit_key=unit.unit_key,
                         report=report,
                         ordinal=ordinal,
+                        computation_batch=computation_batch,
                     )
                     if chain is not None:
                         citations.append(chain)
@@ -132,6 +138,7 @@ class CitationFactory:
         unit_key: str,
         report: Report,
         ordinal: int,
+        computation_batch=None,
     ) -> tuple[Citation | None, tuple[str, str] | None]:
         if snapshot.semantic_payload.quantitative_material is not None and claim_key.startswith(
             "qclaim_"
@@ -148,6 +155,7 @@ class CitationFactory:
                     unit_key=unit_key,
                     report=report,
                     ordinal=ordinal,
+                    batch=computation_batch,
                 ), None
             except (ValueError, PermissionError, KeyError):
                 return None, (

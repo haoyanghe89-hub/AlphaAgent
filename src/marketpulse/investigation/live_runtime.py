@@ -227,6 +227,12 @@ class LiveInvestigationService:
         return run_id
 
     def resume(self, run_id: str, request: ResumeRequest, *, automatic: bool = False) -> None:
+        run = self.repository.get(InvestigationRun, run_id)
+        if run.workflow_version in {"quant-backtest-readiness-v1", "quant-history-acquisition-v1"}:
+            raise RecoveryConflict(
+                "BACKTEST_INPUTS_UNAVAILABLE",
+                "该任务已保存数据检查结果；补齐历史输入后请创建新检查，不能恢复为网页调查。",
+            )
         self._ensure_available()
         task = self.tasks.get(run_id)
         if task is not None and not task.done():
@@ -275,6 +281,10 @@ class LiveInvestigationService:
                 row.completed_at = row.updated_at
                 # Keep ownership until the cancelled step records its final checkpoint.
         task.cancel()
+        run = self.repository.get(InvestigationRun, run_id)
+        if run.workflow_version == "quant-history-acquisition-v1":
+            await asyncio.gather(task, return_exceptions=True)
+            return True
         if self.quant_service is not None:
             await self.quant_service.cancel_run(run_id)
         await asyncio.gather(task, return_exceptions=True)
@@ -306,6 +316,11 @@ class LiveInvestigationService:
             task.cancel()
         await asyncio.gather(*(task for _, task in pending), return_exceptions=True)
         for run_id, _ in pending:
+            if (
+                self.repository.get(InvestigationRun, run_id).workflow_version
+                == "quant-history-acquisition-v1"
+            ):
+                continue
             await self._finalize_run(run_id, "SERVER_SHUTDOWN：服务关闭，已用现有材料完成收尾。")
 
     async def _execute(self, run_id: str, authorized: frozenset[str] = frozenset()) -> None:
@@ -321,6 +336,13 @@ class LiveInvestigationService:
                         else ReportType.INVESTIGATION_STATUS,
                     )
                 self._finish(run_id, RunStatus.COMPLETED, run.interruption_reason)
+                return
+            if run.workflow_version == "quant-compare-v1":
+                # Restart is bounded and local; never relaunch the comparison as web research.
+                await self._finalize_run(
+                    run_id,
+                    "QUANT_COMPARISON_INTERRUPTED：比较研究中断，保留已归档支路与冻结材料；请重新发起比较。",
+                )
                 return
             if run.workflow_version == "quant-v1":
                 if self.quant_service is None:

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+from contextlib import nullcontext
 from datetime import UTC, datetime
 
 from sqlalchemy import select, text
@@ -202,10 +203,12 @@ class SnapshotStore:
             return self.load(snapshot.snapshot_id)
         return snapshot
 
-    def load(self, snapshot_id: str, *, stale: bool = False) -> DatasetSnapshot:
+    def load(
+        self, snapshot_id: str, *, stale: bool = False, session: Session | None = None
+    ) -> DatasetSnapshot:
         import pyarrow.parquet as pq
 
-        with self.sessions() as session:
+        with nullcontext(session) if session is not None else self.sessions() as session:
             row = session.get(DatasetSnapshotRow, snapshot_id)
             if row is None:
                 raise KeyError(snapshot_id)
@@ -258,6 +261,14 @@ class SnapshotStore:
             if ref.sha256 != partition.sha256:
                 raise ValueError("partition digest mismatch")
             self.blobs.verify_hash(ref)
+        if snapshot.result.request.normalizer_version == "dcf-official-v1":
+            from marketpulse.infrastructure.storage.models import BlobError
+
+            for row in json.loads(snapshot.result.records_json):
+                try:
+                    self.blobs.verify_hash(BlobRef(row["document_sha256"]))
+                except BlobError as error:
+                    raise ValueError("DCF original document integrity failure") from error
         return snapshot.model_copy(update={"stale": stale})
 
     def find(self, request: DataRequest, *, stale: bool = False) -> DatasetSnapshot | None:

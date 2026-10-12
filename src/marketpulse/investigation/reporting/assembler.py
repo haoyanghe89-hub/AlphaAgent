@@ -314,9 +314,14 @@ class ReportInputAssembler:
 
         material = load_material(session, run_id)
         if material is not None:
+            from marketpulse.investigation.persistence.models import AuditEventRow
+
+            plan = session.get(AuditEventRow, "QPLAN-" + run_id)
+            question = plan.metadata_payload.get("question", "").strip() if plan else ""
             payload = payload.model_copy(
                 update={
                     "schema_version": "quant-report-input-v2",
+                    "questions": (question,) if question else payload.questions,
                     "claims": payload.claims + snapshot_claims(material),
                     "quantitative_material": canonical(
                         material.model_dump(mode="json", exclude={"job_id"})
@@ -332,6 +337,16 @@ class ReportInputAssembler:
                             for c in material.claims
                         },
                     }
+                }
+            )
+        from marketpulse.quant.comparison import load as load_comparison
+
+        comparison = load_comparison(session, run_id)
+        if comparison is not None:
+            payload = payload.model_copy(
+                update={
+                    "schema_version": "quant-comparison-input-v1",
+                    "comparison_material": canonical(comparison),
                 }
             )
         return ReportInputSnapshot.build(

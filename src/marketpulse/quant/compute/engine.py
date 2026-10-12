@@ -271,7 +271,7 @@ def execute(request: ComputeInput) -> ArtifactBundle:
                         }
                     )
     if request.spec.include_exhibits:
-        from .exhibits import price_cells
+        from .exhibits import kline_cells, price_cells
 
         for price_snapshot in snapshots:
             r = price_snapshot.result.request
@@ -280,6 +280,18 @@ def execute(request: ComputeInput) -> ArtifactBundle:
             chart_rows = sorted(
                 json.loads(price_snapshot.result.records_json), key=lambda x: x["date"]
             )
+            if calendars:
+                chart_days = {
+                    x["date"]
+                    for x in json.loads(calendars[0].result.records_json)
+                    if x["is_session"] and r.start.isoformat() <= x["date"] <= r.end.isoformat()
+                }
+                by_day = {x["date"]: x for x in chart_rows}
+                if set(by_day) - chart_days:
+                    raise ValueError("OHLC on unverified/closed session")
+                chart_rows = [
+                    by_day.get(day, {"date": day, "close": None}) for day in sorted(chart_days)
+                ]
             chart_series = PriceSeries(
                 instrument_id=request.instrument_id,
                 currency="CNY",
@@ -298,6 +310,7 @@ def execute(request: ComputeInput) -> ArtifactBundle:
             if dict(price_snapshot.result.units).get("close") != "CNY/share":
                 raise ValueError("exhibit price unit mismatch")
             values.extend(price_cells(chart_series, request.spec))
+            values.extend(kline_cells(chart_series, price_snapshot))
         for fact in facts:
             if (
                 fact.metric not in {"parent_net_profit", "revenue"}
@@ -327,6 +340,9 @@ def execute(request: ComputeInput) -> ArtifactBundle:
                     update={"start": fact.period_start or fact.period_end, "end": fact.period_end}
                 )
             )
+    from .dcf import dcf_cells
+
+    values.extend(dcf_cells(request))
     # Ordinals are stable within this frozen output; duplicate cell identities are rejected.
     if len({(v.name, v.row_keys) for v in values}) != len(values):
         raise ValueError("duplicate metric cells")

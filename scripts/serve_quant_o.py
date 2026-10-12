@@ -1,4 +1,4 @@
-"""Local, no-model-key Task O acceptance server over an isolated evidence DB."""
+"""Local Task O acceptance and configured-model research server over an isolated evidence DB."""
 
 import argparse
 import os
@@ -24,9 +24,11 @@ if __name__ == "__main__":
     os.environ["INVESTIGATION_BLOB_ROOT"] = str(data / "blobs")
     os.environ["QUANT_CALL_JOURNAL_ROOT"] = str(data / "calls")
     os.environ["INVESTIGATION_SERVE_FRONTEND"] = "true"
-    settings = Settings(
-        database_url=SecretStr("sqlite:///" + (data / "metadata.sqlite").as_posix()),
-        review_allow_insecure_loopback=True,
+    settings = Settings.from_env(require_api_key=False).model_copy(
+        update={
+            "database_url": SecretStr("sqlite:///" + (data / "metadata.sqlite").as_posix()),
+            "review_allow_insecure_loopback": True,
+        }
     )
     uvicorn.run(
         create_app(settings=settings), host="127.0.0.1", port=args.port, log_level="warning"

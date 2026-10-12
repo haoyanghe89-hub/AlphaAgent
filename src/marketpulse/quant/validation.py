@@ -8,8 +8,8 @@ from pydantic import model_validator
 
 from .contracts import digest
 from .domain import ArtifactBundle, FrozenModel, MetricSpec
-from .evidence import ComputationEvidence, build_computation_evidence
-from .execution.service import check_bundle
+from .evidence import ComputationEvidence, build_computation_evidence, computation_evidence_cells
+from .execution.service import check_bundle, check_input_binding
 
 
 class ComputationValidation(FrozenModel):
@@ -84,11 +84,36 @@ def verify_cell(bundle: ArtifactBundle, evidence: ComputationEvidence):
 async def verify_computation_claim(
     service, *, job_id: str, evidence: ComputationEvidence, importance: str = "HIGH"
 ) -> ComputationValidation:
+    return (
+        await verify_computation_claims(
+            service, job_id=job_id, evidence=(evidence,), importance=importance
+        )
+    )[0]
+
+
+async def verify_computation_claims(
+    service, *, job_id: str, evidence: tuple[ComputationEvidence, ...], importance: str = "HIGH"
+) -> tuple[ComputationValidation, ...]:
+    """Reproduce an immutable artifact once, then evaluate every exact bound cell.
+
+    No cross-request cache or caller-provided trust flag. Every call reloads the
+    original inputs, checks all requested evidence and reproduces the full output.
+    """
+    if not evidence:
+        return ()
     bundle = await asyncio.to_thread(service.bundle_for, job_id)
-    verify_cell(bundle, evidence)
+    expected = {e.metric_path: e for e in computation_evidence_cells(bundle)}
+    for item in evidence:
+        if item != expected.get(item.metric_path):
+            raise ValueError("computation cell/lineage binding mismatch")
     reproduced = await service.reproduce(job_id=job_id)
     request = await asyncio.to_thread(service.input_for, job_id)
+    check_input_binding(bundle, request)
     compare_reproduction(bundle, reproduced, request.spec)
+    return tuple(_evaluate_cell(bundle, request, item, importance) for item in evidence)
+
+
+def _evaluate_cell(bundle, request, evidence, importance):
     cell = bundle.values[int(evidence.metric_path.split("/")[-1])]
     inputs = request.snapshots
     # Wrappers are never independent. Only verified original producer lineage counts.

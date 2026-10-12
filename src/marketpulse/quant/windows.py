@@ -39,7 +39,7 @@ def available_windows(service, instrument_id):
         financials = [
             p
             for p in relevant
-            if p["result"]["request"]["normalizer_version"] == "3-parent-2"
+            if p["result"]["request"]["normalizer_version"] in {"3-parent-2", "dcf-official-v1"}
             and p["result"]["request"]["asof"] == asof
             and p["result"]["request"]["end"] <= end
             and p["result"]["request"]["dataset"] in {"financial", "valuation"}

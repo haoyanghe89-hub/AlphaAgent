@@ -204,6 +204,12 @@ class ReportPipeline:
                 }
             )
         draft = await self._writer.draft(projection)
+        if snapshot.semantic_payload.comparison_material is not None:
+            import json
+
+            from marketpulse.quant.comparison import append_draft
+
+            draft = append_draft(draft, json.loads(snapshot.semantic_payload.comparison_material))
         if material is not None:
             from marketpulse.investigation.reporting.chinese_writer import (
                 append_chinese_quant_block,

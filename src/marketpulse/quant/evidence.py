@@ -30,6 +30,21 @@ class ComputationEvidence(FrozenModel):
 
 def build_computation_evidence(bundle: ArtifactBundle, *, metric_path: str) -> ComputationEvidence:
     check_bundle(bundle)
+    return _build_cell(bundle, metric_path, json.loads(bundle.manifest_json))
+
+
+def computation_evidence_cells(bundle: ArtifactBundle):
+    """One full integrity check per immutable bundle, independent hash per cell.
+
+    No caller-controlled skip flag: this batch boundary always validates first.
+    Bundle and its tuple of cells are frozen; unchecked input is never admitted.
+    """
+    check_bundle(bundle)
+    manifest = json.loads(bundle.manifest_json)
+    return tuple(_build_cell(bundle, f"/values/{i}", manifest) for i in range(len(bundle.values)))
+
+
+def _build_cell(bundle, metric_path, manifest):
     pieces = metric_path.split("/")
     if len(pieces) != 3 or pieces[0] != "" or pieces[1] != "values" or not pieces[2].isdigit():
         raise ValueError("metric path must be a stable values ordinal")
@@ -37,7 +52,6 @@ def build_computation_evidence(bundle: ArtifactBundle, *, metric_path: str) -> C
     if str(index) != pieces[2] or index >= len(bundle.values):
         raise ValueError("unknown cell")
     cell: MetricValue = bundle.values[index]
-    manifest = json.loads(bundle.manifest_json)
     material = {
         "artifact_id": bundle.artifact_id,
         "artifact_hash": bundle.output_hash,

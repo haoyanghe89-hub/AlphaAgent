@@ -136,17 +136,56 @@ async def test_cell_tamper_and_same_source_wrappers_rejected(setup_quant, field,
         verify_cell(bundle.model_copy(update={"output_hash": "0" * 64}), evidence)
 
 
-async def test_quant_report_v2_citations_partial_and_folded(setup_quant):
+async def test_report_reproduces_once_but_checks_each_claim(setup_quant, monkeypatch):
+    service, _, snapshot = setup_quant
+    job = await submit(service, snapshot)
+    original = service.reproduce
+    calls = 0
+
+    async def counted(**kwargs):
+        nonlocal calls
+        calls += 1
+        return await original(**kwargs)
+
+    monkeypatch.setattr(service, "reproduce", counted)
+    material = await build_material(service, job_id=job)
+    assert len(material.claims) > 1
+    assert calls == 1
+    assert all(c.validation.reproduction == "REPRODUCIBLE" for c in material.claims)
+    assert all(c.validation.status == "UNVERIFIED" for c in material.claims)
+    from marketpulse.quant.validation import verify_computation_claims
+
+    evidence = tuple(c.evidence for c in material.claims)
+    forged = evidence[:-1] + (evidence[-1].model_copy(update={"unit": "forged"}),)
+    with pytest.raises(ValueError, match="binding mismatch"):
+        await verify_computation_claims(service, job_id=job, evidence=forged)
+    assert calls == 1  # Reject any forged cell before spending a reproduction worker.
+    validations = await verify_computation_claims(service, job_id=job, evidence=evidence)
+    assert validations == tuple(c.validation for c in material.claims)
+    assert calls == 2
+
+
+async def test_quant_report_v2_citations_partial_and_folded(setup_quant, monkeypatch):
     service, repository, snapshot = setup_quant
     job = await submit(service, snapshot)
     material = await build_material(service, job_id=job)
     persist_material(service.sessions, run_id="QR-1", material=material)
+    original_input = service.input_for
+    input_reads = 0
+
+    def counted_input(job_id, **kwargs):
+        nonlocal input_reads
+        input_reads += 1
+        return original_input(job_id, **kwargs)
+
+    monkeypatch.setattr(service, "input_for", counted_input)
     report = await ReportPipeline(
         service.sessions, repository, DeterministicWriter(), quant_service=service
     ).generate(run_id="QR-1", report_type=ReportType.INVESTIGATION_STATUS, now=datetime.now(UTC))
     assert report.snapshot.semantic_payload.schema_version == "quant-report-input-v2"
     assert report.report.schema_version == "quant-report-v2"
     assert report.hard_finding_count == 0, report.findings
+    assert input_reads == 2  # Fresh source validation at build AND validation boundaries.
     assert len(report.citations) >= 3
     assert all(c.canonical_locator["locator_type"] == "COMPUTATION_CELL" for c in report.citations)
     assert "<details>" in report.markdown
@@ -184,6 +223,23 @@ async def test_quant_report_v2_citations_partial_and_folded(setup_quant):
         now=datetime.now(UTC),
     )
     assert any(f.code == "QUANT_NUMERIC_WORDING_DRIFT" for f in findings)
+    # A new validation boundary must reload sources, even after a successful build.
+    from marketpulse.infrastructure.storage.models import BlobRef
+    from marketpulse.investigation.reporting.validation import CitationValidator
+
+    ref = BlobRef.from_uri(snapshot.manifest_ref)
+    path = service.blobs._path(ref)
+    path.write_bytes(b"corrupt original input after report build")
+    with service.sessions() as session:
+        broken = CitationValidator(repository, service).validate(
+            session,
+            citations=list(report.citations),
+            snapshot=report.snapshot,
+            report=report.report,
+            now=datetime.now(UTC),
+        )
+    assert len(broken) == len(report.citations)
+    assert all(f.code == "COMPUTATION_CITATION_INTEGRITY" for f in broken)
 
 
 async def test_hard_timeout_clears_process_and_no_artifact(setup_quant):

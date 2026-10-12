@@ -1,237 +1,94 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import RunProgress from './components/RunProgress.vue'
-import Sidebar from './components/Sidebar.vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import request from './api/request.js'
-import InvestigationView from './views/InvestigationView.vue'
-import TopicSearch from './components/TopicSearch.vue'
-import NewInvestigationModal from './components/NewInvestigationModal.vue'
-import DeleteInvestigationModal from './components/DeleteInvestigationModal.vue'
-import { createTopicLauncher } from './api/topicInvestigation.js'
-const investigations = ref([])
-const activeId = ref('')
-const loading = ref(false)
-const replaying = ref(false)
-const error = ref('')
-const startingTopic = ref(false)
-const topicError = ref('')
-const topicSearch = ref(null)
-const launchTopic = createTopicLauncher(request)
-const revision = ref(0)
-const newModal = ref(false)
-const deleteTarget = ref(null)
-const notice = ref('')
-async function createdArchive(archive) {
-  newModal.value = false
-  activeId.value = archive.investigation_id
-  await load()
-}
-async function deletedArchive(id) {
-  deleteTarget.value = null
-  if (activeId.value === id) activeId.value = ''
-  investigations.value = investigations.value.filter(item => item.investigation_id !== id)
-  notice.value = '卷宗及关联记录已删除。'
-  await load()
-}
-async function load() {
-  loading.value = true
-  error.value = ''
+import { useTheme } from './composables/useTheme.js'
+import { href, useNavigation } from './alpha/navigation.js'
+import Workbench from './alpha/Workbench.vue'
+import ResearchView from './alpha/ResearchView.vue'
+import ReportView from './alpha/ReportView.vue'
+import StockView from './alpha/StockView.vue'
+import LibraryView from './alpha/LibraryView.vue'
+import LegacyView from './alpha/LegacyView.vue'
+import BacktestView from './alpha/BacktestView.vue'
+import ScopeDialog from './alpha/ScopeDialog.vue'
+import LiveResearchView from './alpha/LiveResearchView.vue'
+import LiveComparison from './alpha/LiveComparison.vue'
+import StrategyView from './alpha/StrategyView.vue'
+import DeliveryView from './alpha/DeliveryView.vue'
+import { useLiveQuotes } from './alpha/useLiveQuotes.js'
+const { route, go } = useNavigation(), { theme, toggleTheme } = useTheme()
+const selectedSymbol = ref('sz000333')
+const quoteSymbols = computed(() => route.value.page === 'workbench' ? 'sz000333,sz000651,sh600519,sz000001' : selectedSymbol.value)
+const live = useLiveQuotes(quoteSymbols)
+const asking = ref(false)
+let questionRequest
+const stocks = ref([]), indices = ref([]), history = ref([]), archives = ref([]), loading = ref(false), error = ref(''), questionError = ref(''), pending = ref(null), hasMore = ref(false)
+const quoteNames = ['上证指数','深证成指','创业板指','沪深300','科创50']
+const quotes = computed(() => quoteNames.map(name => live.quotes.value.find(i => i.name === name) || { name }))
+let generation = 0, disposed = false
+async function load(more = false) {
+  const ticket = ++generation
+  loading.value = true; error.value = ''
   try {
-    investigations.value = await request('/investigations')
-  } catch (e) { error.value = e.message }
-  finally { loading.value = false }
+    const outcomes = await Promise.allSettled([
+      request('/quant/overview').then(overview => {
+        if (disposed || ticket !== generation) return
+        stocks.value = overview.stocks
+        indices.value = overview.indices || []
+      }),
+      Promise.all([request('/quant/runs?limit=100&offset=' + (more ? history.value.filter(i => !['live','compare_live','strategy'].includes(i.scenario)).length : 0)), request('/investigations'), request('/quant/research/runs')]).then(([runs, old, fresh]) => {
+        if (disposed || ticket !== generation) return
+        archives.value = old
+        const titles = new Map(old.map(i => [i.investigation_id, i.title]))
+        const result = runs.map(run => ({ ...run, title: run.question || titles.get(run.investigation_id) || '单股研究 · ' + run.run_id }))
+        history.value = (more ? [...history.value, ...result] : [...fresh, ...result]).sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+        hasMore.value = runs.length === 100
+      }),
+    ])
+    const failures = outcomes.filter(outcome => outcome.status === 'rejected')
+    if (failures.length) throw new Error(failures.map(outcome => outcome.reason.message).join('；'))
+  } catch(e) { if (!disposed && ticket === generation) error.value = e.message }
+  finally { if (!disposed && ticket === generation) loading.value = false }
 }
-function newTopic() {
-  if (startingTopic.value || replaying.value) return
-  activeId.value = ''
-  topicError.value = ''
-  topicSearch.value?.clear()
-  topicSearch.value?.focus()
-}
-function selectArchive(id) { if (!startingTopic.value && !replaying.value) activeId.value = id }
-async function startTopic(topic) {
-  if (startingTopic.value || replaying.value) return
-  startingTopic.value = true
-  topicError.value = ''
+const legacy = computed(() => archives.value.filter(i => !history.value.some(run => run.investigation_id === i.investigation_id || run.branch_investigation_ids?.includes(i.investigation_id))))
+const stock = computed(() => stocks.value.find(i => i.code === route.value.id))
+async function ask(text) {
+  questionError.value = ''
+  if (asking.value || !text.trim()) return
+  if (/回测|年度调仓|全市场选股/.test(text)) { go('strategy'); return }
+  if (/\bvs\b|对比|比较/i.test(text)) {
+    sessionStorage.setItem('alpha-comparison-question',text)
+    go('compare'); return
+  }
+  asking.value = true
   try {
-    const result = await launchTopic(topic)
-    activeId.value = result.investigation_id
-    revision.value++
-    topicSearch.value?.clear()
-  } catch (e) { topicError.value = e.message }
-  finally { await load(); startingTopic.value = false }
+    if (questionRequest?.text !== text) questionRequest = { text, key:crypto.randomUUID() }
+    const result = await request('/quant/research/runs', {method:'POST', body:JSON.stringify({request_key:questionRequest.key,question:text})})
+    go('live',result.run_id); load()
+  } catch(e) { questionError.value = e.message }
+  finally { asking.value = false }
 }
-async function replay() {
-  if (replaying.value || startingTopic.value) return
-  replaying.value = true
-  error.value = ''
-  try {
-    const result = await request('/cases/east-palestine-2023/replay', { method: 'POST', timeoutMs: 300000 })
-    activeId.value = result.investigation_id
-    revision.value++
-    await load()
-  } catch (e) { error.value = e.message }
-  finally { replaying.value = false }
-}
-onMounted(load)
-
-const cases = computed(() => investigations.value.map(i => ({ id: i.investigation_id, name: i.title, status: i.run_count ? 'investigating' : 'draft', statusText: i.run_count ? '有运行记录' : '新建', tag: `${i.run_count}次运行` })))
+function started(result) { pending.value = null; questionError.value = ''; go('research', result.run_id); load() }
+watch(() => route.value.page, page => { questionError.value = ''; if (['workbench', 'library'].includes(page)) load() })
+onMounted(() => load()); onUnmounted(() => { disposed = true; generation++ })
 </script>
 <template>
-  <div class="app-wrapper">
-    <Sidebar :cases="cases" :active-case-id="activeId" :loading="loading" :replaying="replaying" :busy="startingTopic" @select="selectArchive" @new-investigation="newTopic" @create-investigation="newModal = true" @delete-investigation="deleteTarget = $event" @refresh="load" @replay="replay" />
-    <main class="main-content">
-      <p v-if="notice" class="notice info" role="status">{{ notice }} <button class="quiet-button" @click="notice = ''">关闭提示</button></p>
-      <div v-if="error" class="notice error" role="alert">{{ error }} <button @click="load">重试连接</button></div>
-      <section v-if="!activeId" class="welcome">
-        <div class="welcome-texture" aria-hidden="true"></div>
-        <div class="welcome-copy">
-          <p class="welcome-kicker">DOSSIER 00 / DIGITAL FOLIO</p>
-          <h1>从一个问题出发，<br>追溯事实与证据。</h1>
-          <p class="welcome-subtitle">事件调查与证据验证。从一个主题开始，建立可追溯的数字卷宗。</p>
-        </div>
-        <div class="welcome-search">
-          <TopicSearch ref="topicSearch" :busy="startingTopic" :disabled="replaying" :error="topicError" @start="startTopic" />
-        </div>
-      </section>
-      <div v-if="startingTopic" class="topic-strip"><RunProgress starting /></div>
-      <InvestigationView v-else-if="activeId" :key="activeId + ':' + revision" :investigation-id="activeId" :replaying="replaying" @updated="load" @replay="replay" @new-investigation="newTopic" />
-      <div v-else-if="replaying" class="topic-strip"><RunProgress replaying /></div>
-      <div v-if="activeId" class="detail-support">
-        <section class="topic-strip">
-          <TopicSearch ref="topicSearch" compact :busy="startingTopic" :disabled="replaying" :error="topicError" @start="startTopic" />
-        </section>
-      </div>
+  <div class="alpha-app">
+    <header class="topbar"><a class="brand" :href="href('workbench')"><span class="brand-mark">α</span> AlphaAgent</a><nav class="topnav" aria-label="主导航"><a :href="href('workbench')" :class="{ active: route.page === 'workbench' }">工作台</a><a :href="href('strategy')" :class="{ active: ['backtest','strategy'].includes(route.page) }">策略回测</a><a :href="href('library')" :class="{ active: route.page === 'library' }">历史库</a></nav><div class="quote-strip" aria-label="指数行情"><span v-for="quote in quotes" :key="quote.name" class="qs-item" :title="quote.quoted_at ? '腾讯报价时间：' + quote.quoted_at : live.error.value || '行情读取中'"><span class="qs-name">{{ quote.name }}</span><span :class="['num',quote.change > 0 ? 'up' : 'down']">{{ quote.price ?? '—' }}</span><span class="num qs-change">{{ quote.change != null ? (quote.change > 0 ? '+' : '') + quote.change + '%' : '—' }}</span></span></div><button class="theme-button" :aria-label="theme === 'dark' ? '切换浅色' : '切换深色'" @click="toggleTheme"><span aria-hidden="true">{{ theme === 'dark' ? '☀' : '☾' }}</span><span>{{ theme === 'dark' ? '浅色' : '深色' }}</span></button></header>
+    <main id="main"><div v-if="questionError" class="page question-error"><p class="notice error-text" role="alert">{{ questionError }}<button class="icon-button" aria-label="关闭问题提示" @click="questionError = ''">×</button></p></div>
+      <Workbench v-if="route.page === 'workbench'" :stocks="stocks" :live-quotes="live.quotes.value" :quote-time="live.retrievedAt.value" :quote-error="live.error.value" :history="history" :loading="loading || asking" :error="error" @ask="ask" @retry="load()" />
+      <LiveResearchView v-else-if="route.page === 'live' || route.page === 'stock'" :key="'live-' + route.id" :id="route.page === 'stock' ? 'new' : route.id" :code="route.page === 'stock' ? route.id : undefined" :quotes="live.quotes.value" :quote-time="live.retrievedAt.value" :quote-error="live.error.value" :quote-loading="live.loading.value" @refresh-quotes="live.refresh" @subject="value => { selectedSymbol = value; live.refresh() }" />
+      <LiveComparison v-else-if="route.page === 'compare'" :key="'compare-' + (route.id || 'new')" :id="route.id" @started="r => { go('compare',r.run_id); load() }" />
+      <StrategyView v-else-if="route.page === 'strategy'" :key="'strategy-' + (route.id || 'new')" :id="route.id" @started="r => { go('strategy',r.run_id); load() }" />
+      <DeliveryView v-else-if="route.page === 'delivery'" />
+      <ResearchView v-else-if="route.page === 'research'" :key="'research-' + route.id" :id="route.id" />
+      <ReportView v-else-if="route.page === 'report'" :key="'report-' + route.id" :id="route.id" />
+      <StockView v-else-if="route.page === 'stock' && stock" :key="stock.code + stock.run_id" :stock="stock" @ask="ask" />
+      <LibraryView v-else-if="route.page === 'library'" :items="history" :legacy="legacy" :loading="loading" :error="error" :has-more="hasMore" @retry="load()" @more="load(true)" />
+      <LegacyView v-else-if="route.page === 'legacy'" :key="route.id" :id="route.id" />
+      <BacktestView v-else-if="route.page === 'backtest'" :key="'backtest-' + (route.id || 'new')" :id="route.id" @started="result => { go('backtest', result.run_id); load() }" />
+      <div v-else class="page"><div class="panel empty-state">{{ loading ? '正在读取…' : route.page === 'stock' ? '标的尚未接入或没有匹配的证券主数据。' : '页面不存在。' }}<a :href="href('workbench')">返回工作台</a><p v-if="error" class="error-text" role="alert">{{ error }}</p></div></div>
     </main>
-    <NewInvestigationModal v-if="newModal" @close="newModal = false" @created="createdArchive" />
-    <DeleteInvestigationModal v-if="deleteTarget" :investigation="deleteTarget" @close="deleteTarget = null" @deleted="deletedArchive" />
+    <ScopeDialog v-if="pending" :question="pending.question" :instrument="pending.instrument" :instruments="pending.instruments" :window="pending.window" :date-start="pending.date_start" :date-end="pending.date_end" @close="pending = null" @started="started" />
   </div>
 </template>
-<style scoped>
-.topic-strip {
-  padding: var(--space-6) var(--space-16);
-  border-bottom: 1px solid var(--border-default);
-}
-
-.detail-support {
-  border-top: 1px solid var(--border-default);
-}
-
-.welcome {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  width: 100%;
-  max-width: none;
-  min-height: calc(100vh - var(--topbar-height));
-  margin: 0;
-  padding: var(--space-20) var(--space-16) var(--space-32);
-  overflow: hidden;
-  align-content: center;
-  justify-items: center;
-}
-
-.welcome-texture {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(to right, currentColor 1px, transparent 1px),
-    linear-gradient(to bottom, currentColor 1px, transparent 1px);
-  background-size: var(--space-8) var(--space-8);
-  color: var(--text-primary);
-  opacity: 0.02;
-  pointer-events: none;
-}
-
-.welcome-copy {
-  display: flex;
-  max-width: 72ch;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.welcome-kicker {
-  margin: 0 0 var(--space-5);
-  color: var(--text-muted);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-overline);
-  font-weight: var(--font-weight-overline);
-  letter-spacing: var(--letter-spacing-overline);
-  line-height: var(--line-height-overline);
-}
-
-.welcome h1 {
-  max-width: 18ch;
-  margin: 0;
-  color: var(--text-primary);
-  font-family: var(--font-display);
-  font-size: var(--font-size-display-xl);
-  font-weight: var(--font-weight-display-xl);
-  letter-spacing: var(--letter-spacing-display-xl);
-  line-height: var(--line-height-display-xl);
-  text-wrap: balance;
-}
-
-.welcome-subtitle {
-  max-width: 52ch;
-  margin: var(--space-5) 0 var(--space-8);
-  color: var(--text-secondary);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-body-lg);
-  font-weight: var(--font-weight-body-lg);
-  letter-spacing: var(--letter-spacing-body-lg);
-  line-height: var(--line-height-body-lg);
-}
-
-.welcome-search {
-  z-index: 1;
-  width: min(100%, 780px);
-}
-
-.welcome-search :deep(.topic-search > label) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.welcome-search :deep(.topic-search button) {
-  margin: 0;
-}
-
-@media (max-width: 1100px) {
-  .topic-strip {
-    padding: var(--space-6) var(--space-8);
-  }
-
-  .welcome {
-    padding-inline: var(--space-8);
-  }
-}
-
-@media (max-width: 640px) {
-  .topic-strip {
-    padding: var(--space-5);
-  }
-
-  .welcome {
-    min-height: auto;
-    padding: var(--space-16) var(--space-5) var(--space-24);
-  }
-
-  .welcome h1 {
-    font-size: var(--font-size-h1);
-    line-height: var(--line-height-h1);
-  }
-
-  .welcome-subtitle {
-    margin-bottom: var(--space-6);
-  }
-}
-</style>

@@ -1,6 +1,6 @@
 import { init, use } from 'echarts/core'
-import { LineChart, BarChart } from 'echarts/charts'
-import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components'
+import { LineChart, BarChart, CandlestickChart } from 'echarts/charts'
+import { GridComponent, LegendComponent, TooltipComponent, DataZoomComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
-use([LineChart, BarChart, GridComponent, LegendComponent, TooltipComponent, CanvasRenderer])
+use([LineChart, BarChart, CandlestickChart, GridComponent, LegendComponent, TooltipComponent, DataZoomComponent, CanvasRenderer])
 export const mountChart = element => init(element, null, { renderer: 'canvas' })

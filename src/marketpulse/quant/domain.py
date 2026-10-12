@@ -226,6 +226,21 @@ def decimal_text(value: Decimal) -> str:
 ExactDecimal = Annotated[Decimal, Field(allow_inf_nan=False), PlainSerializer(decimal_text)]
 
 
+class DcfAssumptions(FrozenModel):
+    """User assumptions, not forecasts inferred from a language model."""
+
+    g1: ExactDecimal = Field(default=Decimal("0.08"), ge=Decimal("-0.2"), le=Decimal("0.4"))
+    g2: ExactDecimal = Field(default=Decimal("0.04"), ge=0, le=Decimal("0.15"))
+    g_term: ExactDecimal = Field(default=Decimal("0.025"), ge=0, le=Decimal("0.04"))
+    discount: ExactDecimal = Field(default=Decimal("0.09"), ge=Decimal("0.05"), le=Decimal("0.15"))
+
+    @model_validator(mode="after")
+    def valid_terminal(self):
+        if self.discount <= self.g_term:
+            raise ValueError("DCF discount must exceed terminal growth")
+        return self
+
+
 class MetricSpec(FrozenModel):
     version: str = "quant-compute-v1"
     metrics: tuple[
@@ -248,6 +263,7 @@ class MetricSpec(FrozenModel):
     return_basis: Literal["price", "adjusted_proxy"] = "price"
     price_adjustment: Literal["raw", "qfq", "hfq"] | None = None
     include_exhibits: bool = False
+    dcf: DcfAssumptions | None = None
     annual_sessions: int = Field(default=252, ge=1, le=366)
     elapsed_year_days: ExactDecimal = Decimal("365.2425")
     suspension_policy: Literal["carry_forward", "reject"] = "carry_forward"

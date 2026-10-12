@@ -1,9 +1,35 @@
 from __future__ import annotations
 
 from .contracts import canonical, digest
+from .evidence import computation_evidence_cells
 from .reporting import load_material
 from .storage.models import ComputeJobRow, SnapshotOwnershipRow
-from .validation import verify_cell
+
+
+class _ComputationCitationBatch:
+    """One build/validation boundary, never shared across reports or requests."""
+
+    def __init__(self, service):
+        self.service = service
+        self._checked = {}
+
+    def bundle(self, job):
+        key = (job.job_id, job.artifact_id)
+        if key not in self._checked:
+            from marketpulse.infrastructure.storage.models import BlobError
+
+            from .execution.service import check_input_binding
+
+            bundle = self.service.load_artifact(job.artifact_id)
+            try:
+                check_input_binding(
+                    bundle, self.service.input_for(job.job_id, require_current_environment=False)
+                )
+            except BlobError as error:
+                raise ValueError("frozen citation input is missing or corrupt") from error
+            proofs = {e.metric_path: e for e in computation_evidence_cells(bundle)}
+            self._checked[key] = (bundle, proofs)
+        return self._checked[key]
 
 
 def public_computation_citation(session, request, citation_id):
@@ -72,7 +98,7 @@ def public_computation_citation(session, request, citation_id):
 
 
 def computation_citation(
-    session, service, *, snapshot, claim_key, section_key, unit_key, report, ordinal
+    session, service, *, snapshot, claim_key, section_key, unit_key, report, ordinal, batch=None
 ):
     if service is None:
         raise ValueError("trusted quant service not bound")
@@ -94,16 +120,12 @@ def computation_citation(
         or job.artifact_id != material.artifact_id
     ):
         raise ValueError("artifact job binding mismatch")
-    bundle = service.load_artifact(job.artifact_id)
-    from marketpulse.infrastructure.storage.models import BlobError
-
-    from .execution.service import check_input_binding
-
-    try:
-        check_input_binding(bundle, service.input_for(job.job_id))
-    except BlobError as error:
-        raise ValueError("frozen citation input is missing or corrupt") from error
-    verify_cell(bundle, claim.evidence)
+    batch = batch or _ComputationCitationBatch(service)
+    if batch.service is not service:
+        raise ValueError("citation batch service mismatch")
+    bundle, proofs = batch.bundle(job)
+    if claim.evidence != proofs.get(claim.evidence.metric_path):
+        raise ValueError("computation cell/lineage binding mismatch")
     from marketpulse.investigation.persistence.models import ClaimRow, ValidationResultRow
 
     claim_row_id = snapshot.runtime_references.claim_ids[claim_key]
