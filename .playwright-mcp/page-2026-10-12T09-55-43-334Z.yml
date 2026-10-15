@@ -1,0 +1,157 @@
+- generic [ref=f12e3]:
+  - banner [ref=f12e4]:
+    - link "α AlphaAgent" [ref=f12e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f12e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f12e7]:
+      - link "工作台" [ref=f12e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f12e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f12e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f12e11] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换浅色" [active] [ref=f12e181] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f12e34]: ☀
+      - generic [ref=f12e35]: 浅色
+  - main [ref=f12e36]:
+    - navigation "选择研究期限" [ref=f12e38]:
+      - link "下一交易日" [ref=f12e39] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance#/decision
+      - link "未来一至三个月" [ref=f12e40] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&research=1#/decision
+    - generic [ref=f12e41]:
+      - generic [ref=f12e42]:
+        - heading "未来几个月，值得关注什么" [level=1] [ref=f12e44]
+        - paragraph [ref=f12e45]: 看经营变化、反对理由，以及哪些事实会改变判断。
+        - group [ref=f12e46]:
+          - generic "研究另一家公司" [ref=f12e71] [cursor=pointer]
+          - option "未来一个月"
+          - option "未来两个月"
+          - option "未来三个月" [selected]
+        - paragraph [ref=f12e54]: 重新读取公司披露后生成。资金分析、行业验证及候选比较将按后续阶段接入；资料不足时会收缩判断。
+      - paragraph [ref=f12e72]: 资料截止：2026/10/12 17:42:24。这是中期研究，与明日方向独立。
+      - article [ref=f12e73]:
+        - generic [ref=f12e74]:
+          - heading "中微公司" [level=2] [ref=f12e75]
+          - generic [ref=f12e76]: 未来 3 个月
+        - generic [ref=f12e77]:
+          - strong [ref=f12e78]: 暂无法判断
+          - generic [ref=f12e79]: 值得优先研究
+        - paragraph [ref=f12e80]: 公司披露收入与利润大幅增长，但现金回收与利润匹配、非经常性损益占比及研发费用影响尚待补证，方向暂难定。
+        - generic [ref=f12e81]:
+          - generic [ref=f12e82]:
+            - heading "经营变化，依据是什么" [level=3] [ref=f12e83]
+            - generic [ref=f12e84]:
+              - paragraph [ref=f12e85]: 公司披露上半年营业收入与归母净利润同比大幅增长，公司称主要来自先进逻辑和存储器件关键刻蚀工艺高端产品新增付运量显著提升并实现大规模量产。
+              - paragraph [ref=f12e86]: 若高端刻蚀产品付运与量产持续，可能支撑收入与毛利；但该解释来自公司披露，尚待独立验证。
+              - button "查看依据 1 ↗" [ref=f12e87] [cursor=pointer]
+            - generic [ref=f12e88]:
+              - paragraph [ref=f12e89]: 公司披露扣非净利润增速明显低于归母净利润增速，且研发投入占营业收入比例约三成，利润结构对非经常性损益与研发费用较为敏感。
+              - paragraph [ref=f12e90]: 若研发费用维持高位或非经常性收益不可持续，利润增速可能回落；待验证。
+              - button "查看依据 1 ↗" [ref=f12e91] [cursor=pointer]
+            - generic [ref=f12e92]:
+              - paragraph [ref=f12e93]: 公司披露经营活动现金流量净额同比增长，但绝对额明显低于同期归母净利润，现金回收与利润的匹配程度尚不明确。
+              - paragraph [ref=f12e94]: 若应收账款或存货占用上升，经营现金流可能继续滞后于利润；待验证。
+              - button "查看依据 1 ↗" [ref=f12e95] [cursor=pointer]
+          - generic [ref=f12e96]:
+            - heading "还要警惕什么" [level=3] [ref=f12e97]
+            - list [ref=f12e98]:
+              - listitem [ref=f12e99]: 公司披露的利润高增含较大非经常性损益成分，扣非增速明显较低，利润质量待验证。
+              - listitem [ref=f12e100]: 经营现金流绝对额低于同期归母净利润，现金回收与利润匹配程度不明确。
+              - listitem [ref=f12e101]: 现有证据仅来自公司披露，缺少独立行业与资金验证，不能据此推断行业景气或股价方向。
+        - generic [ref=f12e102]:
+          - generic [ref=f12e103]:
+            - heading "价格位置" [level=3] [ref=f12e104]
+            - paragraph [ref=f12e105]: 已取得有限未复权收盘观察，尚未计算价格分位。
+          - generic [ref=f12e106]:
+            - heading "估值与预期差" [level=3] [ref=f12e107]
+            - paragraph [ref=f12e108]: 缺少可核对的估值基准，暂无法判断。
+            - paragraph [ref=f12e109]: 缺可靠一致预期、规范化现金流及固定假设；本次无法判断超预期或估值高低。
+      - generic [ref=f12e110]:
+        - heading "接下来，什么会改变判断" [level=2] [ref=f12e111]
+        - generic [ref=f12e112]:
+          - generic [ref=f12e113]:
+            - heading "继续观察" [level=3] [ref=f12e114]
+            - list [ref=f12e115]:
+              - listitem [ref=f12e116]: 查阅后续定期报告中合同负债、存货与收入确认政策，核对交付节点。
+              - listitem [ref=f12e117]: 查阅财务数据中毛利率、研发费用率与应收账款周转，验证利润结构与回款节奏。
+            - paragraph [ref=f12e118]: 关注：后续定期报告披露合同负债、存货与应收账款明细，可核查交付节点与回款节奏；公司披露毛利率与研发费用率变动原因，可验证利润结构解释。具体披露日尚未确认。
+          - generic [ref=f12e119]:
+            - heading "重新评估的条件" [level=3] [ref=f12e120]
+            - list [ref=f12e121]:
+              - listitem [ref=f12e122]: 若后续披露显示收入增长并非来自高端刻蚀产品付运与量产，则公司所称驱动原因被否定。
+              - listitem [ref=f12e123]: 若经营现金流持续显著低于净利润且应收账款或存货占用上升，则现金回收匹配判断需下调。
+      - generic [ref=f12e124]:
+        - heading "三种可能的走向" [level=2] [ref=f12e125]
+        - generic [ref=f12e126]:
+          - generic [ref=f12e127]:
+            - heading "基准情景" [level=3] [ref=f12e128]
+            - paragraph [ref=f12e129]: 若公司披露的付运与量产节奏延续，且合同负债与存货变动能对应交付节点，收入与毛利可能维持当前披露水平。
+            - list [ref=f12e130]:
+              - listitem [ref=f12e131]: 后续披露显示高端刻蚀产品付运与量产持续。
+              - listitem [ref=f12e132]: 合同负债与存货变动可对应具体交付节点。
+          - generic [ref=f12e133]:
+            - heading "改善情景" [level=3] [ref=f12e134]
+            - paragraph [ref=f12e135]: 若研发费用率趋稳且非经常性损益之外的经营利润同步改善，利润结构可能更均衡。
+            - list [ref=f12e136]:
+              - listitem [ref=f12e137]: 后续披露显示扣非利润增速与归母利润增速差距收窄。
+              - listitem [ref=f12e138]: 研发费用率不再显著上升。
+          - generic [ref=f12e139]:
+            - heading "恶化情景" [level=3] [ref=f12e140]
+            - paragraph [ref=f12e141]: 若应收账款或存货占用继续上升，经营现金流可能进一步滞后于利润。
+            - list [ref=f12e142]:
+              - listitem [ref=f12e143]: 后续披露显示应收账款周转放缓或存货占用上升。
+              - listitem [ref=f12e144]: 经营现金流与净利润差距扩大。
+        - paragraph [ref=f12e145]: 这些是有条件的情景，尚无校准概率；经营变化与股价方向仍可能分歧。
+      - group [ref=f12e146]:
+        - generic "这份研究的范围与局限" [ref=f12e147] [cursor=pointer]
+      - generic [ref=f12e148]:
+        - generic [ref=f12e149]:
+          - heading "保存观点，等待事实检验" [level=2] [ref=f12e150]
+          - button "查看当前观察结果" [ref=f12e151] [cursor=pointer]
+        - paragraph [ref=f12e152]: 2026/10/12 17:42:50 发布。原观点保留，更新研究将另存一份；未到期不显示实现收益。
+        - generic [ref=f12e153]:
+          - generic [ref=f12e154]:
+            - heading "20 个交易日" [level=3] [ref=f12e155]
+            - paragraph [ref=f12e156]: 观察日 2026-11-09
+            - strong [ref=f12e157]: 等待观察到期
+          - generic [ref=f12e158]:
+            - heading "40 个交易日" [level=3] [ref=f12e159]
+            - paragraph [ref=f12e160]: 观察日 2026-12-07
+            - strong [ref=f12e161]: 等待观察到期
+          - generic [ref=f12e162]:
+            - heading "60 个交易日" [level=3] [ref=f12e163]
+            - paragraph [ref=f12e164]: 观察日待核定
+            - strong [ref=f12e165]: 等待观察到期
+            - paragraph [ref=f12e166]: 尚缺下一年度核定交易日历，不猜到期日期。
+        - paragraph [ref=f12e167]: 当前按未复权价格观察；行业基准尚缺，未完成全收益独立核对，不能当作正式策略绩效。经营催化是否兑现还需实际披露。
+        - group [ref=f12e168]:
+          - generic "查看最初观点与后续版本（2）" [ref=f12e169] [cursor=pointer]
+          - link "2026/10/12 17:34:19 暂无法判断" [ref=f12e174] [cursor=pointer]:
+            - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+            - generic [ref=f12e175]: 2026/10/12 17:34:19
+            - strong [ref=f12e176]: 暂无法判断
+          - link "2026/10/12 17:42:50 暂无法判断" [ref=f12e177] [cursor=pointer]:
+            - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+            - generic [ref=f12e178]: 2026/10/12 17:42:50
+            - strong [ref=f12e179]: 暂无法判断
+      - generic [ref=f12e170]:
+        - heading "有新披露时，再检查一次" [level=2] [ref=f12e171]
+        - paragraph [ref=f12e172]: 更新会重新取数、另存观点；最初判断和当时依据继续保留。
+        - button "更新这家公司研究" [ref=f12e173] [cursor=pointer]
+      - generic [ref=f12e55]:
+        - heading "已保存的中期研究" [level=2] [ref=f12e56]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f12e57] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f12e58]: 中微公司
+          - generic [ref=f12e59]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f12e60] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f12e61]: 中微公司
+          - generic [ref=f12e62]: 2026/10/12 17:41:58
+    - paragraph [ref=f12e64]:
+      - link "开发者入口" [ref=f12e65] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&developer=1#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a

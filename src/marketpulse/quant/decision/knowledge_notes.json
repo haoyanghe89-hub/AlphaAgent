@@ -1,0 +1,41 @@
+[
+  {
+    "note_id":"KN-BUFFETT-1992-V1","title":"巴菲特原信：增长、投入回报与安全边际",
+    "authors":["Warren E. Buffett"],"source_url":"https://www.berkshirehathaway.com/letters/1992.html",
+    "source_locator":{"section":"Common Stock Investments","anchors":["two approaches are joined at the hip","the best business to own","margin of safety"]},
+    "coverage":"PUBLIC_EXCERPT_VERIFIED","edition":"1992年股东信，署期1993-03-01；只提炼所定位的方法段落",
+    "summary":"增长须结合新增资本的回报判断；经营质量与支付价格分别核查，未来现金流不确定性需要明确边界。",
+    "steps":["先识别能够从原文理解的业务和经营变化","核查新增投入、盈利与现金回收能否相互解释","估值输入不足时只保留经营核查，不能宣称价格便宜"],
+    "input_requirements":["company_disclosures","capital_return_inputs_for_full_valuation"],
+    "counterexamples":["收入增长伴随低效资本投入","增长很好但支付价格已包含过高要求"],
+    "forbidden_inferences":["公司有增长就必然上涨","未取得估值输入也宣称安全边际","用长期原则单独预测下一交易日"],
+    "method_ids":["M01","M02"],"roles":["EQUIPMENT","MANUFACTURING","UNKNOWN","MIXED"],"horizons":["MEDIUM_TERM_BACKGROUND"],
+    "implementation_status":"LIMITED_ORIGINAL_ANALYSIS","validation_status":"UNVALIDATED","review_identity":"AI_METHOD_REVIEWED"
+  },
+  {
+    "note_id":"KN-EXPECTATIONS-PUBLIC-V1","title":"预期投资：作者公开三步方法介绍",
+    "authors":["Michael J. Mauboussin","Alfred Rappaport"],"source_url":"https://www.expectationsinvesting.com/about",
+    "source_locator":{"section":"Frequently Asked Questions / three-step process","anchors":["Estimate Price-Implied Expectations","Identify Expectations Opportunities"]},
+    "coverage":"PUBLIC_EXCERPT_VERIFIED","edition":"《Expectations Investing》作者网站公开方法介绍；未读取整书",
+    "summary":"在明确现金流和估值假设后考察价格要求的经营水平，再核查竞争与经营变化能否改变这些要求。",
+    "steps":["固定有来源的价格、股本、现金流与估值假设","有计算工具及完整输入时反求隐含经营要求","分别检验支持、反证和假设敏感性，缺输入停用求解"],
+    "input_requirements":["valuation_inputs","fixed_assumptions","cash_flow","expectation_basis"],
+    "counterexamples":["不同折现假设得出不同隐含增长","缺乏可靠一致预期却声称业绩超预期"],
+    "forbidden_inferences":["唯一识别市场真实一致预期","将隐含要求当已实现经营结果","缺数据由模型心算目标价"],
+    "method_ids":["M02"],"roles":["EQUIPMENT","MANUFACTURING","UNKNOWN","MIXED"],"horizons":["MEDIUM_TERM_BACKGROUND"],
+    "implementation_status":"REFERENCE_ONLY","validation_status":"UNVALIDATED","review_identity":"AI_METHOD_REVIEWED"
+  },
+  {
+    "note_id":"KN-FRENCH-5F-DEFINITION-V1","title":"French官方五因子构造定义",
+    "authors":["Kenneth R. French","Eugene F. Fama"],"source_url":"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_5_factors_2x3.html",
+    "source_locator":{"section":"Construction","anchors":["The Fama/French 5 factors","operating profitability","investment"]},
+    "coverage":"PUBLIC_EXCERPT_VERIFIED","edition":"French数据图书馆公开组合构造说明；不是A股因子复现",
+    "summary":"规模、价值、盈利和投资等维度需要按明确样本与分组规则构造组合；单股指标展示不等于完整因子策略。",
+    "steps":["记录市场、样本时点和指标口径","完整数据可得后再构造分组组合与收益差","将定义、计算正确性和本市场预测效果分开验证"],
+    "input_requirements":["point_in_time_universe","normalized_fundamentals","portfolio_returns","costs"],
+    "counterexamples":["把海外样本收益搬成A股收益","只计算个股ROE便称已运行盈利因子组合"],
+    "forbidden_inferences":["研究定义等于本系统因子收益已验证","用当前成分回填历史组合","缺失财务当零或任意拼口径"],
+    "method_ids":["M01","M02","M03"],"roles":["EQUIPMENT","MANUFACTURING","UNKNOWN","MIXED"],"horizons":["RESEARCH_DEFINITION"],
+    "implementation_status":"DEFINITION_ONLY","validation_status":"UNVALIDATED","review_identity":"AI_METHOD_REVIEWED"
+  }
+]

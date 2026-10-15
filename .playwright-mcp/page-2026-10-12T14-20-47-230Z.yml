@@ -1,0 +1,185 @@
+- generic [ref=f17e3]:
+  - banner [ref=f17e4]:
+    - link "α AlphaAgent" [ref=f17e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f17e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f17e7]:
+      - link "工作台" [ref=f17e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f17e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f17e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f17e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f17e12]:
+      - generic "腾讯报价时间：2026-10-12T16:14:00+08:00" [ref=f17e62]:
+        - generic [ref=f17e14]: 上证指数
+        - generic [ref=f17e15]: "3797.24"
+        - generic [ref=f17e16]: "-0.43%"
+      - generic "腾讯报价时间：2026-10-12T16:14:33+08:00" [ref=f17e63]:
+        - generic [ref=f17e18]: 深证成指
+        - generic [ref=f17e19]: "12384.87"
+        - generic [ref=f17e20]: "-2.03%"
+      - generic "腾讯报价时间：2026-10-12T16:14:48+08:00" [ref=f17e64]:
+        - generic [ref=f17e22]: 创业板指
+        - generic [ref=f17e23]: "2963.82"
+        - generic [ref=f17e24]: "-2.61%"
+      - generic "腾讯报价时间：2026-10-12T16:14:12+08:00" [ref=f17e65]:
+        - generic [ref=f17e26]: 沪深300
+        - generic [ref=f17e27]: "4287.98"
+        - generic [ref=f17e28]: "-0.68%"
+      - generic "腾讯报价时间：2026-10-12T16:14:12+08:00" [ref=f17e66]:
+        - generic [ref=f17e30]: 科创50
+        - generic [ref=f17e31]: "1426.72"
+        - generic [ref=f17e32]: "-2.1%"
+    - button "切换浅色" [ref=f17e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f17e34]: ☀
+      - generic [ref=f17e35]: 浅色
+  - main [ref=f17e36]:
+    - navigation "选择研究期限" [ref=f17e496]:
+      - link "下一交易日" [ref=f17e497] [cursor=pointer]:
+        - /url: /?review=p2-direction#/decision
+      - link "未来一至三个月" [ref=f17e498] [cursor=pointer]:
+        - /url: /?review=p2-direction&research=1#/decision
+    - generic [ref=f17e499]:
+      - generic [ref=f17e500]:
+        - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f17e502]
+        - paragraph [ref=f17e503]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - group [ref=f17e504]:
+          - generic "研究另一家公司" [ref=f17e535] [cursor=pointer]
+          - option "未来一个月"
+          - option "未来两个月"
+          - option "未来三个月" [selected]
+        - paragraph [ref=f17e512]: 重新读取公司披露后生成。资金分析、行业验证及候选比较将按后续阶段接入；数据缺口会降低判断依据的充分程度。
+      - paragraph [ref=f17e536]: 资料截止：2026/10/12 22:19:05。这是中期研究，与明日方向独立。
+      - article [ref=f17e537]:
+        - generic [ref=f17e538]:
+          - heading "中微公司" [level=2] [ref=f17e539]
+          - generic [ref=f17e540]: 未来 3 个月
+        - generic [ref=f17e541]:
+          - strong [ref=f17e542]: 倾向看多
+          - generic [ref=f17e543]: 判断依据一般
+          - generic [ref=f17e544]: 未来方向的研究倾向
+        - paragraph [ref=f17e545]: 倾向看多：公司披露收入与利润同比明显增长，高端刻蚀付运与量产形成支撑，但研发高投入与现金回收待验证。
+        - generic [ref=f17e546]:
+          - heading "为什么作这个判断" [level=3] [ref=f17e547]
+          - paragraph [ref=f17e548]: 正面依据是公司披露收入与利润同比明显增长，且高端刻蚀付运与量产形成经营支撑；反面依据是研发投入刚性上升、现金回收与估值资金未验证。经营改善的披露证据相对具体，故倾向看多，但依据充分度受限于片段与未验证项。
+          - paragraph [ref=f17e549]: 这是现有证据下的方向取舍，估值、资金及行业核查仍有缺口；不是确定涨跌或校准概率。
+        - generic [ref=f17e550]:
+          - generic [ref=f17e551]:
+            - heading "经营变化，依据是什么" [level=3] [ref=f17e552]
+            - generic [ref=f17e553]:
+              - paragraph [ref=f17e554]: 公司披露上半年营业收入同比增长，主要来自先进逻辑和存储器件关键刻蚀工艺高端产品新增付运量显著提升，多种关键刻蚀工艺实现大规模量产。
+              - paragraph [ref=f17e555]: 若高端刻蚀设备付运与量产验收延续，可能支撑收入继续增长；待验证。
+              - button "查看依据 1 ↗" [ref=f17e556] [cursor=pointer]
+            - generic [ref=f17e557]:
+              - paragraph [ref=f17e558]: 公司披露利润总额与归母净利润同比大幅增长，公司称主要因收入增长带动毛利增加，同时研发投入同比上升且占营业收入比例维持高位。
+              - paragraph [ref=f17e559]: 若收入增长与毛利改善延续，可能支撑利润；但研发投入刚性上升可能部分抵消，待验证。
+              - button "查看依据 1 ↗" [ref=f17e560] [cursor=pointer]
+          - generic [ref=f17e561]:
+            - heading "还要警惕什么" [level=3] [ref=f17e562]
+            - list [ref=f17e563]:
+              - listitem [ref=f17e564]: 公司披露研发投入同比上升且占营业收入比例维持高位，可能持续压制利润弹性。
+              - listitem [ref=f17e565]: 仅有半年度报告片段，缺少完整现金流与回款结构，现金回收质量待验证。
+              - listitem [ref=f17e566]: 缺少一致预期与资金、行业验证，经营改善不能直接推演为股价方向。
+        - generic [ref=f17e567]:
+          - generic [ref=f17e568]:
+            - heading "价格位置" [level=3] [ref=f17e569]
+            - paragraph [ref=f17e570]: 已取得有限未复权收盘观察，尚未计算价格分位。
+          - generic [ref=f17e571]:
+            - heading "估值与预期差" [level=3] [ref=f17e572]
+            - paragraph [ref=f17e573]: 估值基准未齐，不以低估或高估支持本次方向。
+            - paragraph [ref=f17e574]: 一致预期、规范化现金流及固定估值假设尚未齐备；本次方向不以超预期或估值高低作为依据。
+      - generic [ref=f17e575]:
+        - heading "接下来，什么会改变判断" [level=2] [ref=f17e576]
+        - generic [ref=f17e577]:
+          - generic [ref=f17e578]:
+            - heading "继续观察" [level=3] [ref=f17e579]
+            - list [ref=f17e580]:
+              - listitem [ref=f17e581]: 查阅后续定期报告中的收入结构与付运披露
+              - listitem [ref=f17e582]: 查阅后续定期报告中的现金流与回款披露
+              - listitem [ref=f17e583]: 查阅后续定期报告中的研发投入与毛利变化披露
+            - paragraph [ref=f17e584]: 关注：高端刻蚀设备付运与量产验收的后续披露；研发投入与毛利结构变化的后续披露；经营现金流与回款情况的后续披露。具体披露日尚未确认。
+          - generic [ref=f17e585]:
+            - heading "重新评估的条件" [level=3] [ref=f17e586]
+            - list [ref=f17e587]:
+              - listitem [ref=f17e588]: 若后续披露显示高端产品付运或量产验收放缓，收入增长机制可能失效。
+              - listitem [ref=f17e589]: 若研发投入继续刚性上升且毛利改善未能延续，利润支撑可能减弱。
+              - listitem [ref=f17e590]: 若经营现金流与收入增长明显背离，现金回收判断需下调。
+      - generic [ref=f17e591]:
+        - heading "三种可能的走向" [level=2] [ref=f17e592]
+        - generic [ref=f17e593]:
+          - generic [ref=f17e594]:
+            - heading "基准情景" [level=3] [ref=f17e595]
+            - paragraph [ref=f17e596]: 若高端刻蚀付运与量产验收延续、研发投入维持高位，收入可能继续增长而利润弹性受研发支出部分抵消。
+            - list [ref=f17e597]:
+              - listitem [ref=f17e598]: 后续披露显示付运与量产延续
+              - listitem [ref=f17e599]: 研发投入占比维持高位
+          - generic [ref=f17e600]:
+            - heading "改善情景" [level=3] [ref=f17e601]
+            - paragraph [ref=f17e602]: 若高端产品付运放量同时毛利结构改善、研发投入增速放缓，利润与现金回收可能同步改善。
+            - list [ref=f17e603]:
+              - listitem [ref=f17e604]: 付运与验收加速
+              - listitem [ref=f17e605]: 毛利改善且研发增速放缓
+          - generic [ref=f17e606]:
+            - heading "恶化情景" [level=3] [ref=f17e607]
+            - paragraph [ref=f17e608]: 若付运或验收放缓、研发投入继续刚性上升，收入增长与利润支撑可能同时承压。
+            - list [ref=f17e609]:
+              - listitem [ref=f17e610]: 付运或验收放缓
+              - listitem [ref=f17e611]: 研发投入继续上升且毛利未能改善
+        - paragraph [ref=f17e612]: 这些是有条件的情景，尚无校准概率；经营变化与股价方向仍可能分歧。
+      - group [ref=f17e613]:
+        - generic "这份研究的范围与局限" [ref=f17e614] [cursor=pointer]
+      - generic [ref=f17e615]:
+        - generic [ref=f17e616]:
+          - heading "保存观点，等待事实检验" [level=2] [ref=f17e617]
+          - button "查看当前观察结果" [ref=f17e618] [cursor=pointer]
+        - paragraph [ref=f17e619]: 2026/10/12 22:19:34 发布。原观点保留，更新研究将另存一份；未到期不显示实现收益。
+        - generic [ref=f17e620]:
+          - generic [ref=f17e621]:
+            - heading "20 个交易日" [level=3] [ref=f17e622]
+            - paragraph [ref=f17e623]: 观察日 2026-11-09
+            - strong [ref=f17e624]: 等待观察
+          - generic [ref=f17e625]:
+            - heading "40 个交易日" [level=3] [ref=f17e626]
+            - paragraph [ref=f17e627]: 观察日 2026-12-07
+            - strong [ref=f17e628]: 等待观察
+          - generic [ref=f17e629]:
+            - heading "60 个交易日" [level=3] [ref=f17e630]
+            - paragraph [ref=f17e631]: 观察日待核定
+            - strong [ref=f17e632]: 等待观察
+            - paragraph [ref=f17e633]: 尚缺下一年度核定交易日历，不猜到期日期。
+        - paragraph [ref=f17e634]: 当前按未复权价格观察；行业基准尚缺，未完成全收益独立核对，不能当作正式策略绩效。经营催化是否兑现还需实际披露。
+        - group [ref=f17e635]:
+          - generic "查看最初观点与后续版本（3）" [ref=f17e636] [cursor=pointer]
+      - generic [ref=f17e637]:
+        - heading "有新披露时，再检查一次" [level=2] [ref=f17e638]
+        - paragraph [ref=f17e639]: 更新会重新取数、另存观点；最初判断和当时依据继续保留。
+        - button "更新这家公司研究" [ref=f17e640] [cursor=pointer]
+      - generic [ref=f17e518]:
+        - heading "已保存的中期研究" [level=2] [ref=f17e519]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f17e520] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f17e521]: 中微公司
+          - generic [ref=f17e522]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f17e523] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f17e524]: 中微公司
+          - generic [ref=f17e525]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f17e526] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f17e527]: 中微公司
+          - generic [ref=f17e528]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f17e529] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f17e530]: 中微公司
+          - generic [ref=f17e531]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f17e641] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f17e642]: 中微公司
+          - generic [ref=f17e643]: 2026/10/12 22:18:43
+    - paragraph [ref=f17e533]:
+      - link "开发者入口" [ref=f17e534] [cursor=pointer]:
+        - /url: /?review=p2-direction&developer=1#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795

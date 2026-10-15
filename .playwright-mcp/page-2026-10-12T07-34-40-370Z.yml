@@ -1,0 +1,135 @@
+- generic [ref=f4e3]:
+  - banner [ref=f4e4]:
+    - link "α AlphaAgent" [ref=f4e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f4e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f4e7]:
+      - link "工作台" [ref=f4e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f4e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f4e10] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换深色" [active] [ref=f4e142] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f4e33]: ☾
+      - generic [ref=f4e34]: 深色
+  - main [ref=f4e35]:
+    - generic [ref=f4e36]:
+      - generic [ref=f4e37]:
+        - heading "单股研究与预测" [level=1] [ref=f4e39]
+        - navigation "查看内容" [ref=f4e40]:
+          - button "分析结果" [pressed] [ref=f4e41] [cursor=pointer]
+          - button "开发验收" [ref=f4e42] [cursor=pointer]
+        - paragraph [ref=f4e43]: 查看资料与依据；下一交易日预测接通后在顶部展示方向、理由和核对结果。
+      - generic [ref=f4e126]:
+        - generic [ref=f4e127]: 尚未签发
+        - heading "下一交易日预测尚未接通" [level=2] [ref=f4e128]
+        - paragraph [ref=f4e129]: 先在下方查看单股取证结果。模型签发接通后，这里展示涨跌方向、支持与反对理由；当前没有预测或准确率。
+      - generic [ref=f4e45]:
+        - generic [ref=f4e46]:
+          - heading "单股定向取证" [level=2] [ref=f4e47]
+          - generic [ref=f4e48]: 资料与依据
+        - paragraph [ref=f4e49]: 输入公司和研究问题，取得相关原文、行情及融资资料。当前阶段整理事实与缺口，尚未接通模型分析结论。
+        - group [ref=f4e50]:
+          - generic "查看或调整取证条件" [ref=f4e51] [cursor=pointer]
+          - option "本次最新取证" [selected]
+          - option "历史归档核查"
+      - generic [ref=f4e55]:
+        - generic [ref=f4e56]:
+          - heading "北方华创 · 取证报告" [level=2] [ref=f4e57]
+          - generic [ref=f4e58]: 资料有缺口
+        - heading "取得3份原文，整理14条可定位证据" [level=3] [ref=f4e59]
+        - paragraph [ref=f4e60]: 已整理本次取得的资料与缺口，尚未生成经营判断或涨跌预测。
+        - paragraph [ref=f4e61]: 资料截止：2026/10/12 15:28:27 · 002371.SZ · 单股有限取证，不代表全行业覆盖、独立审计或完整历史回放。
+        - generic [ref=f4e62]:
+          - generic [ref=f4e63]: 业绩预告/快报 0 份
+          - generic [ref=f4e64]: 投资者关系 1 份
+          - generic [ref=f4e65]: 定期报告 2 份
+        - heading "原文与引用" [level=3] [ref=f4e66]
+        - article [ref=f4e67]:
+          - strong [ref=f4e68]: 2026年半年度报告
+          - paragraph [ref=f4e69]: 定期报告 · 164 页 · 报告期 2026-01-01 至 2026-06-30公告日期 2026/8/26（日精度）；本次取得 2026/10/12 15:27:42
+          - generic [ref=f4e70]:
+            - link "来源原文" [ref=f4e71] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-08-26/1225501903.PDF
+            - link "本次归档" [ref=f4e72] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-eb910e80af484329a14efd6b79983a2c/documents/DOC-d1126db582cc8521907d9c6b/raw
+            - button "引用 1 · 第 142 页" [ref=f4e73] [cursor=pointer]
+            - button "引用 2 · 第 68 页" [ref=f4e74] [cursor=pointer]
+        - article [ref=f4e75]:
+          - strong [ref=f4e76]: 2025年年度报告
+          - paragraph [ref=f4e77]: 定期报告 · 233 页 · 报告期 2025-01-01 至 2025-12-31公告日期 2026/4/18（日精度）；本次取得 2026/10/12 15:27:59
+          - generic [ref=f4e78]:
+            - link "来源原文" [ref=f4e79] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-04-18/1225122918.PDF
+            - link "本次归档" [ref=f4e80] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-eb910e80af484329a14efd6b79983a2c/documents/DOC-af09ac4951073e650f8d4f42/raw
+            - button "引用 1 · 第 37 页" [ref=f4e81] [cursor=pointer]
+            - button "引用 2 · 第 45 页" [ref=f4e82] [cursor=pointer]
+        - article [ref=f4e83]:
+          - strong [ref=f4e84]: 002371北方华创投资者关系管理信息20260515
+          - paragraph [ref=f4e85]: 投资者关系 · 4 页 · 报告期 未核定 至 未核定公告日期 2026/5/15（日精度）；本次取得 2026/10/12 15:28:26
+          - generic [ref=f4e86]:
+            - link "来源原文" [ref=f4e87] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-05-15/1225310975.PDF
+            - link "本次归档" [ref=f4e88] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-eb910e80af484329a14efd6b79983a2c/documents/DOC-586f8d4c1ff2b2c2483fc0dd/raw
+            - button "引用 1 · 第 2 页" [ref=f4e89] [cursor=pointer]
+            - button "引用 2 · 第 3 页" [ref=f4e90] [cursor=pointer]
+        - heading "行情与融资观察" [level=3] [ref=f4e91]
+        - generic [ref=f4e92]:
+          - generic [ref=f4e93]: 2026-09-29 未复权收盘价：628.96 CNY/share
+          - button "查看依据" [ref=f4e94] [cursor=pointer]
+        - generic [ref=f4e95]:
+          - generic [ref=f4e96]: 2026-09-30 未复权收盘价：615.97 CNY/share
+          - button "查看依据" [ref=f4e97] [cursor=pointer]
+        - generic [ref=f4e98]:
+          - generic [ref=f4e99]: 2026-10-08 未复权收盘价：600.32 CNY/share
+          - button "查看依据" [ref=f4e100] [cursor=pointer]
+        - generic [ref=f4e101]:
+          - generic [ref=f4e102]: 2026-10-09 未复权收盘价：594.04 CNY/share
+          - button "查看依据" [ref=f4e103] [cursor=pointer]
+        - generic [ref=f4e104]:
+          - generic [ref=f4e105]: 2026-10-12 未复权收盘价：587.98 CNY/share
+          - button "查看依据" [ref=f4e106] [cursor=pointer]
+        - generic [ref=f4e107]:
+          - generic [ref=f4e108]: 2026-10-09 融资余额：2365903036 CNY
+          - button "查看依据" [ref=f4e109] [cursor=pointer]
+        - generic [ref=f4e110]:
+          - generic [ref=f4e111]: 2026-10-09 融资买入额：168269493 CNY
+          - button "查看依据" [ref=f4e112] [cursor=pointer]
+        - generic [ref=f4e113]:
+          - generic [ref=f4e114]: 2026-10-09 融资偿还额：197655171 CNY
+          - button "查看依据" [ref=f4e115] [cursor=pointer]
+        - paragraph [ref=f4e116]: 行情为未复权收盘观察；融资是独立渠道，不合计为“主力资金”。
+        - heading "尚缺哪些资料" [level=3] [ref=f4e117]
+        - list [ref=f4e118]:
+          - listitem [ref=f4e119]:
+            - strong [ref=f4e120]: 业绩预告/快报及更正
+            - text: ：本次有限检索未取得在截止时点可用的有效原文，不代表公司未披露。
+        - generic [ref=f4e121]:
+          - link "导出本次取证报告" [ref=f4e122] [cursor=pointer]:
+            - /url: /api/quant/decision/runs/RUN-DEC-eb910e80af484329a14efd6b79983a2c/export
+          - link "新建取证" [ref=f4e123] [cursor=pointer]:
+            - /url: "#/decision"
+        - group [ref=f4e124]:
+          - generic "开发记录：取证过程与方法适用性" [ref=f4e125] [cursor=pointer]
+      - generic [ref=f4e52]:
+        - heading "取证历史" [level=2] [ref=f4e53]
+        - link "000333 · 定向取证 取证完成 · 2026/10/12 15:31:42" [ref=f4e130] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-7e4daf346ca64feca3045284b122b2d5"
+          - generic [ref=f4e131]: 000333 · 定向取证
+          - generic [ref=f4e132]: 取证完成 · 2026/10/12 15:31:42
+        - link "北方华创 · 定向取证 取证完成 · 2026/10/12 15:27:40" [ref=f4e133] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-eb910e80af484329a14efd6b79983a2c"
+          - generic [ref=f4e134]: 北方华创 · 定向取证
+          - generic [ref=f4e135]: 取证完成 · 2026/10/12 15:27:40
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:26:33" [ref=f4e136] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb"
+          - generic [ref=f4e137]: 中微公司 · 定向取证
+          - generic [ref=f4e138]: 取证完成 · 2026/10/12 15:26:33
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:20:08" [ref=f4e139] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-e6094d8139244a56bb37c20b37c06fef"
+          - generic [ref=f4e140]: 中微公司 · 定向取证
+          - generic [ref=f4e141]: 取证完成 · 2026/10/12 15:20:08

@@ -1,0 +1,281 @@
+- generic [ref=f34e3]:
+  - banner [ref=f34e4]:
+    - link "α AlphaAgent" [ref=f34e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f34e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f34e7]:
+      - link "工作台" [ref=f34e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f34e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f34e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f34e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f34e12]:
+      - generic "腾讯报价时间：2026-10-13T10:36:36+08:00" [ref=f34e79]:
+        - generic [ref=f34e14]: 上证指数
+        - generic [ref=f34e15]: "3757.06"
+        - generic [ref=f34e16]: "-1.06%"
+      - generic "腾讯报价时间：2026-10-13T10:36:33+08:00" [ref=f34e80]:
+        - generic [ref=f34e18]: 深证成指
+        - generic [ref=f34e19]: "12137.09"
+        - generic [ref=f34e20]: "-2%"
+      - generic "腾讯报价时间：2026-10-13T10:36:33+08:00" [ref=f34e81]:
+        - generic [ref=f34e22]: 创业板指
+        - generic [ref=f34e23]: "2890.56"
+        - generic [ref=f34e24]: "-2.47%"
+      - generic "腾讯报价时间：2026-10-13T10:36:36+08:00" [ref=f34e82]:
+        - generic [ref=f34e26]: 沪深300
+        - generic [ref=f34e27]: "4229.01"
+        - generic [ref=f34e28]: "-1.38%"
+      - generic "腾讯报价时间：2026-10-13T10:36:36+08:00" [ref=f34e83]:
+        - generic [ref=f34e30]: 科创50
+        - generic [ref=f34e31]: "1396.82"
+        - generic [ref=f34e32]: "-2.1%"
+    - button "切换浅色" [ref=f34e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f34e34]: ☀
+      - generic [ref=f34e35]: 浅色
+  - main [ref=f34e36]:
+    - navigation "选择研究期限" [ref=f34e38]:
+      - link "下一交易日" [ref=f34e39] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&developer=1#/decision
+      - link "未来一至三个月" [ref=f34e40] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&developer=1&research=1#/decision
+    - generic [ref=f34e41]:
+      - generic [ref=f34e42]:
+        - generic [ref=f34e43]:
+          - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f34e44]
+          - generic [ref=f34e45]: 开发者视图
+        - paragraph [ref=f34e46]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - group [ref=f34e84]:
+          - generic "研究另一家公司" [ref=f34e85] [cursor=pointer]
+          - option "未来一个月"
+          - option "未来两个月"
+          - option "未来三个月" [selected]
+        - paragraph [ref=f34e48]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+      - paragraph [ref=f34e86]: 资料截止：2026/10/13 10:29:51。这是中期研究，与明日方向独立。
+      - article [ref=f34e87]:
+        - generic [ref=f34e88]:
+          - heading "中微公司" [level=2] [ref=f34e89]
+          - generic [ref=f34e90]: 未来 3 个月
+        - generic [ref=f34e91]:
+          - strong [ref=f34e92]: 倾向看多
+          - generic [ref=f34e93]: 判断依据有限
+          - generic [ref=f34e94]: 未来方向的研究倾向
+        - paragraph [ref=f34e95]: 倾向看多，公司披露收入与现金流改善，但资金面偏弱需权衡。
+        - generic [ref=f34e96]:
+          - heading "为什么作这个判断" [level=3] [ref=f34e97]
+          - paragraph [ref=f34e98]: 正面依据为公司披露的收入增长、高端刻蚀产品量产及现金流改善，反面依据为资金面多个窗口走弱、非经常性损益贡献较大及现金回收弱于利润确认。正面经营改善更占优，但资金面偏弱限制判断充分程度，故倾向看多。
+          - paragraph [ref=f34e99]: 这是现有证据下的方向取舍，估值、资金及行业核查仍有缺口；不是确定涨跌或校准概率。
+        - generic [ref=f34e100]:
+          - generic [ref=f34e101]:
+            - heading "经营变化，依据是什么" [level=3] [ref=f34e102]
+            - generic [ref=f34e103]:
+              - paragraph [ref=f34e104]: 公司披露上半年营业收入同比增长，主要来自先进逻辑和存储器件关键刻蚀工艺高端产品付运量提升并实现大规模量产。
+              - paragraph [ref=f34e105]: 若高端刻蚀产品持续付运并量产，可能支撑收入增长延续，待验证。
+              - button "查看依据 1 ↗" [ref=f34e106] [cursor=pointer]
+            - generic [ref=f34e107]:
+              - paragraph [ref=f34e108]: 公司披露净利润增幅明显高于扣非净利润增幅，且研发投入占营业收入比例维持高位，公司称研发投入同比增加。
+              - paragraph [ref=f34e109]: 若高研发投入持续，可能压制短期利润弹性，同时非经常性损益对利润贡献较大，待验证。
+              - button "查看依据 1 ↗" [ref=f34e110] [cursor=pointer]
+            - generic [ref=f34e111]:
+              - paragraph [ref=f34e112]: 公司披露经营活动现金流量净额同比增长，但增幅低于净利润增幅，现金回收与利润确认节奏存在差异。
+              - paragraph [ref=f34e113]: 若回款节奏未同步改善，可能影响后续现金回收质量，待验证。
+              - button "查看依据 1 ↗" [ref=f34e114] [cursor=pointer]
+          - generic [ref=f34e115]:
+            - heading "还要警惕什么" [level=3] [ref=f34e116]
+            - list [ref=f34e117]:
+              - listitem [ref=f34e118]: 多个资金窗口融资余额下降，供应商估算大单净额在较长窗口为负，价格同期走弱。
+              - listitem [ref=f34e119]: 净利润增幅明显高于扣非净利润增幅，非经常性损益贡献较大，利润质量待验证。
+              - listitem [ref=f34e120]: 现金回收增幅低于利润增幅，回款节奏与利润确认存在差异。
+        - generic [ref=f34e121]:
+          - generic [ref=f34e122]:
+            - heading "价格位置" [level=3] [ref=f34e123]
+            - paragraph [ref=f34e124]: 已取得有限未复权收盘观察，尚未计算价格分位。
+          - generic [ref=f34e125]:
+            - heading "估值与预期差" [level=3] [ref=f34e126]
+            - paragraph [ref=f34e127]: 估值基准未齐，不以低估或高估支持本次方向。
+            - paragraph [ref=f34e128]: 一致预期、规范化现金流及固定估值假设尚未齐备；本次方向不以超预期或估值高低作为依据。
+      - generic [ref=f34e129]:
+        - heading "接下来，什么会改变判断" [level=2] [ref=f34e130]
+        - generic [ref=f34e131]:
+          - generic [ref=f34e132]:
+            - heading "继续观察" [level=3] [ref=f34e133]
+            - list [ref=f34e134]:
+              - listitem [ref=f34e135]: 查阅刻蚀设备收入按产品线或客户群拆分
+              - listitem [ref=f34e136]: 查阅合同负债变化与回款节奏
+              - listitem [ref=f34e137]: 查阅研发投入转化情况
+            - paragraph [ref=f34e138]: 关注：高端刻蚀产品持续付运并量产；研发投入转化为可量产机型或重复采购；合同负债与回款节奏改善。具体披露日尚未确认。
+          - generic [ref=f34e139]:
+            - heading "重新评估的条件" [level=3] [ref=f34e140]
+            - list [ref=f34e141]:
+              - listitem [ref=f34e142]: 公司披露的收入增长未能延续或高端产品付运放缓
+              - listitem [ref=f34e143]: 现金回收持续弱于利润确认
+              - listitem [ref=f34e144]: 资金面持续走弱且价格进一步下行
+      - generic [ref=f34e145]:
+        - heading "三种可能的走向" [level=2] [ref=f34e146]
+        - generic [ref=f34e147]:
+          - generic [ref=f34e148]:
+            - heading "基准情景" [level=3] [ref=f34e149]
+            - paragraph [ref=f34e150]: 若高端刻蚀产品付运延续且回款节奏平稳，经营可能维持增长，资金面偏弱构成制约。
+            - list [ref=f34e151]:
+              - listitem [ref=f34e152]: 公司披露的收入增长延续
+              - listitem [ref=f34e153]: 现金回收与利润确认差异未扩大
+          - generic [ref=f34e154]:
+            - heading "改善情景" [level=3] [ref=f34e155]
+            - paragraph [ref=f34e156]: 若研发投入转化为可量产机型并带来重复采购，收入与现金回收可能同步改善。
+            - list [ref=f34e157]:
+              - listitem [ref=f34e158]: 研发转化落地
+              - listitem [ref=f34e159]: 客户重复采购增加
+          - generic [ref=f34e160]:
+            - heading "恶化情景" [level=3] [ref=f34e161]
+            - paragraph [ref=f34e162]: 若高端产品付运放缓且回款节奏转弱，利润与现金回收可能承压。
+            - list [ref=f34e163]:
+              - listitem [ref=f34e164]: 付运量下降
+              - listitem [ref=f34e165]: 回款周期拉长
+        - paragraph [ref=f34e166]: 这些是有条件的情景，尚无校准概率；经营变化与股价方向仍可能分歧。
+      - group [ref=f34e167]:
+        - generic "这份研究的范围与局限" [ref=f34e168] [cursor=pointer]
+      - generic [ref=f34e169]:
+        - generic [ref=f34e170]:
+          - heading "资金是否支持这个判断" [level=2] [ref=f34e171]
+          - generic [ref=f34e172]: 分渠道观察
+        - paragraph [ref=f34e173]: 截至 2026-10-12 的已收盘交易日。融资、供应商估算和 ETF 分开看，成交额只表示活跃度。
+        - tablist "资金观察窗口" [ref=f34e174]:
+          - tab "近 5 个交易日" [ref=f34e175] [cursor=pointer]
+          - tab "近 20 个交易日" [selected] [ref=f34e176] [cursor=pointer]
+          - tab "近 60 个交易日" [ref=f34e177] [cursor=pointer]
+        - paragraph [ref=f34e178]: 2026-09-07 — 2026-10-12 · 余额与价格基准 2026-09-04
+        - paragraph [ref=f34e179]: 融资余额下降，供应商估算大单净额为负，两渠道方向一致偏弱。
+        - generic [ref=f34e180]:
+          - article [ref=f34e181]:
+            - generic [ref=f34e182]: 融资余额变化
+            - strong [ref=f34e183]: "-4.72 亿元"
+            - button "查看计算依据" [ref=f34e184] [cursor=pointer]
+          - article [ref=f34e185]:
+            - generic [ref=f34e186]: 融资买入合计
+            - strong [ref=f34e187]: 64.17 亿元
+            - button "查看计算依据" [ref=f34e188] [cursor=pointer]
+          - article [ref=f34e189]:
+            - generic [ref=f34e190]: 融资偿还合计
+            - strong [ref=f34e191]: 68.35 亿元
+            - button "查看计算依据" [ref=f34e192] [cursor=pointer]
+          - article [ref=f34e193]:
+            - generic [ref=f34e194]: 融资余额增加日占比
+            - strong [ref=f34e195]: 25.00%
+            - button "查看计算依据" [ref=f34e196] [cursor=pointer]
+          - article [ref=f34e197]:
+            - generic [ref=f34e198]: 供应商估算大单净额
+            - strong [ref=f34e199]: "-4.70 亿元"
+            - button "查看计算依据" [ref=f34e200] [cursor=pointer]
+          - article [ref=f34e201]:
+            - generic [ref=f34e202]: 个股价格变化
+            - strong [ref=f34e203]: "-7.22%"
+            - button "查看计算依据" [ref=f34e204] [cursor=pointer]
+          - article [ref=f34e205]:
+            - generic [ref=f34e206]: 相对沪深三百价格差
+            - strong [ref=f34e207]: "-1.50 个百分点"
+            - button "查看计算依据" [ref=f34e208] [cursor=pointer]
+        - paragraph [ref=f34e209]: 余额差与买入减偿还存在未解释差额：期间 -53,935,778 元，最大单日差额绝对值 55,901,849 元。保留各原始字段，不强行配平；差额原因尚未核查。
+        - generic [ref=f34e210]:
+          - paragraph [ref=f34e211]:
+            - generic [ref=f34e212]: 持续性
+            - text: 融资余额增加日占比较低，期间净减少并非天天减少，持续性偏弱。
+          - paragraph [ref=f34e213]:
+            - generic [ref=f34e214]: 价与融资
+            - text: 价格与融资余额同向减少。价格与融资余额同向走弱，供应商估算同向，价与融资未背离。
+          - paragraph [ref=f34e215]:
+            - generic [ref=f34e216]: 广度
+            - text: 行业广度与成员集中度未核定，缺项。
+          - paragraph [ref=f34e217]:
+            - generic [ref=f34e218]: 还可能是什么
+            - text: 供应商估算未获交易所逐值独立核验；融资变化不等于全市场净流入
+        - generic [ref=f34e219]:
+          - article [ref=f34e220]:
+            - heading "融资余额（亿元）" [level=3] [ref=f34e221]
+            - img "融资余额（亿元）" [ref=f34e223]
+          - article [ref=f34e226]:
+            - heading "融资买入与偿还（亿元）" [level=3] [ref=f34e227]
+            - img "融资买入与偿还（亿元）" [ref=f34e229]
+          - article [ref=f34e232]:
+            - heading "个股未复权收盘（元）" [level=3] [ref=f34e233]
+            - img "个股未复权收盘（元）" [ref=f34e235]
+          - article [ref=f34e238]:
+            - heading "供应商估算大单净额（亿元）" [level=3] [ref=f34e239]
+            - img "供应商估算大单净额（亿元）" [ref=f34e241]
+        - paragraph [ref=f34e244]: 点击曲线上的日期查看当日原始字段与来源；图表中的空位表示缺失，不代表零。
+        - group [ref=f34e245]:
+          - generic "数据覆盖与计算口径" [ref=f34e246] [cursor=pointer]
+        - group [ref=f34e77]:
+          - generic "开发核验：原始覆盖、供应商核对与封存" [active] [ref=f34e78] [cursor=pointer]
+          - generic [ref=f34e247]: "{ \"method_version\": \"separate-flow-windows-2026-10-13-v1\", \"coverage\": [ { \"channel\": \"security_close\", \"count\": 640, \"first\": \"2024-01-30\", \"last\": \"2026-10-12\", \"source_family\": \"TENCENT\", \"source_ref\": \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\" }, { \"channel\": \"security_turnover\", \"count\": 640, \"first\": \"2024-01-30\", \"last\": \"2026-10-12\", \"source_family\": \"TENCENT\", \"source_ref\": \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\" }, { \"channel\": \"market_close\", \"count\": 640, \"first\": \"2024-02-20\", \"last\": \"2026-10-12\", \"source_family\": \"TENCENT\", \"source_ref\": \"blob://sha256/4fdf56da5afd153ce3ddaf2b5cbabd3c7c374425836b20b3e5bd6924169b846f\" }, { \"channel\": \"margin_balance\", \"count\": 120, \"first\": \"2026-04-14\", \"last\": \"2026-10-12\", \"source_family\": \"EASTMONEY_MARGIN\", \"source_ref\": \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" }, { \"channel\": \"margin_buy\", \"count\": 120, \"first\": \"2026-04-14\", \"last\": \"2026-10-12\", \"source_family\": \"EASTMONEY_MARGIN\", \"source_ref\": \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" }, { \"channel\": \"margin_repay\", \"count\": 120, \"first\": \"2026-04-14\", \"last\": \"2026-10-12\", \"source_family\": \"EASTMONEY_MARGIN\", \"source_ref\": \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" }, { \"channel\": \"vendor_estimate\", \"count\": 120, \"first\": \"2026-04-14\", \"last\": \"2026-10-12\", \"source_family\": \"EASTMONEY_ORDER_ESTIMATE\", \"source_ref\": \"blob://sha256/1b8dedfef83468145df7dd21ff6a47720f0d60004d9d3ec9d608ae1b877eb4f0\" }, { \"channel\": \"etf_shares\", \"count\": 1, \"first\": \"2026-10-12\", \"last\": \"2026-10-12\", \"source_family\": \"SSE_ETF_SHARES\", \"source_ref\": \"blob://sha256/90624d90be712a9e1096c2fa9a6beaba7b95bf1fbff368bb6b0c10f0e453a87f\" }, { \"channel\": \"etf_nav\", \"count\": 20, \"first\": \"2026-09-07\", \"last\": \"2026-10-12\", \"source_family\": \"EASTMONEY_FUND_NAV\", \"source_ref\": \"blob://sha256/b5779c9d6b9a027c78f10550ad5906d200403d311088f8993e0e2642f0bf4a02\" } ], \"gaps\": [], \"checks\": { \"note\": \"没有目标交易日收盘后的两路有效行情\", \"status\": \"CONFLICT_OR_UNAVAILABLE\" }, \"window\": { \"baseline_date\": \"2026-09-04\", \"divergence\": \"ALIGNED_DOWN\", \"metrics\": [ { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"末日融资余额－窗口前一交易日融资余额\", \"label\": \"融资余额变化\", \"metric_id\": \"MARGIN_CHANGE\", \"note\": \"仅融资渠道；不是全市场净流入。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"-472029996\" }, { \"actual_count\": 20, \"expected_count\": 20, \"formula\": \"逐日融资买入额合计\", \"label\": \"融资买入合计\", \"metric_id\": \"MARGIN_BUY\", \"note\": \"金额为人民币元。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"6416518425\" }, { \"actual_count\": 20, \"expected_count\": 20, \"formula\": \"逐日融资偿还额合计\", \"label\": \"融资偿还合计\", \"metric_id\": \"MARGIN_REPAY\", \"note\": \"偿还包括券商申报口径中的调整。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"6834612643\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"余额差－同期（买入合计－偿还合计）\", \"label\": \"融资未解释勾稽差额\", \"metric_id\": \"MARGIN_RECONCILIATION\", \"note\": \"来源金额可能存在申报调整或不一致；保留差额不强行配平，不把余额差等同买入减偿还。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"-53935778\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"逐日余额差与买入减偿还之差的绝对值，取最大\", \"label\": \"最大单日勾稽差额绝对值\", \"metric_id\": \"MARGIN_MAX_RESIDUAL\", \"note\": \"来源金额可能存在申报调整或不一致；保留差额不强行配平，不把余额差等同买入减偿还。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"55901849\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"窗口内余额较前一交易日增加的天数／固定交易日数\", \"label\": \"融资余额增加日占比\", \"metric_id\": \"MARGIN_INCREASE_RATIO\", \"note\": \"不等于资金广度或未来概率。\", \"source_refs\": [ \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\" ], \"status\": \"AVAILABLE\", \"unit\": \"ratio\", \"value\": \"0.25\" }, { \"actual_count\": 20, \"expected_count\": 20, \"formula\": \"逐日成交额合计\", \"label\": \"个股成交额合计\", \"metric_id\": \"TURNOVER\", \"note\": \"成交活跃度，不是净流入。\", \"source_refs\": [ \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"90534444800\" }, { \"actual_count\": 20, \"expected_count\": 20, \"formula\": \"同源同口径逐日分类净额合计\", \"label\": \"供应商估算大单净额\", \"metric_id\": \"VENDOR_NET\", \"note\": \"供应商按订单大小分类估算，不识别机构身份。\", \"source_refs\": [ \"blob://sha256/1b8dedfef83468145df7dd21ff6a47720f0d60004d9d3ec9d608ae1b877eb4f0\" ], \"status\": \"AVAILABLE\", \"unit\": \"CNY\", \"value\": \"-469539616\" }, { \"actual_count\": 20, \"expected_count\": 20, \"formula\": \"供应商分类净额合计／同期本股成交额\", \"label\": \"供应商估算强度\", \"metric_id\": \"VENDOR_INTENSITY\", \"note\": \"不是市场占比或真实主力净流入。\", \"source_refs\": [ \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\", \"blob://sha256/1b8dedfef83468145df7dd21ff6a47720f0d60004d9d3ec9d608ae1b877eb4f0\" ], \"status\": \"AVAILABLE\", \"unit\": \"ratio\", \"value\": \"-0.005186309111822155891765075473\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"末日未复权收盘价／窗口前一日收盘价－一\", \"label\": \"个股价格变化\", \"metric_id\": \"SECURITY_RETURN\", \"note\": \"同窗口未复权价格变化，不是全收益。\", \"source_refs\": [ \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\" ], \"status\": \"AVAILABLE\", \"unit\": \"ratio\", \"value\": \"-0.0721781646890465684813070181\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"末日未复权收盘价／窗口前一日收盘价－一\", \"label\": \"沪深三百价格变化\", \"metric_id\": \"MARKET_RETURN\", \"note\": \"同窗口未复权价格变化，不是全收益。\", \"source_refs\": [ \"blob://sha256/4fdf56da5afd153ce3ddaf2b5cbabd3c7c374425836b20b3e5bd6924169b846f\" ], \"status\": \"AVAILABLE\", \"unit\": \"ratio\", \"value\": \"-0.0571827486505205527643715438\" }, { \"actual_count\": 21, \"expected_count\": 21, \"formula\": \"个股同期价格变化－沪深三百同期价格变化\", \"label\": \"相对沪深三百价格差\", \"metric_id\": \"RELATIVE_RETURN\", \"note\": \"相对表现，不是因果贡献。\", \"source_refs\": [ \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\", \"blob://sha256/4fdf56da5afd153ce3ddaf2b5cbabd3c7c374425836b20b3e5bd6924169b846f\" ], \"status\": \"AVAILABLE\", \"unit\": \"ratio\", \"value\": \"-0.0149954160385260157169354743\" }, { \"actual_count\": 0, \"expected_count\": 21, \"formula\": \"逐日调整后份额差按后续拆并因子换算为末日份额单位，再合计\", \"label\": \"ETF调整后份额变化\", \"metric_id\": \"ETF_CHANGE\", \"note\": \"交易日、字段或核定口径缺失；不补零、不缩短完整窗口。拆并因子须有逐日确认；未知事件不估算。\", \"source_refs\": [ \"blob://sha256/90624d90be712a9e1096c2fa9a6beaba7b95bf1fbff368bb6b0c10f0e453a87f\" ], \"status\": \"UNAVAILABLE\", \"unit\": \"shares\", \"value\": null }, { \"actual_count\": 0, \"expected_count\": 21, \"formula\": \"逐日调整后份额差×同日单位净值，再合计\", \"label\": \"ETF估算申赎额\", \"metric_id\": \"ETF_ESTIMATE\", \"note\": \"交易日、字段或核定口径缺失；不补零、不缩短完整窗口。估算，不等于成分股现金买入，实物申赎与套利可能参与。\", \"source_refs\": [ \"blob://sha256/90624d90be712a9e1096c2fa9a6beaba7b95bf1fbff368bb6b0c10f0e453a87f\", \"blob://sha256/b5779c9d6b9a027c78f10550ad5906d200403d311088f8993e0e2642f0bf4a02\" ], \"status\": \"UNAVAILABLE\", \"unit\": \"CNY\", \"value\": null }, { \"actual_count\": 0, \"expected_count\": 20, \"formula\": \"各日同范围行业成交额／市场成交额，再取平均\", \"label\": \"行业平均成交占比\", \"metric_id\": \"INDUSTRY_SHARE\", \"note\": \"交易日、字段或核定口径缺失；不补零、不缩短完整窗口。需要核定分类、成员与市场分母，不能用个股成交额代替行业。\", \"source_refs\": [], \"status\": \"UNAVAILABLE\", \"unit\": \"ratio\", \"value\": null }, { \"actual_count\": 0, \"expected_count\": 20, \"formula\": \"核定成员范围内逐日计算，缺成员不缩小分母\", \"label\": \"行业上涨覆盖\", \"metric_id\": \"INDUSTRY_BREADTH\", \"note\": \"交易日、字段或核定口径缺失；不补零、不缩短完整窗口。当前未核定行业成员与历史成分，保持缺项。\", \"source_refs\": [], \"status\": \"UNAVAILABLE\", \"unit\": \"ratio\", \"value\": null }, { \"actual_count\": 0, \"expected_count\": 20, \"formula\": \"核定成员范围内逐日计算，缺成员不缩小分母\", \"label\": \"行业成员成交集中度\", \"metric_id\": \"INDUSTRY_CONCENTRATION\", \"note\": \"交易日、字段或核定口径缺失；不补零、不缩短完整窗口。当前未核定行业成员与历史成分，保持缺项。\", \"source_refs\": [], \"status\": \"UNAVAILABLE\", \"unit\": \"ratio\", \"value\": null } ], \"sessions\": [ \"2026-09-07\", \"2026-09-08\", \"2026-09-09\", \"2026-09-10\", \"2026-09-11\", \"2026-09-14\", \"2026-09-15\", \"2026-09-16\", \"2026-09-17\", \"2026-09-18\", \"2026-09-21\", \"2026-09-22\", \"2026-09-23\", \"2026-09-24\", \"2026-09-28\", \"2026-09-29\", \"2026-09-30\", \"2026-10-08\", \"2026-10-09\", \"2026-10-12\" ], \"window\": 20 }, \"calculation_ref\": \"blob://sha256/6dcf8c1df4444940825cf6f707e1f50dd68c820bd448148d1ba5eaffdf3a285c\", \"snapshot\": { \"calendar\": { \"calendar\": { \"content_hash\": \"7cccff58d1e34a9edbb9b3e93727e57402911c103bc5de9885b24d7b713aa7f9\", \"coverage_end\": \"2026-12-31\", \"coverage_start\": \"2026-01-01\", \"exchange\": \"SSE\", \"sessions\": [ \"2026-01-05\", \"2026-01-06\", \"2026-01-07\", \"2026-01-08\", \"2026-01-09\", \"2026-01-12\", \"2026-01-13\", \"2026-01-14\", \"2026-01-15\", \"2026-01-16\", \"2026-01-19\", \"2026-01-20\", \"2026-01-21\", \"2026-01-22\", \"2026-01-23\", \"2026-01-26\", \"2026-01-27\", \"2026-01-28\", \"2026-01-29\", \"2026-01-30\", \"2026-02-02\", \"2026-02-03\", \"2026-02-04\", \"2026-02-05\", \"2026-02-06\", \"2026-02-09\", \"2026-02-10\", \"2026-02-11\", \"2026-02-12\", \"2026-02-13\", \"2026-02-24\", \"2026-02-25\", \"2026-02-26\", \"2026-02-27\", \"2026-03-02\", \"2026-03-03\", \"2026-03-04\", \"2026-03-05\", \"2026-03-06\", \"2026-03-09\", \"2026-03-10\", \"2026-03-11\", \"2026-03-12\", \"2026-03-13\", \"2026-03-16\", \"2026-03-17\", \"2026-03-18\", \"2026-03-19\", \"2026-03-20\", \"2026-03-23\", \"2026-03-24\", \"2026-03-25\", \"2026-03-26\", \"2026-03-27\", \"2026-03-30\", \"2026-03-31\", \"2026-04-01\", \"2026-04-02\", \"2026-04-03\", \"2026-04-07\", \"2026-04-08\", \"2026-04-09\", \"2026-04-10\", \"2026-04-13\", \"2026-04-14\", \"2026-04-15\", \"2026-04-16\", \"2026-04-17\", \"2026-04-20\", \"2026-04-21\", \"2026-04-22\", \"2026-04-23\", \"2026-04-24\", \"2026-04-27\", \"2026-04-28\", \"2026-04-29\", \"2026-04-30\", \"2026-05-06\", \"2026-05-07\", \"2026-05-08\", \"2026-05-11\", \"2026-05-12\", \"2026-05-13\", \"2026-05-14\", \"2026-05-15\", \"2026-05-18\", \"2026-05-19\", \"2026-05-20\", \"2026-05-21\", \"2026-05-22\", \"2026-05-25\", \"2026-05-26\", \"2026-05-27\", \"2026-05-28\", \"2026-05-29\", \"2026-06-01\", \"2026-06-02\", \"2026-06-03\", \"2026-06-04\", \"2026-06-05\", \"2026-06-08\", \"2026-06-09\", \"2026-06-10\", \"2026-06-11\", \"2026-06-12\", \"2026-06-15\", \"2026-06-16\", \"2026-06-17\", \"2026-06-18\", \"2026-06-22\", \"2026-06-23\", \"2026-06-24\", \"2026-06-25\", \"2026-06-26\", \"2026-06-29\", \"2026-06-30\", \"2026-07-01\", \"2026-07-02\", \"2026-07-03\", \"2026-07-06\", \"2026-07-07\", \"2026-07-08\", \"2026-07-09\", \"2026-07-10\", \"2026-07-13\", \"2026-07-14\", \"2026-07-15\", \"2026-07-16\", \"2026-07-17\", \"2026-07-20\", \"2026-07-21\", \"2026-07-22\", \"2026-07-23\", \"2026-07-24\", \"2026-07-27\", \"2026-07-28\", \"2026-07-29\", \"2026-07-30\", \"2026-07-31\", \"2026-08-03\", \"2026-08-04\", \"2026-08-05\", \"2026-08-06\", \"2026-08-07\", \"2026-08-10\", \"2026-08-11\", \"2026-08-12\", \"2026-08-13\", \"2026-08-14\", \"2026-08-17\", \"2026-08-18\", \"2026-08-19\", \"2026-08-20\", \"2026-08-21\", \"2026-08-24\", \"2026-08-25\", \"2026-08-26\", \"2026-08-27\", \"2026-08-28\", \"2026-08-31\", \"2026-09-01\", \"2026-09-02\", \"2026-09-03\", \"2026-09-04\", \"2026-09-07\", \"2026-09-08\", \"2026-09-09\", \"2026-09-10\", \"2026-09-11\", \"2026-09-14\", \"2026-09-15\", \"2026-09-16\", \"2026-09-17\", \"2026-09-18\", \"2026-09-21\", \"2026-09-22\", \"2026-09-23\", \"2026-09-24\", \"2026-09-28\", \"2026-09-29\", \"2026-09-30\", \"2026-10-08\", \"2026-10-09\", \"2026-10-12\", \"2026-10-13\", \"2026-10-14\", \"2026-10-15\", \"2026-10-16\", \"2026-10-19\", \"2026-10-20\", \"2026-10-21\", \"2026-10-22\", \"2026-10-23\", \"2026-10-26\", \"2026-10-27\", \"2026-10-28\", \"2026-10-29\", \"2026-10-30\", \"2026-11-02\", \"2026-11-03\", \"2026-11-04\", \"2026-11-05\", \"2026-11-06\", \"2026-11-09\", \"2026-11-10\", \"2026-11-11\", \"2026-11-12\", \"2026-11-13\", \"2026-11-16\", \"2026-11-17\", \"2026-11-18\", \"2026-11-19\", \"2026-11-20\", \"2026-11-23\", \"2026-11-24\", \"2026-11-25\", \"2026-11-26\", \"2026-11-27\", \"2026-11-30\", \"2026-12-01\", \"2026-12-02\", \"2026-12-03\", \"2026-12-04\", \"2026-12-07\", \"2026-12-08\", \"2026-12-09\", \"2026-12-10\", \"2026-12-11\", \"2026-12-14\", \"2026-12-15\", \"2026-12-16\", \"2026-12-17\", \"2026-12-18\", \"2026-12-21\", \"2026-12-22\", \"2026-12-23\", \"2026-12-24\", \"2026-12-25\", \"2026-12-28\", \"2026-12-29\", \"2026-12-30\", \"2026-12-31\" ], \"source_refs\": [ \"blob://sha256/7ea10c16202c4748f0ad5bcdfe6ee07b85b5462589504604b17c9d63865e7d8c\", \"blob://sha256/fc922c433438b2636cb631eab25cca405209712acbb6aaded768c45456ff8888\" ], \"verified_at\": \"2026-10-13T02:29:48.079545Z\" } }, \"captured_at\": \"2026-10-13T02:29:51.765326+00:00\", \"responses\": [ { \"role\": \"security_daily\", \"source\": { \"blob_ref\": \"blob://sha256/12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\", \"byte_count\": 66206, \"fetched_at\": \"2026-10-13T02:29:49.028884+00:00\", \"key\": \"flow_security_daily\", \"sha256\": \"12c5f2fcaaed82af06ab9896505d126b44c403d4b84f09125a5fc067ce450112\", \"source_family\": \"TENCENT\", \"url\": \"https://proxy.finance.qq.com/ifzqgtimg/appstock/app/newfqkline/get?param=sh688012%2Cday%2C2026-07-10%2C2026-10-12%2C640%2C\" } }, { \"role\": \"market_daily\", \"source\": { \"blob_ref\": \"blob://sha256/4fdf56da5afd153ce3ddaf2b5cbabd3c7c374425836b20b3e5bd6924169b846f\", \"byte_count\": 71102, \"fetched_at\": \"2026-10-13T02:29:49.738864+00:00\", \"key\": \"flow_market_daily\", \"sha256\": \"4fdf56da5afd153ce3ddaf2b5cbabd3c7c374425836b20b3e5bd6924169b846f\", \"source_family\": \"TENCENT\", \"url\": \"https://proxy.finance.qq.com/ifzqgtimg/appstock/app/newfqkline/get?param=sh000300%2Cday%2C2026-07-10%2C2026-10-12%2C640%2C\" } }, { \"role\": \"margin\", \"source\": { \"blob_ref\": \"blob://sha256/eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\", \"byte_count\": 107747, \"fetched_at\": \"2026-10-13T02:29:50.637681+00:00\", \"key\": \"flow_margin\", \"sha256\": \"eef3322543e01fcb1966c8d8545228d88d484350d1fdc77e7e079cf1acd93981\", \"source_family\": \"EASTMONEY_MARGIN\", \"url\": \"https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_WEB_RZRQ_GGMX&columns=ALL&filter=%28SCODE%3D%22688012%22%29&sortColumns=DATE&sortTypes=-1&pageNumber=1&pageSize=120\" } }, { \"role\": \"vendor\", \"source\": { \"blob_ref\": \"blob://sha256/1b8dedfef83468145df7dd21ff6a47720f0d60004d9d3ec9d608ae1b877eb4f0\", \"byte_count\": 15138, \"fetched_at\": \"2026-10-13T02:29:50.921873+00:00\", \"key\": \"flow_vendor\", \"sha256\": \"1b8dedfef83468145df7dd21ff6a47720f0d60004d9d3ec9d608ae1b877eb4f0\", \"source_family\": \"EASTMONEY_ORDER_ESTIMATE\", \"url\": \"https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?lmt=120&klt=101&secid=1.688012&fields1=f1%2Cf2%2Cf3%2Cf7&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61%2Cf62%2Cf63%2Cf64%2Cf65\" } }, { \"role\": \"etf_shares\", \"source\": { \"blob_ref\": \"blob://sha256/90624d90be712a9e1096c2fa9a6beaba7b95bf1fbff368bb6b0c10f0e453a87f\", \"byte_count\": 227773, \"fetched_at\": \"2026-10-13T02:29:51.206744+00:00\", \"key\": \"flow_etf_shares\", \"sha256\": \"90624d90be712a9e1096c2fa9a6beaba7b95bf1fbff368bb6b0c10f0e453a87f\", \"source_family\": \"SSE_ETF_SHARES\", \"url\": \"https://query.sse.com.cn/commonQuery.do?isPagination=true&pageHelp.pageSize=10000&pageHelp.pageNo=1&sqlId=COMMON_SSE_ZQPZ_ETFZL_XXPL_ETFGM_SEARCH_L&STAT_DATE=2026-10-12\" } }, { \"role\": \"etf_nav\", \"source\": { \"blob_ref\": \"blob://sha256/b5779c9d6b9a027c78f10550ad5906d200403d311088f8993e0e2642f0bf4a02\", \"byte_count\": 4480, \"fetched_at\": \"2026-10-13T02:29:51.367244+00:00\", \"key\": \"flow_etf_nav\", \"sha256\": \"b5779c9d6b9a027c78f10550ad5906d200403d311088f8993e0e2642f0bf4a02\", \"source_family\": \"EASTMONEY_FUND_NAV\", \"url\": \"https://api.fund.eastmoney.com/f10/lsjz?fundCode=512480&pageIndex=1&pageSize=100&startDate=2026-07-10&endDate=2026-10-12\" } }, { \"role\": \"quote_tencent\", \"source\": { \"blob_ref\": \"blob://sha256/ca215d5d7675dfd52f5b66a3029df90739a77e2a05725b430ce6436a2c634b42\", \"byte_count\": 543, \"fetched_at\": \"2026-10-13T02:29:51.585272+00:00\", \"key\": \"flow_quote_tencent\", \"sha256\": \"ca215d5d7675dfd52f5b66a3029df90739a77e2a05725b430ce6436a2c634b42\", \"source_family\": \"TENCENT\", \"url\": \"https://qt.gtimg.cn/?q=sh688012\" } }, { \"role\": \"quote_sina\", \"source\": { \"blob_ref\": \"blob://sha256/4e3ab3091e0b4a1b5f15c178ff70b2cfaed04ad8954c38d213884161b83c4f55\", \"byte_count\": 258, \"fetched_at\": \"2026-10-13T02:29:51.750050+00:00\", \"key\": \"flow_quote_sina\", \"sha256\": \"4e3ab3091e0b4a1b5f15c178ff70b2cfaed04ad8954c38d213884161b83c4f55\", \"source_family\": \"SINA\", \"url\": \"https://hq.sinajs.cn/?list=sh688012\" } } ], \"started_at\": \"2026-10-13T02:29:48.179857+00:00\", \"subject\": { \"code\": \"688012\", \"company_type\": \"4\", \"description\": \" 中微半导体设备(上海)股份有限公司(证券简称“中微公司”,证券代码“688012”)是一家以中国为基地、面向全球的微观加工高端设备公司,为集成电路和泛半导体行业提供极具竞争力的高端设备和高质量的服务。中微开发的等离子体刻蚀设备和化学薄膜设备是制造各种微观器件的关键设备,可加工微米级和纳米级的各种器件。这些微观器件是现代数码产业的基础,它们正在彻底改变人类的生产方式和生活方式。中微总部位于上海,聚焦亚洲,并为全球的客户提供技术和设备的解决方案。作为制造和创新的中心,中国和亚洲具有得天独厚的优势和高速成长的市场,而这使中微有无限广阔的发展前景。在中微员工的创新激情、多年的齐心奋斗和合作共赢的精神指引下,中微已经成为一家快速成长的微观加工设备公司,在技术创新、产品优化和市场准入方面取得了重大突破,赢得了众多客户和供应厂商的信任和支持,成为国际半导体微观加工设备产业极具竞争力的一颗新星。\", \"exchange\": \"SSE\", \"industry\": \"电子设备-半导体-集成电路\", \"name\": \"中微公司\", \"security_id\": \"688012.SH\", \"symbol\": \"sh688012\" }, \"transport_gaps\": [] } }"
+      - generic [ref=f34e248]:
+        - generic [ref=f34e249]:
+          - heading "保存观点，等待事实检验" [level=2] [ref=f34e250]
+          - button "查看当前观察结果" [ref=f34e251] [cursor=pointer]
+        - paragraph [ref=f34e252]: 2026/10/13 10:30:22 发布。原观点保留，更新研究将另存一份；未到期不显示实现收益。
+        - generic [ref=f34e253]:
+          - generic [ref=f34e254]:
+            - heading "20 个交易日" [level=3] [ref=f34e255]
+            - paragraph [ref=f34e256]: 观察日 2026-11-10
+            - strong [ref=f34e257]: 等待观察到期
+          - generic [ref=f34e258]:
+            - heading "40 个交易日" [level=3] [ref=f34e259]
+            - paragraph [ref=f34e260]: 观察日 2026-12-08
+            - strong [ref=f34e261]: 等待观察到期
+          - generic [ref=f34e262]:
+            - heading "60 个交易日" [level=3] [ref=f34e263]
+            - paragraph [ref=f34e264]: 观察日待核定
+            - strong [ref=f34e265]: 等待观察到期
+            - paragraph [ref=f34e266]: 尚缺下一年度核定交易日历，不猜到期日期。
+        - paragraph [ref=f34e267]: 当前按未复权价格观察；行业基准尚缺，未完成全收益独立核对，不能当作正式策略绩效。经营催化是否兑现还需实际披露。
+        - group [ref=f34e268]:
+          - generic "查看最初观点与后续版本（5）" [ref=f34e269] [cursor=pointer]
+      - generic [ref=f34e270]:
+        - heading "有新披露时，再检查一次" [level=2] [ref=f34e271]
+        - paragraph [ref=f34e272]: 更新会重新取数、另存观点；最初判断和当时依据继续保留。
+        - button "更新这家公司研究" [ref=f34e273] [cursor=pointer]
+      - generic [ref=f34e49]:
+        - heading "已保存的中期研究" [level=2] [ref=f34e50]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f34e51] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f34e52]: 中微公司
+          - generic [ref=f34e53]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f34e54] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f34e55]: 中微公司
+          - generic [ref=f34e56]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f34e57] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f34e58]: 中微公司
+          - generic [ref=f34e59]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f34e60] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f34e61]: 中微公司
+          - generic [ref=f34e62]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f34e63] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f34e64]: 中微公司
+          - generic [ref=f34e65]: 2026/10/12 22:18:43
+        - link "中微公司 2026/10/13 09:58:49" [ref=f34e66] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-dfaeed1c8b6c4b30b2aa18d59db585d9"
+          - generic [ref=f34e67]: 中微公司
+          - generic [ref=f34e68]: 2026/10/13 09:58:49
+        - link "中微公司 2026/10/13 10:29:14" [ref=f34e69] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1"
+          - generic [ref=f34e70]: 中微公司
+          - generic [ref=f34e71]: 2026/10/13 10:29:14
+      - generic [ref=f34e274]:
+        - heading "开发记录" [level=2] [ref=f34e275]
+        - link "导出原始观点与完整依据" [ref=f34e276] [cursor=pointer]:
+          - /url: /api/quant/decision/runs/RUN-DEC-529672d81d814125aa4459fa7ffd08c1/export
+        - group [ref=f34e277]:
+          - generic "方法适用性、补证循环和实际模型调用" [ref=f34e278] [cursor=pointer]
+    - generic [ref=f34e72]:
+      - group [ref=f34e73]:
+        - generic "前期 P0/P1 验收留档（当时状态）" [ref=f34e74] [cursor=pointer]
+      - paragraph [ref=f34e75]:
+        - link "返回用户视图" [ref=f34e76] [cursor=pointer]:
+          - /url: /?review=p3-user-acceptance-final#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1

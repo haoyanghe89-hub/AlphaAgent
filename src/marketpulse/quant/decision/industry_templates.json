@@ -1,0 +1,8 @@
+{
+  "schema_version":"industry-templates-v1",
+  "templates":[
+    {"industry_id":"semiconductor_equipment","title":"半导体设备","configured":true,"enabled":false,"enable_after":"P4领域门禁与真实材料验收","chain":["终端需求","制造端资本开支","设备导入/验收","收入/利润","现金回收"],"required":["分部/地区业务敞口","制造端原始披露","存货/合同负债/回款","产品验收与风险"],"counterexamples":["海外存储增长与国内设备不相关","合同负债不是完整订单","产品验证不等于量产收入"]},
+    {"industry_id":"semiconductor_manufacturing","title":"半导体制造","configured":false,"enabled":false,"enable_after":"P6独立模板与可比性验收","chain":[],"required":["产能利用率","工艺/币种/资本开支口径"],"counterexamples":["不能照搬设备验收逻辑"]},
+    {"industry_id":"semiconductor_packaging","title":"半导体封测","configured":false,"enabled":false,"enable_after":"后续独立验收","chain":[],"required":["封测业务敞口与产能"],"counterexamples":["先进封装概念不证明当期收入"]}
+  ]
+}

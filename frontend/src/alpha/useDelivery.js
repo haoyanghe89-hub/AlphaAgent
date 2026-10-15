@@ -45,6 +45,8 @@ export function comparisonEntities(question) {
 }
 
 export function deliveryPage(item) {
+  if (item.scenario === 'next_session') return 'decision'
+  if (item.scenario === 'decision') return item.page || 'decision'
   return item.scenario === 'compare_live' ? 'compare' : item.scenario === 'strategy' ? 'strategy'
     : item.scenario === 'live' ? 'live' : item.scenario === 'backtest' ? 'backtest'
       : item.status === 'COMPLETED' ? 'report' : 'research'

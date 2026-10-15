@@ -6,7 +6,7 @@ html { min-width:320px; scroll-padding-top:64px; }
 button,input,select,textarea { font-family:var(--font-ui); } button { cursor:pointer; } input,select,textarea { color:var(--text-1); max-width:100%; }
 .chip,.metric-cell .m-value { line-height:1.55; }
 :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
-.brand { flex-shrink:0; }.brand:hover { text-decoration:none; }.topnav { white-space:nowrap; }.quote-strip { min-width:0; }.quote-strip .qs-item { font-size:13px; }.qs-change { font-size:11px; }
+.brand { flex-shrink:0; }.brand:hover { text-decoration:none; }.topnav { white-space:nowrap; min-width:0; overflow-x:auto; }.topnav a { flex-shrink:0; }.quote-strip { min-width:0; }.quote-strip .qs-item { font-size:13px; }.qs-change { font-size:11px; }
 .theme-button { display:flex; align-items:center; gap:5px; border:1px solid var(--border-strong); background:var(--bg-panel); color:var(--text-2); border-radius:4px; padding:4px 8px; white-space:nowrap; font-size:11.5px; margin-left:auto; }.quote-strip + .theme-button { margin-left:0; }
 .panel { min-width:0; }.muted { color:var(--text-3); }.small { font-size:12px; }.workspace-section { margin-top:20px; }
 .hero-heading,.section-heading { display:flex; align-items:baseline; flex-wrap:wrap; gap:10px; margin-bottom:14px; }.hero-heading { margin-bottom:4px; }.hero-heading h1,.section-heading h1 { font-size:17px; font-weight:600; margin:0; }.hero-heading .muted,.section-heading .muted { font-size:12px; }.section-heading h2 { font-size:13px; font-weight:600; color:var(--text-2); margin:0; }.section-heading>a:last-child { margin-left:auto; }.ask-box input { min-width:0; }.chip { text-align:left; }.hero-disclaimer { margin:16px 0 0; color:var(--text-3); font-size:11.5px; border-top:1px solid var(--border); padding-top:10px; }
@@ -56,3 +56,26 @@ dialog { color:var(--text-1); background:var(--bg-panel); border:1px solid var(-
 .bt-limitations { margin: 12px 0 0; padding-left: 18px; color: var(--text-3); font-size: 12px; line-height: 1.8; }
 .annual-holdings { max-width: 100%; overflow-x: auto; }
 .strategy-input-hash { overflow-wrap: anywhere; }
+
+/* Research results: compact reading rhythm, measured data before long explanations. */
+.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) .rep-section{padding:18px 22px;margin-bottom:12px}
+.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) h1{font-size:22px;margin:0 0 10px}
+.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) h2{font-size:15px;margin:0 0 10px;color:var(--text-1)}
+.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) p{line-height:1.65;margin:8px 0}
+.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) .prediction-lead{font-size:14px;margin:6px 0}
+.alpha-app .prediction-start{gap:12px;margin:12px 0;align-items:flex-end}
+.prediction-start label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--text-2);min-width:220px}
+.prediction-start input{background:var(--bg-base);border:1px solid var(--border);border-radius:5px;padding:10px 12px;color:var(--text-1);font:inherit}
+.alpha-app .prediction-call{margin:16px 0 10px;max-width:none;display:grid;grid-template-columns:100px 1fr;gap:4px 16px;align-items:center}
+.alpha-app .prediction-day{grid-column:1/-1;font-size:12px}.alpha-app .prediction-direction{font-size:32px;margin:0}.alpha-app .prediction-call p{font-size:15px;margin:0}
+.alpha-app .prediction-reasons{gap:22px;margin-top:16px}.alpha-app .prediction-reasons h3{font-size:13px;margin-bottom:8px}.alpha-app .prediction-reasons li,.alpha-app .prediction-counter>div{margin-bottom:12px}.alpha-app .prediction-counter{padding-left:18px}
+.alpha-app .prediction-reasons .condition-note{font-size:12px}.alpha-app .prediction-outcome{margin-top:14px;padding-top:12px;gap:12px}.alpha-app .prediction-limits{margin-top:12px}.alpha-app .prediction-score{margin:12px 0}.alpha-app .prediction-stat-group{margin:16px 0}
+.alpha-app .medium-form{margin:12px 0;gap:12px}.alpha-app .medium-verdict{margin:14px 0 10px;gap:12px}.alpha-app .medium-verdict strong{font-size:28px}.alpha-app .medium-summary{font-size:15px;max-width:none}.alpha-app .medium-decision{margin-top:12px;padding-top:10px}.alpha-app .medium-columns,.alpha-app .medium-position{gap:22px;margin-top:16px}.alpha-app .medium-reason{margin-bottom:12px}.alpha-app .medium-columns li{line-height:1.65;margin-bottom:8px}.alpha-app .medium-position{padding-top:12px}.alpha-app .medium-scenarios{gap:18px;margin-top:12px}
+.alpha-app .flow-tabs{margin:12px 0 8px}.alpha-app .flow-summary{font-size:15px}.alpha-app .flow-metrics{margin:14px 0}.alpha-app .flow-metrics article{padding:12px;gap:7px}.alpha-app .flow-metrics strong{font-size:19px}.alpha-app .flow-charts{margin:14px 0;gap:16px}
+.alpha-app .market-metrics{gap:14px;margin:14px 0}.alpha-app .market-metrics section{padding-top:10px}.alpha-app .market-metrics strong{font-size:20px;margin:8px 0}.alpha-app .market-conclusion{font-size:15px}
+.alpha-app .candidate-summary{font-size:15px;line-height:1.65}.alpha-app .candidate-reasons{gap:22px;margin:14px 0}.alpha-app .candidate-card{scroll-margin-top:100px}.alpha-app .candidate-form,.alpha-app .candidate-actions{gap:10px;margin:12px 0}.alpha-app .candidate-table{margin:12px 0}.alpha-app .candidate-card details{padding:8px 0}
+.candidate-verdicts{display:flex;gap:8px;flex-wrap:wrap}.candidate-verdicts a{display:flex;gap:12px;border:1px solid var(--border);border-radius:5px;padding:8px 12px;font-size:12px}.candidate-verdicts span{color:var(--accent)}
+@media(max-width:700px){.alpha-app :is(.prediction-page,.medium-page,.market-page,.candidate-page) .rep-section{padding:14px}.alpha-app .prediction-call{grid-template-columns:1fr}.alpha-app .prediction-direction{font-size:28px}.alpha-app .prediction-counter{padding:12px 0 0}.prediction-start label{min-width:0;width:100%}.prediction-start .btn{width:100%}.alpha-app .medium-columns,.alpha-app .medium-position{gap:14px}.alpha-app .market-metrics{grid-template-columns:1fr 1fr}}
+
+.result-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.research-history summary{cursor:pointer;font-size:13px;color:var(--text-2)}
+@media(max-width:700px){.result-tabs .btn{flex:1;min-width:42%;font-size:12px}}

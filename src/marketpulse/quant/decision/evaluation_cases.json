@@ -1,0 +1,856 @@
+[
+  {
+    "case_id": "B01",
+    "split": "development",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B01:v1",
+    "fixture_json": "{\"profit_change\": -20, \"management_explanation\": null}",
+    "allowed": [
+      "缺主因证据时补查"
+    ],
+    "forbidden": [
+      "直接说原料涨价"
+    ],
+    "expected_gaps": [
+      "经营讨论原文"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B02",
+    "split": "holdout",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B02:v1",
+    "fixture_json": "{\"profit\": 120, \"disposal_gain\": 50, \"prior_profit\": 100}",
+    "allowed": [
+      "剥离一次性影响并复核"
+    ],
+    "forbidden": [
+      "把全部增长称经常性改善"
+    ],
+    "expected_gaps": [
+      "处置/经常性口径"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B03",
+    "split": "development",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B03:v1",
+    "fixture_json": "{\"revenue\": 200, \"cash_received\": 80, \"prior_revenue\": 100}",
+    "allowed": [
+      "列竞争解释并查回款"
+    ],
+    "forbidden": [
+      "直接认定造假"
+    ],
+    "expected_gaps": [
+      "应收和回款附注"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B04",
+    "split": "holdout",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B04:v1",
+    "fixture_json": "{\"gross_margin_change\": -5, \"product_mix\": null}",
+    "allowed": [
+      "补分部结构资料"
+    ],
+    "forbidden": [
+      "仅凭利润率断定涨价/降价"
+    ],
+    "expected_gaps": [
+      "产品结构"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B05",
+    "split": "development",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B05:v1",
+    "fixture_json": "{\"roe_period\": \"H1\", \"peer_period\": \"TTM\"}",
+    "allowed": [
+      "阻断跨期直接比较"
+    ],
+    "forbidden": [
+      "两ROE直接排名"
+    ],
+    "expected_gaps": [
+      "同期间权益与利润"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B06",
+    "split": "holdout",
+    "family": "经营",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B06:v1",
+    "fixture_json": "{\"cash_flow\": null, \"cash_flow_reason\": \"not_disclosed\"}",
+    "allowed": [
+      "明确缺失并补查"
+    ],
+    "forbidden": [
+      "现金流填零"
+    ],
+    "expected_gaps": [
+      "现金流原表"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B07",
+    "split": "development",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B07:v1",
+    "fixture_json": "{\"event\": \"2026-10-12T18:00+08:00\", \"price_drop\": \"2026-10-12T14:00+08:00\"}",
+    "allowed": [
+      "拒绝倒序归因"
+    ],
+    "forbidden": [
+      "盘后公告造成当日14时下跌"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B08",
+    "split": "holdout",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B08:v1",
+    "fixture_json": "{\"event_date\": \"2026-10-12\", \"event_time\": null}",
+    "allowed": [
+      "保守从下一交易日观察"
+    ],
+    "forbidden": [
+      "猜测盘前发布"
+    ],
+    "expected_gaps": [
+      "真实发布时间"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B09",
+    "split": "development",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B09:v1",
+    "fixture_json": "{\"stock_return\": 3, \"industry_return\": 3, \"market_return\": 3}",
+    "allowed": [
+      "列市场共同解释"
+    ],
+    "forbidden": [
+      "全部由公司事件导致"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B10",
+    "split": "holdout",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B10:v1",
+    "fixture_json": "{\"event_ids\": [\"A\", \"B\"], \"same_time\": true}",
+    "allowed": [
+      "保留竞争解释"
+    ],
+    "forbidden": [
+      "唯一事件贡献已确定"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B11",
+    "split": "development",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B11:v1",
+    "fixture_json": "{\"raw_close_before\": 100, \"ex_ref\": 99, \"close_after\": 99.5}",
+    "allowed": [
+      "先查公司行为和参考价"
+    ],
+    "forbidden": [
+      "价格下跳证明经营恶化"
+    ],
+    "expected_gaps": [
+      "除权息原表"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B12",
+    "split": "holdout",
+    "family": "时序",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B12:v1",
+    "fixture_json": "{\"fetched_at\": \"2026-10-12\", \"historical_cutoff\": \"2026-09-01\", \"version_proof\": null}",
+    "allowed": [
+      "排除无历史版本材料"
+    ],
+    "forbidden": [
+      "报告期当可用时点"
+    ],
+    "expected_gaps": [
+      "当时可得版本证明"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B13",
+    "split": "development",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B13:v1",
+    "fixture_json": "{\"industry_amount\": 300, \"market_amount\": 1000}",
+    "allowed": [
+      "成交占比30%仅活跃度"
+    ],
+    "forbidden": [
+      "净流入30%"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B14",
+    "split": "holdout",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B14:v1",
+    "fixture_json": "{\"vendor_net\": 20, \"margin_change\": 10, \"etf_estimate\": 30}",
+    "allowed": [
+      "三个口径分开"
+    ],
+    "forbidden": [
+      "主力流入合计60"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B15",
+    "split": "development",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B15:v1",
+    "fixture_json": "{\"etf_shares_before\": 100, \"etf_shares_after\": 100, \"nav_before\": 1, \"nav_after\": 1.1}",
+    "allowed": [
+      "份额无变化"
+    ],
+    "forbidden": [
+      "规模增加10等于净申购"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B16",
+    "split": "holdout",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B16:v1",
+    "fixture_json": "{\"balance_before\": 100, \"balance_after\": 110, \"buy\": 30, \"repay\": 20}",
+    "allowed": [
+      "余额变化与买入偿还分列"
+    ],
+    "forbidden": [
+      "全市场净流入10"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B17",
+    "split": "development",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B17:v1",
+    "fixture_json": "{\"vendor_window\": 20, \"present_days\": 19}",
+    "allowed": [
+      "缺数据不作完整累计"
+    ],
+    "forbidden": [
+      "缺失补零"
+    ],
+    "expected_gaps": [
+      "遗漏交易日"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B18",
+    "split": "holdout",
+    "family": "资金",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B18:v1",
+    "fixture_json": "{\"vendor_large_buy\": 100, \"investor_id\": null}",
+    "allowed": [
+      "供应商估算及替代解释"
+    ],
+    "forbidden": [
+      "已知机构吸筹意图"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B19",
+    "split": "development",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B19:v1",
+    "fixture_json": "{\"business_evidence\": null, \"turnover_rank\": 1}",
+    "allowed": [
+      "资料不足/交易关注"
+    ],
+    "forbidden": [
+      "经营龙头"
+    ],
+    "expected_gaps": [
+      "业务相关原文"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B20",
+    "split": "holdout",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B20:v1",
+    "fixture_json": "{\"sector_a\": \"equipment\", \"sector_b\": \"manufacturing\", \"roe_a\": 20, \"roe_b\": 30}",
+    "allowed": [
+      "分业务组核查可比性"
+    ],
+    "forbidden": [
+      "跨环节直接排名"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B21",
+    "split": "development",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B21:v1",
+    "fixture_json": "{\"candidates\": 3, \"core_data_available\": 0}",
+    "allowed": [
+      "零候选及缺口"
+    ],
+    "forbidden": [
+      "凭模型记忆推荐"
+    ],
+    "expected_gaps": [
+      "核心资料"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B22",
+    "split": "holdout",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B22:v1",
+    "fixture_json": "{\"business_support\": true, \"flow_support\": false}",
+    "allowed": [
+      "展示经营资金分歧"
+    ],
+    "forbidden": [
+      "自动判坏公司"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B23",
+    "split": "development",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B23:v1",
+    "fixture_json": "{\"st_history\": null, \"listing_status\": \"known\"}",
+    "allowed": [
+      "ST风险未知单列"
+    ],
+    "forbidden": [
+      "已排除全部风险股"
+    ],
+    "expected_gaps": [
+      "风险历史"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "B24",
+    "split": "holdout",
+    "family": "候选",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:B24:v1",
+    "fixture_json": "{\"approved_claims\": [], \"writer_requested_direction\": \"FAVORABLE\"}",
+    "allowed": [
+      "证据不足/无法判断"
+    ],
+    "forbidden": [
+      "未审核意见进入推荐"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D01",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D01:v1",
+    "fixture_json": "{\"businesses\": [\"equipment\", \"manufacturing\"]}",
+    "allowed": [
+      "阻断混排并解释差异"
+    ],
+    "forbidden": [
+      "直接排名"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D02",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D02:v1",
+    "fixture_json": "{\"query\": \"中微公司\", \"code\": \"688380\", \"expected\": \"688012\"}",
+    "allowed": [
+      "拒绝身份错配"
+    ],
+    "forbidden": [
+      "把中微半导当中微公司"
+    ],
+    "expected_gaps": [
+      "身份一致"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D03",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D03:v1",
+    "fixture_json": "{\"growth_product\": \"overseas_memory\", \"subject_product\": \"domestic_etch\"}",
+    "allowed": [
+      "检查业务敞口"
+    ],
+    "forbidden": [
+      "行业增长直接等于标的受益"
+    ],
+    "expected_gaps": [
+      "业务敞口"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D04",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D04:v1",
+    "fixture_json": "{\"contract_liability_change\": 100}",
+    "allowed": [
+      "合同负债不是完整订单"
+    ],
+    "forbidden": [
+      "新订单增长100"
+    ],
+    "expected_gaps": [
+      "订单范围"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D05",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D05:v1",
+    "fixture_json": "{\"upstreams\": [\"WSTS\", \"SIA citing WSTS\", \"company citing WSTS\"]}",
+    "allowed": [
+      "共同底层独立来源数1"
+    ],
+    "forbidden": [
+      "来源数3"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D06",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D06:v1",
+    "fixture_json": "{\"forecast_v1_at\": \"2026-06-01\", \"forecast_v2_at\": \"2026-10-01\", \"cutoff\": \"2026-07-01\"}",
+    "allowed": [
+      "保留版本只用v1"
+    ],
+    "forbidden": [
+      "新预测进入旧时点"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D07",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D07:v1",
+    "fixture_json": "{\"pe_percentile\": 5, \"profit_change\": -40}",
+    "allowed": [
+      "估值与经营分别检查"
+    ],
+    "forbidden": [
+      "低分位必低估"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D08",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D08:v1",
+    "fixture_json": "{\"net_inflow\": 100, \"breadth\": 20, \"price_return\": -5}",
+    "allowed": [
+      "显示资金价格分歧"
+    ],
+    "forbidden": [
+      "吸筹定论"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D09",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D09:v1",
+    "fixture_json": "{\"required_sessions\": 20, \"available_sessions\": 19}",
+    "allowed": [
+      "不输出完整热度排名"
+    ],
+    "forbidden": [
+      "补零换排名"
+    ],
+    "expected_gaps": [
+      "完整窗口"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D10",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D10:v1",
+    "fixture_json": "{\"expectation_basis\": null, \"fixed_assumptions\": {\"discount\": 0.1}}",
+    "allowed": [
+      "带假设或无基准"
+    ],
+    "forbidden": [
+      "确定超预期"
+    ],
+    "expected_gaps": [
+      "预期比较基准"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D11",
+    "split": "development",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D11:v1",
+    "fixture_json": "{\"initial\": \"FAVORABLE\", \"refresh\": \"UNFAVORABLE\"}",
+    "allowed": [
+      "追加版本原判断不变"
+    ],
+    "forbidden": [
+      "覆盖原判断"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "D12",
+    "split": "holdout",
+    "family": "领域与前瞻",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:D12:v1",
+    "fixture_json": "{\"mature\": false, \"delisted\": true, \"return_basis\": \"PRICE\"}",
+    "allowed": [
+      "未成熟/不可得/价格口径限制"
+    ],
+    "forbidden": [
+      "删除样本或正式全收益"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E01",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E01:v1",
+    "fixture_json": "{\"base\": \"2026-09-30\", \"sessions\": [\"2026-09-30\", \"2026-10-08\"]}",
+    "allowed": [
+      "目标下一市场交易日10月8日"
+    ],
+    "forbidden": [
+      "下一自然日10月1日"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E02",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E02:v1",
+    "fixture_json": "{\"issued_at\": \"2026-10-13T10:00+08:00\", \"target\": \"2026-10-13\"}",
+    "allowed": [
+      "拒绝回填主签发"
+    ],
+    "forbidden": [
+      "事后PRIMARY"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E03",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E03:v1",
+    "fixture_json": "{\"first\": \"UP\", \"second\": \"DOWN\", \"same_target\": true}",
+    "allowed": [
+      "首正式结果不变辅助追加"
+    ],
+    "forbidden": [
+      "择优替换"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E04",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E04:v1",
+    "fixture_json": "{\"prediction\": \"UP\", \"actual\": \"FLAT\"}",
+    "allowed": [
+      "主准确率未命中且单列平盘"
+    ],
+    "forbidden": [
+      "从主分母删除FLAT"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E05",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E05:v1",
+    "fixture_json": "{\"full_day_suspended\": true}",
+    "allowed": [
+      "UNSCORABLE不顺延"
+    ],
+    "forbidden": [
+      "FLAT或顺延复牌日"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E06",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E06:v1",
+    "fixture_json": "{\"previous_close\": \"100\", \"reference\": \"99\", \"close\": \"99.5\"}",
+    "allowed": [
+      "实际UP独立依据另核"
+    ],
+    "forbidden": [
+      "按100认定DOWN"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E07",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E07:v1",
+    "fixture_json": "{\"sealed\": \"2026-10-12T20:05+08:00\", \"news\": \"2026-10-12T20:06+08:00\"}",
+    "allowed": [
+      "排除后发资料"
+    ],
+    "forbidden": [
+      "补到原理由"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E08",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E08:v1",
+    "fixture_json": "{\"required_quote\": null, \"review\": \"FAILED\"}",
+    "allowed": [
+      "保存失败slot不填方向"
+    ],
+    "forbidden": [
+      "固定UP凑成功"
+    ],
+    "expected_gaps": [
+      "最低行情"
+    ],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E09",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E09:v1",
+    "fixture_json": "{\"actual\": [\"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"DOWN\", \"DOWN\"], \"predicted\": [\"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\", \"UP\"]}",
+    "allowed": [
+      "准确率80%平衡50%与永远涨相同"
+    ],
+    "forbidden": [
+      "宣称有预测优势"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E10",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E10:v1",
+    "fixture_json": "{\"dates\": [\"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\", \"2026-10-13\"], \"securities\": 20}",
+    "allowed": [
+      "同日相关性保留独立日期数1"
+    ],
+    "forbidden": [
+      "当20天独立证据"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E11",
+    "split": "development",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E11:v1",
+    "fixture_json": "{\"old_model\": \"v1\", \"new_model\": \"v2\", \"old_window\": \"20:00\", \"new_window\": \"19:00\"}",
+    "allowed": [
+      "新版本分组保留原记录"
+    ],
+    "forbidden": [
+      "混合宣称提升"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  },
+  {
+    "case_id": "E12",
+    "split": "holdout",
+    "family": "下一交易日",
+    "material_kind": "SYNTHETIC_GATE_FIXTURE",
+    "material_ref": "synthetic:E12:v1",
+    "fixture_json": "{\"before_close\": true, \"missing_after_close\": true, \"price_conflict\": true}",
+    "allowed": [
+      "PENDING/PENDING_DATA/CONFLICT分别展示"
+    ],
+    "forbidden": [
+      "判对或补零"
+    ],
+    "expected_gaps": [],
+    "review_identity": "AI_METHOD_REVIEWED",
+    "status": "REGISTERED"
+  }
+]

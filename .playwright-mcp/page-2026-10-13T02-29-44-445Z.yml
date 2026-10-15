@@ -1,0 +1,53 @@
+- generic [ref=f33e3]:
+  - banner [ref=f33e4]:
+    - link "α AlphaAgent" [ref=f33e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f33e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f33e7]:
+      - link "工作台" [ref=f33e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f33e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f33e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f33e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f33e12]:
+      - generic "行情读取中" [ref=f33e13]:
+        - generic [ref=f33e14]: 上证指数
+        - generic [ref=f33e15]: —
+        - generic [ref=f33e16]: —
+      - generic "行情读取中" [ref=f33e17]:
+        - generic [ref=f33e18]: 深证成指
+        - generic [ref=f33e19]: —
+        - generic [ref=f33e20]: —
+      - generic "行情读取中" [ref=f33e21]:
+        - generic [ref=f33e22]: 创业板指
+        - generic [ref=f33e23]: —
+        - generic [ref=f33e24]: —
+      - generic "行情读取中" [ref=f33e25]:
+        - generic [ref=f33e26]: 沪深300
+        - generic [ref=f33e27]: —
+        - generic [ref=f33e28]: —
+      - generic "行情读取中" [ref=f33e29]:
+        - generic [ref=f33e30]: 科创50
+        - generic [ref=f33e31]: —
+        - generic [ref=f33e32]: —
+    - button "切换深色" [ref=f33e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f33e34]: ☾
+      - generic [ref=f33e35]: 深色
+  - main [ref=f33e36]:
+    - navigation "选择研究期限" [ref=f33e38]:
+      - link "下一交易日" [ref=f33e39] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final#/decision
+      - link "未来一至三个月" [ref=f33e40] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&research=1#/decision
+    - generic [ref=f33e42]:
+      - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f33e44]
+      - paragraph [ref=f33e45]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+      - paragraph [ref=f33e46]: 正在读取已保存的研究…
+      - paragraph [ref=f33e47]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+    - paragraph [ref=f33e49]:
+      - link "开发者入口" [ref=f33e50] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&developer=1#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1

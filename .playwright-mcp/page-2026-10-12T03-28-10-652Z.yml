@@ -1,0 +1,52 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "α AlphaAgent" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=e7]:
+      - link "工作台" [ref=e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=e10] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换浅色" [active] [ref=e472] [cursor=pointer]:
+      - generic [aria-hidden] [ref=e33]: ☀
+      - generic [ref=e34]: 浅色
+  - main [ref=e35]:
+    - generic [ref=e473]:
+      - generic [ref=e474]:
+        - generic [ref=e475]:
+          - heading "功能与数据接入" [level=1] [ref=e476]
+          - button "刷新" [ref=e477] [cursor=pointer]
+        - paragraph [ref=e478]: 功能可用与数据完整分开说明。免费来源按证券、期间及模块返回实际覆盖；缺项可后续接入，不用空值或演示数字替代。
+      - generic [ref=e479]:
+        - heading "从头演示一遍" [level=2] [ref=e480]
+        - list [ref=e481]:
+          - listitem [ref=e482]:
+            - link "工作台：输入“全面分析美的集团”" [ref=e483] [cursor=pointer]:
+              - /url: "#/"
+            - text: ，查看真实 Planner、工具调用与五角色过程。
+          - listitem [ref=e484]: 在研究页查看结论高亮与依据，展开财务、K线、估值、两融及风险；缺项会说明原因。
+          - listitem [ref=e485]: 调整 DCF / 均线情景，查看新版本；追问“利润和现金流是否匹配”，检查新研究与父版本。
+          - listitem [ref=e486]:
+            - link "最新双股比较" [ref=e487] [cursor=pointer]:
+              - /url: "#/compare"
+            - text: ：输入两只名称或代码；查看双方新取数、报告日期和口径对照。
+          - listitem [ref=e488]:
+            - link "完整策略执行" [ref=e489] [cursor=pointer]:
+              - /url: "#/strategy"
+            - text: ：确认筛选、成本与无风险假设；有审核包计算，无包保存缺项。
+            - link "历史取证工作台" [ref=e490] [cursor=pointer]:
+              - /url: "#/backtest"
+            - text: 可继续采集免费档案。
+          - listitem [ref=e491]:
+            - link "历史库" [ref=e492] [cursor=pointer]:
+              - /url: "#/library"
+            - text: 刷新、回看、导出原报告；旧版本不随数据更新而改变。
+      - generic [ref=e493]:
+        - heading "研究判断与预测实验 · 开发中" [level=2] [ref=e494]
+        - paragraph [ref=e495]: 查看 P0 真实来源探测、八张方法卡、实验协议和48例清单。预测签发尚未启用。
+        - link "打开研究能力核查 →" [ref=e496] [cursor=pointer]:
+          - /url: "#/decision"

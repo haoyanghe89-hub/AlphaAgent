@@ -3,8 +3,8 @@ import { onUnmounted, ref } from 'vue'
 export function parseRoute(hash) {
   const path = (hash || '#/').replace(/^#/, '')
   if (path === '/') return { page: 'workbench' }
-  if (['/library', '/backtest', '/compare', '/strategy', '/delivery'].includes(path)) return { page: path.slice(1) }
-  const match = path.match(/^\/(research|report|stock|legacy|backtest|live|compare|strategy)\/([^/]+)$/)
+  if (['/library', '/backtest', '/compare', '/strategy', '/delivery', '/decision', '/candidates', '/market'].includes(path)) return { page: path.slice(1) }
+  const match = path.match(/^\/(research|report|stock|legacy|backtest|live|compare|strategy|decision|candidates|market)\/([^/]+)$/)
   if (match) {
     try { return { page: match[1], id: decodeURIComponent(match[2]) } }
     catch { return { page: 'missing' } }

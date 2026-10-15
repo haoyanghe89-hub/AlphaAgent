@@ -1,0 +1,57 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - link "α AlphaAgent" [ref=f15e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f15e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f15e7]:
+      - link "工作台" [ref=f15e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f15e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f15e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f15e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f15e12]:
+      - generic "行情读取中" [ref=f15e13]:
+        - generic [ref=f15e14]: 上证指数
+        - generic [ref=f15e15]: —
+        - generic [ref=f15e16]: —
+      - generic "行情读取中" [ref=f15e17]:
+        - generic [ref=f15e18]: 深证成指
+        - generic [ref=f15e19]: —
+        - generic [ref=f15e20]: —
+      - generic "行情读取中" [ref=f15e21]:
+        - generic [ref=f15e22]: 创业板指
+        - generic [ref=f15e23]: —
+        - generic [ref=f15e24]: —
+      - generic "行情读取中" [ref=f15e25]:
+        - generic [ref=f15e26]: 沪深300
+        - generic [ref=f15e27]: —
+        - generic [ref=f15e28]: —
+      - generic "行情读取中" [ref=f15e29]:
+        - generic [ref=f15e30]: 科创50
+        - generic [ref=f15e31]: —
+        - generic [ref=f15e32]: —
+    - button "切换浅色" [ref=f15e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f15e34]: ☀
+      - generic [ref=f15e35]: 浅色
+  - main [ref=f15e36]:
+    - navigation "选择研究期限" [ref=f15e38]:
+      - link "下一交易日" [ref=f15e39] [cursor=pointer]:
+        - /url: /?review=p2-daily-preservation#/decision
+      - link "未来一至三个月" [ref=f15e40] [cursor=pointer]:
+        - /url: /?review=p2-daily-preservation&research=1#/decision
+    - generic [ref=f15e42]:
+      - generic [ref=f15e43]: ALPHAAGENT · 每日观察
+      - heading "下一交易日，怎么看" [level=1] [ref=f15e45]
+      - paragraph [ref=f15e46]: 明确的涨跌判断，以及支持它和可能推翻它的依据。
+      - generic [ref=f15e47]:
+        - button "生成下一交易日预测" [disabled] [ref=f15e48]
+        - generic [ref=f15e49]: 中微公司 · 北方华创
+      - paragraph [ref=f15e50]: 读取最新可核实资料后生成并保存。正式记录在交易日 20:00–20:15 签发；其他时间生成的结果单独作为探索记录。
+      - status [ref=f15e51]: 正在读取已保存的预测…
+    - paragraph [ref=f15e53]:
+      - link "开发者入口" [ref=f15e54] [cursor=pointer]:
+        - /url: /?review=p2-daily-preservation&developer=1#/decision/RUN-NS-1ad8f3b83db14f9f93b529f34f0fb77f

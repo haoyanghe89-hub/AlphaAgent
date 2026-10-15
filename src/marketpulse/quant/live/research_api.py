@@ -16,6 +16,8 @@ from ..api import _error
 from ..domain import FrozenModel
 from .api import ScenarioIn, public
 from .calculate import dcf_result, simulate
+from .main_flow import MainFlowFeed
+from .market_dashboard import MarketDashboard
 from .overview import build_overview
 from .securities import search
 from .service import ResearchWorkflow, process
@@ -109,6 +111,52 @@ async def quotes(symbol: str | None = None):
         return await asyncio.to_thread(latest_quotes, symbol)
     except Exception as error:
         raise _error(503, "LIVE_QUOTE_FAILED", "行情刷新失败，未替换为旧数据。") from error
+
+
+@router.get("/market-dashboard")
+async def market_dashboard(request: Request):
+    if not hasattr(request.app.state, "market_dashboard"):
+        repo = store(request)
+        request.app.state.market_dashboard = MarketDashboard(
+            repo.legacy_root.parent / "market-live-cache"
+        )
+    try:
+        return await asyncio.to_thread(request.app.state.market_dashboard.snapshot)
+    except ValueError as error:
+        raise _error(503, "MARKET_FEED_UNAVAILABLE", "市场行情暂未取得，请稍后刷新。") from error
+
+
+def funding_feed(request):
+    if not hasattr(request.app.state, "main_flow"):
+        repo = store(request)
+        if not hasattr(request.app.state, "market_dashboard"):
+            request.app.state.market_dashboard = MarketDashboard(
+                repo.legacy_root.parent / "market-live-cache"
+            )
+        request.app.state.main_flow = MainFlowFeed(repo, request.app.state.market_dashboard)
+    return request.app.state.main_flow
+
+
+@router.get("/main-flow")
+async def daily_main_flow(request: Request):
+    try:
+        return await asyncio.to_thread(funding_feed(request).daily)
+    except (ValueError, BlobError) as error:
+        raise _error(
+            503, "MAIN_FLOW_UNAVAILABLE", "盘后主力资金数据刷新失败，请稍后重试。"
+        ) from error
+
+
+@router.get("/main-flow/{symbol}")
+async def stock_main_flow(symbol: str, request: Request):
+    if not re.fullmatch(r"(?:sz(?:00|30)|sh(?:60|68))\d{4}", symbol):
+        raise _error(422, "MAIN_FLOW_SCOPE", "请输入沪深 A 股证券代码。")
+    try:
+        return await asyncio.to_thread(funding_feed(request).stock, symbol)
+    except (ValueError, BlobError) as error:
+        raise _error(
+            503, "MAIN_FLOW_UNAVAILABLE", "盘中主力资金源暂时不可用，请稍后重试。"
+        ) from error
 
 
 @router.post("/runs", status_code=202)

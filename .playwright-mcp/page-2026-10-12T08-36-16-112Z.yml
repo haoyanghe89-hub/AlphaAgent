@@ -1,0 +1,72 @@
+- generic [ref=f6e3]:
+  - banner [ref=f6e4]:
+    - link "α AlphaAgent" [ref=f6e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f6e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f6e7]:
+      - link "工作台" [ref=f6e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f6e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f6e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f6e11]:
+      - generic "行情读取中" [ref=f6e12]:
+        - generic [ref=f6e13]: 上证指数
+        - generic [ref=f6e14]: —
+        - generic [ref=f6e15]: —
+      - generic "行情读取中" [ref=f6e16]:
+        - generic [ref=f6e17]: 深证成指
+        - generic [ref=f6e18]: —
+        - generic [ref=f6e19]: —
+      - generic "行情读取中" [ref=f6e20]:
+        - generic [ref=f6e21]: 创业板指
+        - generic [ref=f6e22]: —
+        - generic [ref=f6e23]: —
+      - generic "行情读取中" [ref=f6e24]:
+        - generic [ref=f6e25]: 沪深300
+        - generic [ref=f6e26]: —
+        - generic [ref=f6e27]: —
+      - generic "行情读取中" [ref=f6e28]:
+        - generic [ref=f6e29]: 科创50
+        - generic [ref=f6e30]: —
+        - generic [ref=f6e31]: —
+    - button "切换深色" [ref=f6e32] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f6e33]: ☾
+      - generic [ref=f6e34]: 深色
+  - main [ref=f6e35]:
+    - generic [ref=f6e36]:
+      - generic [ref=f6e37]:
+        - generic [ref=f6e38]: ALPHAAGENT · 每日观察
+        - heading "下一交易日，怎么看" [level=1] [ref=f6e40]
+        - paragraph [ref=f6e41]: 明确的涨跌判断，以及支持它和可能推翻它的依据。
+        - generic [ref=f6e42]:
+          - button "生成下一交易日预测" [ref=f6e43] [cursor=pointer]
+          - generic [ref=f6e44]: 中微公司 · 北方华创
+        - paragraph [ref=f6e45]: 读取最新可核实资料后生成并保存。正式记录在交易日 20:00–20:15 签发；其他时间生成的结果单独作为探索记录。
+      - generic [ref=f6e46]:
+        - heading "第一份判断，从真实资料开始" [level=2] [ref=f6e47]
+        - paragraph [ref=f6e48]: 点击上方按钮，读取两家公司的最新资料并生成下一交易日方向。现在尚无预测或准确率。
+      - generic [ref=f6e49]:
+        - generic [ref=f6e50]:
+          - heading "判断经得起多少次验证" [level=2] [ref=f6e51]
+          - generic [ref=f6e52]: 持续观察
+        - paragraph [ref=f6e53]: 正式与探索分别统计。准确率按已取得真实结果的样本计算；同一天的两家公司不等于两次独立市场检验。
+        - generic [ref=f6e54]:
+          - generic [ref=f6e55]:
+            - strong [ref=f6e56]: "0"
+            - text: 计划正式预测
+          - generic [ref=f6e57]:
+            - strong [ref=f6e58]: "0"
+            - text: 已正式签发
+          - generic [ref=f6e59]:
+            - strong [ref=f6e60]: "0"
+            - text: 错过签发
+          - generic [ref=f6e61]:
+            - strong [ref=f6e62]: "0"
+            - text: 正式尝试失败
+        - paragraph [ref=f6e63]: 尚无预测样本。准确率 —，简单基线 —。
+    - paragraph [ref=f6e65]:
+      - link "开发者入口" [ref=f6e66] [cursor=pointer]:
+        - /url: /?review=p1n-user-01&developer=1#/decision

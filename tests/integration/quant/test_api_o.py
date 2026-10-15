@@ -66,7 +66,7 @@ def test_start_query_unverified_locators_eventloop_and_archive(tmp_path, monkeyp
         with app.state.inv_sessions() as session:
             assert (
                 session.execute(text("select version_num from alembic_version")).scalar_one()
-                == "20261010_10"
+                == "20261012_11"
             )
         payload = freeze_inputs(app)
         payload["question"] = "全面分析平安银行的历史收益与估值"

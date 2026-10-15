@@ -1,0 +1,406 @@
+[
+  {
+    "method_id": "M01",
+    "version": "2026-10-12-v1",
+    "title": "经营质量与增长质量",
+    "source_refs": [
+      "R01",
+      "R04",
+      "公司原始报表"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry"
+    ],
+    "horizon": "MEDIUM_TERM",
+    "input_requirements": [
+      "financial_statements",
+      "period_identity",
+      "cash_flow",
+      "business_disclosures"
+    ],
+    "procedure": [
+      "拆分数量、价格、结构、成本与费用",
+      "核查现金回收、回款和一次性项目",
+      "同业务且同期间比较，数字由工具计算"
+    ],
+    "counterexamples": [
+      "利润来自一次性处置",
+      "收入增长而现金回收背离可能有多种解释"
+    ],
+    "allowed_outputs": [
+      "有据的经营变化与待验证解释"
+    ],
+    "forbidden_inferences": [
+      "自动认定财务造假",
+      "由ROE直接推导明日上涨"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328200+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "依交接M01核查输入、反例和适用期限；不代表外部专家验证。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M02",
+    "version": "2026-10-12-v1",
+    "title": "估值与预期差",
+    "source_refs": [
+      "R02",
+      "R01"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry"
+    ],
+    "horizon": "MEDIUM_TERM",
+    "input_requirements": [
+      "valuation_inputs",
+      "fixed_assumptions",
+      "expectation_basis"
+    ],
+    "procedure": [
+      "固定有来源的价格、股本、净债务和现金流假设",
+      "在明确边界内反求变量并展示敏感性",
+      "缺输入停用逆向DCF"
+    ],
+    "counterexamples": [
+      "隐含增长依赖缺乏依据的利润率",
+      "低历史估值伴随经营恶化"
+    ],
+    "allowed_outputs": [
+      "在给定假设下价格隐含的经营要求"
+    ],
+    "forbidden_inferences": [
+      "唯一市场一致预期",
+      "低分位等于低估",
+      "DCF等于三个月目标价",
+      "没有比较基准也称超预期"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328221+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "依交接M02审核；缺估值或预期基准时停用相应结论。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M03",
+    "version": "2026-10-12-v1",
+    "title": "市场环境、趋势与拥挤",
+    "source_refs": [
+      "R03",
+      "R05",
+      "R07"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry",
+      "market"
+    ],
+    "horizon": "DAILY_PROXY",
+    "input_requirements": [
+      "daily_prices",
+      "market_prices",
+      "breadth",
+      "concentration"
+    ],
+    "procedure": [
+      "分开观察趋势、波动、扩散和情绪",
+      "历史分布仅使用截止时点以前样本",
+      "区分权重集中与广泛改善"
+    ],
+    "counterexamples": [
+      "只有少数权重股上涨",
+      "价格上涨但业务尚未兑现"
+    ],
+    "allowed_outputs": [
+      "市场环境观察和脆弱性线索"
+    ],
+    "forbidden_inferences": [
+      "单一情绪指标确定买卖",
+      "海外期货动量等于A股个股预测有效",
+      "直接预言见顶"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328224+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "日频观察可用，不能把同期相关性当预测优势。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M04",
+    "version": "2026-10-12-v1",
+    "title": "资金与价格交叉核查",
+    "source_refs": [
+      "R06",
+      "R07",
+      "实际来源定义"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry",
+      "market"
+    ],
+    "horizon": "DAILY_PROXY",
+    "input_requirements": [
+      "daily_prices",
+      "flow_proxy",
+      "aligned_sessions",
+      "source_definitions"
+    ],
+    "procedure": [
+      "逐渠道核查5/20/60交易日覆盖和单位",
+      "比较价格、广度、集中度与各渠道持续性",
+      "寻找调仓、套利、事件交易等替代解释"
+    ],
+    "counterexamples": [
+      "资金方向与价格、广度冲突",
+      "缺一交易日或供应商规则变化"
+    ],
+    "allowed_outputs": [
+      "关注增强、减弱、分歧或证据不足"
+    ],
+    "forbidden_inferences": [
+      "估算等于机构身份或动机",
+      "把融资、ETF和大单累加成主力资金",
+      "日K线伪造订单簿",
+      "把同期冲击当跨月预测"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328225+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "首版仅日频代理；订单簿研究禁用直到取得相应数据。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M05",
+    "version": "2026-10-12-v1",
+    "title": "半导体周期与经营传导",
+    "source_refs": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry"
+    ],
+    "horizon": "MEDIUM_TERM",
+    "input_requirements": [
+      "business_disclosures",
+      "segment_exposure",
+      "customer_capex",
+      "industry_statistics"
+    ],
+    "procedure": [
+      "先区分设计、制造、设备、材料和封测",
+      "需求到客户投入到导入验收到收入利润现金流逐边标事实或假设",
+      "保留统计版本、地区、品类、平滑口径与传导滞后"
+    ],
+    "counterexamples": [
+      "全球增长只来自不相关的海外存储",
+      "客户减少投入、延迟验收或回款"
+    ],
+    "allowed_outputs": [
+      "公司可能受益的具体环节及时间滞后"
+    ],
+    "forbidden_inferences": [
+      "合同负债等于完整新订单",
+      "产品验证等于量产收入",
+      "行业销售金额增长等于销量增长",
+      "WSTS和SIA算独立两源"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328227+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "设备首期；制造用来核查需求，未假定具体客户关系。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M06",
+    "version": "2026-10-12-v1",
+    "title": "事件、行业与价格解释",
+    "source_refs": [
+      "设计归因门禁",
+      "S07",
+      "S08",
+      "S09",
+      "S10"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry"
+    ],
+    "horizon": "SHORT_TERM_OBSERVATION",
+    "input_requirements": [
+      "event_timestamps",
+      "daily_prices",
+      "market_prices",
+      "industry_prices"
+    ],
+    "procedure": [
+      "核查发布时间、价格窗口和除权因素",
+      "对照共同市场与行业变化",
+      "保留竞争解释，有可靠基准才谈超预期"
+    ],
+    "counterexamples": [
+      "资料在价格变化后发布",
+      "多项同期事件可能共同解释"
+    ],
+    "allowed_outputs": [
+      "事实、关联和可能机制分层表达"
+    ],
+    "forbidden_inferences": [
+      "残差等于事件贡献",
+      "盘后消息解释当天盘中波动",
+      "合理机制等于已验证预测能力"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328228+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "仅日期事件按下一交易日起作用；未知时刻不猜。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M07",
+    "version": "2026-10-12-v1",
+    "title": "龙头候选与可比性",
+    "source_refs": [
+      "M01",
+      "M02",
+      "M03",
+      "M04",
+      "M05",
+      "M06"
+    ],
+    "applicable_scopes": [
+      "industry",
+      "market"
+    ],
+    "horizon": "MEDIUM_TERM",
+    "input_requirements": [
+      "point_in_time_universe",
+      "business_evidence",
+      "approved_dimensions",
+      "risk_coverage"
+    ],
+    "procedure": [
+      "区分经营、细分业务和交易领先",
+      "先按业务及证据分组，再用公开确定性键排序",
+      "保留排除、缺数据原因与同业比较，最多三只，允许零只"
+    ],
+    "counterexamples": [
+      "市值大但无竞争地位证据",
+      "概念热度与业务无关",
+      "关键风险材料缺失"
+    ],
+    "allowed_outputs": [
+      "有条件的研究候选或无候选"
+    ],
+    "forbidden_inferences": [
+      "设备和制造直接混排ROE/PE",
+      "大市值等于经营龙头",
+      "未知ST历史等于安全",
+      "模型凭记忆输出名单"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328230+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "排序属于研究优先级；尚未验证预测力。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  },
+  {
+    "method_id": "M08",
+    "version": "2026-10-12-v1",
+    "title": "前瞻情景与撤回条件",
+    "source_refs": [
+      "M01–M07合成协议：本系统待检验方法"
+    ],
+    "applicable_scopes": [
+      "single",
+      "industry",
+      "market"
+    ],
+    "horizon": "MEDIUM_TERM",
+    "input_requirements": [
+      "approved_claims",
+      "valuation_constraints",
+      "flow_support_or_gap",
+      "observable_catalysts"
+    ],
+    "procedure": [
+      "基准、改善、恶化三情景分开",
+      "保存1/2/3个月期限及独立的20/40/60交易日观察窗口",
+      "写支持、反证、撤回条件，首次判断不可覆盖"
+    ],
+    "counterexamples": [
+      "证据不足仍强给方向",
+      "刷新后覆盖原预测",
+      "到期未成熟却报实现收益"
+    ],
+    "allowed_outputs": [
+      "FAVORABLE",
+      "UNFAVORABLE",
+      "MIXED",
+      "UNDETERMINED"
+    ],
+    "forbidden_inferences": [
+      "研究优先级等于看涨",
+      "证据支持程度等于胜率",
+      "中期看好等于明日上涨",
+      "价格收益等于已核验全收益"
+    ],
+    "review_records": [
+      {
+        "identity": "AI_METHOD_REVIEWED",
+        "reviewer": "Codex",
+        "reviewed_at": "2026-10-12T03:13:47.328231+00:00",
+        "reference": "docs/alphaagent-decision-evaluation.md#method-review-v1",
+        "note": "本系统组合协议未验证；后续前瞻留痕评价，功能测试不是投资优势证据。"
+      }
+    ],
+    "validation_status": "UNVALIDATED"
+  }
+]

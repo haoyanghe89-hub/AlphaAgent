@@ -1,0 +1,76 @@
+- generic [ref=f26e3]:
+  - banner [ref=f26e4]:
+    - link "α AlphaAgent" [ref=f26e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f26e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f26e7]:
+      - link "工作台" [ref=f26e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f26e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f26e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f26e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f26e12]:
+      - generic "行情读取中" [ref=f26e13]:
+        - generic [ref=f26e14]: 上证指数
+        - generic [ref=f26e15]: —
+        - generic [ref=f26e16]: —
+      - generic "行情读取中" [ref=f26e17]:
+        - generic [ref=f26e18]: 深证成指
+        - generic [ref=f26e19]: —
+        - generic [ref=f26e20]: —
+      - generic "行情读取中" [ref=f26e21]:
+        - generic [ref=f26e22]: 创业板指
+        - generic [ref=f26e23]: —
+        - generic [ref=f26e24]: —
+      - generic "行情读取中" [ref=f26e25]:
+        - generic [ref=f26e26]: 沪深300
+        - generic [ref=f26e27]: —
+        - generic [ref=f26e28]: —
+      - generic "行情读取中" [ref=f26e29]:
+        - generic [ref=f26e30]: 科创50
+        - generic [ref=f26e31]: —
+        - generic [ref=f26e32]: —
+    - button "切换深色" [ref=f26e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f26e34]: ☾
+      - generic [ref=f26e35]: 深色
+  - main [ref=f26e36]:
+    - navigation "选择研究期限" [ref=f26e38]:
+      - link "下一交易日" [ref=f26e39] [cursor=pointer]:
+        - /url: /?review=p3-start-06#/decision
+      - link "未来一至三个月" [ref=f26e40] [cursor=pointer]:
+        - /url: /?review=p3-start-06&research=1#/decision
+    - generic [ref=f26e41]:
+      - generic [ref=f26e42]:
+        - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f26e44]
+        - paragraph [ref=f26e45]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - paragraph [ref=f26e46]: 正在读取已保存的研究…
+        - paragraph [ref=f26e47]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+      - generic [ref=f26e48]:
+        - heading "已保存的中期研究" [level=2] [ref=f26e49]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f26e50] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f26e51]: 中微公司
+          - generic [ref=f26e52]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f26e53] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f26e54]: 中微公司
+          - generic [ref=f26e55]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f26e56] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f26e57]: 中微公司
+          - generic [ref=f26e58]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f26e59] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f26e60]: 中微公司
+          - generic [ref=f26e61]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f26e62] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f26e63]: 中微公司
+          - generic [ref=f26e64]: 2026/10/12 22:18:43
+    - paragraph [ref=f26e66]:
+      - link "开发者入口" [ref=f26e67] [cursor=pointer]:
+        - /url: /?review=p3-start-06&developer=1#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795

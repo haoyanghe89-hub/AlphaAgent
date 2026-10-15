@@ -18,7 +18,11 @@ def parse_candidates(text):
         if len(parts) < 5:
             continue
         market, code, name, _, kind = parts[:5]
-        if kind != "GP-A" or market not in {"sh", "sz"} or not re.fullmatch(r"\d{6}", code):
+        if (
+            kind not in {"GP-A", "GP-A-KCB"}
+            or market not in {"sh", "sz"}
+            or not re.fullmatch(r"\d{6}", code)
+        ):
             continue
         if not (
             (market == "sh" and code.startswith(("60", "68")))

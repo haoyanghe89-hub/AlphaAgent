@@ -1,0 +1,12 @@
+{
+  "version":"freshness-v1",
+  "rules":[
+    {"kind":"daily_prices","rule":"完整日行情必须覆盖经验证日历的最近已收盘交易日；盘中报价另列，不用自然日推算"},
+    {"kind":"margin","rule":"按实际上游发布日期和覆盖交易日；宽限期未核定时FRESHNESS_UNKNOWN，不默认当天有数"},
+    {"kind":"financial_disclosure","rule":"报告期、披露日和取得日分别保存；本次抓取版本不能回放为历史首次版本"},
+    {"kind":"industry_monthly","rule":"按原机构发布计划、统计月与平滑口径判断；未核定计划时FRESHNESS_UNKNOWN"},
+    {"kind":"etf_shares","rule":"清算份额日期与净值日期分别保存；有拆分合并但缺调整时拒绝估算"},
+    {"kind":"holdings","rule":"持仓日与公告日分别保存；不标实时净买入"}
+  ],
+  "unknown_policy":"无已核定的发布计划和宽限期，不默认fresh；失败值不缓存为今天"
+}

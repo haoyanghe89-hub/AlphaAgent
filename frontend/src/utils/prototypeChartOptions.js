@@ -40,6 +40,13 @@ export const plotValue = value => value == null || value === '' || !Number.isFin
 export function prototypeOptions(block, { palette = {}, reducedMotion = false } = {}) {
   const p = { ...chartPalette, ...palette }, base = prototypeChartBase(p, reducedMotion), axis = prototypeAxis(p)
   const x = block.x || [], series = block.series || []
+  if (block.kind === 'sector_rank' || block.kind === 'flow_rank') return {
+    ...base, grid: { left:76, right:30, top:26, bottom:24 },
+    xAxis: { type:'value', ...axis, axisLabel:{...axis.axisLabel, formatter:block.kind==='flow_rank'?'{value}亿':'{value}%'} },
+    yAxis: { type:'category', inverse:true, data:x, ...axis, splitLine:{show:false} },
+    tooltip:{...base.tooltip, valueFormatter:v=>typeof v==='number'?v.toFixed(2)+(block.kind==='flow_rank'?'亿':'%'):'—'},
+    series:series.map(s=>({name:s.name,type:'bar',data:s.data.map(plotValue),barMaxWidth:14,itemStyle:{color:params=>Number(params.value)>=0?p.up:p.down}})),
+  }
   if (block.kind === 'nav') return {
     ...base, color: [p.accent, p.cyan, p.muted, p.warn],
     legend: { ...base.legend, data: ['策略净值', '沪深300', '策略(0成本)', '策略(0.3%成本)'] },
@@ -65,7 +72,7 @@ export function prototypeOptions(block, { palette = {}, reducedMotion = false } 
       { name: '成交量(手)', type: 'bar', xAxisIndex: 1, yAxisIndex: 1, data: block.volume || [], itemStyle: { color: p.strong } },
     ],
   }
-  const hasPct = series.some(s => /同比|yoy|增速|%/i.test(s.name))
+  const hasPct = series.some(s => s.axis !== 0 && /同比|yoy|增速|%/i.test(s.name))
   return {
     ...base, grid: { ...base.grid, right: hasPct || block.kind === 'margin' ? 52 : 16 },
     xAxis: { type: 'category', data: x, ...axis, boundaryGap: block.chart_type === 'bar' },
@@ -73,7 +80,7 @@ export function prototypeOptions(block, { palette = {}, reducedMotion = false } 
     ...(block.kind === 'pe_history' ? { dataZoom: [{ type: 'inside' }] } : {}),
     series: series.map(s => {
       const pct = /同比|yoy|增速|%/i.test(s.name)
-      const marginBar = block.kind === 'margin' && s.type === 'bar'
+      const marginBar = (block.kind === 'margin' && s.type === 'bar') || s.signed
       return { name: s.name, type: s.type || (block.chart_type === 'bar' && !pct ? 'bar' : 'line'), yAxisIndex: s.axis ?? (pct ? 1 : 0), data: (s.data || []).map(plotValue), smooth: block.chart_type === 'line' && block.kind !== 'pe_history', symbol: s.symbol || 'none', ...(s.symbol === 'circle' ? { symbolSize:4 } : {}), connectNulls: false, barMaxWidth: s.barMaxWidth || 22, lineStyle: { width: pct ? 1.5 : 2, ...s.lineStyle }, itemStyle: { ...(s.color ? { color: s.color } : {}), ...(s.opacity != null ? { opacity:s.opacity } : {}), ...(marginBar ? { color: params => Number(params.value) >= 0 ? p.up : p.down } : {}) }, ...(s.areaStyle ? { areaStyle: s.areaStyle } : {}) }
     }),
   }

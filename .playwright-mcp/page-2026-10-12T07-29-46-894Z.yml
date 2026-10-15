@@ -1,0 +1,182 @@
+- generic [ref=f2e3]:
+  - banner [ref=f2e4]:
+    - link "α AlphaAgent" [ref=f2e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f2e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f2e7]:
+      - link "工作台" [ref=f2e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f2e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f2e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f2e130]:
+      - generic "腾讯报价时间：2026-10-12T15:29:00+08:00" [ref=f2e152]:
+        - generic [ref=f2e132]: 上证指数
+        - generic [ref=f2e133]: "3797.24"
+        - generic [ref=f2e134]: "-0.43%"
+      - generic "腾讯报价时间：2026-10-12T15:29:33+08:00" [ref=f2e153]:
+        - generic [ref=f2e136]: 深证成指
+        - generic [ref=f2e137]: "12384.87"
+        - generic [ref=f2e138]: "-2.03%"
+      - generic "腾讯报价时间：2026-10-12T15:28:48+08:00" [ref=f2e154]:
+        - generic [ref=f2e140]: 创业板指
+        - generic [ref=f2e141]: "2963.82"
+        - generic [ref=f2e142]: "-2.61%"
+      - generic "腾讯报价时间：2026-10-12T15:29:00+08:00" [ref=f2e155]:
+        - generic [ref=f2e144]: 沪深300
+        - generic [ref=f2e145]: "4287.98"
+        - generic [ref=f2e146]: "-0.68%"
+      - generic "腾讯报价时间：2026-10-12T15:29:00+08:00" [ref=f2e156]:
+        - generic [ref=f2e148]: 科创50
+        - generic [ref=f2e149]: "1426.72"
+        - generic [ref=f2e150]: "-2.1%"
+    - button "切换浅色" [ref=f2e151] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f2e12]: ☀
+      - generic [ref=f2e13]: 浅色
+  - main [ref=f2e14]:
+    - generic [ref=f2e15]:
+      - generic [ref=f2e16]:
+        - heading "单股研究与预测" [level=1] [ref=f2e18]
+        - navigation "查看内容" [ref=f2e19]:
+          - button "分析结果" [pressed] [ref=f2e20] [cursor=pointer]
+          - button "开发验收" [ref=f2e21] [cursor=pointer]
+        - paragraph [ref=f2e22]: 查看资料与依据；下一交易日预测接通后在顶部展示方向、理由和核对结果。
+      - generic [ref=f2e34]:
+        - generic [ref=f2e35]: 尚未签发
+        - heading "下一交易日预测尚未接通" [level=2] [ref=f2e36]
+        - paragraph [ref=f2e37]: 先在下方查看单股取证结果。模型签发接通后，这里展示涨跌方向、支持与反对理由；当前没有预测或准确率。
+      - generic [ref=f2e24]:
+        - generic [ref=f2e25]:
+          - heading "单股定向取证" [level=2] [ref=f2e26]
+          - generic [ref=f2e27]: 资料与依据
+        - paragraph [ref=f2e28]: 输入公司和研究问题，取得相关原文、行情及融资资料。当前阶段整理事实与缺口，尚未接通模型分析结论。
+        - group [ref=f2e29]:
+          - generic "查看或调整取证条件" [ref=f2e30] [cursor=pointer]
+          - option "本次最新取证" [selected]
+          - option "历史归档核查"
+      - generic [ref=f2e38]:
+        - generic [ref=f2e39]:
+          - heading "中微公司 · 取证报告" [level=2] [ref=f2e40]
+          - generic [ref=f2e41]: 取证完成
+        - heading "取得3份原文，整理14条可定位证据" [level=3] [ref=f2e42]
+        - paragraph [ref=f2e43]: 已整理本次取得的资料与缺口，尚未生成经营判断或涨跌预测。
+        - paragraph [ref=f2e44]: 资料截止：2026/10/12 15:27:23 · 688012.SH · 单股有限取证，不代表全行业覆盖、独立审计或完整历史回放。
+        - generic [ref=f2e45]:
+          - generic [ref=f2e46]: 业绩预告/快报 2 份
+          - generic [ref=f2e47]: 投资者关系 0 份
+          - generic [ref=f2e48]: 定期报告 1 份
+        - heading "原文与引用" [level=3] [ref=f2e49]
+        - article [ref=f2e50]:
+          - strong [ref=f2e51]: 2026年半年度报告
+          - paragraph [ref=f2e52]: 定期报告 · 210 页 · 报告期 2026-01-01 至 2026-06-30公告日期 2026/8/20（日精度）；本次取得 2026/10/12 15:26:35
+          - generic [ref=f2e53]:
+            - link "来源原文" [ref=f2e54] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-08-20/1225482884.PDF
+            - link "本次归档" [ref=f2e55] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb/documents/DOC-182e2062fed950cd32310099/raw
+            - button "查看第 32 页引用" [ref=f2e56] [cursor=pointer]
+            - button "查看第 32 页引用" [ref=f2e57] [cursor=pointer]
+        - article [ref=f2e58]:
+          - strong [ref=f2e59]: 2026年半年度业绩预告的自愿性披露公告
+          - paragraph [ref=f2e60]: 业绩预告/快报 · 4 页 · 报告期 2026-01-01 至 2026-06-30公告日期 2026/8/4（日精度）；本次取得 2026/10/12 15:27:22
+          - generic [ref=f2e61]:
+            - link "来源原文" [ref=f2e62] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-08-04/1225455464.PDF
+            - link "本次归档" [ref=f2e63] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb/documents/DOC-020a8e984e8dbe30397b167c/raw
+            - button "查看第 2 页引用" [ref=f2e64] [cursor=pointer]
+            - button "查看第 1 页引用" [ref=f2e65] [cursor=pointer]
+        - article [ref=f2e66]:
+          - strong [ref=f2e67]: 2025年度业绩快报公告
+          - paragraph [ref=f2e68]: 业绩预告/快报 · 5 页 · 报告期 未核定 至 未核定公告日期 2026/2/28（日精度）；本次取得 2026/10/12 15:27:22
+          - generic [ref=f2e69]:
+            - link "来源原文" [ref=f2e70] [cursor=pointer]:
+              - /url: https://static.cninfo.com.cn/finalpage/2026-02-28/1224986821.PDF
+            - link "本次归档" [ref=f2e71] [cursor=pointer]:
+              - /url: /api/quant/decision/runs/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb/documents/DOC-7a6ef069963d540aaf873582/raw
+            - button "查看第 2 页引用" [ref=f2e72] [cursor=pointer]
+            - button "查看第 1 页引用" [ref=f2e73] [cursor=pointer]
+        - heading "行情与融资观察" [level=3] [ref=f2e74]
+        - generic [ref=f2e75]:
+          - generic [ref=f2e76]: 2026-09-29 未复权收盘价：324.78 CNY/share
+          - button "查看依据" [ref=f2e77] [cursor=pointer]
+        - generic [ref=f2e78]:
+          - generic [ref=f2e79]: 2026-09-30 未复权收盘价：318.55 CNY/share
+          - button "查看依据" [ref=f2e80] [cursor=pointer]
+        - generic [ref=f2e81]:
+          - generic [ref=f2e82]: 2026-10-08 未复权收盘价：313.24 CNY/share
+          - button "查看依据" [ref=f2e83] [cursor=pointer]
+        - generic [ref=f2e84]:
+          - generic [ref=f2e85]: 2026-10-09 未复权收盘价：311.00 CNY/share
+          - button "查看依据" [ref=f2e86] [cursor=pointer]
+        - generic [ref=f2e87]:
+          - generic [ref=f2e88]: 2026-10-12 未复权收盘价：311.21 CNY/share
+          - button "查看依据" [ref=f2e89] [cursor=pointer]
+        - generic [ref=f2e90]:
+          - generic [ref=f2e91]: 2026-10-09 融资余额：4427042122 CNY
+          - button "查看依据" [ref=f2e92] [cursor=pointer]
+        - generic [ref=f2e93]:
+          - generic [ref=f2e94]: 2026-10-09 融资买入额：296328419 CNY
+          - button "查看依据" [ref=f2e95] [cursor=pointer]
+        - generic [ref=f2e96]:
+          - generic [ref=f2e97]: 2026-10-09 融资偿还额：348170577 CNY
+          - button "查看依据" [ref=f2e98] [cursor=pointer]
+        - paragraph [ref=f2e99]: 行情为未复权收盘观察；融资是独立渠道，不合计为“主力资金”。
+        - heading "尚缺哪些资料" [level=3] [ref=f2e100]
+        - list [ref=f2e101]:
+          - listitem [ref=f2e102]:
+            - strong [ref=f2e103]: 2025年年度报告
+            - text: ：PDF 原文的公司与证券代码未能匹配
+          - listitem [ref=f2e104]:
+            - strong [ref=f2e105]: 投资者关系活动
+            - text: ：本次有限检索未取得在截止时点可用的有效原文，不代表公司未披露。
+        - generic [ref=f2e106]:
+          - link "导出本次取证报告" [ref=f2e107] [cursor=pointer]:
+            - /url: /api/quant/decision/runs/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb/export
+          - link "新建取证" [ref=f2e108] [cursor=pointer]:
+            - /url: "#/decision"
+        - group [ref=f2e109]:
+          - generic "开发记录：取证过程与方法适用性" [active] [ref=f2e110] [cursor=pointer]
+          - paragraph [ref=f2e157]: RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb本阶段模型调用 0 次；没有用程序文案冒充 Agent 分析。累计耗时 50.3 秒。
+          - list [ref=f2e158]:
+            - listitem [ref=f2e159]: 核对动态证券身份与公司资料 · COMPLETED
+            - listitem [ref=f2e160]: 按报告、业绩、投资者关系三类定向检索 · COMPLETED
+            - listitem [ref=f2e161]: 取得未复权行情与独立融资渠道数据 · COMPLETED
+            - listitem [ref=f2e162]: 核对引用、证券身份、页码、字符位置与可用时点 · COMPLETED
+          - paragraph [ref=f2e163]: security_search · COMPLETED · 2026/10/12 15:26:34
+          - paragraph [ref=f2e164]: profile · COMPLETED · 2026/10/12 15:26:34
+          - paragraph [ref=f2e165]: disclosure_issuers · COMPLETED · 2026/10/12 15:26:34
+          - paragraph [ref=f2e166]: catalog_periodic_1 · COMPLETED · 2026/10/12 15:26:34
+          - paragraph [ref=f2e167]: catalog_earnings_1 · COMPLETED · 2026/10/12 15:26:34
+          - paragraph [ref=f2e168]: catalog_investor_1 · COMPLETED · 2026/10/12 15:26:35
+          - paragraph [ref=f2e169]: catalog_investor_fulltext · COMPLETED · 2026/10/12 15:26:35
+          - paragraph [ref=f2e170]: pdf_1225482884 · COMPLETED · 2026/10/12 15:26:35
+          - paragraph [ref=f2e171]: pdf_1225062431 · COMPLETED · 2026/10/12 15:26:56
+          - paragraph [ref=f2e172]: pdf_1225455464 · COMPLETED · 2026/10/12 15:27:22
+          - paragraph [ref=f2e173]: pdf_1224986821 · COMPLETED · 2026/10/12 15:27:22
+          - paragraph [ref=f2e174]: daily · COMPLETED · 2026/10/12 15:27:23
+          - paragraph [ref=f2e175]: margin · COMPLETED · 2026/10/12 15:27:23
+          - paragraph [ref=f2e176]: 方法配置与行业模板不是当期事实；必要输入不足的方法保持停用。
+          - paragraph [ref=f2e177]: M01 · MISSING_INPUTS：缺少必要输入，不能静默启用：financial_statements、cash_flow
+          - paragraph [ref=f2e178]: M02 · MISSING_INPUTS：缺少必要输入，不能静默启用：valuation_inputs、fixed_assumptions、expectation_basis
+          - paragraph [ref=f2e179]: M03 · MISSING_INPUTS：缺少必要输入，不能静默启用：market_prices、breadth、concentration
+          - paragraph [ref=f2e180]: M04 · MISSING_INPUTS：缺少必要输入，不能静默启用：flow_proxy、aligned_sessions、source_definitions
+          - paragraph [ref=f2e181]: M05 · MISSING_INPUTS：缺少必要输入，不能静默启用：segment_exposure、customer_capex、industry_statistics
+          - paragraph [ref=f2e182]: M06 · MISSING_INPUTS：缺少必要输入，不能静默启用：event_timestamps、market_prices、industry_prices
+          - paragraph [ref=f2e183]: M07 · WRONG_SCOPE：不适用当前研究范围。
+          - paragraph [ref=f2e184]: M08 · MISSING_INPUTS：缺少必要输入，不能静默启用：approved_claims、valuation_constraints、flow_support_or_gap、observable_catalysts
+          - paragraph [ref=f2e185]: 定期报告与经营讨论：源报告 8 条，本次检查 8 条，选取 2 条。每类最多检索前2页、选择2篇相关原文；不是完整披露档案。
+          - paragraph [ref=f2e186]: 业绩预告/快报及更正：源报告 8 条，本次检查 8 条，选取 2 条。每类最多检索前2页、选择2篇相关原文；不是完整披露档案。
+          - paragraph [ref=f2e187]: 投资者关系活动：源报告 1 条，本次检查 1 条，选取 0 条。每类最多检索前2页、选择2篇相关原文；不是完整披露档案。
+      - generic [ref=f2e31]:
+        - heading "取证历史" [level=2] [ref=f2e32]
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:26:33" [ref=f2e111] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb"
+          - generic [ref=f2e112]: 中微公司 · 定向取证
+          - generic [ref=f2e113]: 取证完成 · 2026/10/12 15:26:33
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:20:08" [ref=f2e114] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-e6094d8139244a56bb37c20b37c06fef"
+          - generic [ref=f2e115]: 中微公司 · 定向取证
+          - generic [ref=f2e116]: 取证完成 · 2026/10/12 15:20:08

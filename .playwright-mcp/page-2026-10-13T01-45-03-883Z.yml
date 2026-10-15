@@ -1,0 +1,95 @@
+- generic [ref=f26e3]:
+  - banner [ref=f26e4]:
+    - link "α AlphaAgent" [ref=f26e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f26e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f26e7]:
+      - link "工作台" [ref=f26e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f26e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f26e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f26e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f26e12]:
+      - generic "腾讯报价时间：2026-10-13T09:44:51+08:00" [ref=f26e68]:
+        - generic [ref=f26e14]: 上证指数
+        - generic [ref=f26e15]: "3748.81"
+        - generic [ref=f26e16]: "-1.28%"
+      - generic "腾讯报价时间：2026-10-13T09:44:51+08:00" [ref=f26e69]:
+        - generic [ref=f26e18]: 深证成指
+        - generic [ref=f26e19]: "12084.25"
+        - generic [ref=f26e20]: "-2.43%"
+      - generic "腾讯报价时间：2026-10-13T09:44:51+08:00" [ref=f26e70]:
+        - generic [ref=f26e22]: 创业板指
+        - generic [ref=f26e23]: "2866.82"
+        - generic [ref=f26e24]: "-3.27%"
+      - generic "腾讯报价时间：2026-10-13T09:44:51+08:00" [ref=f26e71]:
+        - generic [ref=f26e26]: 沪深300
+        - generic [ref=f26e27]: "4222.06"
+        - generic [ref=f26e28]: "-1.54%"
+      - generic "腾讯报价时间：2026-10-13T09:44:51+08:00" [ref=f26e72]:
+        - generic [ref=f26e30]: 科创50
+        - generic [ref=f26e31]: "1376.31"
+        - generic [ref=f26e32]: "-3.53%"
+    - button "切换深色" [ref=f26e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f26e34]: ☾
+      - generic [ref=f26e35]: 深色
+  - main [ref=f26e36]:
+    - navigation "选择研究期限" [ref=f26e74]:
+      - link "下一交易日" [ref=f26e75] [cursor=pointer]:
+        - /url: /?review=p3-start-06#/decision
+      - link "未来一至三个月" [ref=f26e76] [cursor=pointer]:
+        - /url: /?review=p3-start-06&research=1#/decision
+    - generic [ref=f26e77]:
+      - generic [ref=f26e78]:
+        - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f26e80]
+        - paragraph [ref=f26e81]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - group [ref=f26e82]:
+          - generic "选择公司与期限" [ref=f26e83] [cursor=pointer]
+          - generic [ref=f26e84]:
+            - generic [ref=f26e85]:
+              - text: 公司名称或代码
+              - textbox "公司名称或代码" [ref=f26e86]:
+                - /placeholder: 例如：中微公司或688012
+                - text: 中微公司
+            - generic [ref=f26e87]:
+              - text: 研究期限
+              - combobox "研究期限" [ref=f26e88]:
+                - option "未来一个月"
+                - option "未来两个月"
+                - option "未来三个月" [selected]
+            - button "正在研究…" [disabled] [ref=f26e89]
+        - paragraph [ref=f26e90]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+      - generic [ref=f26e91]:
+        - heading "正在核查资料与理由" [level=2] [ref=f26e92]
+        - paragraph [ref=f26e93]: 核对动态证券身份与公司资料
+        - paragraph [ref=f26e94]: 有关键疑问时补查原文，复核完成后再展示结论。
+        - button "停止研究" [ref=f26e95] [cursor=pointer]
+      - generic [ref=f26e96]:
+        - heading "已保存的中期研究" [level=2] [ref=f26e97]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f26e98] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f26e99]: 中微公司
+          - generic [ref=f26e100]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f26e101] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f26e102]: 中微公司
+          - generic [ref=f26e103]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f26e104] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f26e105]: 中微公司
+          - generic [ref=f26e106]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f26e107] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f26e108]: 中微公司
+          - generic [ref=f26e109]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f26e110] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f26e111]: 中微公司
+          - generic [ref=f26e112]: 2026/10/12 22:18:43
+    - paragraph [ref=f26e114]:
+      - link "开发者入口" [ref=f26e115] [cursor=pointer]:
+        - /url: /?review=p3-start-06&developer=1#/decision/RUN-DEC-47e09eaa96fb4b5c8a6557ae515857e8

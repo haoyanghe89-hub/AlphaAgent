@@ -1,0 +1,53 @@
+- generic [ref=f28e3]:
+  - banner [ref=f28e4]:
+    - link "α AlphaAgent" [ref=f28e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f28e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f28e7]:
+      - link "工作台" [ref=f28e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f28e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f28e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f28e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f28e12]:
+      - generic "行情读取中" [ref=f28e13]:
+        - generic [ref=f28e14]: 上证指数
+        - generic [ref=f28e15]: —
+        - generic [ref=f28e16]: —
+      - generic "行情读取中" [ref=f28e17]:
+        - generic [ref=f28e18]: 深证成指
+        - generic [ref=f28e19]: —
+        - generic [ref=f28e20]: —
+      - generic "行情读取中" [ref=f28e21]:
+        - generic [ref=f28e22]: 创业板指
+        - generic [ref=f28e23]: —
+        - generic [ref=f28e24]: —
+      - generic "行情读取中" [ref=f28e25]:
+        - generic [ref=f28e26]: 沪深300
+        - generic [ref=f28e27]: —
+        - generic [ref=f28e28]: —
+      - generic "行情读取中" [ref=f28e29]:
+        - generic [ref=f28e30]: 科创50
+        - generic [ref=f28e31]: —
+        - generic [ref=f28e32]: —
+    - button "切换深色" [ref=f28e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f28e34]: ☾
+      - generic [ref=f28e35]: 深色
+  - main [ref=f28e36]:
+    - navigation "选择研究期限" [ref=f28e38]:
+      - link "下一交易日" [ref=f28e39] [cursor=pointer]:
+        - /url: /?review=p3-budgeted-final#/decision
+      - link "未来一至三个月" [ref=f28e40] [cursor=pointer]:
+        - /url: /?review=p3-budgeted-final&research=1#/decision
+    - generic [ref=f28e42]:
+      - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f28e44]
+      - paragraph [ref=f28e45]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+      - paragraph [ref=f28e46]: 正在读取已保存的研究…
+      - paragraph [ref=f28e47]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+    - paragraph [ref=f28e49]:
+      - link "开发者入口" [ref=f28e50] [cursor=pointer]:
+        - /url: /?review=p3-budgeted-final&developer=1#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795

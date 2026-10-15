@@ -1,0 +1,289 @@
+- generic [ref=f33e3]:
+  - banner [ref=f33e4]:
+    - link "α AlphaAgent" [ref=f33e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f33e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f33e7]:
+      - link "工作台" [ref=f33e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f33e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f33e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f33e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f33e12]:
+      - generic "腾讯报价时间：2026-10-13T10:32:42+08:00" [ref=f33e304]:
+        - generic [ref=f33e14]: 上证指数
+        - generic [ref=f33e15]: "3751.43"
+        - generic [ref=f33e16]: "-1.21%"
+      - generic "腾讯报价时间：2026-10-13T10:32:39+08:00" [ref=f33e305]:
+        - generic [ref=f33e18]: 深证成指
+        - generic [ref=f33e19]: "12115.35"
+        - generic [ref=f33e20]: "-2.18%"
+      - generic "腾讯报价时间：2026-10-13T10:32:39+08:00" [ref=f33e306]:
+        - generic [ref=f33e22]: 创业板指
+        - generic [ref=f33e23]: "2884.53"
+        - generic [ref=f33e24]: "-2.68%"
+      - generic "腾讯报价时间：2026-10-13T10:32:42+08:00" [ref=f33e307]:
+        - generic [ref=f33e26]: 沪深300
+        - generic [ref=f33e27]: "4223.16"
+        - generic [ref=f33e28]: "-1.51%"
+      - generic "腾讯报价时间：2026-10-13T10:32:42+08:00" [ref=f33e308]:
+        - generic [ref=f33e30]: 科创50
+        - generic [ref=f33e31]: "1394.35"
+        - generic [ref=f33e32]: "-2.27%"
+    - button "切换深色" [ref=f33e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f33e34]: ☾
+      - generic [ref=f33e35]: 深色
+  - main [ref=f33e36]:
+    - navigation "选择研究期限" [ref=f33e38]:
+      - link "下一交易日" [ref=f33e39] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final#/decision
+      - link "未来一至三个月" [ref=f33e40] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&research=1#/decision
+    - generic [ref=f33e41]:
+      - generic [ref=f33e42]:
+        - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f33e44]
+        - paragraph [ref=f33e45]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - group [ref=f33e56]:
+          - generic "研究另一家公司" [ref=f33e172] [cursor=pointer]
+          - option "未来一个月"
+          - option "未来两个月"
+          - option "未来三个月" [selected]
+        - paragraph [ref=f33e47]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业验证及候选比较后续接入，缺项会明确保留。
+      - paragraph [ref=f33e173]: 资料截止：2026/10/13 10:29:51。这是中期研究，与明日方向独立。
+      - article [ref=f33e174]:
+        - generic [ref=f33e175]:
+          - heading "中微公司" [level=2] [ref=f33e176]
+          - generic [ref=f33e177]: 未来 3 个月
+        - generic [ref=f33e178]:
+          - strong [ref=f33e179]: 倾向看多
+          - generic [ref=f33e180]: 判断依据有限
+          - generic [ref=f33e181]: 未来方向的研究倾向
+        - paragraph [ref=f33e182]: 倾向看多，公司披露收入与现金流改善，但资金面偏弱需权衡。
+        - generic [ref=f33e183]:
+          - heading "为什么作这个判断" [level=3] [ref=f33e184]
+          - paragraph [ref=f33e185]: 正面依据为公司披露的收入增长、高端刻蚀产品量产及现金流改善，反面依据为资金面多个窗口走弱、非经常性损益贡献较大及现金回收弱于利润确认。正面经营改善更占优，但资金面偏弱限制判断充分程度，故倾向看多。
+          - paragraph [ref=f33e186]: 这是现有证据下的方向取舍，估值、资金及行业核查仍有缺口；不是确定涨跌或校准概率。
+        - generic [ref=f33e187]:
+          - generic [ref=f33e188]:
+            - heading "经营变化，依据是什么" [level=3] [ref=f33e189]
+            - generic [ref=f33e190]:
+              - paragraph [ref=f33e191]: 公司披露上半年营业收入同比增长，主要来自先进逻辑和存储器件关键刻蚀工艺高端产品付运量提升并实现大规模量产。
+              - paragraph [ref=f33e192]: 若高端刻蚀产品持续付运并量产，可能支撑收入增长延续，待验证。
+              - button "查看依据 1 ↗" [ref=f33e193] [cursor=pointer]
+            - generic [ref=f33e194]:
+              - paragraph [ref=f33e195]: 公司披露净利润增幅明显高于扣非净利润增幅，且研发投入占营业收入比例维持高位，公司称研发投入同比增加。
+              - paragraph [ref=f33e196]: 若高研发投入持续，可能压制短期利润弹性，同时非经常性损益对利润贡献较大，待验证。
+              - button "查看依据 1 ↗" [ref=f33e197] [cursor=pointer]
+            - generic [ref=f33e198]:
+              - paragraph [ref=f33e199]: 公司披露经营活动现金流量净额同比增长，但增幅低于净利润增幅，现金回收与利润确认节奏存在差异。
+              - paragraph [ref=f33e200]: 若回款节奏未同步改善，可能影响后续现金回收质量，待验证。
+              - button "查看依据 1 ↗" [ref=f33e201] [cursor=pointer]
+          - generic [ref=f33e202]:
+            - heading "还要警惕什么" [level=3] [ref=f33e203]
+            - list [ref=f33e204]:
+              - listitem [ref=f33e205]: 多个资金窗口融资余额下降，供应商估算大单净额在较长窗口为负，价格同期走弱。
+              - listitem [ref=f33e206]: 净利润增幅明显高于扣非净利润增幅，非经常性损益贡献较大，利润质量待验证。
+              - listitem [ref=f33e207]: 现金回收增幅低于利润增幅，回款节奏与利润确认存在差异。
+        - generic [ref=f33e208]:
+          - generic [ref=f33e209]:
+            - heading "价格位置" [level=3] [ref=f33e210]
+            - paragraph [ref=f33e211]: 已取得有限未复权收盘观察，尚未计算价格分位。
+          - generic [ref=f33e212]:
+            - heading "估值与预期差" [level=3] [ref=f33e213]
+            - paragraph [ref=f33e214]: 估值基准未齐，不以低估或高估支持本次方向。
+            - paragraph [ref=f33e215]: 一致预期、规范化现金流及固定估值假设尚未齐备；本次方向不以超预期或估值高低作为依据。
+      - generic [ref=f33e216]:
+        - heading "接下来，什么会改变判断" [level=2] [ref=f33e217]
+        - generic [ref=f33e218]:
+          - generic [ref=f33e219]:
+            - heading "继续观察" [level=3] [ref=f33e220]
+            - list [ref=f33e221]:
+              - listitem [ref=f33e222]: 查阅刻蚀设备收入按产品线或客户群拆分
+              - listitem [ref=f33e223]: 查阅合同负债变化与回款节奏
+              - listitem [ref=f33e224]: 查阅研发投入转化情况
+            - paragraph [ref=f33e225]: 关注：高端刻蚀产品持续付运并量产；研发投入转化为可量产机型或重复采购；合同负债与回款节奏改善。具体披露日尚未确认。
+          - generic [ref=f33e226]:
+            - heading "重新评估的条件" [level=3] [ref=f33e227]
+            - list [ref=f33e228]:
+              - listitem [ref=f33e229]: 公司披露的收入增长未能延续或高端产品付运放缓
+              - listitem [ref=f33e230]: 现金回收持续弱于利润确认
+              - listitem [ref=f33e231]: 资金面持续走弱且价格进一步下行
+      - generic [ref=f33e232]:
+        - heading "三种可能的走向" [level=2] [ref=f33e233]
+        - generic [ref=f33e234]:
+          - generic [ref=f33e235]:
+            - heading "基准情景" [level=3] [ref=f33e236]
+            - paragraph [ref=f33e237]: 若高端刻蚀产品付运延续且回款节奏平稳，经营可能维持增长，资金面偏弱构成制约。
+            - list [ref=f33e238]:
+              - listitem [ref=f33e239]: 公司披露的收入增长延续
+              - listitem [ref=f33e240]: 现金回收与利润确认差异未扩大
+          - generic [ref=f33e241]:
+            - heading "改善情景" [level=3] [ref=f33e242]
+            - paragraph [ref=f33e243]: 若研发投入转化为可量产机型并带来重复采购，收入与现金回收可能同步改善。
+            - list [ref=f33e244]:
+              - listitem [ref=f33e245]: 研发转化落地
+              - listitem [ref=f33e246]: 客户重复采购增加
+          - generic [ref=f33e247]:
+            - heading "恶化情景" [level=3] [ref=f33e248]
+            - paragraph [ref=f33e249]: 若高端产品付运放缓且回款节奏转弱，利润与现金回收可能承压。
+            - list [ref=f33e250]:
+              - listitem [ref=f33e251]: 付运量下降
+              - listitem [ref=f33e252]: 回款周期拉长
+        - paragraph [ref=f33e253]: 这些是有条件的情景，尚无校准概率；经营变化与股价方向仍可能分歧。
+      - group [ref=f33e254]:
+        - generic "这份研究的范围与局限" [ref=f33e255] [cursor=pointer]
+      - generic [ref=f33e89]:
+        - generic [ref=f33e90]:
+          - heading "资金是否支持这个判断" [level=2] [ref=f33e91]
+          - generic [ref=f33e92]: 分渠道观察
+        - paragraph [ref=f33e93]: 截至 2026-10-12 的已收盘交易日。融资、供应商估算和 ETF 分开看，成交额只表示活跃度。
+        - tablist "资金观察窗口" [ref=f33e94]:
+          - tab "近 5 个交易日" [ref=f33e95] [cursor=pointer]
+          - tab "近 20 个交易日" [ref=f33e96] [cursor=pointer]
+          - tab "近 60 个交易日" [selected] [ref=f33e97] [cursor=pointer]
+        - paragraph [ref=f33e98]: 2026-07-13 — 2026-10-12 · 余额与价格基准 2026-07-10
+        - paragraph [ref=f33e99]: 融资余额下降，供应商估算大单净额为负，两渠道方向一致偏弱。
+        - generic [ref=f33e100]:
+          - article [ref=f33e101]:
+            - generic [ref=f33e102]: 融资余额变化
+            - strong [ref=f33e103]: "-12.76 亿元"
+            - button "查看计算依据" [ref=f33e104] [cursor=pointer]
+          - article [ref=f33e105]:
+            - generic [ref=f33e106]: 融资买入合计
+            - strong [ref=f33e107]: 365.38 亿元
+            - button "查看计算依据" [ref=f33e108] [cursor=pointer]
+          - article [ref=f33e109]:
+            - generic [ref=f33e110]: 融资偿还合计
+            - strong [ref=f33e111]: 377.60 亿元
+            - button "查看计算依据" [ref=f33e112] [cursor=pointer]
+          - article [ref=f33e113]:
+            - generic [ref=f33e114]: 融资余额增加日占比
+            - strong [ref=f33e115]: 31.67%
+            - button "查看计算依据" [ref=f33e116] [cursor=pointer]
+          - article [ref=f33e117]:
+            - generic [ref=f33e118]: 供应商估算大单净额
+            - strong [ref=f33e119]: "-61.80 亿元"
+            - button "查看计算依据" [ref=f33e120] [cursor=pointer]
+          - article [ref=f33e121]:
+            - generic [ref=f33e122]: 个股价格变化
+            - strong [ref=f33e123]: "-28.38%"
+            - button "查看计算依据" [ref=f33e124] [cursor=pointer]
+          - article [ref=f33e125]:
+            - generic [ref=f33e126]: 相对沪深三百价格差
+            - strong [ref=f33e127]: "-18.07 个百分点"
+            - button "查看计算依据" [ref=f33e128] [cursor=pointer]
+        - paragraph [ref=f33e129]: 余额差与买入减偿还存在未解释差额：期间 -54,429,079 元，最大单日差额绝对值 55,901,849 元。保留各原始字段，不强行配平；差额原因尚未核查。
+        - generic [ref=f33e130]:
+          - paragraph [ref=f33e131]:
+            - generic [ref=f33e132]: 持续性
+            - text: 融资余额增加日占比略高但仍偏低，期间净减少并非天天减少，持续性偏弱。
+          - paragraph [ref=f33e133]:
+            - generic [ref=f33e134]: 价与融资
+            - text: 价格与融资余额同向减少。价格与融资余额同向走弱，供应商估算同向，价与融资未背离。
+          - paragraph [ref=f33e135]:
+            - generic [ref=f33e136]: 广度
+            - text: 行业广度与成员集中度未核定，缺项。
+          - paragraph [ref=f33e137]:
+            - generic [ref=f33e138]: 还可能是什么
+            - text: 长窗口价格走弱可能包含多种因素；供应商估算与融资不可相加
+        - generic [ref=f33e139]:
+          - article [ref=f33e140]:
+            - heading "融资余额（亿元）" [level=3] [ref=f33e141]
+            - img "融资余额（亿元）" [ref=f33e143]:
+              - generic [ref=f33e144] [cursor=pointer]
+          - article [ref=f33e146]:
+            - heading "融资买入与偿还（亿元）" [level=3] [ref=f33e147]
+            - img "融资买入与偿还（亿元）" [ref=f33e149]
+          - article [ref=f33e152]:
+            - heading "个股未复权收盘（元）" [level=3] [ref=f33e153]
+            - img "个股未复权收盘（元）" [ref=f33e155]
+          - article [ref=f33e158]:
+            - heading "供应商估算大单净额（亿元）" [level=3] [ref=f33e159]
+            - img "供应商估算大单净额（亿元）" [ref=f33e161]
+        - paragraph [ref=f33e164]: 点击曲线上的日期查看当日原始字段与来源；图表中的空位表示缺失，不代表零。
+        - group [ref=f33e165]:
+          - generic "数据覆盖与计算口径" [active] [ref=f33e166] [cursor=pointer]
+          - paragraph [ref=f33e309]: 供应商估算大单净额：-61.80 亿元 · 供应商按订单大小分类估算，不识别机构身份。
+          - paragraph [ref=f33e310]: ETF估算申赎额：缺项 · 交易日、字段或核定口径缺失；不补零、不缩短完整窗口。估算，不等于成分股现金买入，实物申赎与套利可能参与。
+          - paragraph [ref=f33e311]: 行业平均成交占比：缺项 · 交易日、字段或核定口径缺失；不补零、不缩短完整窗口。需要核定分类、成员与市场分母，不能用个股成交额代替行业。
+          - paragraph [ref=f33e312]: 融资余额变化：末日融资余额－窗口前一交易日融资余额
+          - paragraph [ref=f33e313]: 融资买入合计：逐日融资买入额合计
+          - paragraph [ref=f33e314]: 融资偿还合计：逐日融资偿还额合计
+          - paragraph [ref=f33e315]: 融资未解释勾稽差额：余额差－同期（买入合计－偿还合计）
+          - paragraph [ref=f33e316]: 最大单日勾稽差额绝对值：逐日余额差与买入减偿还之差的绝对值，取最大
+          - paragraph [ref=f33e317]: 融资余额增加日占比：窗口内余额较前一交易日增加的天数／固定交易日数
+          - paragraph [ref=f33e318]: 个股成交额合计：逐日成交额合计
+          - paragraph [ref=f33e319]: 供应商估算大单净额：同源同口径逐日分类净额合计
+          - paragraph [ref=f33e320]: 供应商估算强度：供应商分类净额合计／同期本股成交额
+          - paragraph [ref=f33e321]: 个股价格变化：末日未复权收盘价／窗口前一日收盘价－一
+          - paragraph [ref=f33e322]: 沪深三百价格变化：末日未复权收盘价／窗口前一日收盘价－一
+          - paragraph [ref=f33e323]: 相对沪深三百价格差：个股同期价格变化－沪深三百同期价格变化
+          - paragraph [ref=f33e324]: 融资、大单估算和ETF是不同渠道，数值不相加；供应商数据未获得交易所逐值独立核验。
+          - paragraph [ref=f33e325]: 成交额只是活跃度；融资变化不等于全市场净流入，不识别机构身份或动机。
+          - paragraph [ref=f33e326]: ETF观察样本为半导体主题基金，当前成分和权重未核定，不等于本股现金买入。
+          - paragraph [ref=f33e327]: 价格比较使用未复权收盘价，与沪深三百同周期比较，不是全收益或事件因果贡献。
+          - paragraph [ref=f33e328]: 行业成员、同范围市场分母和历史分类未核定，行业广度与成员集中度不参与判断。
+          - paragraph [ref=f33e329]: 当前没有连续 ETF 份额与已核定拆并因子，不计算申赎额。行业成员与市场分母未核定，不展示行业热度或广度数值。
+      - generic [ref=f33e256]:
+        - generic [ref=f33e257]:
+          - heading "保存观点，等待事实检验" [level=2] [ref=f33e258]
+          - button "查看当前观察结果" [ref=f33e259] [cursor=pointer]
+        - paragraph [ref=f33e260]: 2026/10/13 10:30:22 发布。原观点保留，更新研究将另存一份；未到期不显示实现收益。
+        - generic [ref=f33e261]:
+          - generic [ref=f33e262]:
+            - heading "20 个交易日" [level=3] [ref=f33e263]
+            - paragraph [ref=f33e264]: 观察日 2026-11-10
+            - strong [ref=f33e265]: 等待观察
+          - generic [ref=f33e266]:
+            - heading "40 个交易日" [level=3] [ref=f33e267]
+            - paragraph [ref=f33e268]: 观察日 2026-12-08
+            - strong [ref=f33e269]: 等待观察
+          - generic [ref=f33e270]:
+            - heading "60 个交易日" [level=3] [ref=f33e271]
+            - paragraph [ref=f33e272]: 观察日待核定
+            - strong [ref=f33e273]: 等待观察
+            - paragraph [ref=f33e274]: 尚缺下一年度核定交易日历，不猜到期日期。
+        - paragraph [ref=f33e275]: 当前按未复权价格观察；行业基准尚缺，未完成全收益独立核对，不能当作正式策略绩效。经营催化是否兑现还需实际披露。
+        - group [ref=f33e276]:
+          - generic "查看最初观点与后续版本（5）" [ref=f33e277] [cursor=pointer]
+      - generic [ref=f33e278]:
+        - heading "有新披露时，再检查一次" [level=2] [ref=f33e279]
+        - paragraph [ref=f33e280]: 更新会重新取数、另存观点；最初判断和当时依据继续保留。
+        - button "更新这家公司研究" [ref=f33e281] [cursor=pointer]
+      - generic [ref=f33e69]:
+        - heading "已保存的中期研究" [level=2] [ref=f33e70]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f33e71] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f33e72]: 中微公司
+          - generic [ref=f33e73]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f33e74] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f33e75]: 中微公司
+          - generic [ref=f33e76]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f33e77] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f33e78]: 中微公司
+          - generic [ref=f33e79]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f33e80] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f33e81]: 中微公司
+          - generic [ref=f33e82]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f33e83] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f33e84]: 中微公司
+          - generic [ref=f33e85]: 2026/10/12 22:18:43
+        - link "中微公司 2026/10/13 09:58:49" [ref=f33e86] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-dfaeed1c8b6c4b30b2aa18d59db585d9"
+          - generic [ref=f33e87]: 中微公司
+          - generic [ref=f33e88]: 2026/10/13 09:58:49
+        - link "中微公司 2026/10/13 10:29:14" [ref=f33e282] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1"
+          - generic [ref=f33e283]: 中微公司
+          - generic [ref=f33e284]: 2026/10/13 10:29:14
+    - paragraph [ref=f33e49]:
+      - link "开发者入口" [ref=f33e50] [cursor=pointer]:
+        - /url: /?review=p3-user-acceptance-final&developer=1#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1

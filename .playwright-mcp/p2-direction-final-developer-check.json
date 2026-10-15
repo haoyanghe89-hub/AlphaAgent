@@ -1,0 +1,16 @@
+{
+  "model_calls": 8,
+  "tokens": 30116,
+  "final_direction": "FAVORABLE",
+  "review": "APPROVE",
+  "claims": [
+    {
+      "id": "C1",
+      "verdict": "APPROVE"
+    },
+    {
+      "id": "C2",
+      "verdict": "APPROVE"
+    }
+  ]
+}

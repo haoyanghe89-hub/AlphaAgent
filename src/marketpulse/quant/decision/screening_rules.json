@@ -1,0 +1,11 @@
+{
+  "rule_version":"candidate-v1",
+  "universe":"运行时同源同层级行业成分；每批保存成员版本和取得时点；不是固定样本名单",
+  "eligibility":["代码与主体匹配","已归档的业务相关原文","核心财务和价格可用","最近20个交易日流动性可观察"],
+  "risk_policy":"停牌/退市/未知ST或重大风险资料单列；缺失不是安全，不声称全量排险",
+  "groups":["经营与资金相互支持","经营有支持但资金分歧","资金活跃但经营未证实","资料不足"],
+  "group_sort":["business_comparability_group_asc","complete_core_dimensions_desc","median_20_session_turnover_desc","security_id_asc"],
+  "max_candidates":3,
+  "business_leader_requires":"独立经营地位原文；只有规模则标大型代表公司",
+  "validation_status":"UNVALIDATED"
+}

@@ -1,0 +1,36 @@
+- generic [ref=f8e3]:
+  - banner [ref=f8e4]:
+    - link "α AlphaAgent" [ref=f8e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f8e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f8e7]:
+      - link "工作台" [ref=f8e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f8e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f8e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f8e11] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换浅色" [ref=f8e12] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f8e13]: ☀
+      - generic [ref=f8e14]: 浅色
+  - main [ref=f8e15]:
+    - generic [ref=f8e17]:
+      - generic [ref=f8e18]: ALPHAAGENT · 每日观察
+      - generic [ref=f8e19]:
+        - heading "下一交易日，怎么看" [level=1] [ref=f8e20]
+        - generic [ref=f8e21]: 开发者视图
+      - paragraph [ref=f8e22]: 明确的涨跌判断，以及支持它和可能推翻它的依据。
+      - generic [ref=f8e23]:
+        - button "生成下一交易日预测" [disabled] [ref=f8e24]
+        - generic [ref=f8e25]: 中微公司 · 北方华创
+      - paragraph [ref=f8e26]: 读取最新可核实资料后生成并保存。正式记录在交易日 20:00–20:15 签发；其他时间生成的结果单独作为探索记录。
+      - status [ref=f8e27]: 正在读取已保存的预测…
+    - generic [ref=f8e28]:
+      - group [ref=f8e29]:
+        - generic "前期 P0/P1 验收留档（当时状态）" [ref=f8e30] [cursor=pointer]
+      - paragraph [ref=f8e31]:
+        - link "返回用户视图" [ref=f8e32] [cursor=pointer]:
+          - /url: /?review=p1n-developer-acceptance#/decision/RUN-NS-1ad8f3b83db14f9f93b529f34f0fb77f

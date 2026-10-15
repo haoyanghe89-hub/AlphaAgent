@@ -1,0 +1,16 @@
+{
+  "schema_version":"next-session-v1",
+  "experiment_id":"ALPHA_NEXT_SESSION_V1",
+  "protocol_id":"NEXT_SESSION_EOD_V1",
+  "universe_version":"SEMICONDUCTOR_PAIR_20261012_V1",
+  "securities":["688012.SH","002371.SZ"],
+  "enabled":false,
+  "enabled_at":null,
+  "first_base_session":null,
+  "timezone":"Asia/Shanghai",
+  "window_start":"20:00:00",
+  "window_end":"20:15:00",
+  "method_version":"NEXT_SESSION_METHOD_V1",
+  "prompt_version":"NEXT_SESSION_PROMPT_V1",
+  "comparator_enabled":false
+}

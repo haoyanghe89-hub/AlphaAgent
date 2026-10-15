@@ -93,18 +93,28 @@ class ResearchStore:
             state["data"] = data
         return state
 
-    def list(self):
+    def list(self, *, prefix=None):
         with self.sessions() as session:
+            query = select(ResearchRunRow)
+            query = (
+                query.where(ResearchRunRow.run_id.like(prefix + "%"))
+                if prefix
+                else query.where(
+                    ~ResearchRunRow.run_id.like("RUN-DEC-%"),
+                    ~ResearchRunRow.run_id.like("RUN-NS-%"),
+                    ~ResearchRunRow.run_id.like("DEC-%"),
+                )
+            )
             registered = [
                 copy.deepcopy(row.payload)
                 for row in session.scalars(
-                    select(ResearchRunRow).order_by(ResearchRunRow.created_at.desc()).limit(100)
+                    query.order_by(ResearchRunRow.created_at.desc()).limit(100)
                 )
             ]
         ids = {s["run_id"] for s in registered}
         from .api import read
 
-        for path in self.legacy_root.glob("RUN-LIVE-*/state.json"):
+        for path in [] if prefix else self.legacy_root.glob("RUN-LIVE-*/state.json"):
             if path.parent.name not in ids:
                 registered.append(read(path))
         return sorted(registered, key=lambda s: s["created_at"], reverse=True)[:100]
@@ -117,7 +127,7 @@ class ResearchStore:
                 state = copy.deepcopy(row.payload)
                 state.update(status="INTERRUPTED", error="服务重启，已完成步骤保留，可继续研究。")
                 for node in state.get("process", []) + state.get("calls", []):
-                    if node["status"] == "RUNNING":
+                    if node.get("status") == "RUNNING":
                         node["status"] = "INTERRUPTED"
                 row.status, row.payload = state["status"], state
 

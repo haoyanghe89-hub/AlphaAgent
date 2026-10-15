@@ -1,0 +1,64 @@
+- generic [ref=f16e3]:
+  - banner [ref=f16e4]:
+    - link "α AlphaAgent" [ref=f16e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f16e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f16e7]:
+      - link "工作台" [ref=f16e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f16e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f16e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f16e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f16e12]:
+      - generic "行情读取中" [ref=f16e13]:
+        - generic [ref=f16e14]: 上证指数
+        - generic [ref=f16e15]: —
+        - generic [ref=f16e16]: —
+      - generic "行情读取中" [ref=f16e17]:
+        - generic [ref=f16e18]: 深证成指
+        - generic [ref=f16e19]: —
+        - generic [ref=f16e20]: —
+      - generic "行情读取中" [ref=f16e21]:
+        - generic [ref=f16e22]: 创业板指
+        - generic [ref=f16e23]: —
+        - generic [ref=f16e24]: —
+      - generic "行情读取中" [ref=f16e25]:
+        - generic [ref=f16e26]: 沪深300
+        - generic [ref=f16e27]: —
+        - generic [ref=f16e28]: —
+      - generic "行情读取中" [ref=f16e29]:
+        - generic [ref=f16e30]: 科创50
+        - generic [ref=f16e31]: —
+        - generic [ref=f16e32]: —
+    - button "切换浅色" [ref=f16e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f16e34]: ☀
+      - generic [ref=f16e35]: 浅色
+  - main [ref=f16e36]:
+    - navigation "选择研究期限" [ref=f16e38]:
+      - link "下一交易日" [ref=f16e39] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance#/decision
+      - link "未来一至三个月" [ref=f16e40] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&research=1#/decision
+    - generic [ref=f16e41]:
+      - generic [ref=f16e42]:
+        - heading "未来几个月，值得关注什么" [level=1] [ref=f16e44]
+        - paragraph [ref=f16e45]: 看经营变化、反对理由，以及哪些事实会改变判断。
+        - paragraph [ref=f16e46]: 正在读取已保存的研究…
+        - paragraph [ref=f16e47]: 重新读取公司披露后生成。资金分析、行业验证及候选比较将按后续阶段接入；资料不足时会收缩判断。
+      - generic [ref=f16e48]:
+        - heading "已保存的中期研究" [level=2] [ref=f16e49]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f16e50] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f16e51]: 中微公司
+          - generic [ref=f16e52]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f16e53] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f16e54]: 中微公司
+          - generic [ref=f16e55]: 2026/10/12 17:41:58
+    - paragraph [ref=f16e57]:
+      - link "开发者入口" [ref=f16e58] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&developer=1#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a

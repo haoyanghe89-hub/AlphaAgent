@@ -1,0 +1,46 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "α AlphaAgent" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=e7]:
+      - link "工作台" [ref=e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=e11]:
+      - generic "行情读取中" [ref=e12]:
+        - generic [ref=e13]: 上证指数
+        - generic [ref=e14]: —
+        - generic [ref=e15]: —
+      - generic "行情读取中" [ref=e16]:
+        - generic [ref=e17]: 深证成指
+        - generic [ref=e18]: —
+        - generic [ref=e19]: —
+      - generic "行情读取中" [ref=e20]:
+        - generic [ref=e21]: 创业板指
+        - generic [ref=e22]: —
+        - generic [ref=e23]: —
+      - generic "行情读取中" [ref=e24]:
+        - generic [ref=e25]: 沪深300
+        - generic [ref=e26]: —
+        - generic [ref=e27]: —
+      - generic "行情读取中" [ref=e28]:
+        - generic [ref=e29]: 科创50
+        - generic [ref=e30]: —
+        - generic [ref=e31]: —
+    - button "切换浅色" [ref=e32] [cursor=pointer]:
+      - generic [aria-hidden] [ref=e33]: ☀
+      - generic [ref=e34]: 浅色
+  - main [ref=e35]:
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: P0 · 研究能力核查
+          - heading "研究判断与预测实验" [level=1] [ref=e41]
+        - button "读取中…" [disabled] [ref=e42]
+      - paragraph [ref=e43]: 先核对真实资料、方法与实验规则，再签发预测。这里展示开发探测记录，数据日期与读取时间分别标注。
+      - status [ref=e44]: 正在核验来源快照及归档哈希…

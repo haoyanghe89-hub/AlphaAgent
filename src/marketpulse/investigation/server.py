@@ -114,6 +114,12 @@ def create_app(
                 sessions, live_runner.blobs, research_root / "live-research"
             )
             app.state.research_jobs = {}
+            from marketpulse.quant.decision.next_session.service import (
+                recover as recover_predictions,
+            )
+            from marketpulse.quant.decision.next_session.store import ExperimentStore
+
+            recover_predictions(ExperimentStore(app.state.research_store))
             app.state.research_store.interrupt_abandoned()
             live_runner.recover_interrupted()
             app.state.live_investigation = live_runner
@@ -172,6 +178,9 @@ def create_app(
     from marketpulse.quant.completion import router as completion_router
 
     app.include_router(completion_router)
+    from marketpulse.quant.decision.api import router as decision_router
+
+    app.include_router(decision_router)
     app.include_router(review_router)
 
     @app.get("/api/health")

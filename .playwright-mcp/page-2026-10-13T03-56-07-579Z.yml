@@ -1,0 +1,53 @@
+- generic [ref=f35e3]:
+  - banner [ref=f35e4]:
+    - link "α AlphaAgent" [ref=f35e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f35e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f35e7]:
+      - link "工作台" [ref=f35e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f35e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f35e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f35e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f35e12]:
+      - generic "腾讯报价时间：2026-10-13T11:55:00+08:00" [ref=f35e111]:
+        - generic [ref=f35e14]: 上证指数
+        - generic [ref=f35e15]: "3787.16"
+        - generic [ref=f35e16]: "-0.27%"
+      - generic "腾讯报价时间：2026-10-13T11:55:42+08:00" [ref=f35e112]:
+        - generic [ref=f35e18]: 深证成指
+        - generic [ref=f35e19]: "12288.4"
+        - generic [ref=f35e20]: "-0.78%"
+      - generic "腾讯报价时间：2026-10-13T11:54:57+08:00" [ref=f35e113]:
+        - generic [ref=f35e22]: 创业板指
+        - generic [ref=f35e23]: "2935.54"
+        - generic [ref=f35e24]: "-0.95%"
+      - generic "腾讯报价时间：2026-10-13T11:55:00+08:00" [ref=f35e114]:
+        - generic [ref=f35e26]: 沪深300
+        - generic [ref=f35e27]: "4263.4"
+        - generic [ref=f35e28]: "-0.57%"
+      - generic "腾讯报价时间：2026-10-13T11:55:00+08:00" [ref=f35e115]:
+        - generic [ref=f35e30]: 科创50
+        - generic [ref=f35e31]: "1417.07"
+        - generic [ref=f35e32]: "-0.68%"
+    - button "切换浅色" [ref=f35e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f35e34]: ☀
+      - generic [ref=f35e35]: 浅色
+  - main [ref=f35e36]:
+    - navigation "选择研究期限" [ref=f35e117]:
+      - link "下一交易日" [ref=f35e118] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance#/decision
+      - link "未来一至三个月" [ref=f35e119] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance&research=1#/decision
+    - generic [ref=f35e121]:
+      - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f35e123]
+      - paragraph [ref=f35e124]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+      - paragraph [ref=f35e125]: 正在读取已保存的研究…
+      - paragraph [ref=f35e126]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业传导与事件窗口也会核查，缺项明确保留。
+    - paragraph [ref=f35e128]:
+      - link "开发者入口" [ref=f35e129] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance&developer=1#/decision/RUN-DEC-65a1c919725a4d6690cca4f4000e26f4

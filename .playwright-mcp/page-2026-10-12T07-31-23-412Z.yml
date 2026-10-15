@@ -1,0 +1,89 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - link "α AlphaAgent" [ref=f3e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f3e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f3e7]:
+      - link "工作台" [ref=f3e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f3e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f3e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f3e11]:
+      - generic "腾讯报价时间：2026-10-12T15:31:00+08:00" [ref=f3e72]:
+        - generic [ref=f3e13]: 上证指数
+        - generic [ref=f3e14]: "3797.24"
+        - generic [ref=f3e15]: "-0.43%"
+      - generic "腾讯报价时间：2026-10-12T15:30:33+08:00" [ref=f3e73]:
+        - generic [ref=f3e17]: 深证成指
+        - generic [ref=f3e18]: "12384.87"
+        - generic [ref=f3e19]: "-2.03%"
+      - generic "腾讯报价时间：2026-10-12T15:30:48+08:00" [ref=f3e74]:
+        - generic [ref=f3e21]: 创业板指
+        - generic [ref=f3e22]: "2963.82"
+        - generic [ref=f3e23]: "-2.61%"
+      - generic "腾讯报价时间：2026-10-12T15:30:00+08:00" [ref=f3e75]:
+        - generic [ref=f3e25]: 沪深300
+        - generic [ref=f3e26]: "4287.98"
+        - generic [ref=f3e27]: "-0.68%"
+      - generic "腾讯报价时间：2026-10-12T15:30:00+08:00" [ref=f3e76]:
+        - generic [ref=f3e29]: 科创50
+        - generic [ref=f3e30]: "1426.72"
+        - generic [ref=f3e31]: "-2.1%"
+    - button "切换浅色" [ref=f3e32] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f3e33]: ☀
+      - generic [ref=f3e34]: 浅色
+  - main [ref=f3e35]:
+    - generic [ref=f3e36]:
+      - generic [ref=f3e37]:
+        - heading "单股研究与预测" [level=1] [ref=f3e39]
+        - navigation "查看内容" [ref=f3e40]:
+          - button "分析结果" [pressed] [ref=f3e41] [cursor=pointer]
+          - button "开发验收" [ref=f3e42] [cursor=pointer]
+        - paragraph [ref=f3e43]: 查看资料与依据；下一交易日预测接通后在顶部展示方向、理由和核对结果。
+      - generic [ref=f3e77]:
+        - generic [ref=f3e78]: 尚未签发
+        - heading "下一交易日预测尚未接通" [level=2] [ref=f3e79]
+        - paragraph [ref=f3e80]: 先在下方查看单股取证结果。模型签发接通后，这里展示涨跌方向、支持与反对理由；当前没有预测或准确率。
+      - generic [ref=f3e45]:
+        - generic [ref=f3e46]:
+          - heading "单股定向取证" [level=2] [ref=f3e47]
+          - generic [ref=f3e48]: 资料与依据
+        - paragraph [ref=f3e49]: 输入公司和研究问题，取得相关原文、行情及融资资料。当前阶段整理事实与缺口，尚未接通模型分析结论。
+        - group [ref=f3e50]:
+          - generic "输入公司与研究问题" [ref=f3e51] [cursor=pointer]
+          - generic [ref=f3e52]:
+            - generic [ref=f3e53]:
+              - text: 公司名称或代码
+              - textbox "公司名称或代码" [ref=f3e54]:
+                - /placeholder: 如：中微公司、002371
+                - text: "000333"
+            - generic [ref=f3e55]:
+              - text: 要核查的问题
+              - textbox "要核查的问题" [active] [ref=f3e56]: 历史时点能否找到已经归档的经营和现金证据
+            - generic [ref=f3e57]:
+              - text: 资料时点
+              - combobox "资料时点" [ref=f3e58]:
+                - option "本次最新取证"
+                - option "历史归档核查" [selected]
+            - generic [ref=f3e81]:
+              - text: 截止时间（北京时间）
+              - textbox "截止时间（北京时间）" [ref=f3e82]
+            - button "开始取证" [disabled] [ref=f3e59]
+          - paragraph [ref=f3e60]: 最新取证在完成后封存资料时点；历史核查只读当时已取得的归档，不用今天抓取的旧报告补历史。
+      - generic [ref=f3e61]:
+        - heading "取证历史" [level=2] [ref=f3e62]
+        - link "北方华创 · 定向取证 取证完成 · 2026/10/12 15:27:40" [ref=f3e63] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-eb910e80af484329a14efd6b79983a2c"
+          - generic [ref=f3e64]: 北方华创 · 定向取证
+          - generic [ref=f3e65]: 取证完成 · 2026/10/12 15:27:40
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:26:33" [ref=f3e66] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb"
+          - generic [ref=f3e67]: 中微公司 · 定向取证
+          - generic [ref=f3e68]: 取证完成 · 2026/10/12 15:26:33
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:20:08" [ref=f3e69] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-e6094d8139244a56bb37c20b37c06fef"
+          - generic [ref=f3e70]: 中微公司 · 定向取证
+          - generic [ref=f3e71]: 取证完成 · 2026/10/12 15:20:08

@@ -1,0 +1,31 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - link "α AlphaAgent" [ref=f1e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f1e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f1e7]:
+      - link "工作台" [ref=f1e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f1e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f1e10] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换深色" [ref=f1e116] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f1e12]: ☾
+      - generic [ref=f1e13]: 深色
+  - main [ref=f1e14]:
+    - generic [ref=f1e15]:
+      - generic [ref=f1e16]:
+        - heading "下一交易日预测" [level=1] [ref=f1e530]
+        - navigation "查看内容" [ref=f1e19]:
+          - button "分析结果" [active] [pressed] [ref=f1e20] [cursor=pointer]
+          - button "开发验收" [ref=f1e21] [cursor=pointer]
+        - paragraph [ref=f1e531]: 查看预测方向、依据、反对理由和次日核对结果。
+      - generic [ref=f1e532]:
+        - generic [ref=f1e533]: 尚未签发
+        - heading "尚未生成预测" [level=2] [ref=f1e534]
+        - paragraph [ref=f1e535]: 中微公司（688012.SH）与北方华创（002371.SZ）目前还没有经过取数与审核的涨跌判断。
+        - paragraph [ref=f1e536]: 真实资料采集与模型审核接通后，这里会展示目标交易日、涨跌方向、支持与反对理由；目标日收盘后再核对结果。目前没有可展示的预测准确率。
+        - link "查看已有研究报告" [ref=f1e537] [cursor=pointer]:
+          - /url: "#/library"

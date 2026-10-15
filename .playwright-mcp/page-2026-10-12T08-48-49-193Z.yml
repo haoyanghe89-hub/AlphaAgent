@@ -1,0 +1,196 @@
+- generic [ref=f7e3]:
+  - banner [ref=f7e4]:
+    - link "α AlphaAgent" [ref=f7e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f7e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f7e7]:
+      - link "工作台" [ref=f7e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f7e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f7e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f7e11]:
+      - generic "腾讯报价时间：2026-10-12T16:14:00+08:00" [ref=f7e50]:
+        - generic [ref=f7e13]: 上证指数
+        - generic [ref=f7e14]: "3797.24"
+        - generic [ref=f7e15]: "-0.43%"
+      - generic "腾讯报价时间：2026-10-12T16:14:33+08:00" [ref=f7e51]:
+        - generic [ref=f7e17]: 深证成指
+        - generic [ref=f7e18]: "12384.87"
+        - generic [ref=f7e19]: "-2.03%"
+      - generic "腾讯报价时间：2026-10-12T16:14:48+08:00" [ref=f7e52]:
+        - generic [ref=f7e21]: 创业板指
+        - generic [ref=f7e22]: "2963.82"
+        - generic [ref=f7e23]: "-2.61%"
+      - generic "腾讯报价时间：2026-10-12T16:14:12+08:00" [ref=f7e53]:
+        - generic [ref=f7e25]: 沪深300
+        - generic [ref=f7e26]: "4287.98"
+        - generic [ref=f7e27]: "-0.68%"
+      - generic "腾讯报价时间：2026-10-12T16:14:12+08:00" [ref=f7e54]:
+        - generic [ref=f7e29]: 科创50
+        - generic [ref=f7e30]: "1426.72"
+        - generic [ref=f7e31]: "-2.1%"
+    - button "切换浅色" [active] [ref=f7e195] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f7e33]: ☀
+      - generic [ref=f7e34]: 浅色
+  - main [ref=f7e35]:
+    - generic [ref=f7e36]:
+      - generic [ref=f7e37]:
+        - generic [ref=f7e38]: ALPHAAGENT · 每日观察
+        - heading "下一交易日，怎么看" [level=1] [ref=f7e40]
+        - paragraph [ref=f7e41]: 明确的涨跌判断，以及支持它和可能推翻它的依据。
+        - generic [ref=f7e42]:
+          - button "生成下一交易日预测" [ref=f7e43] [cursor=pointer]
+          - generic [ref=f7e44]: 中微公司 · 北方华创
+        - paragraph [ref=f7e45]: 读取最新可核实资料后生成并保存。正式记录在交易日 20:00–20:15 签发；其他时间生成的结果单独作为探索记录。
+      - article [ref=f7e55]:
+        - generic [ref=f7e56]:
+          - generic [ref=f7e57]:
+            - heading "中微公司" [level=2] [ref=f7e58]
+            - text: 688012.SH
+          - generic [ref=f7e59]: 探索记录
+        - generic [ref=f7e60]:
+          - generic [ref=f7e61]: 2026-10-13 方向判断
+          - strong [ref=f7e62]: 看跌
+          - paragraph [ref=f7e63]: 基准日仅微幅收涨，但近五日与近二十日方向均向下，且近五日相对大盘明显偏弱，成交额近端也略低于中期均值，短线动能不足。综合看下一交易日方向偏向下行，但证据强度有限，标为较弱。
+        - paragraph [ref=f7e64]: 依据支持程度：较弱 · 2026/10/12 16:37:36 发布
+        - paragraph [ref=f7e65]: 短期机制是待验证的假设。日线价格与成交额不能确认买卖承接或资金意图。
+        - generic [ref=f7e66]:
+          - generic [ref=f7e67]:
+            - heading "为什么这样判断" [level=3] [ref=f7e68]
+            - list [ref=f7e69]:
+              - listitem [ref=f7e70]:
+                - paragraph [ref=f7e71]: 近五日与近二十日未复权价格变化方向均为向下，说明中期与短期价格动能整体偏弱，基准日的小幅收涨尚未扭转这一方向。
+                - paragraph [ref=f7e72]: 若短中期下行方向在下一交易日延续，价格可能继续承压；但若出现新的承接力量，方向也可能被扭转。
+                - button "查看依据 1 ↗" [ref=f7e73] [cursor=pointer]
+                - button "查看依据 2 ↗" [ref=f7e74] [cursor=pointer]
+                - button "查看依据 3 ↗" [ref=f7e75] [cursor=pointer]
+              - listitem [ref=f7e76]:
+                - paragraph [ref=f7e77]: 近五日相对上证指数的价格变化差为负，显示该股同期表现弱于大盘，相对弱势格局可能对下一交易日形成拖累。
+                - paragraph [ref=f7e78]: 若相对弱势在下一交易日延续，个股可能继续跑输大盘；若大盘走强带动补涨，则相对差可能收窄。
+                - button "查看依据 1 ↗" [ref=f7e79] [cursor=pointer]
+                - button "查看依据 2 ↗" [ref=f7e80] [cursor=pointer]
+              - listitem [ref=f7e81]:
+                - paragraph [ref=f7e82]: 近五日与二十日平均成交额之比略低于一，近端成交活跃度相对中期偏低，价格上行动能可能不足。
+                - paragraph [ref=f7e83]: 若成交额继续处于偏低水平，价格向上突破的难度可能较大；若成交明显放大，则方向判断需重新评估。
+                - button "查看依据 1 ↗" [ref=f7e84] [cursor=pointer]
+          - generic [ref=f7e85]:
+            - heading "什么可能推翻判断" [level=3] [ref=f7e86]
+            - generic [ref=f7e87]:
+              - paragraph [ref=f7e88]: 基准日行情涨跌幅为正，收盘价略高于行情参考价，说明当日仍以小幅收涨收尾，短线存在一定韧性，可能削弱继续下行的判断。
+              - paragraph [ref=f7e89]: 若基准日的微幅收涨在下一交易日转化为延续性买盘，价格可能止跌回稳甚至上行。
+              - button "查看反对依据 1 ↗" [ref=f7e90] [cursor=pointer]
+              - button "查看反对依据 2 ↗" [ref=f7e91] [cursor=pointer]
+              - button "查看反对依据 3 ↗" [ref=f7e92] [cursor=pointer]
+        - group [ref=f7e93]:
+          - generic "这份判断有哪些局限" [ref=f7e94] [cursor=pointer]
+        - generic [ref=f7e95]:
+          - strong [ref=f7e96]: 真实核对
+          - generic [ref=f7e97]: 等待目标日收盘
+          - generic [ref=f7e98]: 2026-10-13 收盘后核对
+      - article [ref=f7e99]:
+        - generic [ref=f7e100]:
+          - generic [ref=f7e101]:
+            - heading "北方华创" [level=2] [ref=f7e102]
+            - text: 002371.SZ
+          - generic [ref=f7e103]: 探索记录
+        - generic [ref=f7e104]:
+          - generic [ref=f7e105]: 2026-10-13 方向判断
+          - strong [ref=f7e106]: 看跌
+          - paragraph [ref=f7e107]: 基准日小幅收跌，近几个窗口的未复权价格方向均为下行，且相对大盘明显偏弱；成交额未放大，缺乏承接迹象。综合看下一交易日方向偏向下行，但证据强度有限，标为较弱。
+        - paragraph [ref=f7e108]: 依据支持程度：较弱 · 2026/10/12 16:38:31 发布
+        - paragraph [ref=f7e109]: 短期机制是待验证的假设。日线价格与成交额不能确认买卖承接或资金意图。
+        - generic [ref=f7e110]:
+          - generic [ref=f7e111]:
+            - heading "为什么这样判断" [level=3] [ref=f7e112]
+            - list [ref=f7e113]:
+              - listitem [ref=f7e114]:
+                - paragraph [ref=f7e115]: 基准日行情方向为下跌，近五个交易日与近二十个交易日的未复权价格变化方向同样为下行，多个窗口方向一致，短期动能偏弱。
+                - paragraph [ref=f7e116]: 若短期下行方向延续，次日开盘后可能仍有惯性卖压，价格或继续承压。
+                - button "查看依据 1 ↗" [ref=f7e117] [cursor=pointer]
+                - button "查看依据 2 ↗" [ref=f7e118] [cursor=pointer]
+                - button "查看依据 3 ↗" [ref=f7e119] [cursor=pointer]
+              - listitem [ref=f7e120]:
+                - paragraph [ref=f7e121]: 近五个交易日相对上证指数的价格变化差为负，说明该股在这段时间弱于大盘，相对弱势可能延续到下一交易日。
+                - paragraph [ref=f7e122]: 若相对弱势格局未改，次日该股可能继续跑输大盘，方向偏向下行。
+                - button "查看依据 1 ↗" [ref=f7e123] [cursor=pointer]
+                - button "查看依据 2 ↗" [ref=f7e124] [cursor=pointer]
+              - listitem [ref=f7e125]:
+                - paragraph [ref=f7e126]: 近五日与二十日平均成交额之比略低于一，成交额没有明显放大，缺乏放量承接的迹象，反弹动力不足。
+                - paragraph [ref=f7e127]: 若成交额维持温和水平，次日可能难以形成有效反攻，价格或延续偏弱震荡。
+                - button "查看依据 1 ↗" [ref=f7e128] [cursor=pointer]
+          - generic [ref=f7e129]:
+            - heading "什么可能推翻判断" [level=3] [ref=f7e130]
+            - generic [ref=f7e131]:
+              - paragraph [ref=f7e132]: 基准日收盘价低于行情参考价，且近二十日价格变化标准差显示波动幅度不小，单日方向存在反复可能，不能排除次日出现技术性反弹。
+              - paragraph [ref=f7e133]: 若次日出现超跌修复，价格可能短线回升，与下行判断相反。
+              - button "查看反对依据 1 ↗" [ref=f7e134] [cursor=pointer]
+              - button "查看反对依据 2 ↗" [ref=f7e135] [cursor=pointer]
+              - button "查看反对依据 3 ↗" [ref=f7e136] [cursor=pointer]
+        - group [ref=f7e137]:
+          - generic "这份判断有哪些局限" [ref=f7e138] [cursor=pointer]
+        - generic [ref=f7e139]:
+          - strong [ref=f7e140]: 真实核对
+          - generic [ref=f7e141]: 等待目标日收盘
+          - generic [ref=f7e142]: 2026-10-13 收盘后核对
+      - generic [ref=f7e143]:
+        - generic [ref=f7e144]:
+          - heading "目标日收盘后，回来看结果" [level=2] [ref=f7e145]
+          - button "核对真实结果" [ref=f7e146] [cursor=pointer]
+        - paragraph [ref=f7e147]: 系统只用真实目标日收盘与参考价核对。平盘记未命中；停牌不计分；数据缺失或来源冲突时继续等待。
+      - generic [ref=f7e148]:
+        - generic [ref=f7e149]:
+          - heading "判断经得起多少次验证" [level=2] [ref=f7e150]
+          - generic [ref=f7e151]: 持续观察
+        - paragraph [ref=f7e152]: 正式与探索分别统计。准确率按已取得真实结果的样本计算；同一天的两家公司不等于两次独立市场检验。
+        - generic [ref=f7e153]:
+          - generic [ref=f7e154]:
+            - strong [ref=f7e155]: "2"
+            - text: 计划正式预测
+          - generic [ref=f7e156]:
+            - strong [ref=f7e157]: "0"
+            - text: 已正式签发
+          - generic [ref=f7e158]:
+            - strong [ref=f7e159]: "0"
+            - text: 错过签发
+          - generic [ref=f7e160]:
+            - strong [ref=f7e161]: "0"
+            - text: 正式尝试失败
+        - article [ref=f7e162]:
+          - heading "探索组 · 16:00–16:59" [level=3] [ref=f7e163]
+          - paragraph [ref=f7e164]: 2 份判断 · 0 个已核对交易日
+          - generic [ref=f7e165]:
+            - strong [ref=f7e166]: —
+            - generic [ref=f7e167]: 准确率 · 0/0 命中
+          - table [ref=f7e169]:
+            - rowgroup [ref=f7e170]:
+              - row [ref=f7e171]:
+                - columnheader "同样本对照" [ref=f7e172]
+                - columnheader "准确率" [ref=f7e173]
+                - columnheader "命中 / 可计分" [ref=f7e174]
+            - rowgroup [ref=f7e175]:
+              - row [ref=f7e176]:
+                - cell "永远看涨" [ref=f7e177]
+                - cell "—" [ref=f7e178]
+                - cell "0 / 0" [ref=f7e179]
+              - row [ref=f7e180]:
+                - cell "永远看跌" [ref=f7e181]
+                - cell "—" [ref=f7e182]
+                - cell "0 / 0" [ref=f7e183]
+              - row [ref=f7e184]:
+                - cell "昨日方向延续" [ref=f7e185]
+                - cell "—" [ref=f7e186]
+                - cell "0 / 0" [ref=f7e187]
+          - paragraph [ref=f7e188]: 涨样本命中 — · 跌样本命中 — · 平衡准确率 —
+          - paragraph [ref=f7e189]: 等待收盘 2 · 等待行情 0 · 来源冲突 0 · 不可计分 0。观察结果仅供描述，预测能力尚未验证。
+      - generic [ref=f7e190]:
+        - heading "已保存的预测记录" [level=2] [ref=f7e191]
+        - link "2026-10-13 · 探索 2026/10/12 16:36:40 · 已结束 →" [ref=f7e192] [cursor=pointer]:
+          - /url: "#/decision/RUN-NS-1ad8f3b83db14f9f93b529f34f0fb77f"
+          - generic [ref=f7e193]: 2026-10-13 · 探索
+          - generic [ref=f7e194]: 2026/10/12 16:36:40 · 已结束 →
+    - paragraph [ref=f7e48]:
+      - link "开发者入口" [ref=f7e49] [cursor=pointer]:
+        - /url: /?review=p1n-user-acceptance&developer=1#/decision/RUN-NS-1ad8f3b83db14f9f93b529f34f0fb77f

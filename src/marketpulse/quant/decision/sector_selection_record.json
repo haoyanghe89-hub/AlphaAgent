@@ -1,0 +1,11 @@
+{
+  "selected_at": "2026-10-12T03:19:52.100513+00:00",
+  "data_cutoff": "2026-10-09T15:00:00+08:00",
+  "classification_version": "DEVELOPMENT_TOPIC_ONLY",
+  "coverage_ref": "docs/alphaagent-investment-methodology-and-semiconductor-research.md",
+  "ranking_method": "PROVISIONAL_TOPIC_SELECTION_NO_MARKET_RANK",
+  "metric_refs": [],
+  "chosen_scope": "semiconductor_equipment",
+  "selection_reason": "沿用已批准半导体设备开发样本；本次未取得同口径全市场20日分母与成分历史，不声称全市场最热。",
+  "provisional": true
+}

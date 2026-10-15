@@ -1,0 +1,279 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link "α AlphaAgent" [ref=e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=e7]:
+      - link "工作台" [ref=e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=e10] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换浅色" [ref=e472] [cursor=pointer]:
+      - generic [aria-hidden] [ref=e33]: ☀
+      - generic [ref=e34]: 浅色
+  - main [ref=e35]:
+    - generic [ref=e572]:
+      - generic [ref=e573]:
+        - generic [ref=e574]:
+          - generic [ref=e575]:
+            - generic [ref=e576]: P0 · 研究能力核查
+            - heading "研究判断与预测实验" [level=1] [ref=e577]
+          - button "重读能力台账" [ref=e578] [cursor=pointer]
+        - paragraph [ref=e579]: 先核对真实资料、方法与实验规则，再签发预测。这里展示开发探测记录，数据日期与读取时间分别标注。
+      - generic [ref=e580]:
+        - generic [ref=e581]:
+          - heading "01 下一交易日实验" [level=2] [ref=e582]
+          - generic [ref=e583]: 未开启 · P1-N 待接入
+        - paragraph [ref=e584]: 固定篮子：中微公司 688012.SH、北方华创 002371.SZ。交易日 20:00–20:15 封存并签发，Asia/Shanghai。
+        - paragraph [ref=e585]: 当前没有预测记录或真实准确率。窗口外预测将单列探索组；输入或审核失败保留记录；首个正式判断不可覆盖。
+        - generic [ref=e586]:
+          - generic [ref=e587]:
+            - strong [ref=e588]: 预测与核对
+            - paragraph [ref=e589]: 只预测涨 / 跌。次日用真实收盘价与交易所参考价核对；实际平盘在主准确率中算未命中。
+          - generic [ref=e590]:
+            - strong [ref=e591]: 同时展示三项基线
+            - paragraph [ref=e592]: 永远涨、永远跌、昨日方向延续。停牌、缺数据、冲突和未成熟分开记录。
+        - group [ref=e593]:
+          - generic "查看冻结的实验配置" [ref=e594] [cursor=pointer]
+      - generic [ref=e595]:
+        - generic [ref=e596]:
+          - heading "02 真实来源与覆盖" [level=2] [ref=e597]
+          - generic [ref=e598]: 实测快照
+        - paragraph [ref=e599]: 探测完成：2026/10/12 11:19:52。本页面刷新不重新请求行情。下列“已取得”指本次小样本；原始响应在本机归档，行业版权资料仅保留入口与方法笔记。
+        - generic [ref=e600]:
+          - group [ref=e601]:
+            - generic "WSTS 历史统计 S01 仅入口可读" [ref=e602] [cursor=pointer]:
+              - generic [ref=e603]:
+                - strong [ref=e604]: WSTS 历史统计
+                - generic [ref=e605]: S01
+              - generic [ref=e606]: 仅入口可读
+          - group [ref=e607]:
+            - generic "WSTS 预测与日程 S02 仅入口可读" [ref=e608] [cursor=pointer]:
+              - generic [ref=e609]:
+                - strong [ref=e610]: WSTS 预测与日程
+                - generic [ref=e611]: S02
+              - generic [ref=e612]: 仅入口可读
+          - group [ref=e613]:
+            - generic "SIA 市场统计 S03 仅入口可读" [ref=e614] [cursor=pointer]:
+              - generic [ref=e615]:
+                - strong [ref=e616]: SIA 市场统计
+                - generic [ref=e617]: S03
+              - generic [ref=e618]: 仅入口可读
+          - group [ref=e619]:
+            - generic "SEMI 市场研究 S04 本次未取得" [ref=e620] [cursor=pointer]:
+              - generic [ref=e621]:
+                - strong [ref=e622]: SEMI 市场研究
+                - generic [ref=e623]: S04
+              - generic [ref=e624]: 本次未取得
+          - group [ref=e625]:
+            - generic "SEMI Billings S05 本次未取得" [ref=e626] [cursor=pointer]:
+              - generic [ref=e627]:
+                - strong [ref=e628]: SEMI Billings
+                - generic [ref=e629]: S05
+              - generic [ref=e630]: 本次未取得
+          - group [ref=e631]:
+            - generic "中国半导体行业协会 S06 本次未取得" [ref=e632] [cursor=pointer]:
+              - generic [ref=e633]:
+                - strong [ref=e634]: 中国半导体行业协会
+                - generic [ref=e635]: S06
+              - generic [ref=e636]: 本次未取得
+          - group [ref=e637]:
+            - generic "巨潮披露入口 S10 本次未取得" [ref=e638] [cursor=pointer]:
+              - generic [ref=e639]:
+                - strong [ref=e640]: 巨潮披露入口
+                - generic [ref=e641]: S10
+              - generic [ref=e642]: 本次未取得
+          - group [ref=e643]:
+            - generic "上证 Level-2 S11 仅入口可读" [ref=e644] [cursor=pointer]:
+              - generic [ref=e645]:
+                - strong [ref=e646]: 上证 Level-2
+                - generic [ref=e647]: S11
+              - generic [ref=e648]: 仅入口可读
+          - group [ref=e649]:
+            - generic "中微公司2026半年报 S07 样本已取得" [ref=e650] [cursor=pointer]:
+              - generic [ref=e651]:
+                - strong [ref=e652]: 中微公司2026半年报
+                - generic [ref=e653]: S07
+              - generic [ref=e654]: 样本已取得
+          - group [ref=e655]:
+            - generic "北方华创2026半年报 S08 样本已取得" [ref=e656] [cursor=pointer]:
+              - generic [ref=e657]:
+                - strong [ref=e658]: 北方华创2026半年报
+                - generic [ref=e659]: S08
+              - generic [ref=e660]: 样本已取得
+          - group [ref=e661]:
+            - generic "中芯国际2026半年报 S09 样本已取得" [ref=e662] [cursor=pointer]:
+              - generic [ref=e663]:
+                - strong [ref=e664]: 中芯国际2026半年报
+                - generic [ref=e665]: S09
+              - generic [ref=e666]: 样本已取得
+          - group [ref=e667]:
+            - generic "两证券原始报价 quotes 部分核实" [ref=e668] [cursor=pointer]:
+              - generic [ref=e669]:
+                - strong [ref=e670]: 两证券原始报价
+                - generic [ref=e671]: quotes
+              - generic [ref=e672]: 部分核实
+          - group [ref=e673]:
+            - generic "688012动态身份 identity_688012 样本已取得" [ref=e674] [cursor=pointer]:
+              - generic [ref=e675]:
+                - strong [ref=e676]: 688012动态身份
+                - generic [ref=e677]: identity_688012
+              - generic [ref=e678]: 样本已取得
+          - group [ref=e679]:
+            - generic "688012公司资料 profile_688012 样本已取得" [ref=e680] [cursor=pointer]:
+              - generic [ref=e681]:
+                - strong [ref=e682]: 688012公司资料
+                - generic [ref=e683]: profile_688012
+              - generic [ref=e684]: 样本已取得
+          - group [ref=e685]:
+            - generic "688012原始日行情 daily_688012 样本已取得" [ref=e686] [cursor=pointer]:
+              - generic [ref=e687]:
+                - strong [ref=e688]: 688012原始日行情
+                - generic [ref=e689]: daily_688012
+              - generic [ref=e690]: 样本已取得
+          - group [ref=e691]:
+            - generic "688012融资融券序列 margin_688012 样本已取得" [ref=e692] [cursor=pointer]:
+              - generic [ref=e693]:
+                - strong [ref=e694]: 688012融资融券序列
+                - generic [ref=e695]: margin_688012
+              - generic [ref=e696]: 样本已取得
+          - group [ref=e697]:
+            - generic "688012供应商资金估算 flow_688012 样本已取得" [ref=e698] [cursor=pointer]:
+              - generic [ref=e699]:
+                - strong [ref=e700]: 688012供应商资金估算
+                - generic [ref=e701]: flow_688012
+              - generic [ref=e702]: 样本已取得
+          - group [ref=e703]:
+            - generic "002371动态身份 identity_002371 样本已取得" [ref=e704] [cursor=pointer]:
+              - generic [ref=e705]:
+                - strong [ref=e706]: 002371动态身份
+                - generic [ref=e707]: identity_002371
+              - generic [ref=e708]: 样本已取得
+          - group [ref=e709]:
+            - generic "002371公司资料 profile_002371 样本已取得" [ref=e710] [cursor=pointer]:
+              - generic [ref=e711]:
+                - strong [ref=e712]: 002371公司资料
+                - generic [ref=e713]: profile_002371
+              - generic [ref=e714]: 样本已取得
+          - group [ref=e715]:
+            - generic "002371原始日行情 daily_002371 样本已取得" [ref=e716] [cursor=pointer]:
+              - generic [ref=e717]:
+                - strong [ref=e718]: 002371原始日行情
+                - generic [ref=e719]: daily_002371
+              - generic [ref=e720]: 样本已取得
+          - group [ref=e721]:
+            - generic "002371融资融券序列 margin_002371 样本已取得" [ref=e722] [cursor=pointer]:
+              - generic [ref=e723]:
+                - strong [ref=e724]: 002371融资融券序列
+                - generic [ref=e725]: margin_002371
+              - generic [ref=e726]: 样本已取得
+          - group [ref=e727]:
+            - generic "002371供应商资金估算 flow_002371 样本已取得" [ref=e728] [cursor=pointer]:
+              - generic [ref=e729]:
+                - strong [ref=e730]: 002371供应商资金估算
+                - generic [ref=e731]: flow_002371
+              - generic [ref=e732]: 样本已取得
+          - group [ref=e733]:
+            - generic "同源行业目录（首100项探测） industry_members 部分核实" [ref=e734] [cursor=pointer]:
+              - generic [ref=e735]:
+                - strong [ref=e736]: 同源行业目录（首100项探测）
+                - generic [ref=e737]: industry_members
+              - generic [ref=e738]: 部分核实
+          - group [ref=e739]:
+            - generic "上交所ETF份额（2026-10-09） etf_shares 样本已取得" [ref=e740] [cursor=pointer]:
+              - generic [ref=e741]:
+                - strong [ref=e742]: 上交所ETF份额（2026-10-09）
+                - generic [ref=e743]: etf_shares
+              - generic [ref=e744]: 样本已取得
+          - group [ref=e745]:
+            - generic "512480 ETF单位净值 etf_nav 样本已取得" [ref=e746] [cursor=pointer]:
+              - generic [ref=e747]:
+                - strong [ref=e748]: 512480 ETF单位净值
+                - generic [ref=e749]: etf_nav
+              - generic [ref=e750]: 样本已取得
+          - group [ref=e751]:
+            - generic "BaoStock交易日历 calendar 部分核实" [ref=e752] [cursor=pointer]:
+              - generic [ref=e753]:
+                - strong [ref=e754]: BaoStock交易日历
+                - generic [ref=e755]: calendar
+              - generic [ref=e756]: 部分核实
+          - group [ref=e757]:
+            - generic "供应商半导体行业成员（非设备专属） semiconductor_members 本次未取得" [ref=e758] [cursor=pointer]:
+              - generic [ref=e759]:
+                - strong [ref=e760]: 供应商半导体行业成员（非设备专属）
+                - generic [ref=e761]: semiconductor_members
+              - generic [ref=e762]: 本次未取得
+      - generic [ref=e763]:
+        - generic [ref=e764]:
+          - heading "03 八张方法卡" [level=2] [ref=e765]
+          - generic [ref=e766]: AI方法审核 · 预测价值未验证
+        - group [ref=e767]:
+          - generic "M01 经营质量与增长质量 中期研究" [ref=e768] [cursor=pointer]:
+            - strong [ref=e769]: M01 经营质量与增长质量
+            - generic [ref=e770]: 中期研究
+        - group [ref=e771]:
+          - generic "M02 估值与预期差 中期研究" [ref=e772] [cursor=pointer]:
+            - strong [ref=e773]: M02 估值与预期差
+            - generic [ref=e774]: 中期研究
+        - group [ref=e775]:
+          - generic "M03 市场环境、趋势与拥挤 日频观察" [ref=e776] [cursor=pointer]:
+            - strong [ref=e777]: M03 市场环境、趋势与拥挤
+            - generic [ref=e778]: 日频观察
+        - group [ref=e779]:
+          - generic "M04 资金与价格交叉核查 日频观察" [ref=e780] [cursor=pointer]:
+            - strong [ref=e781]: M04 资金与价格交叉核查
+            - generic [ref=e782]: 日频观察
+        - group [ref=e783]:
+          - generic "M05 半导体周期与经营传导 中期研究" [ref=e784] [cursor=pointer]:
+            - strong [ref=e785]: M05 半导体周期与经营传导
+            - generic [ref=e786]: 中期研究
+        - group [ref=e787]:
+          - generic "M06 事件、行业与价格解释 日频观察" [ref=e788] [cursor=pointer]:
+            - strong [ref=e789]: M06 事件、行业与价格解释
+            - generic [ref=e790]: 日频观察
+        - group [ref=e791]:
+          - generic "M07 龙头候选与可比性 中期研究" [ref=e792] [cursor=pointer]:
+            - strong [ref=e793]: M07 龙头候选与可比性
+            - generic [ref=e794]: 中期研究
+        - group [ref=e795]:
+          - generic "M08 前瞻情景与撤回条件 中期研究" [ref=e796] [cursor=pointer]:
+            - strong [ref=e797]: M08 前瞻情景与撤回条件
+            - generic [ref=e798]: 中期研究
+      - generic [ref=e799]:
+        - heading "04 首行业与尚缺能力" [level=2] [ref=e800]
+        - paragraph [ref=e801]: 沿用已批准半导体设备开发样本；本次未取得同口径全市场20日分母与成分历史，不声称全市场最热。
+        - paragraph [ref=e802]: 开发选题 provisional=true；没有同口径完整20日市场分母与行业成分历史，热度排名关闭。
+        - generic [ref=e803]:
+          - generic [ref=e804]:
+            - strong [ref=e805]: 半导体设备
+            - paragraph [ref=e806]: 模板已配置，业务解释尚未启用
+            - text: P4领域门禁与真实材料验收
+          - generic [ref=e807]:
+            - strong [ref=e808]: 半导体制造
+            - paragraph [ref=e809]: 独立模板尚未建立
+            - text: P6独立模板与可比性验收
+          - generic [ref=e810]:
+            - strong [ref=e811]: 半导体封测
+            - paragraph [ref=e812]: 独立模板尚未建立
+            - text: 后续独立验收
+        - list [ref=e813]:
+          - listitem [ref=e814]: 来源表是有时间戳的实测快照；刷新本页面只重读台账，不冒充重新联网取数。
+          - listitem [ref=e815]: 八张方法卡为AI方法审核，未做外部专家审核；48例仅已登记，未完成48例模型评测。
+          - listitem [ref=e816]: P1定向取证和P1-N签发尚未交付；主实验关闭，无真实预测与准确率。
+          - listitem [ref=e817]: 两证券是实验篮子；开发选题不代表当前全市场热点排名。
+          - listitem [ref=e818]: 日行情活跃度、融资、ETF份额、供应商估算分别处理；缺Level-2则禁用订单簿方法。
+          - listitem [ref=e819]: 5.2历史档案与独立全收益门禁继续保留。
+      - generic [ref=e820]:
+        - generic [ref=e821]:
+          - heading "05 合同与48例验收清单" [level=2] [ref=e822]
+          - generic [ref=e823]: 仅已登记，未跑完模型评测
+        - paragraph [ref=e824]: 48 例：24基础 + 12领域 + 12日预测；开发 24 / 留出 24。合成夹具只验证软件门禁，不代表真实预测准确率。
+        - generic [ref=e825]:
+          - link "查看 / 保存 JSON 合同" [ref=e826] [cursor=pointer]:
+            - /url: /api/quant/decision/schema
+          - link "查看 / 保存48例JSON" [ref=e827] [cursor=pointer]:
+            - /url: /api/quant/decision/evaluation-cases
+          - button "展开48例清单" [ref=e828] [cursor=pointer]

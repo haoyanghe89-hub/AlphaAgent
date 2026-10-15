@@ -1,0 +1,84 @@
+- generic [ref=f35e3]:
+  - banner [ref=f35e4]:
+    - link "α AlphaAgent" [ref=f35e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f35e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f35e7]:
+      - link "工作台" [ref=f35e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f35e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f35e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f35e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f35e12]:
+      - generic "腾讯报价时间：2026-10-13T12:05:00+08:00" [ref=f35e130]:
+        - generic [ref=f35e14]: 上证指数
+        - generic [ref=f35e15]: "3787.16"
+        - generic [ref=f35e16]: "-0.27%"
+      - generic "腾讯报价时间：2026-10-13T12:05:42+08:00" [ref=f35e131]:
+        - generic [ref=f35e18]: 深证成指
+        - generic [ref=f35e19]: "12288.4"
+        - generic [ref=f35e20]: "-0.78%"
+      - generic "腾讯报价时间：2026-10-13T12:04:57+08:00" [ref=f35e132]:
+        - generic [ref=f35e22]: 创业板指
+        - generic [ref=f35e23]: "2935.54"
+        - generic [ref=f35e24]: "-0.95%"
+      - generic "腾讯报价时间：2026-10-13T12:05:00+08:00" [ref=f35e133]:
+        - generic [ref=f35e26]: 沪深300
+        - generic [ref=f35e27]: "4263.4"
+        - generic [ref=f35e28]: "-0.57%"
+      - generic "腾讯报价时间：2026-10-13T12:05:00+08:00" [ref=f35e134]:
+        - generic [ref=f35e30]: 科创50
+        - generic [ref=f35e31]: "1417.07"
+        - generic [ref=f35e32]: "-0.68%"
+    - button "切换浅色" [ref=f35e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f35e34]: ☀
+      - generic [ref=f35e35]: 浅色
+  - main [ref=f35e36]:
+    - navigation "选择研究期限" [ref=f35e136]:
+      - link "下一交易日" [ref=f35e137] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance#/decision
+      - link "未来一至三个月" [ref=f35e138] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance&research=1#/decision
+    - generic [ref=f35e139]:
+      - generic [ref=f35e140]:
+        - heading "未来几个月，倾向看多还是看空" [level=1] [ref=f35e142]
+        - paragraph [ref=f35e143]: 先给明确倾向，再看支持理由、反证和改变判断的条件。
+        - paragraph [ref=f35e144]: 正在读取已保存的研究…
+        - paragraph [ref=f35e145]: 重新读取公司披露后生成。已接入真实分渠道资金观察；行业传导与事件窗口也会核查，缺项明确保留。
+      - generic [ref=f35e146]:
+        - heading "已保存的中期研究" [level=2] [ref=f35e147]
+        - link "中微公司 2026/10/12 17:33:40" [ref=f35e148] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+          - generic [ref=f35e149]: 中微公司
+          - generic [ref=f35e150]: 2026/10/12 17:33:40
+        - link "中微公司 2026/10/12 17:41:58" [ref=f35e151] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-524b7656bbd94412af9ef8fcddb6de2a"
+          - generic [ref=f35e152]: 中微公司
+          - generic [ref=f35e153]: 2026/10/12 17:41:58
+        - link "中微公司 2026/10/12 21:39:12" [ref=f35e154] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-0513adf6a8bd4e8db149f024ee7db162"
+          - generic [ref=f35e155]: 中微公司
+          - generic [ref=f35e156]: 2026/10/12 21:39:12
+        - link "中微公司 2026/10/12 22:11:32" [ref=f35e157] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f4962c90264347459c20c284d43bdd4c"
+          - generic [ref=f35e158]: 中微公司
+          - generic [ref=f35e159]: 2026/10/12 22:11:32
+        - link "中微公司 2026/10/12 22:18:43" [ref=f35e160] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-f629ae223c6a41d0a5f5035cf8ad4795"
+          - generic [ref=f35e161]: 中微公司
+          - generic [ref=f35e162]: 2026/10/12 22:18:43
+        - link "中微公司 2026/10/13 09:58:49" [ref=f35e163] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-dfaeed1c8b6c4b30b2aa18d59db585d9"
+          - generic [ref=f35e164]: 中微公司
+          - generic [ref=f35e165]: 2026/10/13 09:58:49
+        - link "中微公司 2026/10/13 10:29:14" [ref=f35e166] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-529672d81d814125aa4459fa7ffd08c1"
+          - generic [ref=f35e167]: 中微公司
+          - generic [ref=f35e168]: 2026/10/13 10:29:14
+    - paragraph [ref=f35e170]:
+      - link "开发者入口" [ref=f35e171] [cursor=pointer]:
+        - /url: /?review=p4-user-acceptance&developer=1#/decision/RUN-DEC-d259103fe2f64d84a4e874dcecefbad2

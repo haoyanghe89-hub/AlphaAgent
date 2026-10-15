@@ -1,0 +1,37 @@
+- generic [ref=f2e3]:
+  - banner [ref=f2e4]:
+    - link "α AlphaAgent" [ref=f2e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f2e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f2e7]:
+      - link "工作台" [ref=f2e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f2e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f2e10] [cursor=pointer]:
+        - /url: "#/library"
+    - button "切换深色" [ref=f2e11] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f2e12]: ☾
+      - generic [ref=f2e13]: 深色
+  - main [ref=f2e14]:
+    - generic [ref=f2e15]:
+      - generic [ref=f2e16]:
+        - heading "单股研究与预测" [level=1] [ref=f2e18]
+        - navigation "查看内容" [ref=f2e19]:
+          - button "分析结果" [pressed] [ref=f2e20] [cursor=pointer]
+          - button "开发验收" [ref=f2e21] [cursor=pointer]
+        - paragraph [ref=f2e22]: 查看资料与依据；下一交易日预测接通后在顶部展示方向、理由和核对结果。
+        - status [ref=f2e23]: 正在读取功能状态…
+      - generic [ref=f2e24]:
+        - generic [ref=f2e25]:
+          - heading "单股定向取证" [level=2] [ref=f2e26]
+          - generic [ref=f2e27]: 资料与依据
+        - paragraph [ref=f2e28]: 输入公司和研究问题，取得相关原文、行情及融资资料。当前阶段整理事实与缺口，尚未接通模型分析结论。
+        - group [ref=f2e29]:
+          - generic "查看或调整取证条件" [ref=f2e30] [cursor=pointer]
+          - option "本次最新取证" [selected]
+          - option "历史归档核查"
+      - generic [ref=f2e31]:
+        - heading "取证历史" [level=2] [ref=f2e32]
+        - paragraph [ref=f2e33]: 正在读取…

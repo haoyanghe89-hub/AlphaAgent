@@ -1,0 +1,173 @@
+- generic [ref=f10e3]:
+  - banner [ref=f10e4]:
+    - link "α AlphaAgent" [ref=f10e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f10e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f10e7]:
+      - link "工作台" [ref=f10e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f10e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "明日预测" [ref=f10e10] [cursor=pointer]:
+        - /url: "#/decision"
+      - link "历史库" [ref=f10e11] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f10e12]:
+      - generic "无法连接服务：Failed to fetch" [ref=f10e174]:
+        - generic [ref=f10e14]: 上证指数
+        - generic [ref=f10e15]: —
+        - generic [ref=f10e16]: —
+      - generic "无法连接服务：Failed to fetch" [ref=f10e175]:
+        - generic [ref=f10e18]: 深证成指
+        - generic [ref=f10e19]: —
+        - generic [ref=f10e20]: —
+      - generic "无法连接服务：Failed to fetch" [ref=f10e176]:
+        - generic [ref=f10e22]: 创业板指
+        - generic [ref=f10e23]: —
+        - generic [ref=f10e24]: —
+      - generic "无法连接服务：Failed to fetch" [ref=f10e177]:
+        - generic [ref=f10e26]: 沪深300
+        - generic [ref=f10e27]: —
+        - generic [ref=f10e28]: —
+      - generic "无法连接服务：Failed to fetch" [ref=f10e178]:
+        - generic [ref=f10e30]: 科创50
+        - generic [ref=f10e31]: —
+        - generic [ref=f10e32]: —
+    - button "切换浅色" [ref=f10e33] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f10e34]: ☀
+      - generic [ref=f10e35]: 浅色
+  - main [ref=f10e36]:
+    - navigation "选择研究期限" [ref=f10e38]:
+      - link "下一交易日" [ref=f10e39] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance#/decision
+      - link "未来一至三个月" [ref=f10e40] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&research=1#/decision
+    - generic [ref=f10e41]:
+      - generic [ref=f10e42]:
+        - heading "未来几个月，值得关注什么" [level=1] [ref=f10e44]
+        - paragraph [ref=f10e45]: 看经营变化、反对理由，以及哪些事实会改变判断。
+        - generic [ref=f10e46]:
+          - generic [ref=f10e47]:
+            - text: 公司名称或代码
+            - textbox "公司名称或代码" [ref=f10e48]:
+              - /placeholder: 例如：中微公司或688012
+              - text: 中微公司
+          - generic [ref=f10e49]:
+            - text: 研究期限
+            - combobox "研究期限" [ref=f10e50]:
+              - option "未来一个月"
+              - option "未来两个月"
+              - option "未来三个月" [selected]
+          - button "开始研究" [ref=f10e67] [cursor=pointer]
+        - paragraph [ref=f10e52]: 重新读取公司披露后生成。资金分析、行业验证及候选比较将按后续阶段接入；资料不足时会收缩判断。
+      - paragraph [ref=f10e68]: 资料截止：2026/10/12 17:34:07。这是中期研究，与明日方向独立。
+      - article [ref=f10e69]:
+        - generic [ref=f10e70]:
+          - heading "中微公司" [level=2] [ref=f10e71]
+          - generic [ref=f10e72]: 未来 3 个月
+        - generic [ref=f10e73]:
+          - strong [ref=f10e74]: 暂无法判断
+          - generic [ref=f10e75]: 值得优先研究
+        - paragraph [ref=f10e76]: 现有片段仅含会计政策与风险提示，缺收入利润与现金数据，暂无法判断利润与收入是否一致。
+        - generic [ref=f10e77]:
+          - generic [ref=f10e78]:
+            - heading "经营变化，依据是什么" [level=3] [ref=f10e79]
+            - generic [ref=f10e80]:
+              - paragraph [ref=f10e81]: 当前片段仅含会计政策与风险提示，未见收入、利润或现金回收数据，无法判断利润与收入变化是否一致。
+              - paragraph [ref=f10e82]: 待验证：若后续披露收入与利润同步变化，则一致性成立；若不同步，可能由产品结构、价格、成本或费用节奏造成，需公司披露说明。
+              - button "查看依据 1 ↗" [ref=f10e83] [cursor=pointer]
+            - generic [ref=f10e84]:
+              - paragraph [ref=f10e85]: 公司披露提示人才流失与投资并购风险，若关键技术人员流失或投资项目不及预期，可能间接影响经营节奏。
+              - paragraph [ref=f10e86]: 若人才竞争加剧且公司未能提供有竞争力的平台与待遇，可能影响研发与交付；若投资标的受产业政策或市场变化影响，可能拖累利润。
+              - button "查看依据 1 ↗" [ref=f10e87] [cursor=pointer]
+            - generic [ref=f10e88]:
+              - paragraph [ref=f10e89]: 收盘价数据仅反映价格位置，不能用于推断经营改善或估值高低。
+              - paragraph [ref=f10e90]: 价格位置与经营表现相互独立，缺少一致预期与现金流输入时不得作估值归因。
+              - button "查看依据 1 ↗" [ref=f10e91] [cursor=pointer]
+          - generic [ref=f10e92]:
+            - heading "还要警惕什么" [level=3] [ref=f10e93]
+            - list [ref=f10e94]:
+              - listitem [ref=f10e95]: 片段未含任何收入、利润或现金流数据，无法支持方向性判断。
+              - listitem [ref=f10e96]: 风险提示为一般性表述，未量化对经营的实际影响。
+              - listitem [ref=f10e97]: 价格数据不能作为经营或估值依据。
+        - generic [ref=f10e98]:
+          - generic [ref=f10e99]:
+            - heading "价格位置" [level=3] [ref=f10e100]
+            - paragraph [ref=f10e101]: 已取得有限未复权收盘观察，尚未计算价格分位。
+          - generic [ref=f10e102]:
+            - heading "估值与预期差" [level=3] [ref=f10e103]
+            - paragraph [ref=f10e104]: 缺少可核对的估值基准，暂无法判断。
+            - paragraph [ref=f10e105]: 缺可靠一致预期、规范化现金流及固定假设；本次无法判断超预期或估值高低。
+      - generic [ref=f10e106]:
+        - heading "接下来，什么会改变判断" [level=2] [ref=f10e107]
+        - generic [ref=f10e108]:
+          - generic [ref=f10e109]:
+            - heading "继续观察" [level=3] [ref=f10e110]
+            - list [ref=f10e111]:
+              - listitem [ref=f10e112]: 查阅半年度利润表与收入构成
+              - listitem [ref=f10e113]: 查阅现金流量表与应收存货明细
+              - listitem [ref=f10e114]: 查阅公司对经营差异的说明
+            - paragraph [ref=f10e115]: 关注：公司披露半年度收入与利润数据；公司披露经营现金流与应收存货变动；公司披露订单交付或验收节奏信息。具体披露日尚未确认。
+          - generic [ref=f10e116]:
+            - heading "重新评估的条件" [level=3] [ref=f10e117]
+            - list [ref=f10e118]:
+              - listitem [ref=f10e119]: 若后续披露显示收入与利润同步且现金回收匹配，则当前不确定判断需修订。
+              - listitem [ref=f10e120]: 若公司披露明确差异原因且可核查，则待验证机制可升级或删除。
+      - generic [ref=f10e121]:
+        - heading "三种可能的走向" [level=2] [ref=f10e122]
+        - generic [ref=f10e123]:
+          - generic [ref=f10e124]:
+            - heading "基准情景" [level=3] [ref=f10e125]
+            - paragraph [ref=f10e126]: 若公司披露收入与利润同步变化且现金回收匹配，则经营一致性可初步确认。
+            - list [ref=f10e127]:
+              - listitem [ref=f10e128]: 公司披露收入与利润同比方向一致
+              - listitem [ref=f10e129]: 经营现金流与收入确认节奏匹配
+          - generic [ref=f10e130]:
+            - heading "改善情景" [level=3] [ref=f10e131]
+            - paragraph [ref=f10e132]: 若公司披露收入增长且现金回收改善，则经营质量可能好于当前未知状态。
+            - list [ref=f10e133]:
+              - listitem [ref=f10e134]: 收入同比增长
+              - listitem [ref=f10e135]: 应收账款周转改善或存货下降
+          - generic [ref=f10e136]:
+            - heading "恶化情景" [level=3] [ref=f10e137]
+            - paragraph [ref=f10e138]: 若公司披露利润与收入背离且现金回收恶化，则经营质量可能承压。
+            - list [ref=f10e139]:
+              - listitem [ref=f10e140]: 利润下滑而收入增长
+              - listitem [ref=f10e141]: 应收账款或存货显著上升
+        - paragraph [ref=f10e142]: 这些是有条件的情景，尚无校准概率；经营变化与股价方向仍可能分歧。
+      - group [ref=f10e143]:
+        - generic "这份研究的范围与局限" [ref=f10e144] [cursor=pointer]
+      - generic [ref=f10e145]:
+        - generic [ref=f10e146]:
+          - heading "保存观点，等待事实检验" [level=2] [ref=f10e147]
+          - button "查看当前观察结果" [ref=f10e148] [cursor=pointer]
+        - paragraph [ref=f10e149]: 2026/10/12 17:34:19 发布。原观点保留，更新研究将另存一份；未到期不显示实现收益。
+        - generic [ref=f10e150]:
+          - generic [ref=f10e151]:
+            - heading "20 个交易日" [level=3] [ref=f10e152]
+            - paragraph [ref=f10e153]: 观察日 2026-11-09
+            - strong [ref=f10e154]: 等待观察
+          - generic [ref=f10e155]:
+            - heading "40 个交易日" [level=3] [ref=f10e156]
+            - paragraph [ref=f10e157]: 观察日 2026-12-07
+            - strong [ref=f10e158]: 等待观察
+          - generic [ref=f10e159]:
+            - heading "60 个交易日" [level=3] [ref=f10e160]
+            - paragraph [ref=f10e161]: 观察日待核定
+            - strong [ref=f10e162]: 等待观察
+            - paragraph [ref=f10e163]: 尚缺下一年度核定交易日历，不猜到期日期。
+        - paragraph [ref=f10e164]: 当前按未复权价格观察；行业基准尚缺，未完成全收益独立核对，不能当作正式策略绩效。经营催化是否兑现还需实际披露。
+        - group [ref=f10e165]:
+          - generic "查看最初观点与后续版本（1）" [ref=f10e166] [cursor=pointer]
+      - generic [ref=f10e167]:
+        - heading "有新披露时，再检查一次" [level=2] [ref=f10e168]
+        - paragraph [ref=f10e169]: 更新会重新取数、另存观点；最初判断和当时依据继续保留。
+        - button "更新这家公司研究" [ref=f10e170] [cursor=pointer]
+      - generic [ref=f10e171]:
+        - heading "已保存的中期研究" [level=2] [ref=f10e172]
+        - link "中微公司2026/10/12 17:33:40" [ref=f10e173] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2"
+    - paragraph [ref=f10e54]:
+      - link "开发者入口" [ref=f10e55] [cursor=pointer]:
+        - /url: /?review=p2-user-acceptance&developer=1#/decision/RUN-DEC-cdca62871c8a4a17883e8ad26efa2ba2

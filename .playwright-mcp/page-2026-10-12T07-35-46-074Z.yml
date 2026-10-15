@@ -1,0 +1,73 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - link "α AlphaAgent" [ref=f5e5] [cursor=pointer]:
+      - /url: "#/"
+      - generic [ref=f5e6]: α
+      - text: AlphaAgent
+    - navigation "主导航" [ref=f5e7]:
+      - link "工作台" [ref=f5e8] [cursor=pointer]:
+        - /url: "#/"
+      - link "策略回测" [ref=f5e9] [cursor=pointer]:
+        - /url: "#/strategy"
+      - link "历史库" [ref=f5e10] [cursor=pointer]:
+        - /url: "#/library"
+    - generic "指数行情" [ref=f5e11]:
+      - generic "行情读取中" [ref=f5e12]:
+        - generic [ref=f5e13]: 上证指数
+        - generic [ref=f5e14]: —
+        - generic [ref=f5e15]: —
+      - generic "行情读取中" [ref=f5e16]:
+        - generic [ref=f5e17]: 深证成指
+        - generic [ref=f5e18]: —
+        - generic [ref=f5e19]: —
+      - generic "行情读取中" [ref=f5e20]:
+        - generic [ref=f5e21]: 创业板指
+        - generic [ref=f5e22]: —
+        - generic [ref=f5e23]: —
+      - generic "行情读取中" [ref=f5e24]:
+        - generic [ref=f5e25]: 沪深300
+        - generic [ref=f5e26]: —
+        - generic [ref=f5e27]: —
+      - generic "行情读取中" [ref=f5e28]:
+        - generic [ref=f5e29]: 科创50
+        - generic [ref=f5e30]: —
+        - generic [ref=f5e31]: —
+    - button "切换深色" [ref=f5e32] [cursor=pointer]:
+      - generic [aria-hidden] [ref=f5e33]: ☾
+      - generic [ref=f5e34]: 深色
+  - main [ref=f5e35]:
+    - generic [ref=f5e36]:
+      - generic [ref=f5e37]:
+        - heading "单股研究与预测" [level=1] [ref=f5e39]
+        - navigation "查看内容" [ref=f5e40]:
+          - button "分析结果" [pressed] [ref=f5e41] [cursor=pointer]
+          - button "开发验收" [ref=f5e42] [cursor=pointer]
+        - paragraph [ref=f5e43]: 查看资料与依据；下一交易日预测接通后在顶部展示方向、理由和核对结果。
+        - status [ref=f5e44]: 正在读取功能状态…
+      - generic [ref=f5e45]:
+        - generic [ref=f5e46]:
+          - heading "单股定向取证" [level=2] [ref=f5e47]
+          - generic [ref=f5e48]: 资料与依据
+        - paragraph [ref=f5e49]: 输入公司和研究问题，取得相关原文、行情及融资资料。当前阶段整理事实与缺口，尚未接通模型分析结论。
+        - group [ref=f5e50]:
+          - generic "查看或调整取证条件" [ref=f5e51] [cursor=pointer]
+          - option "本次最新取证" [selected]
+          - option "历史归档核查"
+      - generic [ref=f5e52]:
+        - heading "取证历史" [level=2] [ref=f5e53]
+        - link "000333 · 定向取证 取证完成 · 2026/10/12 15:31:42" [ref=f5e54] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-7e4daf346ca64feca3045284b122b2d5"
+          - generic [ref=f5e55]: 000333 · 定向取证
+          - generic [ref=f5e56]: 取证完成 · 2026/10/12 15:31:42
+        - link "北方华创 · 定向取证 取证完成 · 2026/10/12 15:27:40" [ref=f5e57] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-eb910e80af484329a14efd6b79983a2c"
+          - generic [ref=f5e58]: 北方华创 · 定向取证
+          - generic [ref=f5e59]: 取证完成 · 2026/10/12 15:27:40
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:26:33" [ref=f5e60] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-1fb350e72b834bd9a1c0877ef601d6cb"
+          - generic [ref=f5e61]: 中微公司 · 定向取证
+          - generic [ref=f5e62]: 取证完成 · 2026/10/12 15:26:33
+        - link "中微公司 · 定向取证 取证完成 · 2026/10/12 15:20:08" [ref=f5e63] [cursor=pointer]:
+          - /url: "#/decision/RUN-DEC-e6094d8139244a56bb37c20b37c06fef"
+          - generic [ref=f5e64]: 中微公司 · 定向取证
+          - generic [ref=f5e65]: 取证完成 · 2026/10/12 15:20:08
