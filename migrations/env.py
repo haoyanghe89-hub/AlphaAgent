@@ -6,6 +6,7 @@ from alembic import context
 
 from marketpulse.investigation.persistence import models as investigation_models  # noqa: F401
 from marketpulse.investigation.persistence.base import Base, create_investigation_engine
+from marketpulse.quant.knowledge import models as knowledge_models  # noqa: F401
 from marketpulse.quant.storage import models as quant_models  # noqa: F401
 
 config = context.config

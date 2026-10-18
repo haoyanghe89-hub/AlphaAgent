@@ -1,8 +1,33 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import {workbenchIntent,decisionConditions} from '../src/alpha/workbenchIntent.js'
+import {workbenchIntent,decisionConditions,investmentEntities,investmentDraft} from '../src/alpha/workbenchIntent.js'
 import {nextSessionChartBlocks,accuracyChartBlock,marketChartBlocks,candidateChartBlocks} from '../src/utils/decisionChartOptions.js'
 import {prototypeOptions} from '../src/utils/prototypeChartOptions.js'
+
+test('investment questions preserve stock names including embedded command characters',()=>{
+  for(const text of ['美的集团投资计划','请帮我生成美的集团的投资计划','投资计划 美的集团']) assert.equal(investmentEntities(text),'美的集团')
+  assert.equal(investmentEntities('请制定 美的集团 600036 的资金安排'),'美的集团 600036')
+})
+
+test('a natural investment request carries verified names and the stated horizon to the form',async()=>{
+  const names=['美的集团','招商银行','和而泰','同和药业']
+  const search=async q=>names.filter(name=>name===q).map(name=>({name}))
+  assert.deepEqual(await investmentDraft('请为美的集团和招商银行制定未来三个月的投资计划',search),{entities:'美的集团 招商银行',horizon:'MEDIUM',horizon_sessions:60})
+  assert.deepEqual(await investmentDraft('请给和而泰和同和药业生成波段投资计划',search),{entities:'和而泰 同和药业',horizon:'SWING',horizon_sessions:20})
+  assert.equal((await investmentDraft('同和药业投资计划',search)).entities,'同和药业')
+})
+
+test('directory suggestions never invent a replacement company and lookup errors remain explicit',async()=>{
+  const draft=await investmentDraft('同和药业投资计划',async()=>[{name:'同花顺'}])
+  assert.equal(draft.entities,'同和药业')
+  await assert.rejects(investmentDraft('美的集团和招商银行投资计划',async()=>{throw Error('证券目录连接失败')}),/证券目录连接失败/)
+})
+
+test('joined-name lookup stays bounded even for an oversized question',async()=>{
+  let calls=0
+  await investmentDraft(Array(15).fill('同和药业').join('和')+'投资计划',async name=>{calls++;return name==='同和药业'?[{name}]:[]})
+  assert.ok(calls<=16)
+})
 
 test('workbench routes four questions and a selected bare stock',()=>{
   for(const text of ['贵州茅台明日预测','明日预测 贵州茅台','预测贵州茅台下一交易日涨跌','贵州茅台明天会涨吗','明天预测一下贵州茅台','贵州茅台明天是涨还是跌'])assert.deepEqual(workbenchIntent(text,'market'),{mode:'next',entity:'贵州茅台',question:text})

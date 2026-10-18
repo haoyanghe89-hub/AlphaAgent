@@ -27,9 +27,17 @@ class RateLimitedError(ExternalCallError):
 class InvalidProviderResponseError(ExternalCallError):
     code = "INVALID_RESPONSE"
 
-    def __init__(self, message: str, *, validation_issues: tuple[str, ...] = ()) -> None:
+    def __init__(
+        self,
+        message: str,
+        *,
+        validation_issues: tuple[str, ...] = (),
+        input_tokens: int | None = None,
+        output_tokens: int | None = None,
+    ) -> None:
         super().__init__(message)
         self.validation_issues = validation_issues
+        self.input_tokens, self.output_tokens = input_tokens, output_tokens
 
 
 class ModelOutputTruncatedError(InvalidProviderResponseError):

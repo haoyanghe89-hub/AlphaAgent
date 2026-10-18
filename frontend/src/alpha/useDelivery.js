@@ -45,6 +45,11 @@ export function comparisonEntities(question) {
 }
 
 export function deliveryPage(item) {
+  if (item.scenario === 'portfolio_advisor') return 'portfolio-advisor'
+  if (item.scenario === 'holding_advisor') return 'holding-advisor'
+  if (item.scenario === 'morning_brief') return 'morning'
+  if (item.scenario === 'investment_research') return 'investment-research'
+  if (item.scenario === 'investment') return 'investment'
   if (item.scenario === 'next_session') return 'decision'
   if (item.scenario === 'decision') return item.page || 'decision'
   return item.scenario === 'compare_live' ? 'compare' : item.scenario === 'strategy' ? 'strategy'

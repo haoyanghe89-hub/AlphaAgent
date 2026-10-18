@@ -1,5 +1,6 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import request from '../api/request.js'
+import {postSavedTask} from '../api/savedTask.js'
 
 export const nextSessionRoot = '/quant/decision/experiments/next-session'
 export function createNextSessionPrediction(id, { api=request, navigate=rid => { window.location.hash='#/decision/'+rid }, developer=false }={}) {
@@ -18,8 +19,10 @@ export function createNextSessionPrediction(id, { api=request, navigate=rid => {
       if(active())timer=setTimeout(refresh,2000)
     }catch(e){
       if(disposed || ticket!==generation)return
-      state.value=null;scoreboard.value=null;error.value=e.message
-      if(!e.status || e.status>=500)timer=setTimeout(refresh,4000)
+      if(e.status===0 || e.status>=500){
+        error.value='连接暂时中断，正在自动重连；已保存预测保留。'+e.message
+        timer=setTimeout(refresh,4000)
+      }else{state.value=null;scoreboard.value=null;error.value=e.message}
     }
   }
   async function start(entity) {
@@ -30,7 +33,8 @@ export function createNextSessionPrediction(id, { api=request, navigate=rid => {
       const selection = typeof entity==='string' ? entity.trim() : ''
       if ((pending?.entity || '') !== selection) pending=null
       pending ||= {request_key:crypto.randomUUID(),experiment_id:status.value?.experiment_id || 'ALPHA_NEXT_SESSION_V1',...(selection?{entity:selection,exploratory:true}:{})}
-      const run=await api(nextSessionRoot+'/runs',{method:'POST',body:JSON.stringify(pending),timeoutMs:45000})
+      const options={method:'POST',body:JSON.stringify(pending),timeoutMs:45000}
+      const run=await postSavedTask(api,nextSessionRoot+'/runs',options,{disposed:()=>disposed,waiting:m=>{error.value=m}})
       if(!disposed){pending=null;navigate(run.run_id)}
     }catch(e){if(!disposed)error.value=e.message}
     finally{if(!disposed)busy.value=false}

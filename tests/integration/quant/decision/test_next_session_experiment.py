@@ -259,6 +259,29 @@ def test_e08_missing_input_keeps_both_failed_attempts(repo, monkeypatch):
     assert all(repo.record(a)["state"] == "FAILED_INPUT" for a in final["attempt_ids"])
 
 
+def test_no_issued_prediction_is_failed_instead_of_empty_success(repo, monkeypatch):
+    config = activate(repo)
+    state, _ = repo.create_run(
+        dict(request_key=str(uuid4()), experiment_id=config["experiment_id"], exploratory=True),
+        config,
+        "synthetic",
+    )
+    monkeypatch.setattr(
+        service, "load_calendar", lambda _client, exchange, _year: calendar(exchange)
+    )
+    monkeypatch.setattr(
+        service, "build_snapshot", lambda *_: (_ for _ in ()).throw(ValueError("合成日线来源失败"))
+    )
+    asyncio.run(
+        service.run(
+            repo, state["run_id"], SimpleNamespace(model="synthetic-model"), Event(), port=object()
+        )
+    )
+    final = repo.get_run(state["run_id"])
+    assert final["status"] == "FAILED" and final["prediction_ids"] == []
+    assert len(final["attempt_ids"]) == 2
+
+
 def test_e11_versions_and_cohorts_are_not_pooled(repo):
     activate(repo)
     for model, cohort in [("synthetic-model", "PRIMARY"), ("other-model", "EXPLORATORY")]:

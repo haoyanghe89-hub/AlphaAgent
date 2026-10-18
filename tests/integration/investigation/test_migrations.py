@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from alembic import command
 from alembic.config import Config
 from sqlalchemy import create_engine, inspect, text
@@ -71,7 +72,9 @@ def test_upgrade_and_downgrade_preserve_legacy_schema(tmp_path: Path) -> None:
     engine.dispose()
 
     config = _config(url)
-    command.upgrade(config, "head")
+    # The original business schema remains reversible. Knowledge migrations
+    # deliberately refuse destructive downgrades and are tested separately.
+    command.upgrade(config, "20261012_11")
 
     engine = create_engine(url)
     inspector = inspect(engine)
@@ -156,4 +159,33 @@ def test_upgrade_and_downgrade_preserve_legacy_schema(tmp_path: Path) -> None:
     remaining = set(inspect(engine).get_table_names())
     assert "mp_runs" in remaining
     assert not (EXPECTED_TABLES & remaining)
+    engine.dispose()
+
+
+def test_knowledge_head_preserves_legacy_and_refuses_destructive_downgrade(tmp_path):
+    url = "sqlite:///" + (tmp_path / "knowledge-migration.db").as_posix()
+    engine = create_engine(url)
+    with engine.begin() as connection:
+        connection.execute(text("CREATE TABLE mp_runs (run_id VARCHAR(100) PRIMARY KEY)"))
+        connection.execute(text("INSERT INTO mp_runs VALUES ('legacy-run')"))
+    config = _config(url)
+    command.upgrade(config, "head")
+    tables = set(inspect(engine).get_table_names())
+    assert EXPECTED_TABLES <= tables
+    assert {
+        "inv_quant_knowledge_document",
+        "inv_quant_knowledge_rule",
+        "inv_quant_knowledge_supplement",
+        "inv_quant_knowledge_supplement_decision",
+    } <= tables
+    assert {
+        fk["referred_table"]
+        for fk in inspect(engine).get_foreign_keys("inv_quant_knowledge_supplement_decision")
+    } == {"inv_quant_knowledge_supplement"}
+    with pytest.raises(RuntimeError, match="immutable"):
+        command.downgrade(config, "base")
+    with engine.connect() as connection:
+        assert connection.scalar(text("SELECT run_id FROM mp_runs")) == "legacy-run"
+        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "20261016_15"
+    assert tables == set(inspect(engine).get_table_names())
     engine.dispose()

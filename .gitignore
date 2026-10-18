@@ -14,6 +14,7 @@ node_modules/
 build/
 *.egg-info/
 .env
+/alphaagent.local.json
 .env.*
 !.env.example
 /data/
@@ -23,6 +24,7 @@ logs/
 
 /backups/
 /restore-drills/
+/.playwright-mcp/
 
 # Local duplicate checkout and runtime artifacts.
 /Search-Report/

@@ -3,6 +3,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useDelivery, comparisonEntities } from './useDelivery.js'
 import PrototypeChart from './PrototypeChart.vue'
 import { number, dateTime } from './model.js'
+const developer = new URLSearchParams(location.search).get('developer') === '1'
 const props = defineProps({ id:String })
 const emit = defineEmits(['started'])
 const left = ref(''), right = ref(''), selected = ref(null), evidenceDialog = ref(null)
@@ -31,11 +32,11 @@ const label = { ALIGNED:'口径对齐', UNAVAILABLE:'缺少数据', METHOD_DIFFE
       <div class="bt-field"><label for="compare-left">第一只股票</label><input id="compare-left" v-model="left" placeholder="例如：美的集团 / 000333" maxlength="80" required /></div>
       <div class="bt-field"><label for="compare-right">第二只股票</label><input id="compare-right" v-model="right" placeholder="例如：格力电器 / 000651" maxlength="80" required /></div>
       <div class="bt-actions"><button class="btn btn-primary" :disabled="busy || data?.status === 'RUNNING' || !left.trim() || !right.trim()">开始最新对比</button></div>
-    </form><p class="condition-note">双方分别运行 Planner → Data → Analyst → Verifier → Writer；同一请求时间不代表原子同步行情，结果逐模块标注实际日期。</p>
+    </form><p class="condition-note">双方分别读取并核对最新资料，结果按实际数据日期对照。</p>
     <p v-if="error || data?.error" class="error-text" role="alert">{{ error || data.error }}</p>
     <div v-if="data" class="bt-actions"><span class="tag">{{ {RUNNING:'研究进行中',COMPLETED:'比较报告已生成',FAILED:'比较未完成',INTERRUPTED:'研究中断'}[data.status] || data.status }}</span><button class="btn" @click="load(data.run_id)">刷新状态</button><button v-if="['FAILED','INTERRUPTED'].includes(data.status)" class="btn btn-primary" :disabled="busy" @click="resume(data.run_id)">继续未完成部分</button><a class="btn" :href="'/api/quant/deliveries/' + data.run_id + '/export'" download="comparison.json">导出记录与依据</a></div>
   </section>
-  <section v-if="data?.branches?.length" class="panel rep-section" style="margin-top:20px"><h2>双方研究过程</h2><div v-for="b in data.branches" :key="b.run_id" class="bt-check-item"><div><a :href="'#/live/' + b.run_id">{{ b.subject?.name || '证券确认中' }} · 查看完整研究 →</a><span class="tag">{{ b.status }}</span></div><p>{{ b.process?.map(p => p.role + ' ' + p.status).join(' → ') }}</p><p v-if="b.error" class="error-text">{{ b.error }}</p></div></section>
+  <section v-if="developer && data?.branches?.length" class="panel rep-section" style="margin-top:20px"><h2>双方研究过程</h2><div v-for="b in data.branches" :key="b.run_id" class="bt-check-item"><div><a :href="'#/live/' + b.run_id">{{ b.subject?.name || '证券确认中' }} · 查看完整研究 →</a><span class="tag">{{ b.status }}</span></div><p>{{ b.process?.map(p => p.role + ' ' + p.status).join(' → ') }}</p><p v-if="b.error" class="error-text">{{ b.error }}</p></div></section>
   <div v-if="data?.data" class="report-grid comparison-report" style="margin-top:20px">
     <aside class="report-rail"><div class="panel rail-box"><div class="section-title">比较信息</div><div v-for="s in data.data.subjects" :key="s.run_id" class="bt-check-item"><a :href="'#/live/' + s.run_id">{{ s.subject.name }}（{{ s.subject.code }}）</a><p>{{ s.subject.industry }}</p><p>财报 {{ s.data_dates.financial || '—' }}<br />价格 {{ s.data_dates.price || '—' }}</p></div><p class="small muted">请求 {{ dateTime(data.created_at) }}</p></div></aside>
     <article class="report-main"><h1 class="rep-h1">{{ data.title }}</h1>
@@ -47,5 +48,5 @@ const label = { ALIGNED:'口径对齐', UNAVAILABLE:'缺少数据', METHOD_DIFFE
       <div class="disclaimer">本工具为投研参考，不构成投资建议；历史数据不代表未来表现。</div>
     </article>
   </div>
-<dialog v-if="selected" ref="evidenceDialog" class="scope-dialog live-source-dialog" aria-label="比较数值依据" @close="selected = null"><div class="dialog-head"><h2>{{ selected.subject.subject.name }} · {{ selected.cell.name }}</h2><button class="icon-button" aria-label="关闭比较依据" @click="evidenceDialog.close()">×</button></div><p class="ev-num num">{{ number(selected.cell.value,6) }} {{ selected.cell.unit }}</p><p>指标日期：{{ selected.date }} · 尚未完成官方独立核验</p><p>{{ selected.fact?.text }}</p><p class="small muted">定位 {{ selected.fact?.locator || selected.cell.name }}</p><div v-for="s in selected.sources" :key="s.key" class="bt-check-item"><strong>{{ s.key }}</strong><p>获取 {{ dateTime(s.retrieved_at) }}</p><p class="num live-hash">SHA256 {{ s.sha256 }}</p><a :href="s.url" target="_blank" rel="noopener">打开上游来源</a></div><a :href="'#/live/' + selected.subject.run_id">查看公式、交叉核对和完整研究 →</a></dialog>
+<dialog v-if="selected" ref="evidenceDialog" class="scope-dialog live-source-dialog" aria-label="比较数值依据" @close="selected = null"><div class="dialog-head"><h2>{{ selected.subject.subject.name }} · {{ selected.cell.name }}</h2><button class="icon-button" aria-label="关闭比较依据" @click="evidenceDialog.close()">×</button></div><p class="ev-num num">{{ number(selected.cell.value,6) }} {{ selected.cell.unit }}</p><p>指标日期：{{ selected.date }} · 尚未完成官方独立核验</p><p>{{ selected.fact?.text }}</p><p class="small muted">定位 {{ selected.fact?.locator || selected.cell.name }}</p><div v-for="s in selected.sources" :key="s.key" class="bt-check-item"><strong>{{ s.key }}</strong><p>获取 {{ dateTime(s.retrieved_at) }}</p><p v-if="developer" class="num live-hash">SHA256 {{ s.sha256 }}</p><a :href="s.url" target="_blank" rel="noopener">打开上游来源</a></div><a :href="'#/live/' + selected.subject.run_id">查看公式、交叉核对和完整研究 →</a></dialog>
 </div></template>

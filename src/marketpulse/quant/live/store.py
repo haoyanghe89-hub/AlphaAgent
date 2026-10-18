@@ -102,6 +102,11 @@ class ResearchStore:
                 else query.where(
                     ~ResearchRunRow.run_id.like("RUN-DEC-%"),
                     ~ResearchRunRow.run_id.like("RUN-NS-%"),
+                    ~ResearchRunRow.run_id.like("RUN-IP-%"),
+                    ~ResearchRunRow.run_id.like("RUN-IR-%"),
+                    ~ResearchRunRow.run_id.like("RUN-MB-%"),
+                    ~ResearchRunRow.run_id.like("RUN-HA-%"),
+                    ~ResearchRunRow.run_id.like("RUN-PA-%"),
                     ~ResearchRunRow.run_id.like("DEC-%"),
                 )
             )

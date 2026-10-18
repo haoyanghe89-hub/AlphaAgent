@@ -87,9 +87,7 @@ class OpenAICompatibleModelAdapter:
         if request.max_output_tokens is not None:
             kwargs["max_tokens"] = request.max_output_tokens
         if thinking is not None and model.startswith("deepseek-"):
-            kwargs["extra_body"] = {
-                "thinking": {"type": "enabled" if thinking else "disabled"}
-            }
+            kwargs["extra_body"] = {"thinking": {"type": "enabled" if thinking else "disabled"}}
             if thinking and request.reasoning_effort:
                 kwargs["reasoning_effort"] = request.reasoning_effort
         try:
@@ -98,12 +96,17 @@ class OpenAICompatibleModelAdapter:
             if getattr(error, "status_code", None) == 429:
                 raise RateLimitedError("model provider rate limited the request") from error
             raise ProviderCallError("model provider request failed") from error
+        usage = getattr(response, "usage", None)
+        usage_fields = dict(
+            input_tokens=getattr(usage, "prompt_tokens", None),
+            output_tokens=getattr(usage, "completion_tokens", None),
+        )
         try:
             content = response.choices[0].message.content
             if isinstance(content, str) and self._response_observer is not None:
                 self._response_observer(request, content)
             if getattr(response.choices[0], "finish_reason", None) == "length":
-                raise ModelOutputTruncatedError("model output token limit reached")
+                raise ModelOutputTruncatedError("model output token limit reached", **usage_fields)
             if not isinstance(content, str) or not content.strip():
                 raise ValueError("empty model content")
             payload = _json_payload(content)
@@ -134,10 +137,12 @@ class OpenAICompatibleModelAdapter:
                 for item in error.errors(include_input=False, include_context=False)[:12]
             )
             raise InvalidProviderResponseError(
-                "model response failed typed validation", validation_issues=issues
+                "model response failed typed validation", validation_issues=issues, **usage_fields
             ) from error
         except (AttributeError, IndexError, TypeError, ValueError) as error:
-            raise InvalidProviderResponseError("model response failed typed validation") from error
+            raise InvalidProviderResponseError(
+                "model response failed typed validation", **usage_fields
+            ) from error
         usage = getattr(response, "usage", None)
         return StructuredModelResult[T](
             output=output,

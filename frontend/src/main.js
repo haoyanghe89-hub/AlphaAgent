@@ -3,6 +3,7 @@ import App from './App.vue'
 import { useTheme } from './composables/useTheme'
 
 import './styles/alpha.css'
+import './styles/daily-ui.css'
 
 useTheme()
 

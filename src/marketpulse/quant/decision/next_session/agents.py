@@ -75,6 +75,16 @@ PROMPTS = {
     ),
 }
 
+# Keep the preregistered fixed-universe protocol byte-for-byte unchanged.
+SELECTED_PROMPT_VERSION = "NEXT_SESSION_SELECTED_REPAIR_V2"
+SELECTED_PROMPTS = dict(PROMPTS)
+SELECTED_PROMPTS["Analyst"] += (
+    "自选股纠错协议：区分当日与近五日、近二十日窗口，各自陈述方向。"
+    "量比仅表示对应窗口成交额比值，不能推断价格同时上涨、资金流入或买卖意图。"
+    "上下文若有previous_proposal及review_feedback，逐项修正被指出的问题；"
+    "保留封存资料和正确引用，重新形成完整观点，再由复核角色逐项审核。"
+)
+
 
 def guard_proposal(proposal, context):
     allowed = {e["evidence_id"] for e in context["evidence"]}
@@ -108,6 +118,7 @@ class DailyRoles:
         prompts=None,
         schema_version="next-session-v1",
         output_tokens=1700,
+        min_output_tokens=None,
         reserve_limit=20000,
         fallback_model=None,
         fallback_port=None,
@@ -129,6 +140,7 @@ class DailyRoles:
             reserve_limit,
         )
         self.fallback_model = fallback_model
+        self.min_output_tokens = min_output_tokens
         self.fallback_port = fallback_port
         self.transport_attempts = transport_attempts
         self.retry_delay = retry_delay
@@ -160,13 +172,13 @@ class DailyRoles:
         if self.client:
             await self.client.close()
 
-    async def call(self, role, schema, context, guard=None):
+    async def call(self, role, schema, context, guard=None, *, prompt_version=None):
         budget = self.state["config"]["budget"]
         identity = dict(
             role=role,
             instructions=self.prompts[role],
             context=context,
-            prompt_version=self.state["config"]["prompt_version"],
+            prompt_version=prompt_version or self.state["config"]["prompt_version"],
             schema=schema.model_json_schema(),
             model=self.settings.model,
         )
@@ -181,15 +193,39 @@ class DailyRoles:
         )
         if reserve > self.reserve_limit:
             raise ValueError("单次模型输入超出已核定保留预算")
-        retry_error = ""
-        corrective_retry = False
+        previous_issues = []
+        if guard and self.schema_version in {
+            "investment-research-v2",
+            "investment-research-v3",
+            "investment-research-v4",
+        }:
+            for prior in self.state["calls"]:
+                if (
+                    prior.get("role") != role
+                    or prior.get("status") != "FAILED"
+                    or not prior.get("response_ref")
+                ):
+                    continue
+                recorded = self.repo.value(prior["request_ref"])
+                if (
+                    recorded.get("context") != context
+                    or recorded.get("schema") != schema.model_json_schema()
+                ):
+                    continue
+                try:
+                    guard(schema.model_validate(self.repo.value(prior["response_ref"])))
+                except ValueError as issue:
+                    previous_issues.append(str(issue)[:160])
+        retry_error = "; ".join(dict.fromkeys(previous_issues))[:900]
+        corrective_retry = bool(retry_error)
         model = self.state.get("model_choice") or self.settings.model
         for attempt in range(max(2, self.transport_attempts)):
             self.check()
             user_content = content + (
                 "\n上次检查失败："
                 + retry_error
-                + "。修正所有正文及limitations中的阿拉伯数字，不修改引用ID字段。"
+                + "。同时满足原提示的全部要求，保留已经正确的引用和限定；"
+                "修正所有正文及limitations中的阿拉伯数字，不修改引用ID字段。"
                 if corrective_retry
                 else ""
             )
@@ -201,6 +237,12 @@ class DailyRoles:
                 )
                 + self.output_tokens
             )
+            remaining = budget["max_tokens"] - self.state["charged_tokens"]
+            if self.min_output_tokens is not None and reserve > remaining:
+                permitted = remaining - (reserve - self.output_tokens)
+                if permitted >= self.min_output_tokens:
+                    self.output_tokens = permitted
+                    reserve = remaining
             if reserve > self.reserve_limit:
                 raise ValueError("单次模型输入超出已核定保留预算")
             if (
@@ -242,7 +284,7 @@ class DailyRoles:
                 ),
                 response_model=schema,
                 response_schema_version=self.schema_version,
-                prompt_version=self.state["config"]["prompt_version"],
+                prompt_version=identity["prompt_version"],
                 model_hint=model,
                 thinking_enabled=False,
                 max_output_tokens=self.output_tokens,
@@ -283,14 +325,38 @@ class DailyRoles:
                 call.update(status="INTERRUPTED", finished_at=datetime.now(UTC).isoformat())
                 raise
             except Exception as error:
+                reported = (
+                    getattr(error, "input_tokens", None),
+                    getattr(error, "output_tokens", None),
+                )
+                if (
+                    self.schema_version
+                    in {
+                        "investment-research-v2",
+                        "investment-research-v3",
+                        "investment-research-v4",
+                        "investment-method-ablation-v1",
+                        "daily-sector-focus-v1",
+                    }
+                    and "charged_tokens" not in call
+                    and all(type(v) is int and v >= 0 for v in reported)
+                ):
+                    actual = sum(reported)
+                    self.state["charged_tokens"] += actual - reserve
+                    self.state["tokens"] += actual
+                    call.update(
+                        input_tokens=reported[0], output_tokens=reported[1], charged_tokens=actual
+                    )
                 diagnostics = provider_diagnostics(error)
                 transient = retryable_model_error(error)
-                retry_error = (
+                current_error = (
                     str(error)[:160] if isinstance(error, ValueError) else type(error).__name__
                 )
                 issues = list(getattr(error, "validation_issues", ()))
                 if issues:
-                    retry_error += "; " + "; ".join(issues)
+                    current_error += "; " + "; ".join(issues)
+                previous_issues.append(current_error)
+                retry_error = "; ".join(dict.fromkeys(previous_issues))[:900]
                 call.update(
                     status="FAILED",
                     error=type(error).__name__,

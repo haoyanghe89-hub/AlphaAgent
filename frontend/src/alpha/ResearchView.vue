@@ -6,6 +6,7 @@ import { href } from './navigation.js'
 import { isActive, reportSummary, statusLabel } from './model.js'
 import ProcessCard from './ProcessCard.vue'
 import FollowupBar from './FollowupBar.vue'
+const developer = new URLSearchParams(location.search).get('developer') === '1'
 const props = defineProps({ id: String })
 const { data, report, error, loading, load } = useQuantRun(props.id)
 const cancelling = ref(false), cancelError = ref('')
@@ -27,7 +28,7 @@ async function cancel() {
       <div class="msg-user">{{ data.plan?.question || '单股历史价格、财务与估值核对' }}</div>
       <div v-if="isActive(data.run.status)" class="flow-meta"><span>{{ statusLabel(data.run.status) }}</span><span class="num">{{ data.plan?.date_start }} — {{ data.plan?.date_end }}</span><button class="text-button" :disabled="cancelling" @click="cancel">{{ cancelling ? '正在停止…' : '停止研究' }}</button></div>
       <p v-if="cancelError" class="error-text" role="alert">{{ cancelError }}</p>
-      <ProcessCard :nodes="data.process" :status="data.run.status" />
+      <ProcessCard v-if="developer" :nodes="data.process" :status="data.run.status" />
       <article v-if="report" class="panel panel-pad report-summary-card">
         <div class="summary-head"><span class="tag tag-gold">研究报告</span><span class="muted">{{ data.scenario === 'compare' ? data.plan?.comparison?.subjects?.map(s => s.name).join(' vs ') : data.subject?.name }} · 数据截至 {{ data.plan?.date_end }} · v{{ report.version }}</span></div>
         <div v-for="(text,index) in summary.slice(0,3)" :key="index" class="summary-line"><span>›</span><p class="rep-block-text">{{ text }}</p></div>

@@ -118,7 +118,10 @@ def source_fixture(repo, *, originals=True, missing=False, manufacturing=False):
                         (
                             "合成夹具，非真实经营资料。公司主营晶圆制造代工业务，产能利用率与资本开支有风险。"
                             if manufacturing
-                            else "合成夹具，非真实经营资料。公司主营刻蚀设备业务，研发设备收入与现金回收存在风险。"
+                            else (
+                                "合成夹具，非真实经营资料。公司主营刻蚀设备业务，"
+                                "研发设备收入与现金回收存在风险。"
+                            )
                         )
                         * 12
                     )

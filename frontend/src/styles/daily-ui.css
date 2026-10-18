@@ -1,0 +1,133 @@
+/* Daily-use presentation. Values and chart calculations remain owned by each report. */
+:root{--reading-gap:16px;--reading-pad:18px}
+[data-theme='dark']{--text-2:#a4afbf;--text-3:#8794a8}
+.alpha-app .developer-workspace pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto}
+.alpha-app .page{max-width:1320px;padding-top:22px;padding-bottom:24px}
+.alpha-app h1,.alpha-app .section-heading h1,.alpha-app .hero-heading h1{font-size:24px;font-weight:650;line-height:1.35;letter-spacing:0;margin:0}
+.alpha-app h2,.alpha-app .section-heading h2{font-size:16px;font-weight:650;line-height:1.5;color:var(--text-1)}
+.alpha-app h3{font-size:14px;line-height:1.5}
+.alpha-app p{line-height:1.65;overflow-wrap:anywhere}
+.alpha-app .panel{border-radius:7px;box-shadow:none}
+.alpha-app .rep-section{padding:var(--reading-pad);margin-bottom:var(--reading-gap)}
+.alpha-app .condition-note,.alpha-app .muted{line-height:1.6}
+.alpha-app .btn{min-height:34px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12px;cursor:pointer}
+.alpha-app :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.alpha-app :is(button,summary){cursor:pointer}
+.alpha-app :is(input,select,textarea){font:inherit}
+.alpha-app .btn:disabled{cursor:wait}
+.alpha-app :is(.summary-metrics,.numbers,.account-metrics,.plan-numbers){font-variant-numeric:tabular-nums}
+.page-heading{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}
+.page-heading p{margin:5px 0 0}
+.alpha-app .input-disclosure{margin:0}
+.alpha-app .input-disclosure>summary{font-size:13px;font-weight:600;color:var(--text-2);padding:3px 0}
+.alpha-app .input-disclosure[open]>summary{margin-bottom:14px}
+.input-disclosure form{margin-top:12px}
+.alpha-app .research-details>summary,.alpha-app .performance-details>summary{font-size:14px;font-weight:600;color:var(--text-1)}
+.alpha-app .research-details[open]>summary{margin-bottom:14px}
+.alpha-app .result-notes{margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
+.alpha-app .notice{padding:10px 12px;font-size:12px;line-height:1.6;margin:10px 0}
+.alpha-app .section-heading{margin-bottom:12px;align-items:center}
+.alpha-app .section-heading .bt-actions{margin:0}
+.summary-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0}
+.summary-metrics span{font-size:12px;color:var(--text-2)}
+.summary-metrics b{display:block;color:var(--text-1);font-size:20px;margin-top:6px;overflow-wrap:anywhere}
+.alpha-app .workbench .ask-hero{padding:18px 20px;border-top:2px solid var(--accent)}
+.alpha-app .workbench-modes{gap:6px;margin:12px 0 8px}
+.alpha-app .workbench-modes .btn{min-height:32px;padding:6px 12px}
+.alpha-app .hero-heading .muted{margin-left:auto}
+.alpha-app .ask-box{margin:10px 0}
+.alpha-app .ask-box input{font-size:14px;padding:12px}
+.alpha-app .hero-disclaimer{padding-top:8px;margin-top:10px}
+.alpha-app .workbench .workspace-section{margin-top:22px}
+.alpha-app .market-grid>.panel,.alpha-app .industry-leaders{padding:14px 16px}
+.alpha-app .hot-row{padding:6px 3px}
+.alpha-app .market-grid{align-items:start}
+.alpha-app .market-chart{height:auto}
+.alpha-app .hot-list{line-height:1.35}
+.alpha-app .industry-row{padding:9px 0}
+.alpha-app .market-lead{padding:10px 12px;margin:10px 0;background:var(--bg-raised);border-radius:5px}
+.alpha-app .market-lead>strong{font-size:15px}
+.alpha-app .daily-status{padding:8px 12px;background:var(--bg-raised);border-radius:5px}
+.alpha-app .focus-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.alpha-app .focus-list article{padding:12px}
+.alpha-app .focus-list p{margin:6px 0}
+.alpha-app .focus-title{font-size:13px;gap:7px}
+.alpha-app .focus-title .num{font-variant-numeric:tabular-nums}
+.alpha-app .flow-live,.alpha-app .flow-daily{padding:14px 16px}
+.alpha-app .flow-kpis strong{font-size:22px}
+.alpha-app .prediction-card{border-top:2px solid var(--accent)}
+.alpha-app .prediction-call{grid-template-columns:110px minmax(0,1fr);margin:12px 0}
+.alpha-app .prediction-call p{font-size:14px;line-height:1.75}
+.alpha-app .prediction-direction{font-size:34px;font-weight:700}
+.alpha-app .prediction-day{font-size:12px;opacity:1;color:var(--text-2)}
+.alpha-app .prediction-reasons{gap:22px;margin-top:14px}
+.alpha-app .prediction-reasons p{font-size:13px}
+.alpha-app .prediction-reasons li{margin-bottom:10px}
+.alpha-app .performance-details[open]>summary{margin-bottom:16px}
+.alpha-app .plan-conclusion{border-left:3px solid var(--accent)}
+.alpha-app .plan-conclusion .section-heading h2{font-size:21px}
+.alpha-app .plan-results{gap:16px;margin-bottom:16px;align-items:start}
+.alpha-app .stock-outlook{font-size:17px;font-weight:650;margin:10px 0;line-height:1.65}
+.alpha-app .outlook-risk{font-size:12px;color:var(--text-2);padding-left:10px;border-left:2px solid var(--warn);margin:10px 0}
+.alpha-app .plan-numbers{padding:10px 0;gap:12px;font-size:12px}
+.alpha-app .plan-numbers b{margin-left:5px;font-size:16px}
+.alpha-app .quantity{padding:12px;background:var(--accent-dim);border-radius:5px;margin:10px 0;border:0}
+.alpha-app .quantity strong{font-size:15px}
+.alpha-app .condition-list li{font-size:12px;gap:8px}
+.alpha-app .advisor-layout{display:block}
+.alpha-app .has-result>.panel:has(>.input-disclosure:not([open])),.alpha-app .has-result .holding-inputs:has(>.input-disclosure:not([open])){padding:12px 16px}
+.alpha-app .holding-inputs .fields{grid-template-columns:repeat(4,minmax(0,1fr))}
+.alpha-app .holding-inputs .fields .wide{grid-column:span 2}
+.alpha-app .holding-inputs .send{width:auto;min-width:160px}
+.alpha-app .holding-inputs form>label{margin:12px 0}
+.alpha-app .holding-inputs .fields+.condition-note{margin-top:12px}
+.alpha-app .holding-advisor .conclusion,.alpha-app .portfolio-advisor .conclusion{border-left:3px solid var(--accent)}
+.alpha-app .holding-advisor .headline{font-size:22px;line-height:1.5;margin:10px 0;color:var(--text-1)}
+.alpha-app .holding-advisor .numbers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;padding:12px;background:var(--bg-raised);border-radius:5px}
+.alpha-app .holding-advisor .numbers b{font-size:20px}
+.alpha-app .holding-advisor .gate-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.alpha-app .gate{padding:12px;border:1px solid var(--border);border-radius:5px}
+.alpha-app .holding-advisor .gate-price{font-size:23px}
+.alpha-app .portfolio-advisor .conclusion h2{font-size:21px;color:var(--text-1)}
+.alpha-app .account-metrics{grid-template-columns:repeat(3,minmax(0,1fr));padding:12px;gap:14px;margin:12px 0;border-radius:5px}
+.alpha-app .account-plots{gap:16px}
+.alpha-app .change-table{font-size:12px}
+.alpha-app .change-table td{padding:10px 8px}
+.alpha-app .change-table td:last-child{min-width:240px}
+.alpha-app .execution{padding-left:20px;line-height:1.65;font-size:12px;margin:8px 0 14px}
+.alpha-app .library-tools{padding:12px;background:var(--bg-panel);border:1px solid var(--border);border-radius:7px}
+.alpha-app .lib-row{min-height:52px;padding:12px 16px}
+.alpha-app .lib-q{font-size:13px;font-weight:500;line-height:1.65}
+.alpha-app .lib-date{font-size:11px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.alpha-app .report-main .rep-h1{font-size:23px;margin:0 0 14px}
+.alpha-app .report-grid{gap:16px}
+.alpha-app .report-rail{font-size:12px}
+.alpha-app .live-process{margin-bottom:16px}
+.app-footer{max-width:1320px;margin:0 auto;padding:14px 20px 24px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--border);color:var(--text-3);font-size:11px}
+.app-footer a{color:var(--text-2)}
+.app-footer>span{margin-right:auto}
+.alpha-app .developer-shortcut{white-space:nowrap;color:var(--text-3);font-size:11px;padding:6px;text-decoration:none}
+.alpha-app .developer-shortcut:hover{color:var(--accent)}
+.alpha-app .library-tools{flex-wrap:wrap;gap:10px}
+.alpha-app .library-tools input{min-width:180px;flex:1}
+.alpha-app .library-tools select{min-width:145px}
+@media(max-width:1000px){.alpha-app .focus-list{grid-template-columns:repeat(2,minmax(0,1fr))}.alpha-app .holding-advisor .numbers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){
+  .alpha-app .page{padding:16px 12px 20px}
+  .alpha-app h1,.alpha-app .section-heading h1,.alpha-app .hero-heading h1{font-size:22px}
+  .alpha-app .rep-section{padding:14px}
+  .alpha-app .hero-heading .muted{margin-left:0}
+  .alpha-app .workbench-modes .btn{flex:1 0 28%;min-width:0}
+  .alpha-app .holding-inputs .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .alpha-app .holding-inputs .fields .wide{grid-column:1/-1}
+  .alpha-app .holding-advisor .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .alpha-app .holding-advisor .gate-grid{grid-template-columns:1fr}
+  .alpha-app .holding-advisor .headline,.alpha-app .portfolio-advisor .conclusion h2{font-size:19px}
+  .alpha-app .account-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .alpha-app .prediction-call{grid-template-columns:1fr}
+  .alpha-app .focus-list{grid-template-columns:1fr}
+  .app-footer{padding:12px;gap:12px}
+  .app-footer>span{flex-basis:100%}
+  .page-heading{align-items:flex-start;flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.alpha-app *{scroll-behavior:auto!important}}

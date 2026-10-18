@@ -10,7 +10,16 @@ from ...contracts import digest
 from ..backup_model import open_backup
 from ..methods import load_config
 from ..tools import SourceClient, Stopped, resolve
-from .agents import PROMPTS, DailyRoles, Proposal, Review, Writing, guard_proposal
+from .agents import (
+    PROMPTS,
+    SELECTED_PROMPT_VERSION,
+    SELECTED_PROMPTS,
+    DailyRoles,
+    Proposal,
+    Review,
+    Writing,
+    guard_proposal,
+)
 from .calendar import load_calendar
 from .contracts import ExperimentConfig, ExperimentRunSlot, NextSessionPrediction
 from .labels import SHANGHAI, close_at, cohort_for, next_session
@@ -43,6 +52,7 @@ def select_security(client, state):
     config.update(
         securities=[subject["security_id"]],
         universe_version="user-selected-hs-a-v1:" + subject["security_id"],
+        prompt_version=SELECTED_PROMPT_VERSION,
     )
     ExperimentConfig.model_validate(config)
     state.update(config=config, query_subject=subject, title=subject["name"] + " · 明日预测")
@@ -202,6 +212,33 @@ def status(repo, now=None):
     return result
 
 
+async def analyze_verified(roles, context, *, repairs=0, report=None):
+    analysis_context = context
+    for round_index in range(repairs + 1):
+        if report:
+            report(
+                "Analyst", "基于封存资料形成方向" if not round_index else "按具体复核意见修正理由"
+            )
+        proposal, analysis_call = await roles.call(
+            "Analyst", Proposal, analysis_context, lambda v: guard_proposal(v, context)
+        )
+        if report:
+            report("Verifier", "复核理由、反对依据与下一交易日期限")
+        review, review_call = await roles.call(
+            "Verifier", Review, dict(snapshot=context, proposal=proposal.model_dump(mode="json"))
+        )
+        if review.verdict == "APPROVE" and all(
+            (review.citations_supported, review.next_session_relevant, review.no_invented_facts)
+        ):
+            return proposal, analysis_call, review_call
+        analysis_context = dict(
+            context,
+            previous_proposal=proposal.model_dump(mode="json"),
+            review_feedback=review.model_dump(mode="json"),
+        )
+    raise ValueError("语义审核未通过：" + review.reason)
+
+
 async def run(repo, rid, settings, stop, port=None):
     state = repo.get_run(rid)
     started = time.monotonic()
@@ -318,6 +355,9 @@ async def run(repo, rid, settings, stop, port=None):
                     port,
                     fallback_model=backup.model if backup else None,
                     fallback_port=backup.port if backup else None,
+                    prompts=SELECTED_PROMPTS
+                    if state["config"]["prompt_version"] == SELECTED_PROMPT_VERSION
+                    else None,
                 ) as roles,
             ):
                 for security in state["config"]["securities"]:
@@ -345,30 +385,16 @@ async def run(repo, rid, settings, stop, port=None):
                         save()
                         attempt["state"] = "FAILED_REVIEW"
                         attempt["reason"] = "模型或审核未完成"
-                        stage("Analyst", "基于封存资料预测下一交易日涨跌", security)
-                        proposal, analysis_call = await roles.call(
-                            "Analyst",
-                            Proposal,
+                        proposal, analysis_call, review_call = await analyze_verified(
+                            roles,
                             snapshot.model_context,
-                            lambda v, context=snapshot.model_context: guard_proposal(v, context),
-                        )
-                        stage("Verifier", "复核理由、反对依据与下一交易日期限", security)
-                        review, review_call = await roles.call(
-                            "Verifier",
-                            Review,
-                            dict(
-                                snapshot=snapshot.model_context,
-                                proposal=proposal.model_dump(mode="json"),
+                            repairs=2
+                            if state["config"]["prompt_version"] == SELECTED_PROMPT_VERSION
+                            else 0,
+                            report=lambda role, detail, security=security: stage(
+                                role, detail, security
                             ),
                         )
-                        if review.verdict != "APPROVE" or not all(
-                            (
-                                review.citations_supported,
-                                review.next_session_relevant,
-                                review.no_invented_facts,
-                            )
-                        ):
-                            raise ValueError("语义审核未通过：" + review.reason)
                         approved = dict(
                             direction=proposal.direction,
                             summary=proposal.summary,
@@ -476,7 +502,11 @@ async def run(repo, rid, settings, stop, port=None):
                         repo.immutable(attempt["attempt_id"], attempt)
                         state["attempt_ids"].append(attempt["attempt_id"])
                     save()
-        state.update(status="COMPLETED", completed_at=datetime.now(UTC).isoformat())
+        state.update(
+            status="COMPLETED" if state["prediction_ids"] else "FAILED",
+            error=None if state["prediction_ids"] else "本次未签发预测，失败尝试与原因已保存。",
+            completed_at=datetime.now(UTC).isoformat(),
+        )
         save()
     except (asyncio.CancelledError, TimeoutError, Stopped):
         stop.set()

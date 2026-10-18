@@ -92,6 +92,23 @@ def normalized_quote(repo, source, value):
     ), material
 
 
+def daily_input(repo, client, sources, symbol, base):
+    """The quote protocol uses Tencent bars even when disclosure research prefers Tushare."""
+    matching = [s for s in sources if s["key"] == "daily"]
+    if matching:
+        if len(matching) != 1 or matching[0]["source_family"] != "TENCENT":
+            raise ValueError("日预测原始日线来源缺失或冲突")
+        source = matching[0]
+        return source, json.loads(repo.raw_bytes(source["blob_ref"]))
+    # Provider-specific Tushare tables cannot be parsed as Tencent's day-array schema.
+    return client.fetch(
+        "daily",
+        KLINE,
+        params={"param": f"{symbol},day,{base - timedelta(days=180)},{base},640,"},
+        family="TENCENT",
+    )
+
+
 def build_snapshot(repo, state, stop, security, calendar, save):
     budget = state["config"]["budget"]
     remaining = max(1, min(900, int(budget["max_seconds"] - state.get("elapsed_seconds", 0))))
@@ -135,8 +152,8 @@ def build_snapshot(repo, state, stop, security, calendar, save):
     if observed["trading_status"] != "TRADED":
         raise ValueError("基准日没有可核对成交，不能伪造完整行情")
     sources = list(data["sources"]) + [c["source"] for c in state["calls"] if c.get("source")]
-    daily_source = next(s for s in data["sources"] if s["key"] == "daily")
-    raw_daily = json.loads(repo.raw_bytes(daily_source["blob_ref"]))
+    daily_source, raw_daily = daily_input(repo, client, data["sources"], subject["symbol"], base)
+    sources.append(daily_source)
     rows = bars(raw_daily, subject["symbol"], sessions, base)
     if Decimal(rows[-1]["close"]) != Decimal(observed["close"]):
         raise ValueError("日线与两路收盘行情冲突")

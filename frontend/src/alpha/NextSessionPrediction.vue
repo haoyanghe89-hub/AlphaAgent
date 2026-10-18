@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useNextSessionPrediction, nextSessionRoot } from './useNextSessionPrediction.js'
 import DecisionCitation from './DecisionCitation.vue'
 import ResearchDataCharts from './ResearchDataCharts.vue'
@@ -8,6 +8,7 @@ const props=defineProps({id:String,developer:Boolean})
 const {state,status,scoreboard,history,error,busy,active,refresh,start,action}=useNextSessionPrediction(props.id,{developer:props.developer})
 const citation=ref(null)
 const entity=ref(new URLSearchParams(location.search).get('entity') || '')
+watch(state,value=>{if(!entity.value&&value?.request?.entity)entity.value=value.request.entity})
 const generate=()=>start(entity.value)
 const names={'688012.SH':'中微公司','002371.SZ':'北方华创'}
 const direction={UP:'涨',DOWN:'跌',FLAT:'平盘'}
@@ -24,11 +25,11 @@ const evidence=(row,eid)=>{citation.value={pid:row.prediction.prediction_id,eid}
 <template>
   <div class="page prediction-page">
     <section class="panel rep-section prediction-intro">
-      <div class="prediction-eyebrow">ALPHAAGENT · 每日观察</div>
-      <div class="section-heading"><h1>下一交易日，怎么看</h1><span v-if="developer" class="tag tag-warn">开发者视图</span></div>
+      <div v-if="developer" class="prediction-eyebrow">ALPHAAGENT · 每日观察</div>
+      <div class="section-heading"><h1>明日预测</h1><span v-if="developer" class="tag tag-warn">开发者视图</span></div>
       <p class="prediction-lead">明确的涨跌判断，以及支持它和可能推翻它的依据。</p>
-      <form class="prediction-start" @submit.prevent="generate"><label>股票名称或代码<input v-model.trim="entity" required maxlength="80" placeholder="例如：贵州茅台 / 600519" aria-label="预测股票名称或代码"></label><button class="btn btn-primary" :disabled="busy || active() || !status || !entity">{{ busy ? '正在提交…' : active() ? '正在分析…' : '预测这只股票' }}</button></form>
-      <p class="condition-note">支持任意可核实的沪深 A 股，收盘后生成下一交易日判断；上市历史不足或关键资料缺失会说明原因。所选股票单独统计，原预测保留。</p>
+      <details class="input-disclosure" :open="!state?.predictions?.length"><summary>选择股票，生成下一交易日预测</summary><form class="prediction-start" @submit.prevent="generate"><label>股票名称或代码<input v-model.trim="entity" required maxlength="80" placeholder="例如：贵州茅台 / 600519" aria-label="预测股票名称或代码"></label><button class="btn btn-primary" :disabled="busy || active() || !status || !entity">{{ busy ? '正在提交…' : active() ? '正在分析…' : '预测这只股票' }}</button></form>
+      <p class="condition-note">支持任意可核实的沪深 A 股，收盘后生成下一交易日判断；上市历史不足或关键资料缺失会说明原因。所选股票单独统计，原预测保留。</p></details>
       <details v-if="developer" class="prediction-limits"><summary>固定样本实验</summary><p>中微公司 · 北方华创，正式签发窗口 20:00–20:15；与自主选股记录分开统计。</p><button class="btn" :disabled="busy||active()||!status" @click="start()">运行固定样本实验</button></details>
       <p v-if="error" class="notice error-text" role="alert">{{ error }} <button class="btn" @click="refresh">重新读取</button></p>
       <p v-if="!status && !error" role="status">正在读取已保存的预测…</p>
@@ -41,7 +42,7 @@ const evidence=(row,eid)=>{citation.value={pid:row.prediction.prediction_id,eid}
     </section>
     <section v-if="state && !active() && !state.predictions.length" class="panel rep-section"><h2>本次尚未形成可展示的预测</h2><p>{{ state.error || '资料或理由复核未通过，可查看下方说明后重新生成。' }}</p></section>
     <article v-for="row in state?.predictions || []" :key="row.prediction.prediction_id" class="panel rep-section prediction-card">
-      <div class="section-heading"><div><h2>{{ row.name }}</h2><small class="condition-note">{{ row.prediction.security_id }}</small></div><span class="tag" :class="row.prediction.cohort==='PRIMARY'?'tag-cyan':'tag-warn'">{{ row.prediction.cohort==='PRIMARY'?'正式记录':'探索记录' }}</span></div>
+      <div class="section-heading"><div><h2>{{ row.name }}</h2><small class="condition-note">{{ row.prediction.security_id }}</small></div><span class="tag" :class="row.prediction.cohort==='PRIMARY'?'tag-cyan':'tag-warn'">{{ developer?(row.prediction.cohort==='PRIMARY'?'正式记录':'探索记录'):'已保存判断' }}</span></div>
       <div class="prediction-call"><span class="prediction-day">{{ row.prediction.target_session }} 方向判断</span><strong :class="['prediction-direction',row.prediction.prediction.toLowerCase()]">看{{ direction[row.prediction.prediction] }}</strong><p>{{ present(row.prediction.summary) }}</p></div>
       <p class="condition-note">依据支持程度：{{ support[row.prediction.support_level] }} · {{ stamp(row.prediction.issued_at) }} 发布</p>
       <ResearchDataCharts v-if="row.chart_data" :blocks="nextSessionChartBlocks(row.chart_data)"/>
@@ -56,7 +57,7 @@ const evidence=(row,eid)=>{citation.value={pid:row.prediction.prediction_id,eid}
     </article>
     <section v-if="failed.length" class="panel rep-section"><h2>未形成判断的公司</h2><p v-for="attempt in failed" :key="attempt.attempt_id"><strong>{{ names[attempt.slot_key[1]] || attempt.slot_key[1] }}</strong> · {{ attempt.reason }}</p><p class="condition-note">失败尝试保留，不作为已签发预测计分。</p></section>
     <section v-if="state?.prediction_ids?.length || state?.predictions?.length" class="panel rep-section"><div class="section-heading"><h2>目标日收盘后，回来看结果</h2><button class="btn" :disabled="busy || active()" @click="action('observe')">{{ busy?'正在核对…':'核对真实结果' }}</button></div><p class="condition-note">系统只用真实目标日收盘与参考价核对。平盘记未命中；停牌不计分；数据缺失或来源冲突时继续等待。</p></section>
-    <section v-if="scoreboard" class="panel rep-section"><div class="section-heading"><h2>判断经得起多少次验证</h2><span class="tag">持续观察</span></div><p class="condition-note">正式与探索分别统计。准确率按已取得真实结果的样本计算；同一天的两家公司不等于两次独立市场检验。</p>
+    <details v-if="scoreboard" class="panel rep-section performance-details" :open="developer"><summary>历史表现与简单基线</summary><div class="section-heading"><h2>判断经得起多少次验证</h2><span class="tag">持续观察</span></div><p class="condition-note">正式与探索分别统计。准确率按已取得真实结果的样本计算；同一天的两家公司不等于两次独立市场检验。</p>
       <div v-if="developer" class="prediction-coverage"><div><strong>{{ scoreboard.planned || 0 }}</strong><span>计划正式预测</span></div><div><strong>{{ scoreboard.coverage?.numerator || 0 }}</strong><span>已正式签发</span></div><div><strong>{{ scoreboard.missed || 0 }}</strong><span>错过签发</span></div><div><strong>{{ scoreboard.failed || 0 }}</strong><span>正式尝试失败</span></div></div>
       <p v-if="!groups.length" class="condition-note">尚无预测样本。准确率 —，简单基线 —。</p>
       <article v-for="group in groups" :key="group.group_id" class="prediction-stat-group"><h3>{{ group.universe_version?.startsWith('user-selected-')?'自主选股 · '+group.records[0]?.security_id:group.cohort==='PRIMARY'?'固定样本正式组':'固定样本探索组' }} · {{ group.timing_group }}</h3><p class="condition-note"><span v-if="developer">{{ group.model_version }} · {{ group.prompt_version }} · </span>{{ group.records.length }} 份判断 · {{ group.statistics.independent_dates }} 个已核对交易日</p>
@@ -66,7 +67,7 @@ const evidence=(row,eid)=>{citation.value={pid:row.prediction.prediction_id,eid}
         <p class="condition-note">涨样本命中 {{ percent(group.statistics.recalls?.UP) }} · 跌样本命中 {{ percent(group.statistics.recalls?.DOWN) }} · 平衡准确率 {{ group.statistics.balanced_accuracy==null?'—':(Number(group.statistics.balanced_accuracy)*100).toFixed(1)+'%' }}</p>
         <p class="condition-note">等待收盘 {{ group.outcome_counts.PENDING }} · 等待行情 {{ group.outcome_counts.PENDING_DATA }} · 来源冲突 {{ group.outcome_counts.CONFLICT }} · 不可计分 {{ group.outcome_counts.UNSCORABLE }}。观察结果仅供描述，预测能力尚未验证。</p>
       </article>
-    </section>
+    </details>
     <details v-if="history.length" class="panel rep-section research-history"><summary>已保存的预测记录 · {{ history.length }} 份</summary><a v-for="run in [...history].reverse()" :key="run.run_id" class="prediction-history" :href="'#/decision/'+run.run_id"><span>{{ run.title || '下一交易日预测' }} · {{ run.target_session || '目标日核定中' }}</span><span>{{ stamp(run.created_at) }} · {{ batchLabels[run.status] }} →</span></a></details>
     <section v-if="developer && state?.development" class="panel rep-section"><h2>开发记录</h2><a class="btn" :href="'/api'+nextSessionRoot+'/runs/'+state.run_id+'/export'" target="_blank" rel="noopener noreferrer">导出封存输入与完整记录</a><details class="prediction-limits"><summary>实际取数、模型调用与审核轨迹</summary><pre>{{ JSON.stringify(state.development,null,2) }}</pre></details></section>
     <DecisionCitation v-if="citation && state" :key="citation.pid+citation.eid" :run-id="state.run_id" :prediction-id="citation.pid" :evidence-id="citation.eid" :developer="developer" @close="citation=null" />

@@ -16,6 +16,7 @@ from ..contracts import digest
 
 URL = "https://api.tushare.pro"
 FIELDS = {
+    "suspend_d": "ts_code,trade_date,suspend_timing,suspend_type",
     "moneyflow": (
         "ts_code,trade_date,buy_lg_amount,sell_lg_amount,"
         "buy_elg_amount,sell_elg_amount,net_mf_amount"
@@ -28,6 +29,8 @@ FIELDS = {
         "l1_code,l1_name,l2_code,l2_name,l3_code,l3_name,ts_code,name,in_date,out_date,is_new"
     ),
     "daily": "ts_code,trade_date,open,high,low,close,pre_close,vol,amount",
+    "adj_factor": "ts_code,trade_date,adj_factor",
+    "index_daily": "ts_code,trade_date,open,high,low,close,pre_close,vol,amount",
     "daily_basic": "ts_code,trade_date,close,pe_ttm,pb,total_mv,circ_mv,total_share",
     "margin_detail": "trade_date,ts_code,rzye,rzmre,rzche",
     "income": (
@@ -41,6 +44,13 @@ FIELDS = {
     "cashflow": (
         "ts_code,ann_date,f_ann_date,end_date,report_type,comp_type,n_cashflow_act,update_flag"
     ),
+}
+
+# New research contracts opt into these fields; old requests keep their bytes.
+KNOWLEDGE_FIELDS = {
+    "stock_basic": FIELDS["stock_basic"] + ",industry",
+    "income": FIELDS["income"] + ",n_income",
+    "balancesheet": FIELDS["balancesheet"] + ",total_hldr_eqy_exc_min_int",
 }
 
 
@@ -76,13 +86,13 @@ def records(packet):
     return [dict(zip(fields, row, strict=True)) for row in items]
 
 
-def fetch(client, key, api, params):
+def fetch(client, key, api, params, *, fields=None):
     if api not in FIELDS:
         raise ValueError("unsupported read-only Tushare API")
     source, packet = client.fetch(
         "tushare_" + api + "_" + digest(params)[:12],
         URL,
-        data=dict(api_name=api, params=params, fields=FIELDS[api]),
+        data=dict(api_name=api, params=params, fields=fields or FIELDS[api]),
         family="TUSHARE",
     )
     return source, records(packet)
@@ -95,7 +105,9 @@ def request_body(definition):
         or definition["url"] != URL
         or set(public) != {"api_name", "params", "fields"}
         or public["api_name"] not in FIELDS
-        or public["fields"] != FIELDS[public["api_name"]]
+        or public["fields"] not in (
+            FIELDS[public["api_name"]], KNOWLEDGE_FIELDS.get(public["api_name"])
+        )
     ):
         raise ValueError("unapproved Tushare request")
     token = load_token()

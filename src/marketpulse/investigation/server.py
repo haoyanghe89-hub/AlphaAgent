@@ -113,6 +113,12 @@ def create_app(
             app.state.research_store = ResearchStore(
                 sessions, live_runner.blobs, research_root / "live-research"
             )
+            from marketpulse.quant.knowledge.store import KnowledgeStore
+
+            app.state.knowledge_store = KnowledgeStore(sessions, live_runner.blobs)
+            from marketpulse.quant.knowledge.rule_store import RuleStore
+
+            app.state.knowledge_rules = RuleStore(app.state.knowledge_store)
             app.state.research_jobs = {}
             from marketpulse.quant.decision.next_session.service import (
                 recover as recover_predictions,
@@ -141,9 +147,18 @@ def create_app(
             watchdog = RecoveryWatchdog(live_runner, ownership)
             app.state.recovery_watchdog = watchdog
             watchdog.start()
+            daily = None
+            if os.getenv("ALPHAAGENT_DAILY_ENABLED", "false").lower() == "true":
+                from marketpulse.quant.daily.runtime import DailyRuntime
+
+                daily = DailyRuntime(app)
+                app.state.daily_runtime = daily
+                daily.start()
             try:
                 yield
             finally:
+                if daily:
+                    await daily.close()
                 for task in list(app.state.research_jobs.values()):
                     task.cancel()
                 if app.state.research_jobs:
@@ -181,6 +196,24 @@ def create_app(
     from marketpulse.quant.decision.api import router as decision_router
 
     app.include_router(decision_router)
+    from marketpulse.quant.knowledge.api import router as knowledge_router
+
+    app.include_router(knowledge_router)
+    from marketpulse.quant.knowledge.planning_api import router as investment_router
+
+    app.include_router(investment_router)
+    from marketpulse.quant.knowledge.research_api import router as investment_research_router
+
+    app.include_router(investment_research_router)
+    from marketpulse.quant.knowledge.advisor_api import router as holding_advisor_router
+
+    app.include_router(holding_advisor_router)
+    from marketpulse.quant.knowledge.portfolio_api import router as portfolio_advisor_router
+
+    app.include_router(portfolio_advisor_router)
+    from marketpulse.quant.daily.api import router as daily_router
+
+    app.include_router(daily_router)
     app.include_router(review_router)
 
     @app.get("/api/health")

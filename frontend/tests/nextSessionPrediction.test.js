@@ -44,3 +44,15 @@ test('selected stock is sent explicitly and a changed stock gets a new retry key
   assert.equal(bodies[0].request_key,bodies[1].request_key)
   assert.notEqual(bodies[0].request_key,bodies[2].request_key);assert.equal(bodies[2].entity,'宁德时代');ctl.dispose()
 })
+
+test('lost forecast acknowledgement confirms the same saved task automatically',async()=>{
+  const keys=[],links=[]
+  const ctl=createNextSessionPrediction(null,{api:async(path,options)=>{
+    if(path.endsWith('/enable'))return {enabled:true}
+    keys.push(JSON.parse(options.body).request_key)
+    if(keys.length===1)throw Object.assign(Error('lost response'),{status:0})
+    return {run_id:'RUN-NS-saved'}
+  },navigate:id=>links.push(id)})
+  await ctl.start('601318')
+  assert.equal(keys.length,2);assert.equal(keys[0],keys[1]);assert.deepEqual(links,['RUN-NS-saved']);ctl.dispose()
+})

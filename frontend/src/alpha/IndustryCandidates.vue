@@ -20,12 +20,11 @@ const generate=()=>start({entity:industry.value,scope:'industry',research_mode:'
 function scrollCandidate(id){document.getElementById('candidate-'+id)?.scrollIntoView({block:'start'})}
 function compare(opinion){const peer=member(opinion.peer_ids[0]);if(!peer)return;sessionStorage.setItem('alpha-comparison-question',member(opinion.security_id).name+' vs '+peer.name);location.hash='#/compare'}
 function deep(id){const url=new URL(location.href);url.searchParams.set('research','1');url.searchParams.set('entity',id);url.hash='#/decision';return url.pathname+url.search+url.hash}
-function toggle(){const url=new URL(location.href);developer?url.searchParams.delete('developer'):url.searchParams.set('developer','1');return url.pathname+url.search+url.hash}
 </script>
 <template>
   <div class="page candidate-page">
     <section class="panel rep-section"><div class="section-heading"><h1>{{ industry }}，哪些公司值得先研究</h1><span v-if="developer" class="tag tag-warn">开发者视图</span></div><p class="prediction-lead">先看入选理由和同业差异，再核对反证与改变判断的条件。</p><form class="candidate-form" @submit.prevent="generate"><label>行业 <select v-model="industry"><option>半导体设备</option><option>集成电路制造</option></select></label><label>研究期限 <select v-model="months"><option :value="1">未来一个月</option><option :value="2">未来两个月</option><option :value="3">未来三个月</option></select></label><button class="btn btn-primary" :disabled="submitting||active(state)">{{ submitting?'正在提交…':active(state)?'正在研究…':data?'重新取数并另存研究':'开始候选研究' }}</button></form><p class="condition-note">范围为本次实际取得的{{ industry }}分类池。研究优先级与股价方向分别判断。</p><p v-if="loading&&!state" role="status">正在读取已保存研究…</p><p v-if="error" role="alert" class="error-text">{{ error }} <button class="btn" @click="load">重新读取</button></p></section>
-    <section v-if="active(state)" class="panel rep-section" aria-live="polite"><h2>正在核对成分与公司依据</h2><p>{{ state.process.at(-1)?.detail }}</p><button class="btn" @click="action('cancel')" :disabled="submitting">停止研究</button></section>
+    <section v-if="active(state)" class="panel rep-section" aria-live="polite"><h2>正在核对成分与公司依据</h2><p>{{ developer ? state.process.at(-1)?.detail : '正在核对行业成分、公司资料与候选条件…' }}</p><button class="btn" @click="action('cancel')" :disabled="submitting">停止研究</button></section>
     <section v-if="state&&['FAILED','INTERRUPTED','CANCELLED'].includes(state.status)" class="panel rep-section"><h2>本次候选研究尚未完成</h2><p>{{ developer?state.error:'本次行业资料或意见复核未完成，尚未发布候选。失败记录保留，可重试。' }}</p><button v-if="state.status!=='CANCELLED'" class="btn" @click="action('resume')" :disabled="submitting">继续未完成步骤</button></section>
     <template v-if="data">
       <p v-if="!data.report.prompt_version" class="notice">这是早期候选记录，估值措辞尚未按新版基准约束核对。原记录保留；请重新取数生成新版，贵或便宜的表述暂不作为判断依据。</p>
@@ -42,7 +41,7 @@ function toggle(){const url=new URL(location.href);developer?url.searchParams.de
       <section v-if="developer" class="panel rep-section candidate-development"><h2>候选研究开发核验</h2><a class="btn" :href="'/api/quant/decision/runs/'+id+'/export'" target="_blank" rel="noopener noreferrer">导出完整候选与依据</a><details><summary>原始成分、排序、调用与审核</summary><pre>{{ JSON.stringify({universe:data.universe,screening:data.screening_result,members:data.members,calls:state.calls,process:state.process,model_calls:state.model_calls,tokens:state.tokens,elapsed_seconds:state.elapsed_seconds,analysis_ref:data.analysis_ref,review_ref:data.review_ref,candidate_snapshot_ref:data.candidate_snapshot_ref},null,2) }}</pre></details></section>
     </template>
     <details v-if="records.length" class="panel rep-section research-history"><summary>已保存的候选研究 · {{ records.length }} 份</summary><a v-for="row in records" :key="row.run_id" class="prediction-history" :href="'#/candidates/'+row.run_id">{{ row.title }} · {{ new Date(row.created_at).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}) }}</a></details>
-    <p class="condition-note"><a :href="toggle()">{{ developer?'返回用户视图':'开发者入口' }}</a></p>
+
     <DecisionCitation v-if="citation" :key="citation" :run-id="id" :evidence-id="citation" :developer="developer" @close="citation=null"/>
   </div>
 </template>

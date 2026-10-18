@@ -40,6 +40,21 @@ export const plotValue = value => value == null || value === '' || !Number.isFin
 export function prototypeOptions(block, { palette = {}, reducedMotion = false } = {}) {
   const p = { ...chartPalette, ...palette }, base = prototypeChartBase(p, reducedMotion), axis = prototypeAxis(p)
   const x = block.x || [], series = block.series || []
+  if(block.kind==='portfolio_allocation')return {
+    ...base,grid:{left:90,right:24,top:30,bottom:26},
+    xAxis:{type:'value',min:0,max:100,...axis,axisLabel:{...axis.axisLabel,formatter:'{value}%'}},
+    yAxis:{type:'category',inverse:true,data:x,...axis,splitLine:{show:false}},
+    tooltip:{...base.tooltip,valueFormatter:v=>typeof v==='number'?v.toFixed(2)+'%':'—'},
+    series:series.map((s,i)=>({name:s.name,type:'bar',data:s.data.map(plotValue),barMaxWidth:12,itemStyle:{color:i?p.accent:p.secondary}})),
+  }
+  if(block.kind==='portfolio_correlation')return {
+    ...base,grid:{left:80,right:18,top:18,bottom:96},legend:{show:false},
+    xAxis:{type:'category',data:x,...axis,axisLabel:{...axis.axisLabel,rotate:35}},
+    yAxis:{type:'category',data:x,inverse:true,...axis,splitLine:{show:false}},
+    visualMap:{min:-1,max:1,calculable:false,orient:'horizontal',left:'center',bottom:0,itemWidth:12,itemHeight:120,inRange:{color:[p.cyan,p.raised,p.accent]},text:['正相关','负相关'],textStyle:{color:p.secondary}},
+    tooltip:{...base.tooltip,trigger:'item',formatter:params=>x[params.data[0]]+' / '+x[params.data[1]]+'：'+Number(params.data[2]).toFixed(2)},
+    series:[{type:'heatmap',data:(block.matrix||[]).flatMap((row,i)=>row.flatMap((v,j)=>plotValue(v)==null?[]:[[j,i,plotValue(v)]])),label:{show:x.length<=5,formatter:params=>Number(params.data[2]).toFixed(2),fontSize:10,color:p.foreground},itemStyle:{borderWidth:1,borderColor:p.border},emphasis:{itemStyle:{borderWidth:2,borderColor:p.foreground}}}],
+  }
   if (block.kind === 'sector_rank' || block.kind === 'flow_rank') return {
     ...base, grid: { left:76, right:30, top:26, bottom:24 },
     xAxis: { type:'value', ...axis, axisLabel:{...axis.axisLabel, formatter:block.kind==='flow_rank'?'{value}亿':'{value}%'} },
