@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:52.290734+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-FRENCH-5F",
+        "end": 1464,
+        "quote": "RMW (Robust Minus Weak) is the average return on the two robust operating profitability portfolios minus the average return on the two weak operating profitability portfolios, RMW = 1/2 (Small Robust + Big Robust) - 1/2 (Small Weak + Big Weak). CM",
+        "start": 1217,
+        "version": "3eafb817b1e536b08cfab80b0ccfc19bb32f8fbfcf52e9b45b757d7adca19ba7"
+      }
+    ],
+    "conditions": [
+      "当前是因子定义参考，尚未具备本地完整历史组合与A股收益验证。"
+    ],
+    "conflict_group": "因子研究",
+    "counterexamples": [
+      "单一高盈利股票仍可能价格过贵，不能继承来源样本组合的历史收益。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "因子投资",
+      "盈利因子",
+      "质量",
+      "RMW"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "经营盈利指标",
+      "组合样本",
+      "同窗收益"
+    ],
+    "rule_id": "KR-FACTOR-PROFITABILITY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Fama–French资料把盈利因子定义为强经营盈利组合与弱经营盈利组合的平均收益之差。",
+    "steps": [
+      "把盈利质量作为候选研究维度，先明确组合构造和盈利指标定义；不能以一个高盈利公司代替完整因子组合。"
+    ],
+    "system_rule": "把盈利质量作为候选研究维度，先明确组合构造和盈利指标定义；不能以一个高盈利公司代替完整因子组合。",
+    "title": "盈利因子是组合定义，不能直接变成单股保证",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "cacd5d520259b4e501df5a3f9cc1b4bf06f4a1520c550e0eef49a7736d8e033f",
+  "source_families": [
+    "FAMA-FRENCH"
+  ],
+  "rule_id": "KR-FACTOR-PROFITABILITY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:03.132215+00:00",
+      "review_id": "73998a69c3fc0a59f321041f5376124fd9194b8601d965d215510dfd7e563fd2",
+      "rule_id": "KR-FACTOR-PROFITABILITY",
+      "version": "cacd5d520259b4e501df5a3f9cc1b4bf06f4a1520c550e0eef49a7736d8e033f"
+    }
+  ],
+  "review_ids": [
+    "73998a69c3fc0a59f321041f5376124fd9194b8601d965d215510dfd7e563fd2"
+  ]
+}

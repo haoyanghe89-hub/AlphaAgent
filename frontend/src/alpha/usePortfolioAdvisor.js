@@ -1,6 +1,10 @@
 import {createInvestmentPlan} from './useInvestmentPlan.js'
+import {advisorResearchRequest} from './advisorResearchRequest.js'
 
-export const createPortfolioAdvisor=options=>createInvestmentPlan({...options,root:'/quant/portfolio-advisor/turns'})
+export function createPortfolioAdvisor(options){
+  const ctl=createInvestmentPlan({...options,root:'/quant/portfolio-advisor/turns'})
+  return {...ctl,submit:body=>ctl.submit(advisorResearchRequest(body,ctl.state.value?.request))}
+}
 export const portfolioIntent=(text,selected)=>/账户调仓|组合持仓|多只持仓|行业集中度|持仓相关性|整体(?:减仓|加仓|调仓)/.test(text)||(selected==='portfolio'&&!/明日|明天|下一交易日|三个月|3\s*个月|市场观察|行业候选/.test(text))
 export function exposureChart(data,kind='stocks'){
   let labels,before,after

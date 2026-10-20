@@ -1,0 +1,67 @@
+{
+  "body_characters": 86938,
+  "created_at": "2026-10-16T04:04:45.750595+00:00",
+  "document_id": "KS-BUFFETT-1989",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:27.488610+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "wonderful company at a fair price",
+      "end": 73272,
+      "start": 72739
+    },
+    {
+      "anchor": "cigar butt",
+      "end": 71320,
+      "start": 70810
+    }
+  ],
+  "raw_ref": "blob://sha256/4dae70ca027a554a523a1de398cf7310e1cbdcc146c0cce74659931d57141afa",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "wonderful company at a fair price",
+      "cigar butt"
+    ],
+    "authors": [
+      "Warren Buffett"
+    ],
+    "category": "质量与估值",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "1989年度股东信",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "pre",
+    "source_family": "BERKSHIRE",
+    "source_id": "KS-BUFFETT-1989",
+    "tags": [
+      "经营质量",
+      "反例",
+      "安全边际",
+      "巴菲特"
+    ],
+    "title": "巴菲特原信：投资经验与经营质量",
+    "url": "https://www.berkshirehathaway.com/letters/1989.html"
+  },
+  "text_ref": "blob://sha256/31e1a16ee3889621364c8081407fba615f5b103b733e8fb5717abddb343a8334",
+  "version": "bfc0b19e51fb7ce0952ef34c221ce5801bdc79b1809f18d239316a443fa0ec66",
+  "manifest_ref": "blob://sha256/21854077568a199b94cad29999878051a101d5ee0bdf72245cbf92fe3c5f799c",
+  "title": "巴菲特原信：投资经验与经营质量",
+  "excerpts": [
+    {
+      "start": 72739,
+      "end": 73272,
+      "anchor": "wonderful company at a fair price",
+      "text": "d and I Still Miss Him a Lot.\" I could give you other personal examples of \"bargain- purchase\" folly but I'm sure you get the picture: It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price. Charlie understood this early; I was a slow learner. But now, when buying companies or common stocks, we look for first-class businesses accompanied by first- class managements. o That leads right into a related lesson: Good jockeys will do well on good horses, but not on broken-down nags. Both B"
+    },
+    {
+      "start": 70810,
+      "end": 71320,
+      "anchor": "cigar butt",
+      "text": " of the business that gives you a chance to unload at a decent profit, even though the long- term performance of the business may be terrible. I call this the \"cigar butt\" approach to investing. A cigar butt found on the street that has only one puff left in it may not offer much of a smoke, but the \"bargain purchase\" will make that puff all profit. Unless you are a liquidator, that kind of approach to buying businesses is foolish. First, the original \"bargain\" price probably will not turn out to be such "
+    }
+  ]
+}

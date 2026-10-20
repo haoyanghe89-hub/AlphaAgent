@@ -178,6 +178,11 @@ def audit(run_id: str, request: Request):
         model_calls=calls,
         profile_sent_to_model=False,
         holdings_sent_to_model=False,
+        reasoning_profile=state["config"].get("reasoning_profile"),
+        active_research=repo.value(state["active_manifest_ref"])
+        if state.get("active_manifest_ref")
+        else None,
+        publication=state.get("model_steps", {}).get("Writer", {}).get("output_kind", "model"),
     )
 
 
@@ -202,6 +207,9 @@ def export(run_id: str, request: Request):
         "context_snapshot_ref",
         "context_report_ref",
         "forward_protocol_ref",
+        "active_manifest_ref",
+        "base_public_context_ref",
+        "base_evidence_ref",
     ):
         if key not in state:
             continue

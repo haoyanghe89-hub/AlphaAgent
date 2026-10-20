@@ -1,0 +1,68 @@
+{
+  "body_characters": 12804,
+  "created_at": "2026-10-16T04:04:45.790914+00:00",
+  "document_id": "KS-EXPECTATIONS",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:29.439062+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "Estimate Price-Implied Expectations",
+      "end": 6200,
+      "start": 5665
+    },
+    {
+      "anchor": "Identify Expectations Opportunities",
+      "end": 6347,
+      "start": 5812
+    }
+  ],
+  "raw_ref": "blob://sha256/0e3ecc8e370b1c1b332e45cb6685d6949ff8cc040e5f3291617e4973145032a5",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "Estimate Price-Implied Expectations",
+      "Identify Expectations Opportunities"
+    ],
+    "authors": [
+      "Michael Mauboussin",
+      "Alfred Rappaport"
+    ],
+    "category": "预期与估值",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "EXPECTATIONS-INVESTING",
+    "source_id": "KS-EXPECTATIONS",
+    "tags": [
+      "预期差",
+      "现金流",
+      "隐含预期",
+      "估值"
+    ],
+    "title": "预期投资：作者公开三步方法",
+    "url": "https://www.expectationsinvesting.com/about"
+  },
+  "text_ref": "blob://sha256/be8ba90d3f47823c3b32195cac1bc5da7ac1d083dccb17f5f22c67e83229d0d7",
+  "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b",
+  "manifest_ref": "blob://sha256/f9a13b124dfc1dcbe777178a83be45d126a2d107ed6aec43d8a26a04e3edc629",
+  "title": "预期投资：作者公开三步方法",
+  "excerpts": [
+    {
+      "start": 5665,
+      "end": 6200,
+      "anchor": "Estimate Price-Implied Expectations",
+      "text": "entify the right expectations and effectively anticipate revisions in a company’s prospects. Expectations investing comprises the following three-step process: Estimate Price-Implied Expectations. The expectations investor “reads” the expectations for cash flow embedded in a company's current stock price. Identify Expectations Opportunities. The expectations investor then assesses those expectations, evaluates the company's competitive position, and considers the likelihood of upward or downward revisions in those expectations. B"
+    },
+    {
+      "start": 5812,
+      "end": 6347,
+      "anchor": "Identify Expectations Opportunities",
+      "text": "tep process: Estimate Price-Implied Expectations. The expectations investor “reads” the expectations for cash flow embedded in a company's current stock price. Identify Expectations Opportunities. The expectations investor then assesses those expectations, evaluates the company's competitive position, and considers the likelihood of upward or downward revisions in those expectations. Buy, Sell, or Hold? The expectations investor makes a buy, sell, or hold decision, making sure that all investments have a clear-cut after-tax “marg"
+    }
+  ]
+}

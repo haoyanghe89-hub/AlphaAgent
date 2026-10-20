@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:54.311116+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-HOUSEL-RISK",
+        "end": 3183,
+        "quote": "The first thing you have to do is value having options. I remember a driver’s ed class where the instructor said something like, “No matter where you are on the road, always have enough room to stop and a place to pull over.” It gets dangerous when you’re boxed in with limits on how you can react to something you didn’t expect. You’ll regret wanting to do something but not being able to do it. The second is a religious appreciation for unknowns . There’s all kinds of stuff out there that you don’t know about, and stuff that doesn’t exist yet you’ll eventually learn about. Unknowns are dangerous because even if they’re small, your lack of preparedness to deal with them is like an embedded form of leverage. This is the basis for wanting options and having “an out,” even – or especially – when you don’t think you’ll need it. Knock those two out and you’re ready to take some risk. Good risks are those",
+        "start": 2273,
+        "version": "c4930c292d3bac7625907e26a0eead88ec1c459f43f538882d8f45bdb06543a5"
+      }
+    ],
+    "conditions": [
+      "现金和流动性缓冲依个人需求而定；原文没有本系统统一仓位上限。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "过度持币也会有机会成本；保留现金不能消除已有持仓的跳空或系统性风险。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "容量",
+      "仓位",
+      "现金缓冲",
+      "未知风险"
+    ],
+    "kind": "容量",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "可用现金",
+      "持仓约束",
+      "未知事件情景"
+    ],
+    "rule_id": "KR-KEEP-OPTIONS",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Housel强调保留选择空间，并尊重尚未知晓的风险，因为未准备应对的小事件也可能放大影响。",
+    "steps": [
+      "资金使用和持仓安排应留出应对意外与调整判断的空间，缓冲大小作为待核算约束而非统一百分比。"
+    ],
+    "system_rule": "资金使用和持仓安排应留出应对意外与调整判断的空间，缓冲大小作为待核算约束而非统一百分比。",
+    "title": "给未知事件保留调整空间",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "49aaac79e8558991fe5999afd5856e1614eace6817147a32460fb34b38148cfd",
+  "source_families": [
+    "HOUSEL-COLLAB"
+  ],
+  "rule_id": "KR-KEEP-OPTIONS",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:07.853420+00:00",
+      "review_id": "54b1b8e2db4601e42b142f166905f79c8772c87ea002e27c16b09032e93ff82c",
+      "rule_id": "KR-KEEP-OPTIONS",
+      "version": "49aaac79e8558991fe5999afd5856e1614eace6817147a32460fb34b38148cfd"
+    }
+  ],
+  "review_ids": [
+    "54b1b8e2db4601e42b142f166905f79c8772c87ea002e27c16b09032e93ff82c"
+  ]
+}

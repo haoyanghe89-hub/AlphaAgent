@@ -1,0 +1,67 @@
+{
+  "body_characters": 79244,
+  "created_at": "2026-10-16T04:04:45.497121+00:00",
+  "document_id": "KS-BUFFETT-2000",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T04:01:08.706578+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "investment",
+      "end": 3318,
+      "start": 2808
+    },
+    {
+      "anchor": "business",
+      "end": 3683,
+      "start": 3175
+    }
+  ],
+  "raw_ref": "blob://sha256/2ace43c92d5cf9e7a71a9c407dc41a86fabbaa0e168787ec24b01dc7e31c84e6",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "investment",
+      "business"
+    ],
+    "authors": [
+      "Warren Buffett"
+    ],
+    "category": "质量与估值",
+    "encoding": "windows-1252",
+    "media_type": "text/html",
+    "publication_label": "2000年度股东信",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "BERKSHIRE",
+    "source_id": "KS-BUFFETT-2000",
+    "tags": [
+      "经营质量",
+      "估值",
+      "能力圈",
+      "巴菲特"
+    ],
+    "title": "巴菲特原信：投资纪律与商业判断",
+    "url": "https://www.berkshirehathaway.com/2000ar/2000letter.html"
+  },
+  "text_ref": "blob://sha256/f9b4de5e7b385ab387e4f8a3e873d1394c91513cdd31616968ccd925117cdf08",
+  "version": "05e4c96e05654aee66ea2e09728dbd89ab52ed81b32b124a291a83ba373a09b1",
+  "manifest_ref": "blob://sha256/886241ddd98c73f4719b877084908cf408adc228790da0e37a56b240a29654f5",
+  "title": "巴菲特原信：投资纪律与商业判断",
+  "excerpts": [
+    {
+      "start": 2808,
+      "end": 3318,
+      "anchor": "investment",
+      "text": "ssarily subjective, we believe Berkshire’s gain in per-share intrinsic value moderately exceeded its gain in book value. (Intrinsic value, as well as other key investment and accounting terms and concepts, are explained in our Owner’s Manual on pages 59-66. Intrinsic value is discussed on page 64.) Furthermore, we completed two significant acquisitions that we negotiated in 1999 and initiated six more. All told, these purchases have cost us about $8 billion, with 97% of that amount paid in cash and 3% in "
+    },
+    {
+      "start": 3175,
+      "end": 3683,
+      "anchor": "business",
+      "text": "tiated in 1999 and initiated six more. All told, these purchases have cost us about $8 billion, with 97% of that amount paid in cash and 3% in stock. The eight businesses we’ve acquired have aggregate sales of about $13 billion and employ 58,000 people. Still, we incurred no debt in making these purchases, and our shares outstanding have increased only 1 / 3 of 1%. Better yet, we remain awash in liquid assets and are both eager and ready for even larger acquisitions. I will detail our purchases in the n"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {deepResearch} from './researchDepth.js'
 // Route explicit horizons first; a bare stock uses the selected workbench mode.
 export const researchModes = [
   { id:'next', label:'明日预测', placeholder:'贵州茅台明天涨还是跌？', hint:'输入任意沪深 A 股名称或代码，收盘后预测下一交易日涨跌' },
@@ -50,7 +51,8 @@ export async function investmentDraft(text,search) {
 
 export function workbenchIntent(text, selected) {
   const question = text.trim()
-  const mode = /明日|明天|下一交易日|次日/.test(question) ? 'next'
+  const industryCandidates = /半导体设备|集成电路制造|晶圆制造/.test(question) && /候选|哪些.*公司|推荐.*公司/.test(question)
+  const mode = industryCandidates ? 'candidates' : /明日|明天|下一交易日|次日/.test(question) ? 'next'
     : /三个月|3\s*个月|中期/.test(question) ? 'medium'
       : /候选|哪些.*公司|推荐.*公司/.test(question) ? 'candidates'
         : /市场观察|市场行情|观察市场|行业热度/.test(question) ? 'market' : selected
@@ -75,7 +77,7 @@ export function workbenchIntent(text, selected) {
 }
 
 export function decisionConditions(intent) {
-  if (intent.mode === 'market') return { scope:'market', research_mode:'market_scan', entity:'设备与制造观察范围', question:intent.question }
-  if (intent.mode === 'candidates') return { scope:'industry', research_mode:'candidates', entity:intent.entity, question:intent.question, horizon_months:3, budget_profile:{max_candidates:3} }
+  if (intent.mode === 'market') return { scope:'market', research_mode:'market_scan', ...(deepResearch()?{enhanced_research:true}:{}), entity:'设备与制造观察范围', question:intent.question }
+  if (intent.mode === 'candidates') return { scope:'industry', research_mode:'candidates', ...(deepResearch()?{enhanced_research:true}:{}), entity:intent.entity, question:intent.question, horizon_months:3, budget_profile:{max_candidates:3} }
   return { entity:intent.entity, question:intent.question, horizon_months:3, research_mode:'medium_term', include_flows:true, include_industry:true, include_methods:true, budget_profile:{max_rounds:1,max_evidence_calls:1} }
 }

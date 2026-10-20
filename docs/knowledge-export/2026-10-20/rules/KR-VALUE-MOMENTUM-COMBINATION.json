@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:52.439736+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-AQR-VALUE-MOMENTUM",
+        "end": 3384,
+        "quote": "We find consistent value and momentum return premia across eight diverse markets and asset classes, and a strong common factor structure among their returns. Value and momentum returns correlate more strongly across asset classes than passive exposures to the asset classes, but value and momentum are negatively correlated with each other, both within and across asset classes. Our results indicate the presence of common global risks that we characterize with a three-factor model that describes a new set of 48 global across-asset-class test assets, the Fama–French portfolios and a variety of hedge fund indices. Glo",
+        "start": 2764,
+        "version": "d967a68ed16627dec0f5a7f7a3c6914540e0e88789ed2459c2eb3377636d562f"
+      }
+    ],
+    "conditions": [
+      "仅取得官方论文摘要，相关性及组合收益必须在本地同窗样本重新验证。"
+    ],
+    "conflict_group": "因子研究",
+    "counterexamples": [
+      "压力期相关性会改变，个股同时便宜且上涨也不等于组合因子互补效果已实现。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "因子投资",
+      "价值",
+      "动量",
+      "组合",
+      "相关性"
+    ],
+    "kind": "持有",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "价值因子定义",
+      "动量窗口",
+      "组合收益与相关性"
+    ],
+    "rule_id": "KR-VALUE-MOMENTUM-COMBINATION",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "AQR论文摘要报告多个市场资产类别中的价值与动量收益溢价及二者负相关特征。",
+    "steps": [
+      "可将价值与动量作为组合研究的不同维度，明确主路线和辅助信号，不把历史相关性视为实时对冲保证。"
+    ],
+    "system_rule": "可将价值与动量作为组合研究的不同维度，明确主路线和辅助信号，不把历史相关性视为实时对冲保证。",
+    "title": "价值与动量互补只作为待验证组合假说",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "6800c1f47e81ac05b5796791514fd4ef5e462caa8c475960a8e417c4f10035b0",
+  "source_families": [
+    "AQR-RESEARCH"
+  ],
+  "rule_id": "KR-VALUE-MOMENTUM-COMBINATION",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:03.648600+00:00",
+      "review_id": "1f7fd5c5d155ed77ffd7f0d6cc53c58ec11a59d83e8a14ebe534087091f7d47e",
+      "rule_id": "KR-VALUE-MOMENTUM-COMBINATION",
+      "version": "6800c1f47e81ac05b5796791514fd4ef5e462caa8c475960a8e417c4f10035b0"
+    }
+  ],
+  "review_ids": [
+    "1f7fd5c5d155ed77ffd7f0d6cc53c58ec11a59d83e8a14ebe534087091f7d47e"
+  ]
+}

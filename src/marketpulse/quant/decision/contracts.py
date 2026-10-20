@@ -4,7 +4,7 @@ from datetime import date
 from typing import Literal
 from uuid import UUID
 
-from pydantic import AwareDatetime, Field, HttpUrl, model_validator
+from pydantic import AwareDatetime, Field, HttpUrl, model_serializer, model_validator
 
 from ..domain import ExactDecimal, FrozenModel
 
@@ -41,9 +41,19 @@ class ResearchRequest(FrozenModel):
     cutoff_at: AwareDatetime | None = None
     parent_run_id: str | None = Field(default=None, pattern=r"^RUN-DEC-[0-9a-f]{32}$")
     budget_profile: BudgetProfile = BudgetProfile()
+    enhanced_research: bool = False
+
+    @model_serializer(mode="wrap")
+    def serialize(self, handler):
+        value = handler(self)
+        if not self.enhanced_research:
+            value.pop("enhanced_research", None)
+        return value
 
     @model_validator(mode="after")
     def explicit_historical_cutoff(self):
+        if self.enhanced_research and self.research_mode not in {"candidates", "market_scan"}:
+            raise ValueError("增强市场研究仅适用于市场观察和行业候选。")
         if self.research_mode == "candidates" and (
             self.scope != "industry"
             or self.entity not in {"半导体设备", "集成电路制造"}
@@ -52,8 +62,10 @@ class ResearchRequest(FrozenModel):
         ):
             raise ValueError("candidate research requires latest semiconductor-equipment scope")
         if self.research_mode == "market_scan" and (
-            self.scope != "market" or self.entity != "设备与制造观察范围"
-            or self.mode != "latest" or self.cutoff_at is not None
+            self.scope != "market"
+            or self.entity != "设备与制造观察范围"
+            or self.mode != "latest"
+            or self.cutoff_at is not None
         ):
             raise ValueError("market scan requires the declared current two-industry scope")
         if self.mode == "historical" and self.cutoff_at is None:

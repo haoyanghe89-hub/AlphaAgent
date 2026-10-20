@@ -61,6 +61,32 @@ def test_server_does_not_require_a_model_credential(tmp_path: Path) -> None:
         assert client.get("/api/health").status_code == 200
 
 
+def test_frontend_entry_revalidates_after_a_build(tmp_path: Path, monkeypatch: MonkeyPatch) -> None:
+    from fastapi.staticfiles import StaticFiles
+
+    from marketpulse.investigation import server
+
+    frontend = tmp_path / "frontend"
+    frontend.mkdir()
+    (frontend / "index.html").write_text("<html>first build</html>", encoding="utf-8")
+    monkeypatch.setenv("INVESTIGATION_SERVE_FRONTEND", "true")
+    monkeypatch.setattr(
+        server, "StaticFiles", lambda **_: StaticFiles(directory=frontend, html=True)
+    )
+    with TestClient(create_app(settings=_settings(tmp_path))) as client:
+        first = client.get("/")
+        assert first.status_code == 200
+        assert first.headers["cache-control"] == "no-cache"
+        assert client.get("/index.html").headers["cache-control"] == "no-cache"
+        assert client.get("/", headers={"If-None-Match": first.headers["etag"]}).status_code == 304
+        (frontend / "index.html").write_text(
+            "<html>second build with new scripts</html>", encoding="utf-8"
+        )
+        second = client.get("/", headers={"If-None-Match": first.headers["etag"]})
+        assert second.status_code == 200 and "second build" in second.text
+        assert second.headers["cache-control"] == "no-cache"
+
+
 class _ReplayFixture:
     async def run(self) -> ReplayCaseOut:
         return ReplayCaseOut(

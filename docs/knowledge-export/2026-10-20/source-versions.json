@@ -1,0 +1,306 @@
+[
+  {
+    "document_id": "KS-AQR-VALUE-MOMENTUM",
+    "version": "abdce7336afd16f7705c1ecbae1d4cb569eb2b1d053646ee82e30e0737619580",
+    "created_at": "2026-10-16T03:53:49.698740+00:00",
+    "raw_ref": "blob://sha256/5370921411f204f923b579aff935e58090e3f8b7cd9281731e043b9c5d94f980",
+    "text_ref": "blob://sha256/a953cf78276cbd2bb88aad0bc3406aa06c246664044a20854c6535ce72a18219",
+    "manifest_ref": "blob://sha256/8dd32e25aa9810f12484854f82e0207365b21903ce3072ef5b92d434d1f99a8f"
+  },
+  {
+    "document_id": "KS-AQR-VALUE-MOMENTUM",
+    "version": "b31630f2e38b8aa9b1283d746ad66e0a88a89fc600da481c0f5ff4adf5a0cb8c",
+    "created_at": "2026-10-16T04:01:14.001644+00:00",
+    "raw_ref": "blob://sha256/5370921411f204f923b579aff935e58090e3f8b7cd9281731e043b9c5d94f980",
+    "text_ref": "blob://sha256/a953cf78276cbd2bb88aad0bc3406aa06c246664044a20854c6535ce72a18219",
+    "manifest_ref": "blob://sha256/1d2c1f3c809d81a2787eb67124ae20d72981a4b6ea58615cbe35e419618fa068"
+  },
+  {
+    "document_id": "KS-AQR-VALUE-MOMENTUM",
+    "version": "d967a68ed16627dec0f5a7f7a3c6914540e0e88789ed2459c2eb3377636d562f",
+    "created_at": "2026-10-16T04:04:47.739610+00:00",
+    "raw_ref": "blob://sha256/5370921411f204f923b579aff935e58090e3f8b7cd9281731e043b9c5d94f980",
+    "text_ref": "blob://sha256/a953cf78276cbd2bb88aad0bc3406aa06c246664044a20854c6535ce72a18219",
+    "manifest_ref": "blob://sha256/f9992713ffcafe23343ffa72621b8e31296807ad5dd1e3ea5a7e40c3d91a5ced"
+  },
+  {
+    "document_id": "KS-BOGLE-COST-2005",
+    "version": "3772add96e8fbaaa1b372dcafa82a8d522878a05a55d5d796abf1ea956aeb375",
+    "created_at": "2026-10-18T05:46:27.501964+00:00",
+    "raw_ref": "blob://sha256/7400c6b2ee4ef3dbd81e8b68cc16ec267d61add6f8b1d7177ee1bdcee0631c42",
+    "text_ref": "blob://sha256/67883c0c8b1f5922530aee852ea7ee48f956638f5ec2a41444a7656c84cc3909",
+    "manifest_ref": "blob://sha256/f25dbc66b44a7bd153c9fbeafb015e94bd1251e699d0de2632a7666af7bd50d2"
+  },
+  {
+    "document_id": "KS-BUFFETT-1989",
+    "version": "cca92ec3b2512fb60bf9c33aafadeddce1c9439bdb443ddd490fa3ef86ade169",
+    "created_at": "2026-10-16T03:53:27.489483+00:00",
+    "raw_ref": "blob://sha256/4dae70ca027a554a523a1de398cf7310e1cbdcc146c0cce74659931d57141afa",
+    "text_ref": "blob://sha256/31e1a16ee3889621364c8081407fba615f5b103b733e8fb5717abddb343a8334",
+    "manifest_ref": "blob://sha256/1294258dd7625adf81eced29d1f5056317e9d0e8f1bb67c81ec5289e01b65bcb"
+  },
+  {
+    "document_id": "KS-BUFFETT-1989",
+    "version": "95ae1af4cfa65d1102257014e409a88e1328571a30b48406ef672cddd29134cc",
+    "created_at": "2026-10-16T04:01:09.760693+00:00",
+    "raw_ref": "blob://sha256/4dae70ca027a554a523a1de398cf7310e1cbdcc146c0cce74659931d57141afa",
+    "text_ref": "blob://sha256/31e1a16ee3889621364c8081407fba615f5b103b733e8fb5717abddb343a8334",
+    "manifest_ref": "blob://sha256/dc8d8f9d3e44d551594bb1bdbe46f4a24f36fd83a2d7102a4b5d56a092949692"
+  },
+  {
+    "document_id": "KS-BUFFETT-1989",
+    "version": "bfc0b19e51fb7ce0952ef34c221ce5801bdc79b1809f18d239316a443fa0ec66",
+    "created_at": "2026-10-16T04:04:45.750595+00:00",
+    "raw_ref": "blob://sha256/4dae70ca027a554a523a1de398cf7310e1cbdcc146c0cce74659931d57141afa",
+    "text_ref": "blob://sha256/31e1a16ee3889621364c8081407fba615f5b103b733e8fb5717abddb343a8334",
+    "manifest_ref": "blob://sha256/21854077568a199b94cad29999878051a101d5ee0bdf72245cbf92fe3c5f799c"
+  },
+  {
+    "document_id": "KS-BUFFETT-1992",
+    "version": "311f4e80ae2aa9b6b7e919708ef87e5ebe2554fe42571cc7e6d3f4c7f7d41219",
+    "created_at": "2026-10-16T03:53:24.654449+00:00",
+    "raw_ref": "blob://sha256/281218259801b95b4fad83f3e92a3e7bfbc15389b8f308b4f5992730f19cdde8",
+    "text_ref": "blob://sha256/13e1390a3d1fb280d7f214ada0e7e097094186d03c4b62fb9836132f0e846197",
+    "manifest_ref": "blob://sha256/5a5653ceb5adff2f2fcc9b30bc4b431db77f8ea4dac031656cedbdeeb34fb785"
+  },
+  {
+    "document_id": "KS-BUFFETT-1992",
+    "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab",
+    "created_at": "2026-10-16T04:04:45.425518+00:00",
+    "raw_ref": "blob://sha256/281218259801b95b4fad83f3e92a3e7bfbc15389b8f308b4f5992730f19cdde8",
+    "text_ref": "blob://sha256/13e1390a3d1fb280d7f214ada0e7e097094186d03c4b62fb9836132f0e846197",
+    "manifest_ref": "blob://sha256/7b794041380d358800431f405dc2b88a165c6305ea51389aac6633191afcab9a"
+  },
+  {
+    "document_id": "KS-BUFFETT-2000",
+    "version": "05e4c96e05654aee66ea2e09728dbd89ab52ed81b32b124a291a83ba373a09b1",
+    "created_at": "2026-10-16T04:04:45.497121+00:00",
+    "raw_ref": "blob://sha256/2ace43c92d5cf9e7a71a9c407dc41a86fabbaa0e168787ec24b01dc7e31c84e6",
+    "text_ref": "blob://sha256/f9b4de5e7b385ab387e4f8a3e873d1394c91513cdd31616968ccd925117cdf08",
+    "manifest_ref": "blob://sha256/886241ddd98c73f4719b877084908cf408adc228790da0e37a56b240a29654f5"
+  },
+  {
+    "document_id": "KS-BUFFETT-2001",
+    "version": "a5bd05a6baa1cb21005d12286a9ed91a47685d5bc04ea95ef295aaefdcbcc6d1",
+    "created_at": "2026-10-16T04:04:45.631460+00:00",
+    "raw_ref": "blob://sha256/0f05ccf7980e0597e4327d73969d824361f1507eeddba3e2467c218e27e07492",
+    "text_ref": "blob://sha256/ca227afb979b7bcbb0e75ec677c3b2a960bc5fc7af918cdb4ba29b986e8ec760",
+    "manifest_ref": "blob://sha256/b80fad1ea6f60ca54f99c58df8c7a9cbdb37ef7568f672241cb63278ba998817"
+  },
+  {
+    "document_id": "KS-DAMODARAN-VALUATION",
+    "version": "f983479d7bab2961b5a08c1c8c7f3d7d87fcc16b4b16df93c80ff12f24495027",
+    "created_at": "2026-10-16T03:53:42.653857+00:00",
+    "raw_ref": "blob://sha256/9361661850796c75110bd35035d18f67a6cc45251a161cb8e6844e2a217718dc",
+    "text_ref": "blob://sha256/be21e33981224321420d79babcbd1315d4a2ca50523b6e2d17ae7f35b5a71365",
+    "manifest_ref": "blob://sha256/7b1f488db354fde2881efb1c34e33822a0ca688aed22ae87cc1869dd3042c209"
+  },
+  {
+    "document_id": "KS-DAMODARAN-VALUATION",
+    "version": "3fb98dbb6e8a5209b6df987a4b4faa779622f50f000dc67eeac5f400cb0841f6",
+    "created_at": "2026-10-16T04:01:13.512226+00:00",
+    "raw_ref": "blob://sha256/b95d014d904a9f89ab262d2da8b774c190430d8e1f23b0cda51188371a6f335f",
+    "text_ref": "blob://sha256/864a424dbae3b20a5c16d231fe908102f5f3fd8f456537a85efd63ae6737333c",
+    "manifest_ref": "blob://sha256/95550df351ad454ad540cc0d035ba00d17eab128193e80408bed72e38834647c"
+  },
+  {
+    "document_id": "KS-DAMODARAN-VALUATION",
+    "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69",
+    "created_at": "2026-10-16T04:04:47.068753+00:00",
+    "raw_ref": "blob://sha256/b95d014d904a9f89ab262d2da8b774c190430d8e1f23b0cda51188371a6f335f",
+    "text_ref": "blob://sha256/864a424dbae3b20a5c16d231fe908102f5f3fd8f456537a85efd63ae6737333c",
+    "manifest_ref": "blob://sha256/66c78cbc996af6abf8a546f6b783f85ca840f14bfb52f5faad5f1e70069cb7ca"
+  },
+  {
+    "document_id": "KS-EXPECTATIONS",
+    "version": "58ad7de303ec2171d45d0cd457dc1fd544029b43b1b74e7f17748a971b768702",
+    "created_at": "2026-10-16T03:53:29.440211+00:00",
+    "raw_ref": "blob://sha256/0e3ecc8e370b1c1b332e45cb6685d6949ff8cc040e5f3291617e4973145032a5",
+    "text_ref": "blob://sha256/be8ba90d3f47823c3b32195cac1bc5da7ac1d083dccb17f5f22c67e83229d0d7",
+    "manifest_ref": "blob://sha256/2668c855e9a0986a4f66239ce78600f22eb74ad241d0d025cd7fc8d6aee7eef2"
+  },
+  {
+    "document_id": "KS-EXPECTATIONS",
+    "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b",
+    "created_at": "2026-10-16T04:04:45.790914+00:00",
+    "raw_ref": "blob://sha256/0e3ecc8e370b1c1b332e45cb6685d6949ff8cc040e5f3291617e4973145032a5",
+    "text_ref": "blob://sha256/be8ba90d3f47823c3b32195cac1bc5da7ac1d083dccb17f5f22c67e83229d0d7",
+    "manifest_ref": "blob://sha256/f9a13b124dfc1dcbe777178a83be45d126a2d107ed6aec43d8a26a04e3edc629"
+  },
+  {
+    "document_id": "KS-FRENCH-3F",
+    "version": "01f173f4818e7500a7a3dd4590c3b52c284529301d661ef2cac39ec6b1f86b21",
+    "created_at": "2026-10-16T03:53:32.865084+00:00",
+    "raw_ref": "blob://sha256/dbe12941658dc09fdad243c8ce0b0dce970e7782d71498ceb19caf9545de21e3",
+    "text_ref": "blob://sha256/3ff212606de703d6f6704b621c235bd67865f053778570b21603c5f8bffcd11a",
+    "manifest_ref": "blob://sha256/56c6da5009944ff3c2116b36380d1a2085ab9d497387974ee3c85b63ed9dd896"
+  },
+  {
+    "document_id": "KS-FRENCH-3F",
+    "version": "94af5580ea423f99c6503c1944b23baa8b348d0e6e362f60a9f4e13552b44897",
+    "created_at": "2026-10-16T04:04:45.867726+00:00",
+    "raw_ref": "blob://sha256/dbe12941658dc09fdad243c8ce0b0dce970e7782d71498ceb19caf9545de21e3",
+    "text_ref": "blob://sha256/3ff212606de703d6f6704b621c235bd67865f053778570b21603c5f8bffcd11a",
+    "manifest_ref": "blob://sha256/cc508f7cfe59965bd0c922efc8c535bc7236418fcfcbeb289d9032ad1e7fd676"
+  },
+  {
+    "document_id": "KS-FRENCH-5F",
+    "version": "dda403303b548ca3a28e17ef052ccabbeb6ad953d9b2ba2e0aa200bc5c169738",
+    "created_at": "2026-10-16T03:53:31.655402+00:00",
+    "raw_ref": "blob://sha256/67c2150c5d99f645f880fa5e168819b9e813c8c1406228ca7105efe8a89bccc2",
+    "text_ref": "blob://sha256/c52274dc381ce99c1552dad946f375c6db6bbb80880ae597bf6a136db1194926",
+    "manifest_ref": "blob://sha256/dce1685b04eff67f31e6121003cbc82829f46c1e2edf7ac00419529e705ff4ca"
+  },
+  {
+    "document_id": "KS-FRENCH-5F",
+    "version": "a2cb3d85e6251884a789f1ea4a1e6d19005d1a248eaa846440c885938dd32095",
+    "created_at": "2026-10-16T04:01:09.880558+00:00",
+    "raw_ref": "blob://sha256/67c2150c5d99f645f880fa5e168819b9e813c8c1406228ca7105efe8a89bccc2",
+    "text_ref": "blob://sha256/c52274dc381ce99c1552dad946f375c6db6bbb80880ae597bf6a136db1194926",
+    "manifest_ref": "blob://sha256/a9f0c4300ea65fe82ae75fb6e76b8a0c0f4012510d5ab4b3885c0e42027269ed"
+  },
+  {
+    "document_id": "KS-FRENCH-5F",
+    "version": "3eafb817b1e536b08cfab80b0ccfc19bb32f8fbfcf52e9b45b757d7adca19ba7",
+    "created_at": "2026-10-16T04:04:45.826446+00:00",
+    "raw_ref": "blob://sha256/67c2150c5d99f645f880fa5e168819b9e813c8c1406228ca7105efe8a89bccc2",
+    "text_ref": "blob://sha256/c52274dc381ce99c1552dad946f375c6db6bbb80880ae597bf6a136db1194926",
+    "manifest_ref": "blob://sha256/628a6c7d0c72570d8b5002fd022a3fcaebdbecf2d85940d8a55beb3fe93c0aba"
+  },
+  {
+    "document_id": "KS-HOUSEL-ENDURANCE",
+    "version": "4dcb9b7891c8eb0aa4400b3ac368e27b412d0c812f27056d4552edd730387c74",
+    "created_at": "2026-10-16T03:53:45.891172+00:00",
+    "raw_ref": "blob://sha256/a3d1715b307f179c8f2a8a24a402a11f1f049832e0385266f9b152f348ec827b",
+    "text_ref": "blob://sha256/ab590efe550a6fed57bed3fa314065914d5864a7e5850b45d0d9c839c76e8aa3",
+    "manifest_ref": "blob://sha256/3440fc68a04cac39fd64ff7d5652297ea1a1555682a62a0308933da372012fde"
+  },
+  {
+    "document_id": "KS-HOUSEL-ENDURANCE",
+    "version": "6afa55d5dfacb20100135b7bfe8fbe75381aed5af080cac9ddeed8de9adcd6f1",
+    "created_at": "2026-10-16T04:01:13.938149+00:00",
+    "raw_ref": "blob://sha256/a3d1715b307f179c8f2a8a24a402a11f1f049832e0385266f9b152f348ec827b",
+    "text_ref": "blob://sha256/ab590efe550a6fed57bed3fa314065914d5864a7e5850b45d0d9c839c76e8aa3",
+    "manifest_ref": "blob://sha256/d8ea380451ca0cf09f181da1e5976a1ab761f40b985364ee5b17a061ca7d078f"
+  },
+  {
+    "document_id": "KS-HOUSEL-ENDURANCE",
+    "version": "3617a3130ffc357a316eb98689a1be3972c3f29ab6a872b884991bcbd5e962dc",
+    "created_at": "2026-10-16T04:04:47.674342+00:00",
+    "raw_ref": "blob://sha256/a3d1715b307f179c8f2a8a24a402a11f1f049832e0385266f9b152f348ec827b",
+    "text_ref": "blob://sha256/ab590efe550a6fed57bed3fa314065914d5864a7e5850b45d0d9c839c76e8aa3",
+    "manifest_ref": "blob://sha256/caf2bc2448581c42ca35b2fdea0e040ae0ccbc8d02cbfb302226decea83c1cb7"
+  },
+  {
+    "document_id": "KS-HOUSEL-REASONABLE",
+    "version": "4b7c2cef08e61c6f619b65bec25c9b24e87f8ff28274a49f9a3201849b1aee99",
+    "created_at": "2026-10-16T03:53:44.917253+00:00",
+    "raw_ref": "blob://sha256/ba5cb6f6f3e1fcd0ef2adb4765bea48600f72cbae20ed998ff377313f4c2cf16",
+    "text_ref": "blob://sha256/40a91fcb6b145e3aab57393814b699b5a205b9d4ad19012f3c89ed58be38f977",
+    "manifest_ref": "blob://sha256/6dca3f3f67795d432632b162f80550b7f04e6fc5c88fdca9568cd934884b14e5"
+  },
+  {
+    "document_id": "KS-HOUSEL-REASONABLE",
+    "version": "88dd418dac24754f4e203d8391fa4a812ebf6af0111f783606774b3ccdb9dd0b",
+    "created_at": "2026-10-16T04:01:13.867594+00:00",
+    "raw_ref": "blob://sha256/ba5cb6f6f3e1fcd0ef2adb4765bea48600f72cbae20ed998ff377313f4c2cf16",
+    "text_ref": "blob://sha256/40a91fcb6b145e3aab57393814b699b5a205b9d4ad19012f3c89ed58be38f977",
+    "manifest_ref": "blob://sha256/1752decfa0dd5e68f52768711a0a616c1101299b512240c4887639caab6b79ae"
+  },
+  {
+    "document_id": "KS-HOUSEL-REASONABLE",
+    "version": "73fe4c0624bd05d0d15fb36340bad9a054994650d2e4bb866cc016293433895d",
+    "created_at": "2026-10-16T04:04:47.575968+00:00",
+    "raw_ref": "blob://sha256/ba5cb6f6f3e1fcd0ef2adb4765bea48600f72cbae20ed998ff377313f4c2cf16",
+    "text_ref": "blob://sha256/40a91fcb6b145e3aab57393814b699b5a205b9d4ad19012f3c89ed58be38f977",
+    "manifest_ref": "blob://sha256/9a7eda85f9cf12661fabce2d8b381e8321d73c508d926c7988e9b669c6018284"
+  },
+  {
+    "document_id": "KS-HOUSEL-RISK",
+    "version": "0b91137e7bd233c867c445ae062983a90476e0d5c45fa2bb5a7200c07f976ff8",
+    "created_at": "2026-10-16T03:53:44.080676+00:00",
+    "raw_ref": "blob://sha256/8c9fc8360b071ee913cc511e1b04d19195dba80936751fac782057b6e70d9b27",
+    "text_ref": "blob://sha256/20395a0ea56f1cb5f03173ee96355e8f78570a893cdacbbc883b912b91e99532",
+    "manifest_ref": "blob://sha256/aafef001020075c60cba7dd52e311312e380da48ea1de99ae0adee0dd866b8a0"
+  },
+  {
+    "document_id": "KS-HOUSEL-RISK",
+    "version": "c4930c292d3bac7625907e26a0eead88ec1c459f43f538882d8f45bdb06543a5",
+    "created_at": "2026-10-16T04:04:47.496346+00:00",
+    "raw_ref": "blob://sha256/8c9fc8360b071ee913cc511e1b04d19195dba80936751fac782057b6e70d9b27",
+    "text_ref": "blob://sha256/20395a0ea56f1cb5f03173ee96355e8f78570a893cdacbbc883b912b91e99532",
+    "manifest_ref": "blob://sha256/e53f40929c6959442415cd744a1ef50cd9e42b2671fb8a6ac0a6e57db029e409"
+  },
+  {
+    "document_id": "KS-IBD-ENTRY",
+    "version": "6b5eee954b678d3e6f65fed2fffad2ef57437b5afbe47326a6b981842d07aa76",
+    "created_at": "2026-10-16T03:53:35.314676+00:00",
+    "raw_ref": "blob://sha256/9ae1e2c287b78e610b84937123349e7534da2026e6bedd2a9207bbb2bd4128ed",
+    "text_ref": "blob://sha256/56fce432057765db5b68569eae77661819f73b2645befd45c673cb2cb3a54a73",
+    "manifest_ref": "blob://sha256/2bbccaa111845f120c440a70169c5321b3e08581ff1406c792980c3776f5d248"
+  },
+  {
+    "document_id": "KS-IBD-ENTRY",
+    "version": "cb338d8cdc2ce210e1dd32c9c1e18102bfab11e010c3b469cd77803511eb631d",
+    "created_at": "2026-10-16T04:04:45.905598+00:00",
+    "raw_ref": "blob://sha256/9ae1e2c287b78e610b84937123349e7534da2026e6bedd2a9207bbb2bd4128ed",
+    "text_ref": "blob://sha256/56fce432057765db5b68569eae77661819f73b2645befd45c673cb2cb3a54a73",
+    "manifest_ref": "blob://sha256/8c21f27dfdb72869cba0be9d4c391b4f1b8de5fb84756e6073ccf8c491788ac7"
+  },
+  {
+    "document_id": "KS-MARKS-RISK",
+    "version": "8d2ec6eeeb5afdc3bd1e454cc445be44dca59b40001579cf238895246446a035",
+    "created_at": "2026-10-16T03:53:50.836666+00:00",
+    "raw_ref": "blob://sha256/7590a94f8617d4acb3714d3958b6a44bb2fdd44e461138506155157bb11f3617",
+    "text_ref": "blob://sha256/a16e68cf88887ef3a2d6d8c2550874d5262956539df0f49fdb92209ac03d5eb3",
+    "manifest_ref": "blob://sha256/a3581c5a25d620cab8d91dfe299860e9cc33dfcf119d693c2ef50fbae0a2502e"
+  },
+  {
+    "document_id": "KS-MARKS-RISK",
+    "version": "f64c3542a8a18e4c13a67d0a9605334082c1f3ffae65f78da41f0a7357321331",
+    "created_at": "2026-10-16T04:01:14.083428+00:00",
+    "raw_ref": "blob://sha256/7590a94f8617d4acb3714d3958b6a44bb2fdd44e461138506155157bb11f3617",
+    "text_ref": "blob://sha256/a16e68cf88887ef3a2d6d8c2550874d5262956539df0f49fdb92209ac03d5eb3",
+    "manifest_ref": "blob://sha256/a86aed314cb14a8e3854fea9f8af95fd6aa4a978a0366c5e5bf4a74d3919d702"
+  },
+  {
+    "document_id": "KS-MARKS-RISK",
+    "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351",
+    "created_at": "2026-10-16T04:04:47.835249+00:00",
+    "raw_ref": "blob://sha256/7590a94f8617d4acb3714d3958b6a44bb2fdd44e461138506155157bb11f3617",
+    "text_ref": "blob://sha256/a16e68cf88887ef3a2d6d8c2550874d5262956539df0f49fdb92209ac03d5eb3",
+    "manifest_ref": "blob://sha256/131f8e0167f267365f90cdb6fa2e814a026db413b96126dcef4f00e33b0a7215"
+  },
+  {
+    "document_id": "KS-MARKS-TEMPERATURE-2023",
+    "version": "22d82c764cf95fb6e077fd118a299fbc7a52335172bca02e9b5795a04e5b6891",
+    "created_at": "2026-10-18T05:47:04.735163+00:00",
+    "raw_ref": "blob://sha256/cb777ac31c0d4cb357a5d5f8a2e7ddfa74c79e6f693f1b11b51ec4f5b59f21d6",
+    "text_ref": "blob://sha256/255cfd5293a7d06fa754d9143c347a353f83905b87333e2df9fc2551edbfbc5e",
+    "manifest_ref": "blob://sha256/a473a8b6c6d0293b421247717d2ab7ef1bd89ea5a7eaad6f339cb834005e930d"
+  },
+  {
+    "document_id": "KS-MOF-CAS31",
+    "version": "c29913b3fc63927d394ed8bf87654ca13b76a88739d7b320f4ce0ac45e58c2c4",
+    "created_at": "2026-10-18T06:04:36.352783+00:00",
+    "raw_ref": "blob://sha256/d3dfb3b45cff71bf62468b86de4eb9aff49fe87c0e8a1425089ada10ff8d7f8b",
+    "text_ref": "blob://sha256/6979b1a3d9b6d93afc17d9a3a42941ec7c2b88e81cc1b9ec21a6262721083ecb",
+    "manifest_ref": "blob://sha256/5eb91ed08de00250e02b7846df3cd4068b67f2973d2e34b21f992ed82807bce4"
+  },
+  {
+    "document_id": "KS-MOF-CAS33",
+    "version": "fa895f8dcecf7c012bc3e2169d189c8098ed172fd8995cc10e20331ac75ea2ec",
+    "created_at": "2026-10-18T06:04:36.709312+00:00",
+    "raw_ref": "blob://sha256/e0735e114846c0d8044d2d5623d1641cbaea78542fbf7cb0ed47a98e4072a9af",
+    "text_ref": "blob://sha256/1e3ecf65438442723369d7ac64b711968da4ce8f2065d8dfc18f74b7fee9957c",
+    "manifest_ref": "blob://sha256/321f7b4ffcc61fae8aeffb3406c562e64e63027780950949edce6a2e656a9195"
+  },
+  {
+    "document_id": "KS-TANG-XHSD-EXCERPT",
+    "version": "a4948bf0b1f1ee15a599c6a53d09c514cbd1a0af13eeeea74fd208de70d65452",
+    "created_at": "2026-10-18T06:04:08.918823+00:00",
+    "raw_ref": "blob://sha256/c58e2b23d3a5100213c0c3084532aaba844be68d2118a4bb27b2836cd4e2e607",
+    "text_ref": "blob://sha256/af9062e997fb192caf459afa7b22e07cda44306ea62fddb41de54fcd23fdc999",
+    "manifest_ref": "blob://sha256/097b6f781a764d812fedf565731c60a7277e73a0f788e609ed4ebdc33cdd28f9"
+  }
+]

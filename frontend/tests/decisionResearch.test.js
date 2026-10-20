@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { parseRoute } from '../src/alpha/navigation.js'
 import { createDecisionResearch } from '../src/alpha/useDecisionResearch.js'
+import {decisionConditions,workbenchIntent} from '../src/alpha/workbenchIntent.js'
 
 test('P0 capability link survives refresh without changing legacy routes', () => {
   assert.deepEqual(parseRoute('#/decision'), { page:'decision' })
@@ -62,4 +63,51 @@ test('continuing a failed research reuses retry key, keeps materials on network 
   await ctl.action('resume')
   assert.equal(bodies[0].request_key,bodies[1].request_key)
   assert.deepEqual(links,['RUN-DEC-recovered']);ctl.dispose()
+})
+
+test('market and candidate starts default to standard and preserve explicit enhancement from both workbench and dedicated pages without changing other modes',async()=>{
+  for (const [mode,research_mode] of [['market','market_scan'],['candidates','candidates']]) {
+    const conditions=decisionConditions({mode,entity:'半导体设备',question:'合成界面请求'})
+    assert.equal(conditions.enhanced_research,undefined)
+    const posts=[]
+    const ctl=createDecisionResearch(null,{api:async(path,options)=>{posts.push(JSON.parse(options.body));throw Error('lost response')}})
+    const direct={research_mode,entity:'半导体设备',question:'合成界面请求'}
+    await ctl.start(direct)
+    await ctl.start({...direct,enhanced_research:false})
+    assert.equal(posts[0].enhanced_research,false)
+    assert.equal(posts[0].request_key,posts[1].request_key)
+    assert.equal('enhanced_research' in direct,false)
+    ctl.dispose()
+  }
+  assert.equal('enhanced_research' in decisionConditions({mode:'medium',entity:'合成股票',question:'合成中期问题'}),false)
+  for (const research_mode of ['medium_term','evidence_only',undefined]) {
+    const posts=[]
+    const ctl=createDecisionResearch(null,{api:async(path,options)=>{posts.push(JSON.parse(options.body));return {run_id:'RUN-DEC-synthetic'}},navigate:()=>{}})
+    await ctl.start({research_mode,entity:'合成股票',question:'合成原流程'})
+    assert.equal('enhanced_research' in posts[0],false)
+    ctl.dispose()
+  }
+})
+
+test('refresh uses selected standard mode for market/candidate new versions and retains legacy medium payload',async()=>{
+  for (const research_mode of ['market_scan','candidates','medium_term']) {
+    const posts=[]
+    const ctl=createDecisionResearch('RUN-DEC-old',{api:async(path,options)=>{
+      posts.push(JSON.parse(options.body));return {run_id:'RUN-DEC-new'}
+    },navigate:()=>{}})
+    ctl.state.value={status:'COMPLETED',request:{research_mode}}
+    await ctl.refresh()
+    assert.equal(posts[0].enhanced_research,research_mode==='medium_term'?undefined:false)
+    assert.equal(ctl.state.value.request.enhanced_research,undefined)
+    ctl.dispose()
+  }
+})
+
+test('industry candidate questions retain their industry intent when a holding horizon is included',()=>{
+  const intent=workbenchIntent('分析半导体设备行业未来三个月的候选，比较公司业务与现金回收。','candidates')
+  assert.equal(intent.mode,'candidates')
+  assert.equal(intent.entity,'半导体设备')
+  assert.equal(decisionConditions(intent).enhanced_research,undefined)
+  assert.equal(workbenchIntent('集成电路制造中期哪些公司值得研究？','next').mode,'candidates')
+  assert.equal(workbenchIntent('宁德时代未来三个月怎么看？','candidates').mode,'medium')
 })

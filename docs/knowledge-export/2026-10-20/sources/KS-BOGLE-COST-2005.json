@@ -1,0 +1,68 @@
+{
+  "body_characters": 28566,
+  "created_at": "2026-10-18T05:46:27.501964+00:00",
+  "document_id": "KS-BOGLE-COST-2005",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-18T05:46:27.501193+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "gross return",
+      "end": 8487,
+      "start": 7975
+    },
+    {
+      "anchor": "Cost Matters",
+      "end": 10169,
+      "start": 9657
+    }
+  ],
+  "raw_ref": "blob://sha256/7400c6b2ee4ef3dbd81e8b68cc16ec267d61add6f8b1d7177ee1bdcee0631c42",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "gross return",
+      "Cost Matters"
+    ],
+    "authors": [
+      "John C. Bogle"
+    ],
+    "category": "成本与组合",
+    "encoding": "utf-8-sig",
+    "media_type": "application/pdf",
+    "publication_label": "2005-05-24 AAII原讲稿；成本主题定位段落",
+    "reading_note": "因视频推荐《投资常识》补充同作者公开讲稿；并非该书全文或等价章节，不把美国历史费用率当作A股阈值。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "BOGLE-ORIGINALS",
+    "source_id": "KS-BOGLE-COST-2005",
+    "tags": [
+      "费用",
+      "净收益",
+      "指数基金",
+      "基金比较",
+      "换手成本"
+    ],
+    "title": "Bogle公开原讲稿：投资净收益与成本",
+    "url": "https://johncbogle.com/speeches/JCB_AAII0505.pdf"
+  },
+  "text_ref": "blob://sha256/67883c0c8b1f5922530aee852ea7ee48f956638f5ec2a41444a7656c84cc3909",
+  "version": "3772add96e8fbaaa1b372dcafa82a8d522878a05a55d5d796abf1ea956aeb375",
+  "manifest_ref": "blob://sha256/f25dbc66b44a7bd153c9fbeafb015e94bd1251e699d0de2632a7666af7bd50d2",
+  "title": "Bogle公开原讲稿：投资净收益与成本",
+  "excerpts": [
+    {
+      "start": 7975,
+      "end": 8487,
+      "anchor": "gross return",
+      "text": "ctations for future returns in the financial markets, we are implicitly concealing the central fact of investing. As a group, investors never— never!—enjoy the gross return that the markets deliver. Investors earn the net return, after all of the costs of our system of financial intermediation. Thus, just as gambling in the casino is a zero-sum game before the croupiers rake in their share (I’m told that this is called “vigorish,” or “the vig”) and a loser’s game thereafter, so beating the stock and bond ma"
+    },
+    {
+      "start": 9657,
+      "end": 10169,
+      "anchor": "Cost Matters",
+      "text": " most of the time. But the relentless rules of humble arithmetic remind us of something both more certain and more profound than the EMH. I call it the CMH—the Cost Matters Hypothesis—the iron rule that investors as a group must always lose to the stock market by the amount of the costs they incur. 3. The Simple Arithmetic of Fund Expenses and Taxes When we examine the record of the past two decades, the relentless rules of humble arithmetic have clearly proven dangerous to the wealth of most families who h"
+    }
+  ]
+}

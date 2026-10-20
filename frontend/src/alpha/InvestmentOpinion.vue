@@ -2,7 +2,7 @@
 const props=defineProps({opinion:Object,evidence:Array,fragments:Array,runId:String,rationale:String})
 const facts=claim=>(claim.evidence_ids||[]).map(id=>props.evidence.find(e=>e.evidence_id===id)).filter(Boolean)
 const methods=()=>props.fragments.filter(f=>props.opinion.method_rule_ids.includes(f.rule_id))
-const value=e=>e.unit==='text'?e.text:e.unit==='ratio'?(Number(e.value)*100).toFixed(2)+'%':Number(e.value).toLocaleString('zh-CN',{maximumFractionDigits:2})+(['CNY/share','CNY'].includes(e.unit)?' 元':e.unit==='CNY/session'?' 元/日':'')
+const value=e=>e.unit==='text'?e.text:e.unit==='ratio'?(Number(e.value)*100).toFixed(2)+'%':Number(e.value).toLocaleString('zh-CN',{maximumFractionDigits:2})+(['CNY/share','CNY'].includes(e.unit)?' 元':e.unit==='CNY/session'?' 元/日':['倍','万元'].includes(e.unit)?' '+e.unit:'')
 const display=e=>e.metric_key==='cash_conversion'||e.metric_key==='turnover_ratio_5_20'?Number(e.value).toFixed(2)+' 倍':value(e)
 </script>
 <template>

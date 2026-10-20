@@ -1,0 +1,77 @@
+{
+  "created_at": "2026-10-18T05:48:06.607761+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "把作者公开反向投资边界转成A股研究准入检查，不将情绪极端或逆向态度直接换算成胜率、仓位或必然反转。",
+    "citations": [
+      {
+        "document_id": "KS-MARKS-TEMPERATURE-2023",
+        "end": 31325,
+        "quote": "Remember that in extreme times, because of the above, the secret to making money lies in contrarianism, not conformity. When emotional investors take an extreme view of an asset’s future and, as a result, take the price to unjustified levels, the “easy money” is usually made by doing the opposite. This is, however, very different from simply diverging from the consensus all the time. Indeed, most of the time, the consensus is as close to right as most individuals can get. So to be successful at contrarianism, you have to understand (a) what the herd is doing, (b) why it’s doing it, (c) what’s wrong with it, and (d) what should be done instead and why.",
+        "start": 30666,
+        "version": "22d82c764cf95fb6e077fd118a299fbc7a52335172bca02e9b5795a04e5b6891"
+      }
+    ],
+    "conditions": [
+      "缺少估值、经营或流动性边界等关键证据时只能观察等待，不能用情绪标签直接触发交易。"
+    ],
+    "conflict_group": "逆向与趋势纪律",
+    "counterexamples": [
+      "共识可能来自持续改善的基本面，盲目逆向会长期亏损；恐慌也可能反映永久损失而不是便宜机会。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得以人多看多就看空、人多看空就抄底，或把逆向投资当作没有风险的必胜方法。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "逆向投资",
+      "共识",
+      "情绪",
+      "风险",
+      "反证"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "可核查的群体观点与行为",
+      "估值和经营证据",
+      "可承受期限与流动性",
+      "反向论证及失效条件"
+    ],
+    "rule_id": "KR-CONTRARIAN-EVIDENCE",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "马克斯强调极端情绪下的逆向与逢共识必反不同；需理解群体在做什么、为何如此、哪里错以及替代选择的依据。",
+    "steps": [
+      "分别说明群体行为、行为原因、错误所在和替代选择依据。",
+      "核对永久损失风险、可承受期限及反证，保留共识可能正确的解释。"
+    ],
+    "system_rule": "只有估值、经营与可验证情绪证据显示极端且反向判断有具体理由时，才讨论有约束的风险调整；反对市场共识本身不构成买卖依据。",
+    "title": "逆向判断需要解释共识哪里错",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "1143b0f964067b21425e83896fc9d510a3a001ed9b468e5cc19b97b569992611",
+  "source_families": [
+    "OAKTREE-MARKS"
+  ],
+  "rule_id": "KR-CONTRARIAN-EVIDENCE",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-18T05:49:20.492072+00:00",
+      "review_id": "3bb236f123cd8bf3313e3f81db3d67a6f55a75d1de83df73f674e0e4a64925a7",
+      "rule_id": "KR-CONTRARIAN-EVIDENCE",
+      "version": "1143b0f964067b21425e83896fc9d510a3a001ed9b468e5cc19b97b569992611"
+    }
+  ],
+  "review_ids": [
+    "3bb236f123cd8bf3313e3f81db3d67a6f55a75d1de83df73f674e0e4a64925a7"
+  ]
+}

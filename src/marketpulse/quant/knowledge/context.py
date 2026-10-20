@@ -442,6 +442,8 @@ def verify(repo, state):
         repo.value(state["knowledge_ref"]),
         state["request"]["horizon_sessions"],
     )
+    if state["request"].get("analysis_focus"):
+        base["user_analysis_focus"] = state["request"]["analysis_focus"]
     expected, evidence = enrich(base, facts, report)
     if state["request"]["schema_version"] in {"investment-research-v3", "investment-research-v4"}:
         from . import technicals
@@ -453,6 +455,13 @@ def verify(repo, state):
         ):
             raise ValueError("技术指标不等于封存行情复算")
         expected, evidence = technicals.enrich(expected, evidence, technical, packet)
+    if state["config"].get("agentic_research_v1"):
+        from . import active_research
+
+        if expected != repo.value(state["base_public_context_ref"]):
+            raise ValueError("增强研究基础证据不等于原文复算")
+        expected = active_research.verify(repo, state, expected, repo.value(state["knowledge_ref"]))
+        evidence += active_research.additional_evidence(expected["tool_results"])
     if expected != repo.value(state["public_context_ref"]) or evidence != state["data"]["evidence"]:
         raise ValueError("模型上下文或证据不等于原文复算")
     return report

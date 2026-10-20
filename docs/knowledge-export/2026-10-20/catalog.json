@@ -1,0 +1,491 @@
+{
+  "document_count": 19,
+  "source_families": 11,
+  "categories": [
+    "因子与组合",
+    "市场环境与周期",
+    "成本与组合",
+    "成长与趋势",
+    "财报与会计口径",
+    "质量与估值",
+    "预期与估值",
+    "风险与纪律"
+  ],
+  "rules_published": 0,
+  "routes_executable": 0,
+  "stage": "K1_SOURCES",
+  "search_mode": "CJK_BIGRAM_FTS5",
+  "documents": [
+    {
+      "document_id": "KS-MOF-CAS33",
+      "version": "fa895f8dcecf7c012bc3e2169d189c8098ed172fd8995cc10e20331ac75ea2ec",
+      "title": "财政部：合并财务报表准则原文",
+      "authors": [
+        "中华人民共和国财政部"
+      ],
+      "tags": [
+        "母公司",
+        "合并报表",
+        "控制",
+        "合并范围",
+        "会计口径"
+      ],
+      "category": "财报与会计口径",
+      "source_family": "MOF-ACCOUNTING-STANDARDS",
+      "url": "https://kjs.mof.gov.cn/zt/kjzzss/kuaijizhunzeshishi/200806/t20080618_46248.htm",
+      "reading_note": "财政部当前目录所列2014修订第33号准则；仅蒸馏报告主体和合并范围边界，不推导分红金额或交易信号。",
+      "publication_label": "2014修订第33号准则；主体与合并范围定位段落",
+      "fetched_at": "2026-10-18T06:04:36.708514+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 9186,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-MOF-CAS31",
+      "version": "c29913b3fc63927d394ed8bf87654ca13b76a88739d7b320f4ce0ac45e58c2c4",
+      "title": "财政部：现金流量表准则原文",
+      "authors": [
+        "中华人民共和国财政部"
+      ],
+      "tags": [
+        "现金流",
+        "经营现金流",
+        "净利润",
+        "受限资金",
+        "金融企业"
+      ],
+      "category": "财报与会计口径",
+      "source_family": "MOF-ACCOUNTING-STANDARDS",
+      "url": "https://kjs.mof.gov.cn/zt/kjzzss/kuaijizhunzeshishi/200806/t20080618_46250.htm",
+      "reading_note": "由财政部当前会计准则目录定位的第31号准则；用于独立核实财报分析基础，不归因于唐朝，不代表当前已核完所有后续解释或各行业报表格式。",
+      "publication_label": "财会〔2006〕3号；财政部当前准则目录所列原文",
+      "fetched_at": "2026-10-18T06:04:09.231951+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 2162,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-TANG-XHSD-EXCERPT",
+      "version": "a4948bf0b1f1ee15a599c6a53d09c514cbd1a0af13eeeea74fd208de70d65452",
+      "title": "唐朝《手把手教你读财报》：新华书店公开书摘",
+      "authors": [
+        "唐朝"
+      ],
+      "tags": [
+        "财报",
+        "母公司",
+        "合并报表",
+        "分红",
+        "书摘"
+      ],
+      "category": "财报与会计口径",
+      "source_family": "TANG-PUBLISHED-EXCERPT",
+      "url": "https://item.xhsd.com/items/1010000102921542",
+      "reading_note": "浏览器可见书摘的文字捕获，以HTML容器保存，非HTTP原始页面字节；新华书店2015版ISBN9787513636124，非2021版全文。不从目录推导其他章节，不沿用历史法律比例。",
+      "publication_label": "2015版；新华书店官方商城公开书摘",
+      "fetched_at": "2026-10-18T06:03:49.142000+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 621,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-MARKS-TEMPERATURE-2023",
+      "version": "22d82c764cf95fb6e077fd118a299fbc7a52335172bca02e9b5795a04e5b6891",
+      "title": "Marks公开原文：周期、群体情绪与反向判断边界",
+      "authors": [
+        "Howard Marks"
+      ],
+      "tags": [
+        "周期",
+        "因果链",
+        "市场情绪",
+        "反向投资",
+        "风险姿态"
+      ],
+      "category": "市场环境与周期",
+      "source_family": "OAKTREE-MARKS",
+      "url": "https://www.oaktreecapital.com/insights/memo/taking-the-temperature",
+      "reading_note": "因视频推荐《周期》补充作者官方备忘录，其中明确讨论书中周期定义；未读取整书，不推断拐点日期或收益概率。",
+      "publication_label": "2023-07-10官方备忘录Taking the Temperature；定位段落",
+      "fetched_at": "2026-10-18T05:46:28.787447+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 45430,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-BOGLE-COST-2005",
+      "version": "3772add96e8fbaaa1b372dcafa82a8d522878a05a55d5d796abf1ea956aeb375",
+      "title": "Bogle公开原讲稿：投资净收益与成本",
+      "authors": [
+        "John C. Bogle"
+      ],
+      "tags": [
+        "费用",
+        "净收益",
+        "指数基金",
+        "基金比较",
+        "换手成本"
+      ],
+      "category": "成本与组合",
+      "source_family": "BOGLE-ORIGINALS",
+      "url": "https://johncbogle.com/speeches/JCB_AAII0505.pdf",
+      "reading_note": "因视频推荐《投资常识》补充同作者公开讲稿；并非该书全文或等价章节，不把美国历史费用率当作A股阈值。",
+      "publication_label": "2005-05-24 AAII原讲稿；成本主题定位段落",
+      "fetched_at": "2026-10-18T05:46:27.501193+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 28566,
+      "media_type": "application/pdf"
+    },
+    {
+      "document_id": "KS-MARKS-RISK",
+      "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351",
+      "title": "Howard Marks：Risk原始备忘录",
+      "authors": [
+        "Howard Marks"
+      ],
+      "tags": [
+        "风险控制",
+        "周期",
+        "风险承受",
+        "反例"
+      ],
+      "category": "风险与纪律",
+      "source_family": "OAKTREE-MARKS",
+      "url": "https://www.oaktreecapital.com/docs/default-source/memos/2006-01-19-risk.pdf",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "2006-01-19备忘录",
+      "fetched_at": "2026-10-16T03:53:50.834016+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 33424,
+      "media_type": "application/pdf"
+    },
+    {
+      "document_id": "KS-AQR-VALUE-MOMENTUM",
+      "version": "d967a68ed16627dec0f5a7f7a3c6914540e0e88789ed2459c2eb3377636d562f",
+      "title": "AQR：价值与动量的跨市场研究",
+      "authors": [
+        "Cliff Asness",
+        "Tobias Moskowitz",
+        "Lasse Pedersen"
+      ],
+      "tags": [
+        "价值因子",
+        "动量因子",
+        "组合",
+        "样本边界"
+      ],
+      "category": "因子与组合",
+      "source_family": "AQR-RESEARCH",
+      "url": "https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:49.697085+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 9333,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-HOUSEL-ENDURANCE",
+      "version": "3617a3130ffc357a316eb98689a1be3972c3f29ab6a872b884991bcbd5e962dc",
+      "title": "Housel：持有期限与承受能力",
+      "authors": [
+        "Morgan Housel"
+      ],
+      "tags": [
+        "持有周期",
+        "回撤控制",
+        "资金管理",
+        "长期投资"
+      ],
+      "category": "风险与纪律",
+      "source_family": "HOUSEL-COLLAB",
+      "url": "https://collabfund.com/blog/time-horizon-vs-endurance/",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:45.890102+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 3735,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-HOUSEL-REASONABLE",
+      "version": "73fe4c0624bd05d0d15fb36340bad9a054994650d2e4bb866cc016293433895d",
+      "title": "Housel：理性与可坚持的投资行为",
+      "authors": [
+        "Morgan Housel"
+      ],
+      "tags": [
+        "行为金融",
+        "持有纪律",
+        "风险承受",
+        "投资路线"
+      ],
+      "category": "风险与纪律",
+      "source_family": "HOUSEL-COLLAB",
+      "url": "https://collabfund.com/blog/rational-vs-reasonable/",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:44.913710+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 7023,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-HOUSEL-RISK",
+      "version": "c4930c292d3bac7625907e26a0eead88ec1c459f43f538882d8f45bdb06543a5",
+      "title": "Housel：风险承受与保留选择",
+      "authors": [
+        "Morgan Housel"
+      ],
+      "tags": [
+        "风险控制",
+        "持有纪律",
+        "资金管理",
+        "行为金融"
+      ],
+      "category": "风险与纪律",
+      "source_family": "HOUSEL-COLLAB",
+      "url": "https://collabfund.com/blog/risk-management/",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:44.079359+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 4764,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-DAMODARAN-VALUATION",
+      "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69",
+      "title": "Damodaran：估值方法公开章节",
+      "authors": [
+        "Aswath Damodaran"
+      ],
+      "tags": [
+        "估值",
+        "现金流",
+        "折现率",
+        "风险",
+        "模型假设"
+      ],
+      "category": "预期与估值",
+      "source_family": "DAMODARAN-NYU",
+      "url": "https://pages.stern.nyu.edu/~adamodar/pdfiles/valn2ed/ch2.pdf",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "Investment Valuation公开第二章；未读取整书",
+      "fetched_at": "2026-10-16T04:01:13.511105+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 41332,
+      "media_type": "application/pdf"
+    },
+    {
+      "document_id": "KS-IBD-ENTRY",
+      "version": "cb338d8cdc2ce210e1dd32c9c1e18102bfab11e010c3b469cd77803511eb631d",
+      "title": "O’Neil／IBD：成长、市场与入场清单",
+      "authors": [
+        "William O’Neil",
+        "Investor’s Business Daily"
+      ],
+      "tags": [
+        "入场时机",
+        "成长投资",
+        "市场趋势",
+        "突破",
+        "量价"
+      ],
+      "category": "成长与趋势",
+      "source_family": "IBD-ONEIL",
+      "url": "https://get.investors.com/wp-content/uploads/2024/08/IBDD-How-to-buy-Stocks-infographic.pdf",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:35.309812+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 5451,
+      "media_type": "application/pdf"
+    },
+    {
+      "document_id": "KS-FRENCH-3F",
+      "version": "94af5580ea423f99c6503c1944b23baa8b348d0e6e362f60a9f4e13552b44897",
+      "title": "French：市场、规模与价值因子定义",
+      "authors": [
+        "Kenneth French",
+        "Eugene Fama"
+      ],
+      "tags": [
+        "因子投资",
+        "价值因子",
+        "规模因子",
+        "市场因子"
+      ],
+      "category": "因子与组合",
+      "source_family": "FAMA-FRENCH",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_factors.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:32.863520+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 1759,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-FRENCH-5F",
+      "version": "3eafb817b1e536b08cfab80b0ccfc19bb32f8fbfcf52e9b45b757d7adca19ba7",
+      "title": "French：五因子原始构造定义",
+      "authors": [
+        "Kenneth French",
+        "Eugene Fama"
+      ],
+      "tags": [
+        "因子投资",
+        "盈利因子",
+        "价值因子",
+        "规模因子",
+        "投资因子"
+      ],
+      "category": "因子与组合",
+      "source_family": "FAMA-FRENCH",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_5_factors_2x3.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:31.653455+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 2997,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-EXPECTATIONS",
+      "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b",
+      "title": "预期投资：作者公开三步方法",
+      "authors": [
+        "Michael Mauboussin",
+        "Alfred Rappaport"
+      ],
+      "tags": [
+        "预期差",
+        "现金流",
+        "隐含预期",
+        "估值"
+      ],
+      "category": "预期与估值",
+      "source_family": "EXPECTATIONS-INVESTING",
+      "url": "https://www.expectationsinvesting.com/about",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "公开方法资料",
+      "fetched_at": "2026-10-16T03:53:29.439062+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 12804,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-BUFFETT-1989",
+      "version": "bfc0b19e51fb7ce0952ef34c221ce5801bdc79b1809f18d239316a443fa0ec66",
+      "title": "巴菲特原信：投资经验与经营质量",
+      "authors": [
+        "Warren Buffett"
+      ],
+      "tags": [
+        "经营质量",
+        "反例",
+        "安全边际",
+        "巴菲特"
+      ],
+      "category": "质量与估值",
+      "source_family": "BERKSHIRE",
+      "url": "https://www.berkshirehathaway.com/letters/1989.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "1989年度股东信",
+      "fetched_at": "2026-10-16T03:53:27.488610+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 86938,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-BUFFETT-2001",
+      "version": "a5bd05a6baa1cb21005d12286a9ed91a47685d5bc04ea95ef295aaefdcbcc6d1",
+      "title": "巴菲特原信：风险与资本配置",
+      "authors": [
+        "Warren Buffett"
+      ],
+      "tags": [
+        "风险控制",
+        "资本配置",
+        "巴菲特",
+        "分散"
+      ],
+      "category": "风险与纪律",
+      "source_family": "BERKSHIRE",
+      "url": "https://www.berkshirehathaway.com/2001ar/2001letter.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "2001年度股东信",
+      "fetched_at": "2026-10-16T04:01:09.757467+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 73604,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-BUFFETT-2000",
+      "version": "05e4c96e05654aee66ea2e09728dbd89ab52ed81b32b124a291a83ba373a09b1",
+      "title": "巴菲特原信：投资纪律与商业判断",
+      "authors": [
+        "Warren Buffett"
+      ],
+      "tags": [
+        "经营质量",
+        "估值",
+        "能力圈",
+        "巴菲特"
+      ],
+      "category": "质量与估值",
+      "source_family": "BERKSHIRE",
+      "url": "https://www.berkshirehathaway.com/2000ar/2000letter.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "2000年度股东信",
+      "fetched_at": "2026-10-16T04:01:08.706578+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 79244,
+      "media_type": "text/html"
+    },
+    {
+      "document_id": "KS-BUFFETT-1992",
+      "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab",
+      "title": "巴菲特原信：增长、资本回报与安全边际",
+      "authors": [
+        "Warren Buffett"
+      ],
+      "tags": [
+        "资本回报",
+        "现金流",
+        "安全边际",
+        "巴菲特",
+        "价值投资"
+      ],
+      "category": "质量与估值",
+      "source_family": "BERKSHIRE",
+      "url": "https://www.berkshirehathaway.com/letters/1992.html",
+      "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+      "publication_label": "1992年度股东信",
+      "fetched_at": "2026-10-16T03:53:24.653143+00:00",
+      "reading_scope": "EXCERPT_CAPTURED",
+      "excerpt_count": 2,
+      "body_characters": 68295,
+      "media_type": "text/html"
+    }
+  ]
+}

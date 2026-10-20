@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:45.574141+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-IBD-ENTRY",
+        "end": 4802,
+        "quote": "Check the Stock Market Exposure indicator on investors.com to make sure buying a new position will keep your portfolio aligned with the current market conditions. Go to the IBD Stock Checkup and make sure a stock’s fundamentals get good ratings. 2 Review the stock’s chart and look for a breakout from a chart pattern on high volume. Buy within 5% of the chart pattern’s buy point. 3 How to When you’re considering buying a stock, follow this THREE-STEP ROUTINE to put the odds of success in your favor. BUY STOCKS 0%-20%: The most cautious level. Put very little, if any, of your investing capital at risk. 20%-40%: Remain cautious, with your portfolio tilted toward cash. But you might try out some of your stock ideas when the market starts to improve. If the market is pulling",
+        "start": 4022,
+        "version": "cb338d8cdc2ce210e1dd32c9c1e18102bfab11e010c3b469cd77803511eb631d"
+      }
+    ],
+    "conditions": [
+      "IBD市场暴露指标和美国经验不是本地市场择时模型，A股判定口径待验证。"
+    ],
+    "conflict_group": "趋势入退场",
+    "counterexamples": [
+      "市场总体转弱时个股突破可能失败；总体走强也不能替代个股条件核查。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM"
+    ],
+    "keywords": [
+      "市场环境",
+      "趋势",
+      "入场时机",
+      "仓位"
+    ],
+    "kind": "市场环境",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "市场行情",
+      "个股财务",
+      "复权价格",
+      "成交量"
+    ],
+    "rule_id": "KR-TREND-MARKET",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "IBD买入清单先检查其市场暴露指标，再检查个股基本面及放量突破，并要求组合与市场条件匹配。",
+    "steps": [
+      "A股趋势研究先检查有真实数据的市场状态，再评估个股信号；不把IBD专有指标冒充本地已实现指标。"
+    ],
+    "system_rule": "A股趋势研究先检查有真实数据的市场状态，再评估个股信号；不把IBD专有指标冒充本地已实现指标。",
+    "title": "趋势入场先检查整体市场环境",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "3cdfa7d12bc6cbaffda9ae9d16761b89f236046b837beadf149030514cc36be9",
+  "source_families": [
+    "IBD-ONEIL"
+  ],
+  "rule_id": "KR-TREND-MARKET",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:48.549288+00:00",
+      "review_id": "aedf67de69987f31a08832602f66b416ffa368e97a7c5003d1c50af0c0e1b760",
+      "rule_id": "KR-TREND-MARKET",
+      "version": "3cdfa7d12bc6cbaffda9ae9d16761b89f236046b837beadf149030514cc36be9"
+    }
+  ],
+  "review_ids": [
+    "aedf67de69987f31a08832602f66b416ffa368e97a7c5003d1c50af0c0e1b760"
+  ]
+}

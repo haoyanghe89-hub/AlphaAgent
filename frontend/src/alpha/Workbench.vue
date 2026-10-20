@@ -8,6 +8,7 @@ import { userHistoryItem } from './uiPresentation.js'
 import MarketDashboard from './MarketDashboard.vue'
 import MainFlowMonitor from './MainFlowMonitor.vue'
 import DailyWorkspace from './DailyWorkspace.vue'
+import ResearchDepth from './ResearchDepth.vue'
 const props=defineProps({ stocks:Array, history:Array, loading:Boolean, historyLoading:Boolean, error:String, liveQuotes:Array, quoteTime:String, quoteError:String })
 const emit=defineEmits(['ask','retry'])
 const developer=new URLSearchParams(location.search).get('developer')==='1'
@@ -25,7 +26,7 @@ const label=item=>item.scenario==='portfolio_advisor'?'账户调仓':item.scenar
       <div class="hero-heading"><h1>今天，关注什么</h1><span class="muted">市场、机会与持仓，一处查看</span></div>
       <div class="workbench-modes" role="group" aria-label="选择研究内容"><button v-for="item in researchModes" :key="item.id" class="btn" :class="{'btn-primary':mode===item.id}" :aria-pressed="mode===item.id" @click="mode=item.id;input?.focus()">{{ item.label }}</button></div>
       <form class="ask-box" @submit.prevent="ask()"><input ref="input" v-model="question" aria-label="投研问题" :placeholder="current.placeholder" autocomplete="off" maxlength="2000"><button class="btn btn-primary" :disabled="!question.trim()||loading">{{ loading?'正在读取…':'开始分析' }}</button></form>
-      <p class="condition-note mode-hint">{{ current.hint }} <a href="#/investment-research">按路线与资金生成投资计划 →</a></p>
+      <ResearchDepth /><p class="condition-note mode-hint">{{ current.hint }} <a href="#/investment-research">按路线与资金生成投资计划 →</a></p>
       <div class="ask-chips"><button v-for="example in examples" :key="example" class="chip" :disabled="loading" @click="ask(example)">{{ example }}</button></div>
       <p class="hero-disclaimer">方向是待验证的判断。预测保存后不覆盖，目标交易日收盘后核对真实结果。</p>
     </section>

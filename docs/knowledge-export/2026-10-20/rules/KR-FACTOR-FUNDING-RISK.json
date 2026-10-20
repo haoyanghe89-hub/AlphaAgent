@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:52.532486+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-AQR-VALUE-MOMENTUM",
+        "end": 3981,
+        "quote": "Global funding liquidity risk is a partial source of these patterns, which are identifiable only when examining value and momentum jointly across markets. Our findings present a challenge to existing behavioral, institutional and rational asset pricing theories that largely focus on U.S. equities. The strong correlation structure among value and momentum strategies across such diverse asset classes is difficult to reconcile under existing behavioral theories, for example. The high return premium and Sharpe ratio of a global across-asset-class diversified value and momentum portfolio presents a",
+        "start": 3381,
+        "version": "d967a68ed16627dec0f5a7f7a3c6914540e0e88789ed2459c2eb3377636d562f"
+      }
+    ],
+    "conditions": [
+      "研究摘要的解释不能替代实时融资指标或完整论文复现，也不证明适用于所有市场。"
+    ],
+    "conflict_group": "因子研究",
+    "counterexamples": [
+      "本地交易限制或市场结构差异可能使国外因子结果失效，单期流入不能证实全球机制。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "因子投资",
+      "市场环境",
+      "融资流动性",
+      "跨市场"
+    ],
+    "kind": "市场环境",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "融资环境证据",
+      "因子同窗样本",
+      "市场差异"
+    ],
+    "rule_id": "KR-FACTOR-FUNDING-RISK",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "AQR摘要指出全球融资流动性风险是价值与动量模式的部分来源，并强调跨市场联合观察。",
+    "steps": [
+      "使用跨市场因子经验时列出融资环境与样本差异；把流动性影响作为情景假说而非当前资金流事实。"
+    ],
+    "system_rule": "使用跨市场因子经验时列出融资环境与样本差异；把流动性影响作为情景假说而非当前资金流事实。",
+    "title": "跨市场因子表现仍可能暴露共同流动性风险",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "88289431906874bb46255ae80bb8b9702a2df051fa61e50a3587a6cf6117ae85",
+  "source_families": [
+    "AQR-RESEARCH"
+  ],
+  "rule_id": "KR-FACTOR-FUNDING-RISK",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:03.924780+00:00",
+      "review_id": "ef68873dce8aa0dd450fe7e3e4943f9d20c8683f943bb9bc44c9820b5706eb9d",
+      "rule_id": "KR-FACTOR-FUNDING-RISK",
+      "version": "88289431906874bb46255ae80bb8b9702a2df051fa61e50a3587a6cf6117ae85"
+    }
+  ],
+  "review_ids": [
+    "ef68873dce8aa0dd450fe7e3e4943f9d20c8683f943bb9bc44c9820b5706eb9d"
+  ]
+}

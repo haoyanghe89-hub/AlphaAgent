@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:44.408819+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-EXPECTATIONS",
+        "end": 4289,
+        "quote": "Sell stocks that trade at sufficient premiums over expected value The higher a stock price’s premium to its expected value, the more compelling the selling opportunity. Investors should sell a stock for three reasons: it has reached its expected value, better investment opportunities exist, or the investor revises expectations downward. But even these reasons may not be decisive after incorporating taxes and transactions costs into the analysis. Don’t overlook value determinants missing from the financial statements For example, compa",
+        "start": 3749,
+        "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b"
+      }
+    ],
+    "conditions": [
+      "与基本面路线一致；当前未计算A股税费和交易数量，不能生成直接交易指令。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "更好机会的预期不可靠或换手成本较高时，频繁替换可能降低实际收益。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "退出",
+      "卖出",
+      "预期下调",
+      "交易成本"
+    ],
+    "kind": "退出",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "当前估值",
+      "原始持有依据",
+      "替代机会",
+      "交易成本"
+    ],
+    "rule_id": "KR-EXPECTATION-EXIT",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "预期投资列出达到预期价值、更好机会和预期下调等卖出理由，并提示税与交易成本可能改变决策。",
+    "steps": [
+      "定期复核原持有依据、估值和可比机会，列清退出触发条件及成本，不能只因上涨或下跌机械换股。"
+    ],
+    "system_rule": "定期复核原持有依据、估值和可比机会，列清退出触发条件及成本，不能只因上涨或下跌机械换股。",
+    "title": "退出理由同时考虑价值、替代机会和成本",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "12c95f541f54aa0826b19edf78952dca28eb9e7c8f7552664fa85918527ce544",
+  "source_families": [
+    "EXPECTATIONS-INVESTING"
+  ],
+  "rule_id": "KR-EXPECTATION-EXIT",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:46.260492+00:00",
+      "review_id": "d337e51aa19a7e589b245418b9f813586652d1db026b071c2dd8609f05a46b81",
+      "rule_id": "KR-EXPECTATION-EXIT",
+      "version": "12c95f541f54aa0826b19edf78952dca28eb9e7c8f7552664fa85918527ce544"
+    }
+  ],
+  "review_ids": [
+    "d337e51aa19a7e589b245418b9f813586652d1db026b071c2dd8609f05a46b81"
+  ]
+}

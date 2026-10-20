@@ -7,6 +7,10 @@ const emit = defineEmits(['close'])
 const dialog = ref(null), data = ref(null), error = ref(''), loading = ref(true)
 const excerpt=computed(()=>{
   const item=data.value?.evidence
+  if(item?.source_family==='DECISION_MARKET_CALC'&&item.value!=null){
+    const value=Number(item.value),label=item.text.split('：')[0]
+    return label+'：'+(item.unit==='CNY'?(value/1e8).toFixed(2)+' 亿元':(value*100).toFixed(2)+(item.evidence_id.endsWith('change_5_share')?' 个百分点':'%'))
+  }
   if(item?.source_family==='DECISION_ATTRIBUTION_CALC')return item.text.split('：')[0]+'：'+(Number(item.value)*100).toFixed(2)+(item.evidence_id.includes('relative_')?' 个百分点':'%')+'。未复权价格观察，不是事件贡献。'
   if(item?.kind!=='calculation')return item?.text
   const label=item.text.split('：')[0],value=Number(item.value)
@@ -15,7 +19,7 @@ const excerpt=computed(()=>{
 let disposed = false
 const outside = useEvidencePopover(dialog, () => emit('close'))
 onMounted(async () => {
-  try { const value = await request(props.predictionId ? '/quant/decision/experiments/next-session/runs/' + encodeURIComponent(props.runId) + '/evidence/' + encodeURIComponent(props.predictionId) + '/' + encodeURIComponent(props.evidenceId) : '/quant/decision/runs/' + encodeURIComponent(props.runId) + '/evidence/' + encodeURIComponent(props.evidenceId)); if (!disposed) data.value = value }
+  try { const value = await request(props.predictionId ? '/quant/decision/experiments/next-session/runs/' + encodeURIComponent(props.runId) + '/evidence/' + encodeURIComponent(props.predictionId) + '/' + encodeURIComponent(props.evidenceId) : '/quant/decision/runs/' + encodeURIComponent(props.runId) + '/evidence/' + encodeURIComponent(props.evidenceId), { timeoutMs: 60000 }); if (!disposed) data.value = value }
   catch(e) { if (!disposed) error.value = e.message }
   finally { if (!disposed) loading.value = false }
 })
@@ -26,7 +30,7 @@ onUnmounted(() => { disposed = true })
     <div class="dialog-head"><h2 id="decision-citation-title">引用原文</h2><button class="icon-button" aria-label="关闭引用原文" @click="emit('close')">×</button></div>
     <p v-if="loading" role="status">正在核对引用位置…</p><p v-if="error" class="error-text" role="alert">{{ error }}</p>
     <template v-if="data">
-      <h3>{{ data.document?.title || ({TENCENT:'腾讯行情',SINA:'新浪行情',DETERMINISTIC_CALCULATION:'根据已保存行情计算',DECISION_FLOW_CALC:'根据本次封存数据分渠道计算',DECISION_ATTRIBUTION_CALC:'根据同期封存行情计算',WSTS:'WSTS 原始发布',SEMI:'SEMI 原始发布',CNINFO_EVENT:'公司公告目录标题',EASTMONEY_MARGIN:'融资渠道观察',POLICY_CN:'中国官方政策原文',POLICY_US:'美国官方政策原文'}[data.evidence.source_family] || '资料依据') }}</h3>
+      <h3>{{ data.document?.title || ({TENCENT:'腾讯行情',SINA:'新浪行情',DETERMINISTIC_CALCULATION:'根据已保存行情计算',DECISION_MARKET_CALC:'根据本次封存行业行情计算',DECISION_FLOW_CALC:'根据本次封存数据分渠道计算',DECISION_ATTRIBUTION_CALC:'根据同期封存行情计算',WSTS:'WSTS 原始发布',SEMI:'SEMI 原始发布',CNINFO_EVENT:'公司公告目录标题',EASTMONEY_MARGIN:'融资渠道观察',POLICY_CN:'中国官方政策原文',POLICY_US:'美国官方政策原文'}[data.evidence.source_family] || '资料依据') }}</h3>
       <p class="condition-note">{{ data.evidence.locator.page ? 'PDF 第 ' + data.evidence.locator.page + ' 页' : '资料时点：' + new Date(data.evidence.observed_at || data.evidence.published_at || data.evidence.available_at).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}) }}</p>
       <p class="evidence-excerpt">{{ excerpt }}</p>
       <p class="condition-note">{{ data.evidence.limitations.join('；') }}</p>

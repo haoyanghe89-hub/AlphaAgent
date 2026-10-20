@@ -1,0 +1,40 @@
+{
+  "exported_at": "2026-10-20T09:23:23+08:00",
+  "formal_data_directory": "D:\\deepsearch\\.phase3-quant-o\\alpha-history-real-02",
+  "current_documents": 19,
+  "source_versions": 38,
+  "source_families": 11,
+  "published_rules": 30,
+  "rule_versions": 30,
+  "normalized_current_body_characters": 516668,
+  "excerpt_locations": 38,
+  "excerpt_characters_within_document_deduplicated": 17291,
+  "rule_explanatory_characters_excluding_quotes_ids_metadata": 9612,
+  "rule_kinds": {
+    "风险": 7,
+    "筛选": 8,
+    "市场环境": 3,
+    "容量": 3,
+    "持有": 3,
+    "估值": 3,
+    "入场": 2,
+    "退出": 1
+  },
+  "source_family_documents": {
+    "MOF-ACCOUNTING-STANDARDS": 2,
+    "TANG-PUBLISHED-EXCERPT": 1,
+    "OAKTREE-MARKS": 2,
+    "BOGLE-ORIGINALS": 1,
+    "AQR-RESEARCH": 1,
+    "HOUSEL-COLLAB": 3,
+    "DAMODARAN-NYU": 1,
+    "IBD-ONEIL": 1,
+    "FAMA-FRENCH": 2,
+    "EXPECTATIONS-INVESTING": 1,
+    "BERKSHIRE": 4
+  },
+  "candidates": 8,
+  "candidate_retrieval_eligible": 0,
+  "rule_status": "REFERENCE_ONLY / UNVALIDATED",
+  "knowledge_tables_unchanged": true
+}

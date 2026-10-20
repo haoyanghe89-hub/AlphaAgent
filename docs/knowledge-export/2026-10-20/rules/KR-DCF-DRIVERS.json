@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:51.388656+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-DAMODARAN-VALUATION",
+        "end": 3360,
+        "quote": "r = Discount rate reflecting the riskiness of the estimated cashflows The cashflows will vary from asset to asset -- dividends for stocks, coupons (interest) and the face value for bonds and after-tax cashflows for a real project. The discount rate will be a function of the riskiness of the estimated cashflows, with higher rates for riskier assets and lower rates for safer projects. You can in fact think of discounted cash flow valuation on a continuum. At one end of the spectrum, you have the default-free zero coupon bond, with a guaranteed cash flow in the future. Discounting this cash flow at the riskless rate should yield the value of the",
+        "start": 2710,
+        "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69"
+      }
+    ],
+    "conditions": [
+      "预测现金流不是已发生事实，折现率不能由大模型凭记忆填写。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "增长或终值假设稍有变化就可能显著改变估值，精确结果可能掩盖输入不确定性。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "DCF",
+      "现金流折现",
+      "估值",
+      "敏感性"
+    ],
+    "kind": "估值",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "现金流预测",
+      "预测期限",
+      "折现率依据"
+    ],
+    "rule_id": "KR-DCF-DRIVERS",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Damodaran说明资产现金流不同，折现率随预期现金流风险变化，风险越高要求的折现率通常越高。",
+    "steps": [
+      "估值需分别记录现金流预测、期限和折现风险假设，对输入变化进行情景比较，不能只输出一个目标价。"
+    ],
+    "system_rule": "估值需分别记录现金流预测、期限和折现风险假设，对输入变化进行情景比较，不能只输出一个目标价。",
+    "title": "现金流、期限与风险共同决定折现估值",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "b6b10d1808fa6b6ce449249658b11ec172a80f7c2dd73820b4cd20e4a29a69d4",
+  "source_families": [
+    "DAMODARAN-NYU"
+  ],
+  "rule_id": "KR-DCF-DRIVERS",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:00.620750+00:00",
+      "review_id": "9bad8e5cba42d59e8a1d5688d5391f58d7d982c4527fa1bd18130e1090751006",
+      "rule_id": "KR-DCF-DRIVERS",
+      "version": "b6b10d1808fa6b6ce449249658b11ec172a80f7c2dd73820b4cd20e4a29a69d4"
+    }
+  ],
+  "review_ids": [
+    "9bad8e5cba42d59e8a1d5688d5391f58d7d982c4527fa1bd18130e1090751006"
+  ]
+}

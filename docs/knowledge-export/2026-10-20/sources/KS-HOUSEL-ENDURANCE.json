@@ -1,0 +1,67 @@
+{
+  "body_characters": 3735,
+  "created_at": "2026-10-16T04:04:47.674342+00:00",
+  "document_id": "KS-HOUSEL-ENDURANCE",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:45.890102+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "There is a difference between time horizon and endurance",
+      "end": 759,
+      "start": 203
+    },
+    {
+      "anchor": "Having the endurance to make long time horizons work",
+      "end": 3291,
+      "start": 2739
+    }
+  ],
+  "raw_ref": "blob://sha256/a3d1715b307f179c8f2a8a24a402a11f1f049832e0385266f9b152f348ec827b",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "There is a difference between time horizon and endurance",
+      "Having the endurance to make long time horizons work"
+    ],
+    "authors": [
+      "Morgan Housel"
+    ],
+    "category": "风险与纪律",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "HOUSEL-COLLAB",
+    "source_id": "KS-HOUSEL-ENDURANCE",
+    "tags": [
+      "持有周期",
+      "回撤控制",
+      "资金管理",
+      "长期投资"
+    ],
+    "title": "Housel：持有期限与承受能力",
+    "url": "https://collabfund.com/blog/time-horizon-vs-endurance/"
+  },
+  "text_ref": "blob://sha256/ab590efe550a6fed57bed3fa314065914d5864a7e5850b45d0d9c839c76e8aa3",
+  "version": "3617a3130ffc357a316eb98689a1be3972c3f29ab6a872b884991bcbd5e962dc",
+  "manifest_ref": "blob://sha256/caf2bc2448581c42ca35b2fdea0e040ae0ccbc8d02cbfb302226decea83c1cb7",
+  "title": "Housel：持有期限与承受能力",
+  "excerpts": [
+    {
+      "start": 203,
+      "end": 759,
+      "anchor": "There is a difference between time horizon and endurance",
+      "text": "reign wealth funds. The fund’s objectives, the manager said, were generational. “So how do you measure performance?” Fink asked. “Quarterly,” said the manager. There is a difference between time horizon and endurance. One is how much time you have to achieve your goals. The other is whether you’re situated to hang around long enough to take advantage of that horizon. Twenty-six drivers started in the 1985 San Marino Grand Prix – a 200-mile sprint. Five finished. The rest ran out of fuel , thanks to a new set of gas-tank rules designed to improve car "
+    },
+    {
+      "start": 2739,
+      "end": 3291,
+      "anchor": "Having the endurance to make long time horizons work",
+      "text": " through day-to-day life. Yes, some people can calmly respond to day-to-day hassles. That’s the trick to long-term thinking. But it’s different from ignorance. Having the endurance to make long time horizons work means your allocation, cash flow, and mindset are intentionally designed to deal with the nonsense that occurs within short time horizons. Tyler Cowen wrote: Plenty of companies have made big mistakes from thinking too big and too long-term; for instance, a lot of mergers were based on notions of long-run synergies that never materialize"
+    }
+  ]
+}

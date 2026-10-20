@@ -45,6 +45,7 @@ export function comparisonEntities(question) {
 }
 
 export function deliveryPage(item) {
+  if (item.scenario === 'research_evaluation') return 'evaluation'
   if (item.scenario === 'portfolio_advisor') return 'portfolio-advisor'
   if (item.scenario === 'holding_advisor') return 'holding-advisor'
   if (item.scenario === 'morning_brief') return 'morning'

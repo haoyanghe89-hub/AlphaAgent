@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:52.071571+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-DAMODARAN-VALUATION",
+        "end": 15547,
+        "quote": "(1) Firms in trouble: A distressed firm generally has negative earnings and cashflows. It expects to lose money for some time in the future. For these firms, estimating future cashflows is difficult to do, since there is a strong probability of bankruptcy. For firms which are expected to fail, discounted cashflow valuation does not work very well, since we value the firm as a going concern providing positive cashflows to its investors. Even for firms that are expected to survive, cashflows will have to be estimated until they turn positive, since obtaining a present value of negative cashflows will yield a negative1 value for equity or the firm. (2) Cyclical Firms: The earnings and cashflows of cyclical firms tend to follow the economy - rising during economic booms and falling during recessions. If discounted cashflow valuation is used on these firms, expected future cashflows are usually smoothed out, unless the analyst wants to undertake the onerous task of predicting the timing and duration of economic recessions and recoveries. Many cyclical firms, in the depths of a recession, look like troubled firms, with negative earnings and cashflows. Estimating future cashflows then becomes entangled with analyst predictions about when",
+        "start": 14297,
+        "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69"
+      }
+    ],
+    "conditions": [
+      "困境与普通周期低谷需区别，缺少恢复或失败证据时保留多情景，不编造恢复概率。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "把濒临失败企业当作正常周期反转会高估价值；把暂时低谷永久化也会误判。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "困境",
+      "周期",
+      "估值风险",
+      "负利润"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "偿债能力",
+      "经营现金流",
+      "周期位置",
+      "持续经营披露"
+    ],
+    "rule_id": "KR-DCF-DISTRESS",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Damodaran指出困境企业有破产风险，通常持续经营折现框架不易直接适用；周期企业现金流应考虑经济波动。",
+    "steps": [
+      "遇到亏损、偿债压力或周期低谷，先区分持续经营、重整和恢复情景，不把单期亏损外推为永续现金流。"
+    ],
+    "system_rule": "遇到亏损、偿债压力或周期低谷，先区分持续经营、重整和恢复情景，不把单期亏损外推为永续现金流。",
+    "title": "困境与周期企业需要调整持续经营假设",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "56508280b01283466e14a8c7d84d86c6d6972c7ab9e7569c0130e0aadea14877",
+  "source_families": [
+    "DAMODARAN-NYU"
+  ],
+  "rule_id": "KR-DCF-DISTRESS",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:02.603642+00:00",
+      "review_id": "d954f6be57c86fa97914519a7390e45b957ca49ae7742e3a3e981cae860df47e",
+      "rule_id": "KR-DCF-DISTRESS",
+      "version": "56508280b01283466e14a8c7d84d86c6d6972c7ab9e7569c0130e0aadea14877"
+    }
+  ],
+  "review_ids": [
+    "d954f6be57c86fa97914519a7390e45b957ca49ae7742e3a3e981cae860df47e"
+  ]
+}

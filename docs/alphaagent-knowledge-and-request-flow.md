@@ -1,5 +1,9 @@
 # 当前知识库与问题处理全过程
 
+> 后续开发补充：新发起的明日预测、投资研究已接入动态方法选择、受控研究工具和按角色推理，详见[首批增强交付与验收](alphaagent-model-research-acceptance-2026-10-18.md)。下文原始轨迹保留；旧固定流程与历史继续按原协议读取。
+
+> 2026-10-19补充：首页复杂问句、持仓与账户连续追问已接入现有DeepSeek的匿名语义理解。模型先识别任务、证券指代和研究重点，再进入统一知识体系与原有计算/复核流程；私人数字和原始私人问句留在本地。详见[真实页面与历史验收](alphaagent-semantic-understanding-acceptance-2026-10-19.md)。
+
 > 本文记录2026-10-18书单补充前的架构与数据快照。随后完成[首批书单补充](alphaagent-douyin-booklist-intake-2026-10-18.md)与[财报知识补充](alphaagent-tang-financial-intake-2026-10-18.md)：当前正式参考规则30条、不同原文资料19份、资料版本38个。本文中的原始数量与研究轨迹保留用于追溯；主链绑定8条固定规则的行为未因补充改变。
 
 核对时间：2026-10-18。依据正在使用的`alpha-history-real-02`数据库、CAS原文、实际源码和已完成研究记录。本轮只读取、解释和输出说明，没有修改正式知识、研究结果或模型配置，没有发起新的模型研究。
@@ -287,3 +291,7 @@ Verifier的user JSON使用`proposal`携带候选分析；Writer的user JSON只�
 核对入口：`src/marketpulse/quant/knowledge/{rules.py,store.py,rule_retrieval.py,research_context.py,routing.py,research_service.py}`、`src/marketpulse/investigation/adapters/model.py`、`frontend/src/App.vue`及`frontend/src/alpha/useInvestmentPlan.js`。
 
 本轮机器证据：`D:\deepsearch\.phase3-quant-o\knowledge-explained-20261018\inventory.json`与`trace.json`。所有时间和计数来自已有数据；本轮没有修改或重新发布知识。
+
+2026-10-18 后续更新：新投资研究、明日预测、持仓顾问与账户调仓已分批接入增强公开研究。新顾问咨询按知识选择、假设／反证、受控工具、分析复核、本地账户计算的顺序执行；旧轮次仍按封存协议恢复。日常追问复用原研究，更新公开资料才新建研究。具体实页证据、兼容与预算边界见 [增强顾问验收记录](alphaagent-enhanced-advisors-acceptance-2026-10-18.md)。本文此前的四职责示例描述的是原历史记录，不能视为新任务的实时调用轨迹。
+
+2026-10-18 市场任务更新：新市场观察和行业候选也使用创建时已发布的知识。Researcher 选择方法、假设和反证，并提出有界的封存事实检索；市场再经 Planner、Analyst、Verifier。行业候选从规划反证生成核查重点，按原固定名单逐股执行 Analyst、Verifier，单股反馈只修正该股，全部批准后按原顺序合并；整次请求共享累计预算。数据计算、候选排序和同业范围仍由原程序核定，全部调用、原文节选位置和方法版本可回放。具体范围、实页结果及限制见 [市场增强验收记录](alphaagent-enhanced-markets-acceptance-2026-10-18.md)。

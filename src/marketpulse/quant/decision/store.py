@@ -81,6 +81,11 @@ class DecisionStore:
             model_calls=0,
             tokens=0,
         )
+        if request.get("enhanced_research"):
+            state.update(
+                config=dict(agentic_research_v1=True, budget=request["budget_profile"]),
+                charged_tokens=0,
+            )
         try:
             with self.base.sessions.begin() as session:
                 session.add(
@@ -144,11 +149,22 @@ class DecisionStore:
                 c for c in state["calls"] if c.get("role") and c["status"] == "COMPLETED"
             ]:
                 raise ValueError("candidate report differs from actual task roles")
-            if data.get("report", {}).get("stage") == "P6_MARKET" and (
-                data["sources"] != [c["source"] for c in state["calls"] if c.get("source")]
-                or state.get("model_calls", 0) != 0
-            ):
-                raise ValueError("market report differs from actual source acquisitions")
+            if data.get("report", {}).get("stage") == "P6_MARKET":
+                if data["sources"] != [c["source"] for c in state["calls"] if c.get("source")]:
+                    raise ValueError("market report differs from actual source acquisitions")
+                if state["request"].get("enhanced_research"):
+                    from .market_enhanced import verify_state
+
+                    verify_state(self, state)
+                elif state.get("model_calls", 0) != 0 or data.get("enhanced_research"):
+                    raise ValueError("legacy market report cannot contain model research")
+            if data.get("report", {}).get("stage") == "P5":
+                if state["request"].get("enhanced_research"):
+                    from .candidate_enhanced import verify_state
+
+                    verify_state(self, state)
+                elif data.get("enhanced_research"):
+                    raise ValueError("legacy candidates cannot contain enhanced research")
             if data.get("report", {}).get("stage") in {"P2", "P3", "P4", "P4K"}:
                 from .forecasts import verify_binding
 

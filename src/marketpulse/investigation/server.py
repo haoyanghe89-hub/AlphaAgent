@@ -211,6 +211,14 @@ def create_app(
     from marketpulse.quant.knowledge.portfolio_api import router as portfolio_advisor_router
 
     app.include_router(portfolio_advisor_router)
+
+    from marketpulse.quant.knowledge.question_api import router as question_router
+
+    app.include_router(question_router)
+
+    from marketpulse.quant.knowledge.paired_evaluation_api import router as evaluation_router
+
+    app.include_router(evaluation_router)
     from marketpulse.quant.daily.api import router as daily_router
 
     app.include_router(daily_router)
@@ -244,6 +252,13 @@ def create_app(
     }:
         frontend_root = Path(__file__).resolve().parents[3] / "frontend" / "dist"
         if frontend_root.is_dir():
+            @app.middleware("http")
+            async def revalidate_frontend_entry(request: Request, call_next):
+                response = await call_next(request)
+                if request.url.path in {"/", "/index.html"}:
+                    response.headers["Cache-Control"] = "no-cache"
+                return response
+
             app.mount("/", StaticFiles(directory=frontend_root, html=True), name="console")
 
     return app

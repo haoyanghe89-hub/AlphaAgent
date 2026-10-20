@@ -7,10 +7,11 @@ from datetime import UTC, datetime
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 
-from ...contracts import digest
+from ...contracts import canonical, digest
 from ...live.store import ResearchRunRow
 from ..store import DecisionStore
 from .contracts import (
+    EnhancedNextSessionSnapshot,
     ExperimentConfig,
     NextSessionOutcome,
     NextSessionPrediction,
@@ -157,7 +158,23 @@ class ExperimentStore:
                 if call.get(name):
                     self.raw_bytes(call[name])
         for ref in state.get("snapshots", {}).values():
-            self.snapshot(ref)
+            snapshot = self.snapshot(ref)
+            if isinstance(snapshot, EnhancedNextSessionSnapshot):
+                from .enhanced import METHOD_VERSION, PROMPT_VERSION
+
+                research = self.value(snapshot.research_state_ref)
+                if (
+                    state["request"].get("enhanced_research") is not True
+                    or state["config"].get("agentic_research_v1") is not True
+                    or state["config"]["prompt_version"] != PROMPT_VERSION
+                    or state["config"]["method_version"] != METHOD_VERSION
+                    or state["calls"][: len(research["calls"])] != research["calls"]
+                    or state["config"].get("reasoning_profile")
+                    != research["config"].get("reasoning_profile")
+                ):
+                    raise ValueError("增强快照与真实研究批次或模型调用不一致")
+        if state["config"].get("agentic_research_v1") is True:
+            self.verify_enhanced_profiles(state)
         for pid in state.get("prediction_ids", []):
             prediction = self.prediction(pid)
             snapshot = self.snapshot(state["snapshots"][prediction.security_id])
@@ -167,6 +184,11 @@ class ExperimentStore:
                 or prediction.target_session != snapshot.target_session
             ):
                 raise ValueError("预测与封存输入不一致")
+            if (
+                isinstance(snapshot, EnhancedNextSessionSnapshot)
+                and prediction.cohort != "EXPLORATORY"
+            ):
+                raise ValueError("增强研究不能混入原正式预测组")
             from .agents import Proposal, Review, Writing, guard_proposal
 
             review = Review.model_validate(self.value(prediction.review_refs[0]))
@@ -194,15 +216,145 @@ class ExperimentStore:
                 or writing.approved_hash != digest(proposal.model_dump(mode="json"))
             ):
                 raise ValueError("预测与已保存审核结果不一致")
+            if isinstance(snapshot, EnhancedNextSessionSnapshot):
+                self.verify_enhanced_publication(state, snapshot, prediction, proposal)
         for aid in state.get("attempt_ids", []):
             self.record(aid)
         return state
+
+    def verify_enhanced_profiles(self, state):
+        from ...knowledge import active_research as active
+        from . import enhanced
+        from .agents import Proposal, Review, Writing
+
+        schemas = dict(
+            Researcher=active.ResearchPlan, Analyst=Proposal, Verifier=Review, Writer=Writing
+        )
+        for call in state["calls"]:
+            if call.get("kind") != "model":
+                continue
+            role = call.get("role")
+            if role not in schemas:
+                raise ValueError("增强预测包含未知模型职责")
+            request = self.value(call["request_ref"])
+            active.verify_profile(state, request, call, role, repo=self)
+            instructions = active.PROMPT if role == "Researcher" else enhanced.PROMPTS[role]
+            version = active.VERSION if role == "Researcher" else enhanced.PROMPT_VERSION
+            messages = request.get("messages", [])
+            prefix = canonical(request.get("context"))
+            if (
+                request.get("role") != role
+                or request.get("instructions") != instructions
+                or request.get("schema") != schemas[role].model_json_schema()
+                or request.get("prompt_version") != version
+                or len(messages) != 2
+                or messages[0] != dict(role="system", content=instructions)
+                or messages[1].get("role") != "user"
+                or not (
+                    messages[1].get("content") == prefix
+                    or messages[1].get("content", "").startswith(prefix + "\n上次检查失败：")
+                )
+            ):
+                raise ValueError("增强模型调用提示、契约或实际消息与固定上下文不一致")
+
+    def verify_enhanced_publication(self, state, snapshot, prediction, published):
+        from ...knowledge.active_research import verify_profile
+        from .agents import Proposal, Review, Writing, guard_proposal
+        from .enhanced import METHOD_VERSION, PROMPT_VERSION, analysis_context
+
+        if (
+            prediction.prompt_version != PROMPT_VERSION
+            or METHOD_VERSION not in prediction.method_versions
+        ):
+            raise ValueError("增强预测发布版本不一致")
+        research = self.value(snapshot.research_state_ref)
+        public = analysis_context(snapshot.model_context, state["config"])
+        expected_analysis = public
+        proposal, analysis_call, review, review_call = None, None, None, None
+        approved = False
+        next_role = "Analyst"
+        previous_finished = snapshot.evidence_sealed_at
+        for call in state["calls"][len(research["calls"]) :]:
+            if call.get("kind") != "model":
+                continue
+            role = call["role"]
+            if role != next_role:
+                raise ValueError("增强预测的实际分析、复核与发布顺序不一致")
+            request = self.value(call["request_ref"])
+            if role == "Analyst" and not approved:
+                expected = expected_analysis
+            elif role == "Verifier" and proposal is not None and not approved:
+                expected = dict(snapshot=public, proposal=proposal.model_dump(mode="json"))
+            elif role == "Writer" and approved:
+                expected = dict(
+                    direction=proposal.direction,
+                    summary=proposal.summary,
+                    approved_hash=digest(proposal.model_dump(mode="json")),
+                )
+            else:
+                raise ValueError("增强预测的实际分析、复核与发布顺序不一致")
+            if request["context"] != expected:
+                raise ValueError("增强模型调用未绑定最终快照或对应批准对象")
+            if call.get("purpose") == "input_count":
+                if call["status"] == "MEASURED":
+                    verify_profile(
+                        state, request, call, role, prediction.issued_at.isoformat(), repo=self
+                    )
+                    if datetime.fromisoformat(call["started_at"]) < previous_finished:
+                        raise ValueError("输入计量早于封存或上一职责完成")
+                    previous_finished = datetime.fromisoformat(call["finished_at"])
+                elif call["status"] == "COMPLETED":
+                    raise ValueError("输入计量调用不能替代正式分析或批准")
+                continue
+            if call["status"] != "COMPLETED":
+                continue
+            verify_profile(state, request, call, role, prediction.issued_at.isoformat(), repo=self)
+            if datetime.fromisoformat(call["started_at"]) < previous_finished:
+                raise ValueError("增强模型调用早于封存或上一职责完成")
+            previous_finished = datetime.fromisoformat(call["finished_at"])
+            if role == "Analyst":
+                proposal = Proposal.model_validate(self.value(call["response_ref"]))
+                guard_proposal(proposal, snapshot.model_context)
+                analysis_call = call
+                next_role = "Verifier"
+            elif role == "Verifier":
+                review = Review.model_validate(self.value(call["response_ref"]))
+                review_call = call
+                approved = review.verdict == "APPROVE" and all(
+                    (
+                        review.citations_supported,
+                        review.next_session_relevant,
+                        review.no_invented_facts,
+                    )
+                )
+                expected_analysis = dict(
+                    public,
+                    previous_proposal=proposal.model_dump(mode="json"),
+                    review_feedback=review.model_dump(mode="json"),
+                )
+                next_role = "Writer" if approved else "Analyst"
+            else:
+                writing = Writing.model_validate(self.value(call["response_ref"]))
+                if (
+                    writing.model_dump(mode="json") != expected
+                    or proposal != published
+                    or prediction.model_version != analysis_call["model"]
+                    or tuple(prediction.review_refs)
+                    != (review_call["response_ref"], call["response_ref"])
+                ):
+                    raise ValueError("增强预测不是实际分析、复核与发布调用的批准结果")
+                return
+        raise ValueError("增强预测缺少实际完成的模型发布链")
 
     def snapshot(self, ref):
         if self.request_cache and ref in self._snapshots:
             return self._snapshots[ref]
         value = self.value(ref)
-        snap = NextSessionSnapshot.model_validate(value)
+        snap = (
+            EnhancedNextSessionSnapshot
+            if value.get("schema_version") == "next-session-enhanced-v1"
+            else NextSessionSnapshot
+        ).model_validate(value)
         if digest({k: v for k, v in value.items() if k != "input_hash"}) != snap.input_hash:
             raise ValueError("封存输入哈希不符")
         data = dict(
@@ -214,7 +366,12 @@ class ExperimentStore:
         # P1 facts/quotes/calculations are verified separately by the daily reader.
         from .snapshot import verify_snapshot
 
-        verify_snapshot(self, snap, data)
+        if isinstance(snap, EnhancedNextSessionSnapshot):
+            from .enhanced import verify
+
+            verify(self, snap)
+        else:
+            verify_snapshot(self, snap, data)
         if self.request_cache:
             self._snapshots[ref] = snap
         return snap

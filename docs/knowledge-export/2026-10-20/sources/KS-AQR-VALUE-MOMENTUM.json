@@ -1,0 +1,69 @@
+{
+  "body_characters": 9333,
+  "created_at": "2026-10-16T04:04:47.739610+00:00",
+  "document_id": "KS-AQR-VALUE-MOMENTUM",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:49.697085+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "We find consistent value and momentum",
+      "end": 3141,
+      "start": 2604
+    },
+    {
+      "anchor": "negatively correlated with each other",
+      "end": 3443,
+      "start": 2906
+    }
+  ],
+  "raw_ref": "blob://sha256/5370921411f204f923b579aff935e58090e3f8b7cd9281731e043b9c5d94f980",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "We find consistent value and momentum",
+      "negatively correlated with each other"
+    ],
+    "authors": [
+      "Cliff Asness",
+      "Tobias Moskowitz",
+      "Lasse Pedersen"
+    ],
+    "category": "因子与组合",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "AQR-RESEARCH",
+    "source_id": "KS-AQR-VALUE-MOMENTUM",
+    "tags": [
+      "价值因子",
+      "动量因子",
+      "组合",
+      "样本边界"
+    ],
+    "title": "AQR：价值与动量的跨市场研究",
+    "url": "https://www.aqr.com/Insights/Research/Journal-Article/Value-and-Momentum-Everywhere"
+  },
+  "text_ref": "blob://sha256/a953cf78276cbd2bb88aad0bc3406aa06c246664044a20854c6535ce72a18219",
+  "version": "d967a68ed16627dec0f5a7f7a3c6914540e0e88789ed2459c2eb3377636d562f",
+  "manifest_ref": "blob://sha256/f9992713ffcafe23343ffa72621b8e31296807ad5dd1e3ea5a7e40c3d91a5ced",
+  "title": "AQR：价值与动量的跨市场研究",
+  "excerpts": [
+    {
+      "start": 2604,
+      "end": 3141,
+      "anchor": "We find consistent value and momentum",
+      "text": "ds Flex UCITS Funds Our Firm About Us Leadership Careers Contact Us MyAQR Log In Register Contact Us ${ numberSection } ${ text } Value and Momentum Everywhere We find consistent value and momentum return premia across eight diverse markets and asset classes, and a strong common factor structure among their returns. Value and momentum returns correlate more strongly across asset classes than passive exposures to the asset classes, but value and momentum are negatively correlated with each other, both within and across asset classes"
+    },
+    {
+      "start": 2906,
+      "end": 3443,
+      "anchor": "negatively correlated with each other",
+      "text": " their returns. Value and momentum returns correlate more strongly across asset classes than passive exposures to the asset classes, but value and momentum are negatively correlated with each other, both within and across asset classes. Our results indicate the presence of common global risks that we characterize with a three-factor model that describes a new set of 48 global across-asset-class test assets, the Fama–French portfolios and a variety of hedge fund indices. Global funding liquidity risk is a partial source of these pat"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ from typing import Literal
 from uuid import UUID
 from zoneinfo import ZoneInfo
 
-from pydantic import AwareDatetime, Field, model_validator
+from pydantic import AwareDatetime, Field, model_serializer, model_validator
 
 from ...domain import ExactDecimal, FrozenModel
 from ..contracts import BudgetProfile, EvidenceBundle
@@ -71,6 +71,14 @@ class NextSessionRunRequest(FrozenModel):
     entity: str | None = Field(default=None, min_length=1, max_length=80)
     # No direction, actual, reviewed flag, retrospective cutoff or cohort input.
     exploratory: bool = False
+    enhanced_research: bool = False
+
+    @model_serializer(mode="wrap")
+    def keep_legacy_request(self, handler):
+        value = handler(self)
+        if not self.enhanced_research:
+            value.pop("enhanced_research", None)
+        return value
 
     @model_validator(mode="after")
     def selected_stock(self):
@@ -162,6 +170,13 @@ class NextSessionSnapshot(FrozenModel):
         if self.daily_prices[-1].reference_price is None:
             raise ValueError("base session requires a verified quote reference")
         return self
+
+
+class EnhancedNextSessionSnapshot(NextSessionSnapshot):
+    schema_version: Literal["next-session-enhanced-v1"] = "next-session-enhanced-v1"
+    base_snapshot_ref: str = Field(pattern=r"^blob://sha256/[0-9a-f]{64}$")
+    knowledge_ref: str = Field(pattern=r"^blob://sha256/[0-9a-f]{64}$")
+    research_state_ref: str = Field(pattern=r"^blob://sha256/[0-9a-f]{64}$")
 
 
 class PredictionReason(FrozenModel):

@@ -1,0 +1,68 @@
+{
+  "body_characters": 41332,
+  "created_at": "2026-10-16T04:04:47.068753+00:00",
+  "document_id": "KS-DAMODARAN-VALUATION",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T04:01:13.511105+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "discounted cash flow",
+      "end": 1938,
+      "start": 1418
+    },
+    {
+      "anchor": "relative valuation",
+      "end": 1088,
+      "start": 570
+    }
+  ],
+  "raw_ref": "blob://sha256/b95d014d904a9f89ab262d2da8b774c190430d8e1f23b0cda51188371a6f335f",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "discounted cash flow",
+      "relative valuation"
+    ],
+    "authors": [
+      "Aswath Damodaran"
+    ],
+    "category": "预期与估值",
+    "encoding": "utf-8-sig",
+    "media_type": "application/pdf",
+    "publication_label": "Investment Valuation公开第二章；未读取整书",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "DAMODARAN-NYU",
+    "source_id": "KS-DAMODARAN-VALUATION",
+    "tags": [
+      "估值",
+      "现金流",
+      "折现率",
+      "风险",
+      "模型假设"
+    ],
+    "title": "Damodaran：估值方法公开章节",
+    "url": "https://pages.stern.nyu.edu/~adamodar/pdfiles/valn2ed/ch2.pdf"
+  },
+  "text_ref": "blob://sha256/864a424dbae3b20a5c16d231fe908102f5f3fd8f456537a85efd63ae6737333c",
+  "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69",
+  "manifest_ref": "blob://sha256/66c78cbc996af6abf8a546f6b783f85ca840f14bfb52f5faad5f1e70069cb7ca",
+  "title": "Damodaran：估值方法公开章节",
+  "excerpts": [
+    {
+      "start": 1418,
+      "end": 1938,
+      "anchor": "discounted cash flow",
+      "text": "s for such differences in value across different models and to help in choosing the right model to use for a specific task. Discounted Cashflow Valuation While discounted cash flow valuation is one of the three ways of approaching valuation and most valuations done in the real world are relative valuations, we will argue that it is the foundation on which all other valuation approaches are built. To do relative valuation correctly, we need to understand the fundamentals of discounted cash flow valuation. To apply o"
+    },
+    {
+      "start": 570,
+      "end": 1088,
+      "anchor": "relative valuation",
+      "text": "valuation. The first, discounted cashflow valuation, relates the value of an asset to the present value of expected future cashflows on that asset. The second, relative valuation, estimates the value of an asset by looking at the pricing of 'comparable' assets relative to a common variable such as earnings, cashflows, book value or sales. The third, contingent claim valuation, uses option pricing models to measure the value of assets that share option characteristics. Some of these assets are traded financial ass"
+    }
+  ]
+}

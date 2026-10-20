@@ -1,0 +1,67 @@
+{
+  "body_characters": 33424,
+  "created_at": "2026-10-16T04:04:47.835249+00:00",
+  "document_id": "KS-MARKS-RISK",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:50.834016+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "When priced fairly",
+      "end": 3776,
+      "start": 3258
+    },
+    {
+      "anchor": "possibility of losses",
+      "end": 3921,
+      "start": 3400
+    }
+  ],
+  "raw_ref": "blob://sha256/7590a94f8617d4acb3714d3958b6a44bb2fdd44e461138506155157bb11f3617",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "When priced fairly",
+      "possibility of losses"
+    ],
+    "authors": [
+      "Howard Marks"
+    ],
+    "category": "风险与纪律",
+    "encoding": "utf-8-sig",
+    "media_type": "application/pdf",
+    "publication_label": "2006-01-19备忘录",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "OAKTREE-MARKS",
+    "source_id": "KS-MARKS-RISK",
+    "tags": [
+      "风险控制",
+      "周期",
+      "风险承受",
+      "反例"
+    ],
+    "title": "Howard Marks：Risk原始备忘录",
+    "url": "https://www.oaktreecapital.com/docs/default-source/memos/2006-01-19-risk.pdf"
+  },
+  "text_ref": "blob://sha256/a16e68cf88887ef3a2d6d8c2550874d5262956539df0f49fdb92209ac03d5eb3",
+  "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351",
+  "manifest_ref": "blob://sha256/131f8e0167f267365f90cdb6fa2e814a026db413b96126dcef4f00e33b0a7215",
+  "title": "Howard Marks：Risk原始备忘录",
+  "excerpts": [
+    {
+      "start": 3258,
+      "end": 3776,
+      "anchor": "When priced fairly",
+      "text": "nagement, L.P. All Rights Reserved Riskier investme nts are those where the outcome is less certain. That is, the probability distribution of returns is wider. When priced fairly, riskier investments should entail:  higher expected returns,  the possibility of lower returns, and  in some cases the possibility of losses. The traditional graph shown first above is deceptive, because it communicates the positive connection between risk and return but fails to suggest the uncertainty involved. It has brought a lot"
+    },
+    {
+      "start": 3400,
+      "end": 3921,
+      "anchor": "possibility of losses",
+      "text": "returns is wider. When priced fairly, riskier investments should entail:  higher expected returns,  the possibility of lower returns, and  in some cases the possibility of losses. The traditional graph shown first above is deceptive, because it communicates the positive connection between risk and return but fails to suggest the uncertainty involved. It has brought a lot of people a lot of misery through its unwavering intimation that taking more risk leads to making more money. I hope my version of the graph is "
+    }
+  ]
+}

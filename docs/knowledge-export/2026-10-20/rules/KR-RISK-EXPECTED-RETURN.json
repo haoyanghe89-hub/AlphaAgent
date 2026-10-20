@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:52.835157+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-MARKS-RISK",
+        "end": 3924,
+        "quote": "riskier investments have to offer the prospect of higher returns, or higher promised returns, or higher expected returns. But there’s absolutely nothing to say those higher prospective returns have to materialize. The way I conceptualize the capital market line makes it easier for me to relate to the relationship underlying it all: Risk Return 0 Risk Return 0 2 © Oaktree Capital Management, L.P. All Rights Reserved Riskier investme nts are those where the outcome is less certain. That is, the probability distribution of returns is wider. When priced fairly, riskier investments should entail:  higher expected returns,  the possibility of lower returns, and  in some cases the possibility of losses. The traditional graph shown first above is deceptive, because it communicates the positive connection between risk and return but fails to suggest the uncertainty involved. It has brought a lot of people a lot of misery through its unwavering intimation that taking more risk leads to making more money. I hope my version of the graph is mor",
+        "start": 2874,
+        "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351"
+      }
+    ],
+    "conditions": [
+      "预期回报属于假设，不能用历史涨幅或高票息替代完整风险分析。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "高杠杆放大上行预期，也可能让一次不利变化造成无法承受的损失。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "风险",
+      "预期收益",
+      "杠杆",
+      "回撤控制"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "收益假设",
+      "亏损机制",
+      "不利情景"
+    ],
+    "rule_id": "KR-RISK-EXPECTED-RETURN",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Marks强调风险投资需要提供更高的预期或承诺回报来吸引资本，但更高预期收益不一定实现，结果分布更宽。",
+    "steps": [
+      "遇到高回报机会时同时列出亏损机制与不利情景，不把承受更高风险解释为最终收益必然增加。"
+    ],
+    "system_rule": "遇到高回报机会时同时列出亏损机制与不利情景，不把承受更高风险解释为最终收益必然增加。",
+    "title": "更高预期回报不等于实际收益更高",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "48d29c9c6ebc9aaeaaa34b99047385ec1f8561139009f3fa71d5f6c37aba8c71",
+  "source_families": [
+    "OAKTREE-MARKS"
+  ],
+  "rule_id": "KR-RISK-EXPECTED-RETURN",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:04.656010+00:00",
+      "review_id": "c3df1f4d38d0a0ba633d9f43c820cfb9b6f903f26bdc0e9f461ea1ea075bb2c7",
+      "rule_id": "KR-RISK-EXPECTED-RETURN",
+      "version": "48d29c9c6ebc9aaeaaa34b99047385ec1f8561139009f3fa71d5f6c37aba8c71"
+    }
+  ],
+  "review_ids": [
+    "c3df1f4d38d0a0ba633d9f43c820cfb9b6f903f26bdc0e9f461ea1ea075bb2c7"
+  ]
+}

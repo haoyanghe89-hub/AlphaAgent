@@ -67,6 +67,9 @@ def schedule(request, state):
                 repository(request),
                 state["run_id"],
                 stop,
+                request.app.state.settings,
+                port=getattr(request.app.state, "decision_model_port", None),
+                rules=getattr(request.app.state, "knowledge_rules", None),
                 collector=getattr(request.app.state, "decision_market_collector", None),
             )
         )
@@ -80,6 +83,7 @@ def schedule(request, state):
                 stop,
                 request.app.state.settings,
                 port=getattr(request.app.state, "decision_model_port", None),
+                rules=getattr(request.app.state, "knowledge_rules", None),
                 collector=getattr(request.app.state, "decision_candidate_collector", None),
             )
         )
@@ -128,7 +132,7 @@ async def create_run(payload: contracts.ResearchRequest, request: Request):
     if payload.cutoff_at and payload.cutoff_at > datetime.now(UTC):
         raise _error(422, "DECISION_FUTURE_CUTOFF", "截止时点不能在未来。")
     capacity(request)
-    if payload.research_mode in {"medium_term", "candidates"}:
+    if payload.research_mode in {"medium_term", "candidates"} or payload.enhanced_research:
         settings = getattr(request.app.state, "settings", None)
         if not getattr(settings, "deepseek_api_key", None) and not getattr(
             request.app.state, "decision_model_port", None
@@ -183,6 +187,7 @@ async def list_runs(request: Request):
 class RefreshRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     request_key: UUID
+    enhanced_research: bool | None = None
 
 
 @router.post("/runs/{run_id}/retry", status_code=202)
@@ -193,6 +198,8 @@ async def retry_run(run_id: str, payload: RefreshRequest, request: Request):
     previous = await asyncio.to_thread(checked, request, run_id, with_data=False)
     if previous["status"] not in {"FAILED", "INTERRUPTED"}:
         raise _error(409, "DECISION_RETRY_UNAVAILABLE", "仅未完成的研究可以复用资料重试。")
+    if previous["request"].get("enhanced_research"):
+        return await resume_run(run_id, request)
     target = "RUN-DEC-" + payload.request_key.hex
     if repo.exists(target):
         prior = checked(request, target)
@@ -221,6 +228,8 @@ async def refresh_run(run_id: str, payload: RefreshRequest, request: Request):
             409, "DECISION_REFRESH_UNAVAILABLE", "仅已完成的最新研究可以更新；历史时点不回填。"
         )
     definition = dict(parent["request"], request_key=str(payload.request_key), parent_run_id=run_id)
+    if payload.enhanced_research is not None:
+        definition["enhanced_research"] = payload.enhanced_research
     if "subject" in parent:
         definition["entity"] = parent["subject"]["security_id"]
     return await create_run(contracts.ResearchRequest.model_validate(definition), request)
@@ -258,6 +267,29 @@ async def export_run(run_id: str, request: Request):
     state = await asyncio.to_thread(checked, request, run_id)
     if state["status"] != "COMPLETED":
         raise _error(409, "DECISION_INCOMPLETE", "报告尚未完成，过程可在任务页面查看。")
+    enhancement = state.get("data", {}).get("enhanced_research")
+    if enhancement:
+        repo = repository(request)
+        state = dict(
+            state,
+            enhancement_audit=dict(
+                knowledge=repo.value(enhancement["knowledge_ref"]),
+                manifest=repo.value(enhancement["manifest_ref"]),
+                model_calls=[
+                    dict(
+                        record=call,
+                        request=repo.value(call["request_ref"]),
+                        response=repo.value(call["response_ref"])
+                        if call.get("response_ref")
+                        else None,
+                    )
+                    for call in state["calls"]
+                    if call.get("kind") == "model"
+                ],
+            ),
+        )
+        if enhancement.get("focus_ref"):
+            state["enhancement_audit"]["focus"] = repo.value(enhancement["focus_ref"])
     return JSONResponse(
         state,
         headers={
@@ -270,7 +302,14 @@ async def export_run(run_id: str, request: Request):
 @router.get("/runs/{run_id}/evidence/{evidence_id}")
 async def get_evidence(run_id: str, evidence_id: str, request: Request):
     state = await asyncio.to_thread(checked, request, run_id)
-    for item in state.get("data", {}).get("bundle", {}).get("items", []):
+    for item in state.get("data", {}).get("enhanced_research", {}).get("evidence", []):
+        if item["evidence_id"] == evidence_id:
+            return dict(evidence=item, document=None)
+    data = state.get("data", {})
+    items = data.get("bundle", {}).get("items", [])
+    if state["request"].get("enhanced_research") and data.get("report", {}).get("stage") == "P5":
+        items = data["evidence"]
+    for item in items:
         if item["evidence_id"] == evidence_id:
             doc = next(
                 (

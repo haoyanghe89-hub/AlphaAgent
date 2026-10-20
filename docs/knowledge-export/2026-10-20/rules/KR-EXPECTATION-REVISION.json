@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:44.360368+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-EXPECTATIONS",
+        "end": 3775,
+        "quote": "Use competitive strategy analysis to help anticipate revisions The surest way for investors to anticipate expectations revisions is to foresee shifts in a company’s competitive dynamics. For investors, competitive strategy analysis integrated with financial analysis is an essential tool in the expectations game. Buy stocks that trade at sufficient discounts from expected value The greater the discount from expected value, the higher the prospective excess return—and hence the more attractive a stock is for purchase. The sooner the stock price converges toward the higher expected value, the greater the excess return. The longer it takes, the lower the excess return. Sell stocks that trade at ",
+        "start": 3075,
+        "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b"
+      }
+    ],
+    "conditions": [
+      "必须说明竞争变化如何传导到现金流，而不只是罗列热门题材。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "竞争优势改善若已被价格充分计入，经营利好也可能没有超额回报。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "竞争优势",
+      "预期修正",
+      "成长",
+      "催化"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "竞争披露",
+      "财务披露",
+      "预期假设"
+    ],
+    "rule_id": "KR-EXPECTATION-REVISION",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "预期投资将竞争战略与财务分析结合，用竞争动态变化寻找预期可能修正的方向。",
+    "steps": [
+      "围绕竞争份额、产品和盈利机制核查预期差，区分已披露变化与尚未发生的催化假说。"
+    ],
+    "system_rule": "围绕竞争份额、产品和盈利机制核查预期差，区分已披露变化与尚未发生的催化假说。",
+    "title": "用竞争变化核查预期修正机制",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "82970f183ac8fb92b4f628bf0226f4971e972368506e38e573b1045c1c4dc1c3",
+  "source_families": [
+    "EXPECTATIONS-INVESTING"
+  ],
+  "rule_id": "KR-EXPECTATION-REVISION",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:46.070244+00:00",
+      "review_id": "85c14c522a4901364eec266741acbfca4895a0597b1d9fbc300bcfd3cfcd1a2c",
+      "rule_id": "KR-EXPECTATION-REVISION",
+      "version": "82970f183ac8fb92b4f628bf0226f4971e972368506e38e573b1045c1c4dc1c3"
+    }
+  ],
+  "review_ids": [
+    "85c14c522a4901364eec266741acbfca4895a0597b1d9fbc300bcfd3cfcd1a2c"
+  ]
+}

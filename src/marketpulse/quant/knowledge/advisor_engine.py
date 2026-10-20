@@ -137,14 +137,14 @@ def sell_cost(position, price, shares):
     )
 
 
-def build_answer(request, report, quote, trading, *, pinned_route=None):
+def build_answer(request, report, quote, trading, *, pinned_route=None, understanding=None):
     request = AdvisorRequest.model_validate(request)
     with localcontext() as ctx:
         ctx.prec = 34
-        return _answer(request, report, quote, trading, pinned_route)
+        return _answer(request, report, quote, trading, pinned_route, understanding)
 
 
-def _answer(request, report, quote, trading, pinned_route):
+def _answer(request, report, quote, trading, pinned_route, understanding):
     if len(report["candidates"]) != 1:
         raise ValueError("持仓咨询必须绑定单只股票的已复核研究。")
     c = report["candidates"][0]
@@ -235,14 +235,22 @@ def _answer(request, report, quote, trading, pinned_route):
         )
     if position.sellable_shares == 0:
         warnings.append("本次声明可卖数量为零；今日不能按建议执行减仓，待交收后重新核对。")
+    subject = theme(request.question)
+    if understanding:
+        focuses = understanding["tasks"][0]["focuses"]
+        subject = next(
+            (f for f in focuses if f in {"BASIS", "ADD", "DEFENSE", "SELL", "HOLD"}), "GENERAL"
+        )
+        if "INVALIDATION" in focuses:
+            subject = "INVALIDATION"
     lines = [opinion["summary"]]
-    if theme(request.question) == "ADD":
+    if subject == "ADD":
         lines.append(
             "当前咨询不安排新增买入数量；先核查原持有理由、风险预算和路线入场条件，亏损本身不是补仓依据。"
         )
-    if theme(request.question) == "BASIS":
+    if subject == "BASIS":
         lines.extend(fragments[r]["system_rule"] for r in sorted(ids & REQUIRED_RULES))
-    if theme(request.question) == "GENERAL":
+    if subject == "GENERAL":
         lines.append("本轮结合你已填持仓回答持有、减仓和退出条件；其他股票或其他任务请另开咨询。")
     lines.append(
         f"持仓 {position.shares} 股，可卖 {position.sellable_shares} 股；"
@@ -346,7 +354,7 @@ def _answer(request, report, quote, trading, pinned_route):
         headline=title,
         suggested_now_shares=now_qty,
         answer=lines,
-        theme=theme(request.question),
+        theme=subject,
         direction=opinion["direction"],
         price_comparable=comparable,
         opinion=opinion,

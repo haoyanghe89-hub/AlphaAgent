@@ -1,0 +1,74 @@
+{
+  "created_at": "2026-10-16T07:03:54.430520+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-HOUSEL-REASONABLE",
+        "end": 3132,
+        "quote": "My theory is that most investment models maximize for risk-adjusted returns, but in the real world every investor wants to maximize for sleeping well at night and being proud of themselves in a complicated world. Harry Markowitz won the Nobel Prize for exploring the mathematical tradeoff between risk and return. A few years ago the Wall Street Journal asked ",
+        "start": 2772,
+        "version": "73fe4c0624bd05d0d15fb36340bad9a054994650d2e4bb866cc016293433895d"
+      }
+    ],
+    "conditions": [
+      "这是行为与适配原则，不是来源作者给出的通用资产比例或本系统收益优化结果。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "主观舒适可能导致过度保守或追逐近期表现，仍需检查成本、分散和实际财务目标。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "容量",
+      "风险偏好",
+      "行为",
+      "路线选择"
+    ],
+    "kind": "容量",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "风险承受偏好",
+      "现金需求",
+      "执行约束"
+    ],
+    "rule_id": "KR-BEHAVIOR-FIT",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Housel认为模型追求风险调整回报，而现实投资者还关心睡得安稳等心理和生活约束。",
+    "steps": [
+      "路线与风险配置要纳入用户能够遵守的约束；无法承受的理论最优配置需要调整并说明机会成本。"
+    ],
+    "system_rule": "路线与风险配置要纳入用户能够遵守的约束；无法承受的理论最优配置需要调整并说明机会成本。",
+    "title": "选择能够持续执行的风险配置",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "4a08b1ed8aea145f8cdd00050b54a8b8ba509452f6201a5383c7490a3dbb12dc",
+  "source_families": [
+    "HOUSEL-COLLAB"
+  ],
+  "rule_id": "KR-BEHAVIOR-FIT",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:08.260862+00:00",
+      "review_id": "cd7698a4f0c3e3e0e7dd8b71ef425e7f0f8bde6fa62d40e7940acfaa234e779f",
+      "rule_id": "KR-BEHAVIOR-FIT",
+      "version": "4a08b1ed8aea145f8cdd00050b54a8b8ba509452f6201a5383c7490a3dbb12dc"
+    }
+  ],
+  "review_ids": [
+    "cd7698a4f0c3e3e0e7dd8b71ef425e7f0f8bde6fa62d40e7940acfaa234e779f"
+  ]
+}

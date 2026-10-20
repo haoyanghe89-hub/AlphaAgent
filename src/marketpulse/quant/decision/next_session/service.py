@@ -10,6 +10,7 @@ from ...contracts import digest
 from ..backup_model import open_backup
 from ..methods import load_config
 from ..tools import SourceClient, Stopped, resolve
+from . import enhanced
 from .agents import (
     PROMPTS,
     SELECTED_PROMPT_VERSION,
@@ -239,11 +240,25 @@ async def analyze_verified(roles, context, *, repairs=0, report=None):
     raise ValueError("语义审核未通过：" + review.reason)
 
 
-async def run(repo, rid, settings, stop, port=None):
+async def run(
+    repo,
+    rid,
+    settings,
+    stop,
+    port=None,
+    *,
+    snapshot_builder=None,
+    issue_deadline=None,
+    allow_backup=True,
+):
     state = repo.get_run(rid)
     started = time.monotonic()
     budget = state["config"]["budget"]
     deadline = started + budget["max_seconds"]
+    if issue_deadline is not None:
+        deadline = min(
+            deadline, started + max(0, (issue_deadline - datetime.now(UTC)).total_seconds())
+        )
     current_cohort = None
 
     def check():
@@ -280,7 +295,7 @@ async def run(repo, rid, settings, stop, port=None):
             attempt_cohort = current_cohort or cohort_for(now, base, target)
         except ValueError:
             attempt_cohort = "EXPLORATORY"
-        if state["request"].get("entity"):
+        if state["request"].get("entity") or state["request"].get("enhanced_research"):
             attempt_cohort = "EXPLORATORY"
         for security in state["config"]["securities"]:
             if security in attempted:
@@ -308,6 +323,8 @@ async def run(repo, rid, settings, stop, port=None):
             stage("Planner", "核对所选股票身份与行业")
             await asyncio.to_thread(select_security, client, state)
             save()
+        enhanced.enable(state)
+        save()
         calendars = {}
         for exchange in ("SSE", "SZSE"):
             calendars[exchange] = await asyncio.to_thread(
@@ -320,7 +337,11 @@ async def run(repo, rid, settings, stop, port=None):
         current_cohort = cohort_for(now, base, target)
         if cohort_for(datetime.fromisoformat(state["created_at"]), base, target) != "PRIMARY":
             current_cohort = "EXPLORATORY"
-        if state["request"]["exploratory"] or state["request"].get("entity"):
+        if (
+            state["request"]["exploratory"]
+            or state["request"].get("entity")
+            or state["request"].get("enhanced_research")
+        ):
             current_cohort = "EXPLORATORY"
         state.update(base_session=str(base), target_session=str(target), cohort=current_cohort)
         if current_cohort == "PRIMARY":
@@ -342,7 +363,7 @@ async def run(repo, rid, settings, stop, port=None):
             async with (
                 open_backup(
                     settings,
-                    enabled=bool(state["request"].get("entity")) and port is None,
+                    enabled=allow_backup and bool(state["request"].get("entity")) and port is None,
                     repo=repo,
                     state=state,
                 ) as backup,
@@ -355,7 +376,11 @@ async def run(repo, rid, settings, stop, port=None):
                     port,
                     fallback_model=backup.model if backup else None,
                     fallback_port=backup.port if backup else None,
-                    prompts=SELECTED_PROMPTS
+                    reserve_limit=45000 if state["config"].get("agentic_research_v1") else 20000,
+                    min_output_tokens=800 if state["config"].get("agentic_research_v1") else None,
+                    prompts=enhanced.PROMPTS
+                    if state["config"].get("agentic_research_v1")
+                    else SELECTED_PROMPTS
                     if state["config"]["prompt_version"] == SELECTED_PROMPT_VERSION
                     else None,
                 ) as roles,
@@ -378,8 +403,23 @@ async def run(repo, rid, settings, stop, port=None):
                         stage("Data", "取得行情、披露与融资，并封存输入", security)
                         calendar = calendars["SSE" if security.endswith(".SH") else "SZSE"]
                         ref, snapshot, subject = await asyncio.to_thread(
-                            build_snapshot, repo, state, stop, security, calendar, save
+                            snapshot_builder or build_snapshot,
+                            repo,
+                            state,
+                            stop,
+                            security,
+                            calendar,
+                            save,
                         )
+                        if state["config"].get("agentic_research_v1"):
+                            stage(
+                                "Researcher",
+                                "按股票选择知识、假设与反证，调用受控研究工具",
+                                security,
+                            )
+                            ref, snapshot = await enhanced.build(
+                                repo, state, ref, snapshot, roles, client, save
+                            )
                         state["snapshots"][security] = ref
                         state.setdefault("subjects", {})[security] = subject
                         save()
@@ -387,9 +427,12 @@ async def run(repo, rid, settings, stop, port=None):
                         attempt["reason"] = "模型或审核未完成"
                         proposal, analysis_call, review_call = await analyze_verified(
                             roles,
-                            snapshot.model_context,
+                            enhanced.analysis_context(snapshot.model_context, state["config"])
+                            if state["config"].get("agentic_research_v1")
+                            else snapshot.model_context,
                             repairs=2
-                            if state["config"]["prompt_version"] == SELECTED_PROMPT_VERSION
+                            if state["config"]["prompt_version"]
+                            in {SELECTED_PROMPT_VERSION, enhanced.PROMPT_VERSION}
                             else 0,
                             report=lambda role, detail, security=security: stage(
                                 role, detail, security
@@ -440,6 +483,11 @@ async def run(repo, rid, settings, stop, port=None):
                             method_versions=(
                                 state["config"]["method_version"],
                                 "next-session-observations-v1",
+                            )
+                            + (
+                                ("bounded-public-context-v1",)
+                                if state["config"].get("bounded_context_v1")
+                                else ()
                             ),
                             model_version=analysis_call["model"],
                             prompt_version=state["config"]["prompt_version"],

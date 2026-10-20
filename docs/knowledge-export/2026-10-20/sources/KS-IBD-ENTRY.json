@@ -1,0 +1,69 @@
+{
+  "body_characters": 5451,
+  "created_at": "2026-10-16T04:04:45.905598+00:00",
+  "document_id": "KS-IBD-ENTRY",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:35.309812+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "WAIT FOR A BREAKOUT",
+      "end": 4308,
+      "start": 3789
+    },
+    {
+      "anchor": "market conditions",
+      "end": 4523,
+      "start": 4006
+    }
+  ],
+  "raw_ref": "blob://sha256/9ae1e2c287b78e610b84937123349e7534da2026e6bedd2a9207bbb2bd4128ed",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "WAIT FOR A BREAKOUT",
+      "market conditions"
+    ],
+    "authors": [
+      "William O’Neil",
+      "Investor’s Business Daily"
+    ],
+    "category": "成长与趋势",
+    "encoding": "utf-8-sig",
+    "media_type": "application/pdf",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "IBD-ONEIL",
+    "source_id": "KS-IBD-ENTRY",
+    "tags": [
+      "入场时机",
+      "成长投资",
+      "市场趋势",
+      "突破",
+      "量价"
+    ],
+    "title": "O’Neil／IBD：成长、市场与入场清单",
+    "url": "https://get.investors.com/wp-content/uploads/2024/08/IBDD-How-to-buy-Stocks-infographic.pdf"
+  },
+  "text_ref": "blob://sha256/56fce432057765db5b68569eae77661819f73b2645befd45c673cb2cb3a54a73",
+  "version": "cb338d8cdc2ce210e1dd32c9c1e18102bfab11e010c3b469cd77803511eb631d",
+  "manifest_ref": "blob://sha256/8c21f27dfdb72869cba0be9d4c391b4f1b8de5fb84756e6073ccf8c491788ac7",
+  "title": "O’Neil／IBD：成长、市场与入场清单",
+  "excerpts": [
+    {
+      "start": 3789,
+      "end": 4308,
+      "anchor": "WAIT FOR A BREAKOUT",
+      "text": "s IDEAL BUY POINT: 10 cents above peak in middle of the “W” LENGTH: 5-week minimum BASE DEPTH: 15% or less IDEAL BUY POINT: 10 cents above peak within the base WAIT FOR A BREAKOUT FROM A CHART PATTERN MOST COMMON 3Chart Patterns THE Check the Stock Market Exposure indicator on investors.com to make sure buying a new position will keep your portfolio aligned with the current market conditions. Go to the IBD Stock Checkup and make sure a stock’s fundamentals get good ratings. 2 Review the stock’s chart and look for "
+    },
+    {
+      "start": 4006,
+      "end": 4523,
+      "anchor": "market conditions",
+      "text": "rt Patterns THE Check the Stock Market Exposure indicator on investors.com to make sure buying a new position will keep your portfolio aligned with the current market conditions. Go to the IBD Stock Checkup and make sure a stock’s fundamentals get good ratings. 2 Review the stock’s chart and look for a breakout from a chart pattern on high volume. Buy within 5% of the chart pattern’s buy point. 3 How to When you’re considering buying a stock, follow this THREE-STEP ROUTINE to put the odds of success in your favo"
+    }
+  ]
+}

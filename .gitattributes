@@ -1,0 +1,4 @@
+# Preserve bytes used by tokenizer checks and knowledge-export SHA-256 manifests.
+src/marketpulse/quant/decision/next_session/assets/tokenizer*.json -text
+# Archived excerpts retain their source whitespace as part of the byte hashes.
+docs/knowledge-export/** -text -whitespace

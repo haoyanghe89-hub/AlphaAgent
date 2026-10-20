@@ -10,6 +10,7 @@ test('prediction lost submission preserves key and prevents double clicks',async
     return {run_id:'RUN-NS-test'}
   },navigate:id=>links.push(id)})
   await ctl.start();await ctl.start()
+  assert.equal('enhanced_research' in bodies[0],false)
   assert.equal(bodies[0].request_key,bodies[1].request_key);assert.equal(links.length,1);ctl.dispose()
 })
 
@@ -41,6 +42,7 @@ test('selected stock is sent explicitly and a changed stock gets a new retry key
   }})
   await ctl.start('600519');await ctl.start('600519');await ctl.start('宁德时代')
   assert.equal(bodies[0].entity,'600519');assert.equal(bodies[0].exploratory,true)
+  assert.equal(bodies[0].enhanced_research,undefined)
   assert.equal(bodies[0].request_key,bodies[1].request_key)
   assert.notEqual(bodies[0].request_key,bodies[2].request_key);assert.equal(bodies[2].entity,'宁德时代');ctl.dispose()
 })

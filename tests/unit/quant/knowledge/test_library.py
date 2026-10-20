@@ -86,6 +86,31 @@ def test_locators_rebuild_from_exact_raw_and_scripts_do_not_enter_excerpts(libra
         assert normalized[excerpt["start"] : excerpt["end"]] == excerpt["text"]
 
 
+def test_repeated_extraction_reuses_exact_input_without_sharing_mutable_locators(
+    source, monkeypatch
+):
+    from marketpulse.quant.knowledge import ingestion
+
+    parser, calls = ingestion.BeautifulSoup, []
+
+    def counted(*args, **kwargs):
+        calls.append(1)
+        return parser(*args, **kwargs)
+
+    monkeypatch.setattr(ingestion, "BeautifulSoup", counted)
+    assert ingestion._extract.cache_info().maxsize == 64
+    first = ingestion.extract(original("unique cache fixture"), source)
+    expected = copy.deepcopy(first)
+    first[1][0]["start"] = -1
+    assert ingestion.extract(original("unique cache fixture"), source) == expected
+    assert len(calls) == 1
+    ingestion.extract(original("different bytes"), source)
+    assert len(calls) == 2
+    changed = source.model_copy(update={"anchors": ("reported profit", "capital return")})
+    ingestion.extract(original("unique cache fixture"), changed)
+    assert len(calls) == 3
+
+
 @pytest.mark.parametrize(
     "raw", [b"<main>navigation only</main>", b"", b"<main>capital return cash collection</main>"]
 )

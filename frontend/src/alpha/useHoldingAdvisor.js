@@ -1,6 +1,10 @@
 import { createInvestmentPlan } from './useInvestmentPlan.js'
+import { advisorResearchRequest } from './advisorResearchRequest.js'
 
-export const createHoldingAdvisor = options => createInvestmentPlan({ ...options, root:'/quant/holding-advisor/turns' })
+export function createHoldingAdvisor(options) {
+  const ctl = createInvestmentPlan({ ...options, root:'/quant/holding-advisor/turns' })
+  return {...ctl, submit:body=>ctl.submit(advisorResearchRequest(body, ctl.state.value?.request))}
+}
 
 export function holdingIntent(text, selected) {
   const explicit=/持仓顾问|持仓咨询|成本价|我(?:持有|买了|有).{0,30}股|到多少.*卖|止盈|止损|减仓|补仓|加仓|该不该卖|什么时候卖|能卖吗/.test(text)

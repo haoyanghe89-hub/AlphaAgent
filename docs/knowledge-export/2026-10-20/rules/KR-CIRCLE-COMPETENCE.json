@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:44.265050+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-BUFFETT-1992",
+        "end": 39568,
+        "quote": "First, we try to stick to businesses we believe we understand. That means they must be relatively simple and stable in character. If a business is complex or subject to constant change, we're not smart enough to predict future cash flows. Incidentally, that shortcoming doesn't bother us. What counts for most people in investing is not how much they know, but rather how realistically they define what they don't know. An investor needs to do very few things right as long as he or she avoids big mistakes. Second, and equally important, we insist on a margin of safety in our purchase price. If we calculate the value of a common stock to be only slightly higher than its price,",
+        "start": 38888,
+        "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab"
+      }
+    ],
+    "conditions": [
+      "能力边界来自业务解释与资料核验，不以熟悉公司名字替代。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "看似稳定的旧业务遭遇技术替代时，过去经验可能无法解释未来现金流。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "能力圈",
+      "业务理解",
+      "现金流",
+      "筛选"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "业务结构",
+      "现金流驱动",
+      "行业变化"
+    ],
+    "rule_id": "KR-CIRCLE-COMPETENCE",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "巴菲特倾向简单稳定、自己能理解的业务，并承认复杂多变业务的未来现金流难以预测。",
+    "steps": [
+      "先说明收入来源、成本和竞争变化；无法解释关键现金流驱动时标记分析边界，避免精确估值。"
+    ],
+    "system_rule": "先说明收入来源、成本和竞争变化；无法解释关键现金流驱动时标记分析边界，避免精确估值。",
+    "title": "现金流难以解释时缩小结论范围",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "816e17251c89f70dc8c9098f88661ef3a98f157a70c66c798db707c380b03ab0",
+  "source_families": [
+    "BERKSHIRE"
+  ],
+  "rule_id": "KR-CIRCLE-COMPETENCE",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:45.538709+00:00",
+      "review_id": "d89274fa2c7c589039a5090383085308050a31d68eda65565bb1afa56af8b8f6",
+      "rule_id": "KR-CIRCLE-COMPETENCE",
+      "version": "816e17251c89f70dc8c9098f88661ef3a98f157a70c66c798db707c380b03ab0"
+    }
+  ],
+  "review_ids": [
+    "d89274fa2c7c589039a5090383085308050a31d68eda65565bb1afa56af8b8f6"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-10-16T07:03:53.936004+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-MARKS-RISK",
+        "end": 12344,
+        "quote": "Rejecting risk as synonymous with volatility, as I do, eliminates the one measure of risk that’s entirely quantifiable, objective and absolute. This, in turn, makes it hard to argue that the market’s an efficient machine that precisely assesses the risk of each investment and allocates prospective return proportionately. 3BUMeasuring Risk Prospectively I’m sure we agree that investors should and do demand higher prospective returns on riskier investments. And hopefully we can agree that losing money is the risk people care about most in demanding prospective returns, and thus in setting prices for investments. An important question remains: How do they measure that risk? 5 © Oaktree Capital Management, L.P. All Rights Reserved  First, it clearly is nothi ng but a matter of opinion: hopefully an educated, skillful esti",
+        "start": 11514,
+        "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351"
+      }
+    ],
+    "conditions": [
+      "风险量化需要明确口径，历史波动仅是部分观察，不代表完整未来风险。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "长期低波动的高杠杆或缺乏流动性资产，仍可能在单次事件中损失严重。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "风险",
+      "波动",
+      "永久损失",
+      "回撤控制"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "波动序列",
+      "亏损情景",
+      "现金需求",
+      "投资目标"
+    ],
+    "rule_id": "KR-RISK-NON-VOLATILITY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Marks不认同把风险等同波动，并指出未来风险难以用唯一客观的量化尺度衡量。",
+    "steps": [
+      "波动指标之外还检查永久损失、现金需求和目标偏离，不把低历史波动写成安全结论。"
+    ],
+    "system_rule": "波动指标之外还检查永久损失、现金需求和目标偏离，不把低历史波动写成安全结论。",
+    "title": "风险还包括亏损和个人目标失败",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "47ed5f4389abbdc67f3154cc8fe83f0c61407114d16df30b6ac7c246d40ec6cf",
+  "source_families": [
+    "OAKTREE-MARKS"
+  ],
+  "rule_id": "KR-RISK-NON-VOLATILITY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:06.938174+00:00",
+      "review_id": "cf055f3f9398f8a8bea7b460eb5217c20d79402d832af18ee149a817d54a6bb2",
+      "rule_id": "KR-RISK-NON-VOLATILITY",
+      "version": "47ed5f4389abbdc67f3154cc8fe83f0c61407114d16df30b6ac7c246d40ec6cf"
+    }
+  ],
+  "review_ids": [
+    "cf055f3f9398f8a8bea7b460eb5217c20d79402d832af18ee149a817d54a6bb2"
+  ]
+}

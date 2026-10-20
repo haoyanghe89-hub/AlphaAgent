@@ -52,6 +52,7 @@ def materials(repo, state, cache=None):
             or public["entities"] != definition["entities"]
             or public["horizon"] != definition["horizon"]
             or public["horizon_sessions"] != (20 if definition["horizon"] == "SWING" else 60)
+            or bool(public.get("enhanced_research")) != request.enhanced_research
         ):
             raise ValueError("账户研究主体、周期或公开载荷边界不一致。")
         studies.append(study)
@@ -97,6 +98,11 @@ class PortfolioStore(DecisionStore):
             if parent["status"] != "COMPLETED" or parent["turn_count"] >= 100:
                 raise ValueError("上一轮完成后才能追问；一百轮后请另开咨询，原记录保留。")
             before = PortfolioRequest.model_validate(parent["request"])
+            if (
+                not request.refresh_research
+                and request.enhanced_research != before.enhanced_research
+            ):
+                raise ValueError("更换研究流程时请勾选更新公开资料，原研究会保留。")
             old_assets = {a.entity: a for a in before.assets}
             for a in request.assets:
                 if a.entity in old_assets:
@@ -133,6 +139,8 @@ class PortfolioStore(DecisionStore):
         )
         if parent and not request.refresh_research:
             state["research_groups"] = copy.deepcopy(parent["research_groups"])
+        if request.semantic_understanding:
+            state["dialogue_version"] = "question-dialogue-v2"
         try:
             with self.base.sessions.begin() as session:
                 session.add(
@@ -173,6 +181,19 @@ class PortfolioStore(DecisionStore):
                 state["request"], studies, data["quotes"], trading, sessions, state["pinned_routes"]
             )
             expected["quotes"] = data["quotes"]
+            if PortfolioRequest.model_validate(state["request"]).semantic_understanding:
+                from .question_understanding import bound_understanding, dialogue
+
+                understanding = bound_understanding(self, state, studies)
+                expected["dialogue"] = dialogue(
+                    expected,
+                    understanding,
+                    portfolio=True,
+                    version=state.get("dialogue_version", "question-dialogue-v1"),
+                )
+                expected["privacy"]["anonymous_semantics_sent_to_model"] = (
+                    state["understanding"]["model_calls"] > 0
+                )
             if (
                 expected != data
                 or digest(data) != state["result_sha256"]

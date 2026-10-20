@@ -1,0 +1,92 @@
+{
+  "created_at": "2026-10-16T07:03:47.915504+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-IBD-ENTRY",
+        "end": 2446,
+        "quote": "25%+ earnings growth in the most recent quarter 25%+ earnings growth over the last 3 years 25%+ sales growth in the most recent quarter 17%+ return on equity (ROE) A new product or service that is leading or revolutionizing its industry That sounds like a lot of research. Is ther",
+        "start": 2166,
+        "version": "cb338d8cdc2ce210e1dd32c9c1e18102bfab11e010c3b469cd77803511eb631d"
+      }
+    ],
+    "conditions": [
+      "财务增长须处理低基数、负利润与口径差异；这些原始阈值没有A股效果证明。"
+    ],
+    "conflict_group": "趋势入退场",
+    "counterexamples": [
+      "一次性收益或低基数可令增长率达标但业务未改善，高ROE也可能来自过高杠杆。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM"
+    ],
+    "keywords": [
+      "成长",
+      "盈利增长",
+      "质量",
+      "ROE",
+      "趋势"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [
+      {
+        "applicability": "SOURCE_MARKET_ONLY",
+        "citation_index": 0,
+        "meaning": "IBD原文最近季度盈利增长筛选参考，非A股准入条件。",
+        "name": "最近季度盈利增长",
+        "origin": "AUTHOR_ORIGINAL",
+        "value": "25%+"
+      },
+      {
+        "applicability": "SOURCE_MARKET_ONLY",
+        "citation_index": 0,
+        "meaning": "IBD原文ROE参考，非A股统一质量标准。",
+        "name": "股东权益回报",
+        "origin": "AUTHOR_ORIGINAL",
+        "value": "17%+"
+      }
+    ],
+    "required_inputs": [
+      "季度盈利增长",
+      "多年盈利增长",
+      "季度销售增长",
+      "ROE"
+    ],
+    "rule_id": "KR-TREND-GROWTH-SCREEN",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "IBD清单同时观察近期盈利增长、多年盈利增长、销售增长及股东权益回报，而非仅看价格图形。",
+    "steps": [
+      "将增长与盈利质量列为趋势候选的研究输入；作者数值仅保留为来源市场的参考条件，A股不直接套用。"
+    ],
+    "system_rule": "将增长与盈利质量列为趋势候选的研究输入；作者数值仅保留为来源市场的参考条件，A股不直接套用。",
+    "title": "增长清单保留原始市场与阈值出处",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "4f9b676acc26b34b12a187e09f1d41fb5f830b32d0af9ad82f7fa20939fc39ac",
+  "source_families": [
+    "IBD-ONEIL"
+  ],
+  "rule_id": "KR-TREND-GROWTH-SCREEN",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:53.325002+00:00",
+      "review_id": "5a42d1e01b7964fa98e8f22e97cc91c01f9a8e0040bfbabd074b349aa601e1de",
+      "rule_id": "KR-TREND-GROWTH-SCREEN",
+      "version": "4f9b676acc26b34b12a187e09f1d41fb5f830b32d0af9ad82f7fa20939fc39ac"
+    }
+  ],
+  "review_ids": [
+    "5a42d1e01b7964fa98e8f22e97cc91c01f9a8e0040bfbabd074b349aa601e1de"
+  ]
+}

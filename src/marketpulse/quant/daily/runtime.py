@@ -182,12 +182,13 @@ class DailyRuntime:
                 continue
             try:
                 if kind == "NEXT":
-                    state = self.events.get_run(rid)
-                    if not pending_next(self.events, state, through):
+                    state = await asyncio.to_thread(self.events.get_run, rid)
+                    if not await asyncio.to_thread(pending_next, self.events, state, through):
                         continue
                 else:
-                    state = repo.get(rid)
-                    if not pending_investment(ObservationStore(repo).view(state), through):
+                    state = await asyncio.to_thread(repo.get, rid)
+                    view = await asyncio.to_thread(ObservationStore(repo).view, state)
+                    if not pending_investment(view, through):
                         continue
             except (ValueError, KeyError, OSError, BlobError):
                 self.events.immutable(
@@ -301,6 +302,10 @@ class DailyRuntime:
             await self.morning(now, self.calendar)
             if not self.stopping.is_set():
                 await self.observe_one(now, self.calendar)
+            if not self.stopping.is_set():
+                from ..knowledge.forward_pairs import tick as evaluate_forward
+
+                await evaluate_forward(self, now)
         trading = self.calendar and now.strftime("%Y%m%d") in self.calendar
         intraday = trading and (
             "09:15" <= now.strftime("%H:%M") <= "11:30"

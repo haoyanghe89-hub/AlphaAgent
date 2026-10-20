@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { useNextSessionPrediction, nextSessionRoot } from './useNextSessionPrediction.js'
 import DecisionCitation from './DecisionCitation.vue'
 import ResearchDataCharts from './ResearchDataCharts.vue'
+import ResearchDepth from './ResearchDepth.vue'
 import {nextSessionChartBlocks,accuracyChartBlock} from '../utils/decisionChartOptions.js'
 const props=defineProps({id:String,developer:Boolean})
 const {state,status,scoreboard,history,error,busy,active,refresh,start,action}=useNextSessionPrediction(props.id,{developer:props.developer})
@@ -29,7 +30,7 @@ const evidence=(row,eid)=>{citation.value={pid:row.prediction.prediction_id,eid}
       <div class="section-heading"><h1>明日预测</h1><span v-if="developer" class="tag tag-warn">开发者视图</span></div>
       <p class="prediction-lead">明确的涨跌判断，以及支持它和可能推翻它的依据。</p>
       <details class="input-disclosure" :open="!state?.predictions?.length"><summary>选择股票，生成下一交易日预测</summary><form class="prediction-start" @submit.prevent="generate"><label>股票名称或代码<input v-model.trim="entity" required maxlength="80" placeholder="例如：贵州茅台 / 600519" aria-label="预测股票名称或代码"></label><button class="btn btn-primary" :disabled="busy || active() || !status || !entity">{{ busy ? '正在提交…' : active() ? '正在分析…' : '预测这只股票' }}</button></form>
-      <p class="condition-note">支持任意可核实的沪深 A 股，收盘后生成下一交易日判断；上市历史不足或关键资料缺失会说明原因。所选股票单独统计，原预测保留。</p></details>
+      <ResearchDepth /><p class="condition-note">支持任意可核实的沪深 A 股，收盘后生成下一交易日判断；上市历史不足或关键资料缺失会说明原因。所选股票单独统计，原预测保留。</p></details>
       <details v-if="developer" class="prediction-limits"><summary>固定样本实验</summary><p>中微公司 · 北方华创，正式签发窗口 20:00–20:15；与自主选股记录分开统计。</p><button class="btn" :disabled="busy||active()||!status" @click="start()">运行固定样本实验</button></details>
       <p v-if="error" class="notice error-text" role="alert">{{ error }} <button class="btn" @click="refresh">重新读取</button></p>
       <p v-if="!status && !error" role="status">正在读取已保存的预测…</p>

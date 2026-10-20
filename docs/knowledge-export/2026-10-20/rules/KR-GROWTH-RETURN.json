@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-10-16T07:03:44.237535+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-BUFFETT-1992",
+        "end": 39003,
+        "quote": "Leaving the question of price aside, the best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return. The worst business to own is one that must, or will , do the opposite - that is, consistently employ ever-greater amounts of capital at very low rates of return. Unfortunately, the first type of business is very hard to find: Most high-return businesses need relatively little capital. Shareholders of such a business usually will benefit if it pays out most of its earnings in dividends or makes significant stock repurchases. Though the mathematical calculations required to evaluate equities are not difficult, an analyst - even one who is experienced and intelligent - can easily go wrong in estimating future \"coupons.\" At Berkshire, we attempt to deal with this problem in two ways. First, we try to stick to businesses we believe we understand. That means they must be relatively simple and stable",
+        "start": 38023,
+        "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab"
+      }
+    ],
+    "conditions": [
+      "明确增量资本与回报的期间及业务口径，仍需单独考虑买入价格。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "高增长由低回报扩张支撑时会损害价值；历史高回报也不保证新增项目延续。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "成长",
+      "ROIC",
+      "资本回报",
+      "持有",
+      "再投资"
+    ],
+    "kind": "持有",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "增量资本投入",
+      "经营收益",
+      "股东分配",
+      "估值"
+    ],
+    "rule_id": "KR-GROWTH-RETURN",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "巴菲特把可长期以高回报运用大量增量资本的企业，与持续投入更多资本却低回报的企业相对照。",
+    "steps": [
+      "持续跟踪增长是否伴随有质量的资本回报；增长消耗资本且回报恶化时重新评估持有逻辑。"
+    ],
+    "system_rule": "持续跟踪增长是否伴随有质量的资本回报；增长消耗资本且回报恶化时重新评估持有逻辑。",
+    "title": "增长要与增量资本回报一起判断",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "955b2c3550391b916e9c886a2fb786d2fccb883dba9529cdc4fec4896f0f0452",
+  "source_families": [
+    "BERKSHIRE"
+  ],
+  "rule_id": "KR-GROWTH-RETURN",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:45.370567+00:00",
+      "review_id": "893ef1a2937e4c3a2a39e832f761ce0ea72eeb8672ef0e51b241be0ffd7b4b62",
+      "rule_id": "KR-GROWTH-RETURN",
+      "version": "955b2c3550391b916e9c886a2fb786d2fccb883dba9529cdc4fec4896f0f0452"
+    }
+  ],
+  "review_ids": [
+    "893ef1a2937e4c3a2a39e832f761ce0ea72eeb8672ef0e51b241be0ffd7b4b62"
+  ]
+}

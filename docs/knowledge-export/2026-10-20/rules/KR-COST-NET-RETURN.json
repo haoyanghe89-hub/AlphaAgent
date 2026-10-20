@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-10-18T05:48:05.916805+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "这是结合博格公开成本论述形成的A股研究检查项，不是《投资常识》整书蒸馏；本地费率、税制与净值口径须重新核查，未验证收益效果。",
+    "citations": [
+      {
+        "document_id": "KS-BOGLE-COST-2005",
+        "end": 8571,
+        "quote": "As a group, investors never— never!—enjoy the gross return that the markets deliver. Investors earn the net return, after all of the costs of our system of financial intermediation. Thus, just as gambling in the casino is a zero-sum game before the croupiers rake in their share (I’m told that this is called “vigorish,” or “the vig”) and a loser’s game thereafter, so beating the stock and bond markets is a zero-sum game before intermediation costs, and a loser’s game thereafter.",
+        "start": 8089,
+        "version": "3772add96e8fbaaa1b372dcafa82a8d522878a05a55d5d796abf1ea956aeb375"
+      },
+      {
+        "document_id": "KS-BOGLE-COST-2005",
+        "end": 11987,
+        "quote": "And that’s before taxes. Because of the shocking tax inefficiency engendered by its astonishingly high (100-percent-plus) portfolio turnover, the average managed equity fund cost its taxable investors another 2.2 percentage points in taxes, producing not 57 percent of the market’s annual return, but only 41 percent. With the index fund relinquishing only 0.9 points in taxes, the gap between the equity fund and the index fund rises from 2.8 to",
+        "start": 11541,
+        "version": "3772add96e8fbaaa1b372dcafa82a8d522878a05a55d5d796abf1ea956aeb375"
+      }
+    ],
+    "conditions": [
+      "比较对象的风险暴露和期限可比；费用或税制未知须明确缺口，不把美国历史平均费率当作当前A股参数。"
+    ],
+    "conflict_group": "成本与风险可比性",
+    "counterexamples": [
+      "低费率产品仍可能因集中、跟踪偏差或流动性损失跑输；高费率策略个别时期可能在扣费后胜出，低成本不保证未来盈利。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得宣称主动投资必然亏损、指数基金必然盈利，或凭作者美国历史样本保证A股净收益与明日涨跌。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "费用",
+      "成本",
+      "净收益",
+      "指数基金",
+      "基线",
+      "换手"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "产品费率与净值口径",
+      "换手和交易成本",
+      "适用税费",
+      "同窗净收益与风险可比基准"
+    ],
+    "rule_id": "KR-COST-NET-RETURN",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "博格在公开原讲稿中区分市场毛收益与投资者扣除中介成本后的净收益，并讨论费用与税对实际所得的影响。",
+    "steps": [
+      "核对费率与换手资料，避免重复扣除已反映在净值中的费用。",
+      "分别列出毛收益、净收益和基准，不能用低费率代替风险判断。"
+    ],
+    "system_rule": "比较基金或投资路线时列明管理、托管、交易、换手和适用税费，使用同窗同口径的成本后收益与基准；费用缺项时不能宣称净收益优势。",
+    "title": "比较投资结果先核对成本后的净收益",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "448030389b2062bcedf6c84091554d84048d9304f44da412e4b5229c44e8ebd1",
+  "source_families": [
+    "BOGLE-ORIGINALS"
+  ],
+  "rule_id": "KR-COST-NET-RETURN",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-18T05:48:46.573755+00:00",
+      "review_id": "f8c4a496deabc814bc58febaef4a85a741d786adefc42f3481818cbe64209c0d",
+      "rule_id": "KR-COST-NET-RETURN",
+      "version": "448030389b2062bcedf6c84091554d84048d9304f44da412e4b5229c44e8ebd1"
+    }
+  ],
+  "review_ids": [
+    "f8c4a496deabc814bc58febaef4a85a741d786adefc42f3481818cbe64209c0d"
+  ]
+}

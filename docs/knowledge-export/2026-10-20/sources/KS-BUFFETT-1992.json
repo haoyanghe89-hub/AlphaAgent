@@ -1,0 +1,68 @@
+{
+  "body_characters": 68295,
+  "created_at": "2026-10-16T04:04:45.425518+00:00",
+  "document_id": "KS-BUFFETT-1992",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:24.653143+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "two approaches are joined at the hip",
+      "end": 34802,
+      "start": 34266
+    },
+    {
+      "anchor": "margin of safety",
+      "end": 39798,
+      "start": 39282
+    }
+  ],
+  "raw_ref": "blob://sha256/281218259801b95b4fad83f3e92a3e7bfbc15389b8f308b4f5992730f19cdde8",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "two approaches are joined at the hip",
+      "margin of safety"
+    ],
+    "authors": [
+      "Warren Buffett"
+    ],
+    "category": "质量与估值",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "1992年度股东信",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "pre",
+    "source_family": "BERKSHIRE",
+    "source_id": "KS-BUFFETT-1992",
+    "tags": [
+      "资本回报",
+      "现金流",
+      "安全边际",
+      "巴菲特",
+      "价值投资"
+    ],
+    "title": "巴菲特原信：增长、资本回报与安全边际",
+    "url": "https://www.berkshirehathaway.com/letters/1992.html"
+  },
+  "text_ref": "blob://sha256/13e1390a3d1fb280d7f214ada0e7e097094186d03c4b62fb9836132f0e846197",
+  "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab",
+  "manifest_ref": "blob://sha256/7b794041380d358800431f405dc2b88a165c6305ea51389aac6633191afcab9a",
+  "title": "巴菲特原信：增长、资本回报与安全边际",
+  "excerpts": [
+    {
+      "start": 34266,
+      "end": 34802,
+      "anchor": "two approaches are joined at the hip",
+      "text": "s a form of intellectual cross- dressing. We view that as fuzzy thinking (in which, it must be confessed, I myself engaged some years ago). In our opinion, the two approaches are joined at the hip: Growth is always a component in the calculation of value, constituting a variable whose importance can range from negligible to enormous and whose impact can be negative as well as positive. In addition, we think the very term \"value investing\" is redundant. What is \"investing\" if it is not the act of seeking value at least sufficient t"
+    },
+    {
+      "start": 39282,
+      "end": 39798,
+      "anchor": "margin of safety",
+      "text": "ine what they don't know. An investor needs to do very few things right as long as he or she avoids big mistakes. Second, and equally important, we insist on a margin of safety in our purchase price. If we calculate the value of a common stock to be only slightly higher than its price, we're not interested in buying. We believe this margin-of-safety principle, so strongly emphasized by Ben Graham, to be the cornerstone of investment success. Fixed-Income Securities Below we list our largest holdings of fixed-in"
+    }
+  ]
+}

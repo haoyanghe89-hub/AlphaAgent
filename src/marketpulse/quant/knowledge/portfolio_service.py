@@ -80,11 +80,20 @@ async def run(
                     horizon=binding["horizon"],
                     horizon_sessions=20 if binding["horizon"] == "SWING" else 60,
                     profile=None,
+                    enhanced_research=request.enhanced_research,
+                    execution_contract="investment-structured-v2"
+                    if request.structured_research
+                    else None,
+                    input_reservation="deepseek-v4-tokenizer-v1"
+                    if request.structured_research
+                    else None,
                 ).model_dump(mode="json")
                 public.create(definition)
         for binding in state["research_groups"]:
             check()
             study = public.get(binding["run_id"])
+            if bool(study["request"].get("enhanced_research")) != request.enhanced_research:
+                raise ValueError("公开研究流程与账户请求不一致。")
             if study["status"] == "COMPLETED":
                 continue
             others = [
@@ -123,7 +132,8 @@ async def run(
                 retries = state["automatic_continuations"].get(study["run_id"], 0)
                 correctable = (
                     study["status"] == "INTERRUPTED"
-                    and study.get("stage") in {"PLANNER", "ANALYST", "VERIFIER", "WRITER"}
+                    and study.get("stage")
+                    in {"RESEARCHER", "PLANNER", "ANALYST", "VERIFIER", "WRITER"}
                     and (
                         "输出未通过" in (study.get("error") or "")
                         or "解释仍未通过" in (study.get("error") or "")
@@ -175,6 +185,19 @@ async def run(
                 )
                 trading[sid] = sell_rules(study["data"], repo.raw_bytes, sid)
         answer = build(request, studies, quotes, trading, sessions, state["pinned_routes"])
+        from .question_understanding import dialogue, understand_advisor
+
+        understanding = await understand_advisor(repo, state, studies, stop, settings)
+        if request.semantic_understanding:
+            answer["dialogue"] = dialogue(
+                answer,
+                understanding,
+                portfolio=True,
+                version=state.get("dialogue_version", "question-dialogue-v1"),
+            )
+            answer["privacy"]["anonymous_semantics_sent_to_model"] = (
+                state["understanding"]["model_calls"] > 0
+            )
         answer["quotes"] = quotes
         check()
         state.update(

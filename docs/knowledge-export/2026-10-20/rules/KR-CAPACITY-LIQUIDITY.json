@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-10-16T07:03:53.375072+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-MARKS-RISK",
+        "end": 11688,
+        "quote": "Illiquidity – If an investor needs money with which to pay for surgery in three months or buy a home in a year, he may be unable to make an investment that can’t be counted on for liquidity that meets his schedule. Thus, for him, risk isn’t just losing money or volatility, or any of the above. It’s being unable when needed to turn an investment into cash at a reasonable price. This, too, is a personal risk. Theoretically, a fund whose life is perpetual and whose liquidity needs are predictable shouldn’t be sensitive to this risk and thus should be able to bear it for profit. The bottom line is that investment risk comes in many forms. Many risks matter to some investors but not to others, and they may make a given investment seem safe for some investors but risky for others. Rejecting risk as synonymous with volatility, as I do, eliminates the one measure of risk that’s entirely quantifiable, objective and absolute. This, in turn, makes it hard t",
+        "start": 10728,
+        "version": "91018cf8e1432cbc923b550004e05ebc8490384a6d9b59002ad4bb80df243351"
+      }
+    ],
+    "conditions": [
+      "实际数量上限必须由工具结合交易规则与成交数据核算，本规则只提出约束。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "账面收益良好但急需现金时无法卖出，仍可能导致实际财务目标失败。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "容量",
+      "资金量",
+      "流动性",
+      "现金需求",
+      "仓位"
+    ],
+    "kind": "容量",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "现金需求日期",
+      "可投资资金",
+      "证券成交能力"
+    ],
+    "rule_id": "KR-CAPACITY-LIQUIDITY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Marks把需要时无法以合理价格变现视为个人风险，流动性需求不同的投资者承受能力不同。",
+    "steps": [
+      "把投资期限、近期现金用途与证券可成交能力一起核查，资金规模不能单独决定适合哪条路线。"
+    ],
+    "system_rule": "把投资期限、近期现金用途与证券可成交能力一起核查，资金规模不能单独决定适合哪条路线。",
+    "title": "用现金需求日期约束可承受的流动性",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "17b8c791d28f51cedfd74d810fbfcf22dc0bac01cd0fb8e85c1a9b67322fd40a",
+  "source_families": [
+    "OAKTREE-MARKS"
+  ],
+  "rule_id": "KR-CAPACITY-LIQUIDITY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:05.810630+00:00",
+      "review_id": "81d126e2216ff6981acfef1a7f74c31a663df1de13412627fe2d3cecc463862b",
+      "rule_id": "KR-CAPACITY-LIQUIDITY",
+      "version": "17b8c791d28f51cedfd74d810fbfcf22dc0bac01cd0fb8e85c1a9b67322fd40a"
+    }
+  ],
+  "review_ids": [
+    "81d126e2216ff6981acfef1a7f74c31a663df1de13412627fe2d3cecc463862b"
+  ]
+}

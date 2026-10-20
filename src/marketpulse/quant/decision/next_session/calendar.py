@@ -6,6 +6,7 @@ import re
 import xml.etree.ElementTree as ET
 import zipfile
 from datetime import date, timedelta
+from functools import lru_cache
 
 from pypdf import PdfReader
 
@@ -58,7 +59,9 @@ def parse_annual(text, year):
     )
 
 
+@lru_cache(maxsize=8)
 def rule_text(raw):
+    # Pure parsing only: callers still read/hash-check every source before supplying bytes.
     if raw.startswith(b"PK"):
         with zipfile.ZipFile(io.BytesIO(raw)) as archive:
             entry = archive.getinfo("word/document.xml")

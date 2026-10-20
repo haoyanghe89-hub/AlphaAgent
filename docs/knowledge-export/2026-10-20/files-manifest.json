@@ -1,0 +1,392 @@
+[
+  {
+    "path": "candidate-index.json",
+    "bytes": 1564,
+    "sha256": "db6393d38e6ab3b2552c4bf95bd56942724976c50aa2bd10db3aaa202d2bb7ab"
+  },
+  {
+    "path": "candidate-index.md",
+    "bytes": 1438,
+    "sha256": "ecb72c6694177d990e0c71cc12120d0e1522125559232870fb000f5314908843"
+  },
+  {
+    "path": "catalog.json",
+    "bytes": 19249,
+    "sha256": "f2588f7b052b04e1181dccd0b16ea7e072012ddc37a94060c8ba5429cf69bfe9"
+  },
+  {
+    "path": "inventory.json",
+    "bytes": 1129,
+    "sha256": "6589b06a0d7164f66a32eccbcb9f8c9e949a0cfd19070bdcc89d6537248bbc82"
+  },
+  {
+    "path": "README.md",
+    "bytes": 4046,
+    "sha256": "3f14e92359f21492cdcf6eec508c26e2825edffec8b9bff8b324a28192c70ecd"
+  },
+  {
+    "path": "rules/KR-AVOID-RUIN.json",
+    "bytes": 3568,
+    "sha256": "a009dbc872c61b2890e9c35929eeaaaa071ab33f6e1904c65ada9b1581846ccf"
+  },
+  {
+    "path": "rules/KR-BEHAVIOR-FIT.json",
+    "bytes": 3071,
+    "sha256": "2f10422f4430bb511f320a3749251c0c7def6513e5381c28ea25c1bc25a3576d"
+  },
+  {
+    "path": "rules/KR-CAPACITY-LIQUIDITY.json",
+    "bytes": 3709,
+    "sha256": "58db19bc9185abaedb6b5b11cf93027f391144fd3491e1e50341bdd3d38f517a"
+  },
+  {
+    "path": "rules/KR-CIRCLE-COMPETENCE.json",
+    "bytes": 3341,
+    "sha256": "6ade012f548ebc1c4696430b0c5a511a8be721ae849d569de0c2f7d95050bcaf"
+  },
+  {
+    "path": "rules/KR-CONTRARIAN-EVIDENCE.json",
+    "bytes": 3702,
+    "sha256": "243f643d7a1b9679a00355b737ccafd62c229d0e2d552663e68d285f7266cfe5"
+  },
+  {
+    "path": "rules/KR-COST-NET-RETURN.json",
+    "bytes": 4313,
+    "sha256": "c2fdd495ff45a6c91728bca7b6345311bf67965297a64a2bb6b5639ac92d721f"
+  },
+  {
+    "path": "rules/KR-CYCLE-CAUSAL-BOUNDARY.json",
+    "bytes": 4166,
+    "sha256": "11a95e3999f818517bf2eb144ffcccbfecef307272a16a652e653f156811947e"
+  },
+  {
+    "path": "rules/KR-DCF-DISTRESS.json",
+    "bytes": 4026,
+    "sha256": "93aafab6ca91a90bfd5555f310be10b868244834416c10d77d4396927fc531ab"
+  },
+  {
+    "path": "rules/KR-DCF-DRIVERS.json",
+    "bytes": 3359,
+    "sha256": "3adab2b6f03bcc103d088951e938c2737b42cc20479877225c5cfd18d31fb0f9"
+  },
+  {
+    "path": "rules/KR-EXPECTATION-EXIT.json",
+    "bytes": 3300,
+    "sha256": "a78ff73ea5b0e5b618122fea457dcb9086c6dd306365309b27e7a09e53052398"
+  },
+  {
+    "path": "rules/KR-EXPECTATION-REVISION.json",
+    "bytes": 3343,
+    "sha256": "71b811bbc4c446ce8615760865e596080cf531cb3e81550466cdc7687733af6d"
+  },
+  {
+    "path": "rules/KR-FACTOR-FUNDING-RISK.json",
+    "bytes": 3373,
+    "sha256": "67f8805f6fbf0315a90b07ea8561b4ab829fe4b9259840be27b0190337ce5412"
+  },
+  {
+    "path": "rules/KR-FACTOR-INVESTMENT.json",
+    "bytes": 2996,
+    "sha256": "64624790f4b6c9bb0dabbbe6de0f90309ff2503a3341f6851791445e9ab55668"
+  },
+  {
+    "path": "rules/KR-FACTOR-PROFITABILITY.json",
+    "bytes": 2964,
+    "sha256": "e73ed0cffc3fa14f07d94c83d30ce446955c190f3b149f6884728fa9990e051a"
+  },
+  {
+    "path": "rules/KR-FINANCIAL-ENTITY-SCOPE.json",
+    "bytes": 4781,
+    "sha256": "fc2860930d30bbbbf6758dd19dcfd720d2b1978d1fa115f35eb1d3ab40d71df0"
+  },
+  {
+    "path": "rules/KR-GROWTH-RETURN.json",
+    "bytes": 3675,
+    "sha256": "9ccd5161190abf1cc5fbff2ee8449179d1028e83411be77f72e9189b121cf496"
+  },
+  {
+    "path": "rules/KR-HORIZON-ENDURANCE.json",
+    "bytes": 3023,
+    "sha256": "6ee92b0207247486548c29ae2cea0d64d2a9f9c3aa973fcd5d723dd256042ee1"
+  },
+  {
+    "path": "rules/KR-KEEP-OPTIONS.json",
+    "bytes": 3636,
+    "sha256": "84929380999f9490a4d051aa9576bea66bc6dba04f87a5a97e91407791783904"
+  },
+  {
+    "path": "rules/KR-LIQUIDITY-USABLE-CASH.json",
+    "bytes": 4876,
+    "sha256": "c8646314b8a4cf8ed16e1233c8a0c17a29275ec3d16ed637c0d785eca187d937"
+  },
+  {
+    "path": "rules/KR-MARGIN-SAFETY.json",
+    "bytes": 3043,
+    "sha256": "f75cd878d05091a76cc863e49ddbb101fcd907714716b71e670b19272d6bac60"
+  },
+  {
+    "path": "rules/KR-PRICE-EXPECTATIONS.json",
+    "bytes": 3348,
+    "sha256": "83faf74de36b00f1daab9749621a1163eaea8726a07d1745d559acdbc341303f"
+  },
+  {
+    "path": "rules/KR-PROFIT-CASH-BRIDGE.json",
+    "bytes": 5515,
+    "sha256": "b21537cae31e249e5457d1fcc62ee38fa8ec5b6dc9eea256d1d4623580032d87"
+  },
+  {
+    "path": "rules/KR-QUALITY-ECONOMICS.json",
+    "bytes": 3652,
+    "sha256": "2aeef016f9a5450e94235303f883dfc6ccc4bc2a936e846a9b365dc4b04e56a0"
+  },
+  {
+    "path": "rules/KR-RELATIVE-COMPARABILITY.json",
+    "bytes": 3482,
+    "sha256": "bfc17f7057aa1cf992323931b507fe1a722cdc7f0a964ef6773be81d126af9a7"
+  },
+  {
+    "path": "rules/KR-RISK-EXPECTED-RETURN.json",
+    "bytes": 3771,
+    "sha256": "fa402e30132a93b19c5f3ed8ebe8b8b7243d545d39a9bac6de07c77679edaf95"
+  },
+  {
+    "path": "rules/KR-RISK-NON-VOLATILITY.json",
+    "bytes": 3522,
+    "sha256": "9f0a139991dbdfc82635ae387002046fa03ff68a11e8644559a45871a9e87382"
+  },
+  {
+    "path": "rules/KR-TREND-ENTRY-DISCIPLINE.json",
+    "bytes": 3277,
+    "sha256": "186591bdeaf93f5bdd519658f97e1d7461528bdc0a7ff20e2de1c013376d826e"
+  },
+  {
+    "path": "rules/KR-TREND-GROWTH-SCREEN.json",
+    "bytes": 3619,
+    "sha256": "319fe567fec98cf771576417442bbacb425c5eac543b73e63e068237ca805160"
+  },
+  {
+    "path": "rules/KR-TREND-MARKET.json",
+    "bytes": 3492,
+    "sha256": "eb7a9b7d794af1f361eec72c20d3aec79af3b3968a70fa0423bc4ad4b7df954c"
+  },
+  {
+    "path": "rules/KR-VALUE-MOMENTUM-COMBINATION.json",
+    "bytes": 3388,
+    "sha256": "ecbf3f8d736299d9e655cb391b55d2d93cb9750bb21eaf9d0dc10b4f953bc33e"
+  },
+  {
+    "path": "rules.json",
+    "bytes": 118717,
+    "sha256": "367b7fa894d645b7205d3990e1eed5470ad84fe090997a67fda23179da1dcc83"
+  },
+  {
+    "path": "rules.md",
+    "bytes": 77750,
+    "sha256": "4fbc859d13d714639dc8a58b0284120653cbad73548534175b255925d57efd33"
+  },
+  {
+    "path": "source-excerpts.md",
+    "bytes": 28645,
+    "sha256": "8917214907c76c782f6b4d3f1e727bf9c749ecd9da044a44a8f6ecf44791d0f8"
+  },
+  {
+    "path": "source-versions.json",
+    "bytes": 18598,
+    "sha256": "117bcad39f4824d645e0b431c7b45f20c22dd42f58e7ad178fbd0ee4e34f4d4e"
+  },
+  {
+    "path": "sources/index.md",
+    "bytes": 15866,
+    "sha256": "308efbc0a3dc3f1f25db4b76b4f678ad6c2044a21c3dd370017e2ae37c7f20f0"
+  },
+  {
+    "path": "sources/KS-AQR-VALUE-MOMENTUM.json",
+    "bytes": 3396,
+    "sha256": "8094aa28e1406a817de5e0715ed379831aa1a04118e07de7e4183050064a59f2"
+  },
+  {
+    "path": "sources/KS-AQR-VALUE-MOMENTUM.txt",
+    "bytes": 9349,
+    "sha256": "a953cf78276cbd2bb88aad0bc3406aa06c246664044a20854c6535ce72a18219"
+  },
+  {
+    "path": "sources/KS-BOGLE-COST-2005.json",
+    "bytes": 3216,
+    "sha256": "290a4bc9c800a6c8d5f92b4954518495ee3ddadc915f99bf125976103394274b"
+  },
+  {
+    "path": "sources/KS-BOGLE-COST-2005.txt",
+    "bytes": 28854,
+    "sha256": "67883c0c8b1f5922530aee852ea7ee48f956638f5ec2a41444a7656c84cc3909"
+  },
+  {
+    "path": "sources/KS-BUFFETT-1989.json",
+    "bytes": 3200,
+    "sha256": "7d43a9616f73683df9635c548ac8b683b8f7ec49862b2826c84a8ee6b7e50250"
+  },
+  {
+    "path": "sources/KS-BUFFETT-1989.txt",
+    "bytes": 86938,
+    "sha256": "31e1a16ee3889621364c8081407fba615f5b103b733e8fb5717abddb343a8334"
+  },
+  {
+    "path": "sources/KS-BUFFETT-1992.json",
+    "bytes": 3275,
+    "sha256": "e579c4978f7deb03cbc4520d621095bf33db10257e8dac3cf4e629fd85a5ac6c"
+  },
+  {
+    "path": "sources/KS-BUFFETT-1992.txt",
+    "bytes": 68295,
+    "sha256": "13e1390a3d1fb280d7f214ada0e7e097094186d03c4b62fb9836132f0e846197"
+  },
+  {
+    "path": "sources/KS-BUFFETT-2000.json",
+    "bytes": 3095,
+    "sha256": "4ed510769a7d427eeb832cc9196d3bf25195be99f31df64821d664c5e969dce4"
+  },
+  {
+    "path": "sources/KS-BUFFETT-2000.txt",
+    "bytes": 79627,
+    "sha256": "f9b4de5e7b385ab387e4f8a3e873d1394c91513cdd31616968ccd925117cdf08"
+  },
+  {
+    "path": "sources/KS-BUFFETT-2001.json",
+    "bytes": 3076,
+    "sha256": "406ff44a6699adfa9b2e5ac84a2da0a4be4247f7f23ddd00c16d876f573745b5"
+  },
+  {
+    "path": "sources/KS-BUFFETT-2001.txt",
+    "bytes": 73770,
+    "sha256": "ca227afb979b7bcbb0e75ec677c3b2a960bc5fc7af918cdb4ba29b986e8ec760"
+  },
+  {
+    "path": "sources/KS-DAMODARAN-VALUATION.json",
+    "bytes": 3228,
+    "sha256": "cbeff733f9ecb6fcbc2836e5a19d3ee84a184358e3aa2fba5c21d0e7c9053bc5"
+  },
+  {
+    "path": "sources/KS-DAMODARAN-VALUATION.txt",
+    "bytes": 41362,
+    "sha256": "864a424dbae3b20a5c16d231fe908102f5f3fd8f456537a85efd63ae6737333c"
+  },
+  {
+    "path": "sources/KS-EXPECTATIONS.json",
+    "bytes": 3324,
+    "sha256": "fce81615c99da954f2b951b596ca07ef37411f7f8cd391e793f4e95bbdbea99b"
+  },
+  {
+    "path": "sources/KS-EXPECTATIONS.txt",
+    "bytes": 12910,
+    "sha256": "be8ba90d3f47823c3b32195cac1bc5da7ac1d083dccb17f5f22c67e83229d0d7"
+  },
+  {
+    "path": "sources/KS-FRENCH-3F.json",
+    "bytes": 3179,
+    "sha256": "6b79b93a571a5ec9705c73df316d0faf16b28e5d689319bc23b919d95556467a"
+  },
+  {
+    "path": "sources/KS-FRENCH-3F.txt",
+    "bytes": 1759,
+    "sha256": "3ff212606de703d6f6704b621c235bd67865f053778570b21603c5f8bffcd11a"
+  },
+  {
+    "path": "sources/KS-FRENCH-5F.json",
+    "bytes": 3286,
+    "sha256": "1c2f8e625dbf0e4acd486536e02c75b172b398a7d983ded8a7892aa04b394564"
+  },
+  {
+    "path": "sources/KS-FRENCH-5F.txt",
+    "bytes": 2997,
+    "sha256": "c52274dc381ce99c1552dad946f375c6db6bbb80880ae597bf6a136db1194926"
+  },
+  {
+    "path": "sources/KS-HOUSEL-ENDURANCE.json",
+    "bytes": 3461,
+    "sha256": "e09e812666c8c2a9c7925f4056547abede9449c47dc8e6bfda75cf73f24ae5e2"
+  },
+  {
+    "path": "sources/KS-HOUSEL-ENDURANCE.txt",
+    "bytes": 3799,
+    "sha256": "ab590efe550a6fed57bed3fa314065914d5864a7e5850b45d0d9c839c76e8aa3"
+  },
+  {
+    "path": "sources/KS-HOUSEL-REASONABLE.json",
+    "bytes": 3310,
+    "sha256": "03d21b61c72e8c8969cb4afc5c87726da69f5d3af42bde574dab58a366576740"
+  },
+  {
+    "path": "sources/KS-HOUSEL-REASONABLE.txt",
+    "bytes": 7175,
+    "sha256": "40a91fcb6b145e3aab57393814b699b5a205b9d4ad19012f3c89ed58be38f977"
+  },
+  {
+    "path": "sources/KS-HOUSEL-RISK.json",
+    "bytes": 3103,
+    "sha256": "06ee96b36a3a1bd4621fb6ba1760b6a1b75aa67fee79cd47bbb95b74b98e64ca"
+  },
+  {
+    "path": "sources/KS-HOUSEL-RISK.txt",
+    "bytes": 4902,
+    "sha256": "20395a0ea56f1cb5f03173ee96355e8f78570a893cdacbbc883b912b91e99532"
+  },
+  {
+    "path": "sources/KS-IBD-ENTRY.json",
+    "bytes": 3274,
+    "sha256": "418d3991d87be2f10957c06602b9e99802bafae8bd7d81278c7121e6c836f262"
+  },
+  {
+    "path": "sources/KS-IBD-ENTRY.txt",
+    "bytes": 5526,
+    "sha256": "56fce432057765db5b68569eae77661819f73b2645befd45c673cb2cb3a54a73"
+  },
+  {
+    "path": "sources/KS-MARKS-RISK.json",
+    "bytes": 3184,
+    "sha256": "6409d7c9490dc8fc3c900c19f061f20846e6eb758e4e426351123cd7fc5f91fe"
+  },
+  {
+    "path": "sources/KS-MARKS-RISK.txt",
+    "bytes": 33959,
+    "sha256": "a16e68cf88887ef3a2d6d8c2550874d5262956539df0f49fdb92209ac03d5eb3"
+  },
+  {
+    "path": "sources/KS-MARKS-TEMPERATURE-2023.json",
+    "bytes": 3531,
+    "sha256": "bc46df735304ca69542595e2331a1e02552edaa0a803fe13712208abd72a3eab"
+  },
+  {
+    "path": "sources/KS-MARKS-TEMPERATURE-2023.txt",
+    "bytes": 46129,
+    "sha256": "255cfd5293a7d06fa754d9143c347a353f83905b87333e2df9fc2551edbfbc5e"
+  },
+  {
+    "path": "sources/KS-MOF-CAS31.json",
+    "bytes": 4441,
+    "sha256": "d3d86cc31b96125ef4f505c60c0b2f4133e24323e9261d3e39fcae44dc70e2b0"
+  },
+  {
+    "path": "sources/KS-MOF-CAS31.txt",
+    "bytes": 6150,
+    "sha256": "6979b1a3d9b6d93afc17d9a3a42941ec7c2b88e81cc1b9ec21a6262721083ecb"
+  },
+  {
+    "path": "sources/KS-MOF-CAS33.json",
+    "bytes": 4987,
+    "sha256": "39c9a015d43bdabefbfff38c751512a3c0c63af20f9bbdbcb1d1334c9a1e6f80"
+  },
+  {
+    "path": "sources/KS-MOF-CAS33.txt",
+    "bytes": 27078,
+    "sha256": "1e3ecf65438442723369d7ac64b711968da4ce8f2065d8dfc18f74b7fee9957c"
+  },
+  {
+    "path": "sources/KS-TANG-XHSD-EXCERPT.json",
+    "bytes": 4364,
+    "sha256": "3368eae59db05d1dda8da33933ad17859ccc8a7e5b8d1e5b1c975762bc4b9d81"
+  },
+  {
+    "path": "sources/KS-TANG-XHSD-EXCERPT.txt",
+    "bytes": 1827,
+    "sha256": "af9062e997fb192caf459afa7b22e07cda44306ea62fddb41de54fcd23fdc999"
+  }
+]

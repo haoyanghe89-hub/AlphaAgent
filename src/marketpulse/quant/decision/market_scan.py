@@ -326,8 +326,14 @@ def rebuild(repo, snapshot):
 
 def verify(repo, data):
     snapshot = repo.value(data["market_snapshot_ref"])
-    if {k: v for k, v in data.items() if k != "market_snapshot_ref"} != rebuild(repo, snapshot):
+    if {
+        k: v for k, v in data.items() if k not in {"market_snapshot_ref", "enhanced_research"}
+    } != rebuild(repo, snapshot):
         raise ValueError("market source/calculation/report changed")
+    if "enhanced_research" in data:
+        from .market_enhanced import verify_result
+
+        verify_result(repo, data)
 
 
 def collect_partial(repo, state, stop, save, step, reason):
@@ -449,7 +455,7 @@ def rebuild_partial(repo, snapshot):
     )
 
 
-async def run(repo, run_id, stop, settings=None, *, collector=None):
+async def run(repo, run_id, stop, settings=None, *, collector=None, port=None, rules=None):
     state = repo.get(run_id, with_data=False)
     prior, started = state.get("elapsed_seconds", 0), time.monotonic()
 
@@ -477,9 +483,15 @@ async def run(repo, run_id, stop, settings=None, *, collector=None):
                 )
             state["market_snapshot_ref"] = repo.blob(snapshot)
             save()
-        data = rebuild(repo, repo.value(state["market_snapshot_ref"]))
+        data = await asyncio.to_thread(rebuild, repo, repo.value(state["market_snapshot_ref"]))
         data["market_snapshot_ref"] = state["market_snapshot_ref"]
-        verify(repo, data)
+        if state["request"].get("enhanced_research"):
+            from .market_enhanced import analyze
+
+            data["enhanced_research"] = await analyze(
+                repo, state, data, settings, save, stop, port=port, rules=rules
+            )
+        await asyncio.to_thread(verify, repo, data)
         state.update(
             status="COMPLETED",
             title=data["report"]["title"],

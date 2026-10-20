@@ -49,18 +49,28 @@ async def run(
                 horizon=request.horizon,
                 horizon_sessions=request.horizon_sessions,
                 profile=None,
+                enhanced_research=request.enhanced_research,
+                execution_contract="investment-structured-v2"
+                if request.structured_research
+                else None,
+                input_reservation="deepseek-v4-tokenizer-v1"
+                if request.structured_research
+                else None,
             ).model_dump(mode="json")
             research, _ = public.create(definition)
             state["research_run_id"] = research["run_id"]
             save()
         research = public.get(state["research_run_id"])
+        if bool(research["request"].get("enhanced_research")) != request.enhanced_research:
+            raise ValueError("公开研究流程与持仓请求不一致。")
         while research["status"] != "COMPLETED":
             research = await research_run(
                 public, rules, research["run_id"], stop, settings, **(research_options or {})
             )
             correctable = (
                 research["status"] == "INTERRUPTED"
-                and research.get("stage") in {"PLANNER", "ANALYST", "VERIFIER", "WRITER"}
+                and research.get("stage")
+                in {"RESEARCHER", "PLANNER", "ANALYST", "VERIFIER", "WRITER"}
                 and (
                     "输出未通过" in (research.get("error") or "")
                     or "解释仍未通过" in (research.get("error") or "")
@@ -103,9 +113,24 @@ async def run(
         state["issued_at"] = datetime.now(UTC).isoformat()
         advisor_quotes.verify(repo, quoted, report, state["issued_at"])
         trading = sell_rules(report, repo.raw_bytes, report["candidates"][0]["security_id"])
+        from .question_understanding import dialogue, understand_advisor
+
+        understanding = await understand_advisor(repo, state, [research], stop, settings)
         answer = build_answer(
-            request, report, quoted, trading, pinned_route=state.get("pinned_route")
+            request,
+            report,
+            quoted,
+            trading,
+            pinned_route=state.get("pinned_route"),
+            understanding=understanding,
         )
+        if request.semantic_understanding:
+            answer["dialogue"] = dialogue(
+                answer, understanding, version=state.get("dialogue_version", "question-dialogue-v1")
+            )
+            answer["privacy"]["anonymous_semantics_sent_to_model"] = (
+                state["understanding"]["model_calls"] > 0
+            )
         answer.update(research_run_id=research["run_id"], research_sha256=research["result_sha256"])
         state.update(
             status="COMPLETED",

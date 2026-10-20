@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:44.290393+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-BUFFETT-1992",
+        "end": 39826,
+        "quote": "Second, and equally important, we insist on a margin of safety in our purchase price. If we calculate the value of a common stock to be only slightly higher than its price, we're not interested in buying. We believe this margin-of-safety principle, so strongly emphasized by Ben Graham, to be the cornerstone of investment success. Fixed-Income Securities Below we list our largest holdings of fixed-income securities: (000s omitt",
+        "start": 39396,
+        "version": "b3c247bf017230ee44b6395a07f1f5ed4ff00c38b055422df5480e420f9a00ab"
+      }
+    ],
+    "conditions": [
+      "估值依据和误差区间必须可解释，原文未给统一安全边际百分比。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "估值假设系统性过于乐观时，表面折价也不能提供真实保护。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "安全边际",
+      "估值",
+      "入场时机",
+      "买点"
+    ],
+    "kind": "入场",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "真实价格",
+      "估值假设",
+      "不利情景"
+    ],
+    "rule_id": "KR-MARGIN-SAFETY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "巴菲特要求购买价格留有安全边际，估计价值仅略高于价格时并无购买兴趣。",
+    "steps": [
+      "对估值关键假设做不利情景检查，再讨论价格与价值差异，不能把估值点值直接视为买点。"
+    ],
+    "system_rule": "对估值关键假设做不利情景检查，再讨论价格与价值差异，不能把估值点值直接视为买点。",
+    "title": "估值略高于价格仍不构成安全边际",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "9e8c00628379ddb3e5d69807c771ecbfe53d678c917a1fee9c7a43ab83852fd8",
+  "source_families": [
+    "BERKSHIRE"
+  ],
+  "rule_id": "KR-MARGIN-SAFETY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:45.705488+00:00",
+      "review_id": "9b02471ed7b036dbe852c35bb83c27a9ba9afdc1caecc34fc0dbf1ed6e65a99f",
+      "rule_id": "KR-MARGIN-SAFETY",
+      "version": "9e8c00628379ddb3e5d69807c771ecbfe53d678c917a1fee9c7a43ab83852fd8"
+    }
+  ],
+  "review_ids": [
+    "9b02471ed7b036dbe852c35bb83c27a9ba9afdc1caecc34fc0dbf1ed6e65a99f"
+  ]
+}

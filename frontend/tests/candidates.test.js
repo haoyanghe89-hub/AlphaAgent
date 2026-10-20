@@ -42,3 +42,14 @@ test('zero candidate result stays empty and developer details remain separate',a
   assert.doesNotMatch(await render(empty),/data-candidate-id/)
   assert.match(await render(data(),true),/原始成分、排序、调用与审核/)
 })
+test('candidate enhancement metadata remains developer-only and never replaces the approved cards',async()=>{
+  const value=data()
+  value.enhanced_research={knowledge_ref:'DEVELOPER_KNOWLEDGE_ONLY',manifest_ref:'DEVELOPER_MANIFEST_ONLY',tool_results:[{trace:'DEVELOPER_TOOL_ONLY'}]}
+  const user=await render(value)
+  assert.match(user,/倾向看多，等待现金回收验证/)
+  assert.doesNotMatch(user,/DEVELOPER_KNOWLEDGE_ONLY|DEVELOPER_MANIFEST_ONLY|DEVELOPER_TOOL_ONLY/)
+  const developer=await render(value,true)
+  assert.match(developer,/DEVELOPER_KNOWLEDGE_ONLY/)
+  assert.match(developer,/DEVELOPER_MANIFEST_ONLY/)
+  assert.match(developer,/DEVELOPER_TOOL_ONLY/)
+})

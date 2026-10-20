@@ -1,0 +1,69 @@
+{
+  "body_characters": 2997,
+  "created_at": "2026-10-16T04:04:45.826446+00:00",
+  "document_id": "KS-FRENCH-5F",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:31.653455+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "operating profitability",
+      "end": 657,
+      "start": 134
+    },
+    {
+      "anchor": "Conservative Minus Aggressive",
+      "end": 1836,
+      "start": 1307
+    }
+  ],
+  "raw_ref": "blob://sha256/67c2150c5d99f645f880fa5e168819b9e813c8c1406228ca7105efe8a89bccc2",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "operating profitability",
+      "Conservative Minus Aggressive"
+    ],
+    "authors": [
+      "Kenneth French",
+      "Eugene Fama"
+    ],
+    "category": "因子与组合",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "FAMA-FRENCH",
+    "source_id": "KS-FRENCH-5F",
+    "tags": [
+      "因子投资",
+      "盈利因子",
+      "价值因子",
+      "规模因子",
+      "投资因子"
+    ],
+    "title": "French：五因子原始构造定义",
+    "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_5_factors_2x3.html"
+  },
+  "text_ref": "blob://sha256/c52274dc381ce99c1552dad946f375c6db6bbb80880ae597bf6a136db1194926",
+  "version": "3eafb817b1e536b08cfab80b0ccfc19bb32f8fbfcf52e9b45b757d7adca19ba7",
+  "manifest_ref": "blob://sha256/628a6c7d0c72570d8b5002fd022a3fcaebdbecf2d85940d8a55beb3fe93c0aba",
+  "title": "French：五因子原始构造定义",
+  "excerpts": [
+    {
+      "start": 134,
+      "end": 657,
+      "anchor": "operating profitability",
+      "text": "/French 5 factors (2x3) are constructed using the 6 value-weight portfolios formed on size and book-to-market, the 6 value-weight portfolios formed on size and operating profitability, and the 6 value-weight portfolios formed on size and investment. (See the description of the 6 size/book-to-market, size/operating profitability, size/investment portfolios.) SMB (Small Minus Big) is the average return on the nine small stock portfolios minus the average return on the nine big stock portfolios, SMB (B/M) = SMB (OP) = SM"
+    },
+    {
+      "start": 1307,
+      "end": 1836,
+      "anchor": "Conservative Minus Aggressive",
+      "text": "rtfolios minus the average return on the two weak operating profitability portfolios, RMW = 1/2 (Small Robust + Big Robust) - 1/2 (Small Weak + Big Weak). CMA (Conservative Minus Aggressive) is the average return on the two conservative investment portfolios minus the average return on the two aggressive investment portfolios, CMA = 1/2 (Small Conservative + Big Conservative) - 1/2 (Small Aggressive + Big Aggressive). R m -R f , the excess return on the market, value-weight return of all CRSP firms incorporated in the US an"
+    }
+  ]
+}

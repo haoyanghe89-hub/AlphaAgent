@@ -16,7 +16,7 @@ def protocol(state):
     request = state["request"]
     profile = request.get("profile")
     capital = number(profile["capital"]) if profile else None
-    return dict(
+    result = dict(
         version=VERSION,
         run_id=state["run_id"],
         registered_at=state["created_at"],
@@ -52,6 +52,14 @@ def protocol(state):
         simulation="NOT_SIMULATED;original_5.2_admission_and_independent_total_return_required",
         knowledge_updates="candidate_only;no_auto_tuning_or_publication",
     )
+    if request.get("enhanced_research"):
+        result["research_protocol"] = "active-public-research-v1"
+    if request.get("analysis_focus"):
+        result["analysis_focus"] = request["analysis_focus"]
+        result["research_protocol"] = (
+            result.get("research_protocol", "fixed-public-research-v1") + "+semantic-focus-v1"
+        )
+    return result
 
 
 def open_days(rows, exchange, after, through=None):
@@ -281,13 +289,19 @@ def _evaluate(report, initial, snapshot):
 def summarize(items):
     groups = {}
     for item in items:
-        key = (item.get("route_id", "UNASSIGNED"), item["profile_group"], item["horizon_sessions"])
+        key = (
+            item.get("route_id", "UNASSIGNED"),
+            item["profile_group"],
+            item["horizon_sessions"],
+            item.get("research_protocol"),
+        )
         group = groups.setdefault(
             key,
             dict(
                 route_id=key[0],
                 profile_group=key[1],
                 horizon_sessions=key[2],
+                **({"research_protocol": key[3]} if key[3] else {}),
                 registered=0,
                 matured=0,
                 correct=0,

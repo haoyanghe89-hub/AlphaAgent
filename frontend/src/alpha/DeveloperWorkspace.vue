@@ -24,6 +24,7 @@ onMounted(()=>{if(props.enabled)refresh()})
         <section class="panel rep-section"><h2>验收与数据接入</h2><p>查看既有交付记录、历史包合同、来源覆盖和回测准入。</p><a class="btn" href="#/delivery">交付与接入记录</a><a class="btn" href="#/backtest">历史数据取证</a><a class="btn" href="#/strategy">策略与准入检查</a></section>
         <section class="panel rep-section"><h2>内置知识体系</h2><p>查看已审核方法、原文、固定版本、知识发布与候选补充。</p><a class="btn" href="#/knowledge">知识与方法核验</a></section>
         <section class="panel rep-section"><h2>逐份研究过程</h2><p>从历史库打开任意研究，本模式显示对应的职责分析、调用预算、固定输入和计算记录。</p><a class="btn" href="#/library">打开完整历史库</a></section>
+        <section class="panel rep-section"><h2>模型与知识效果对照</h2><p>以同一封存输入比较原流程和增强流程的方向、论证、耗时与调用费用；到期后核对真实预测表现。</p><a class="btn" href="#/evaluation">打开实源对照评测</a></section>
         <section class="panel rep-section"><h2>用户页面</h2><p>页面底部可切回同一份报告的用户视图。切换展示保留原ID、输入、结果与历史，不改变知识发布或回测准入权限。</p><a class="btn" :href="userHome">返回日常工作台</a></section>
       </div>
     </template>

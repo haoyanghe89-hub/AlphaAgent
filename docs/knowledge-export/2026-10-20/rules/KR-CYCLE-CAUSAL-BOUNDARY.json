@@ -1,0 +1,78 @@
+{
+  "created_at": "2026-10-18T05:48:06.490148+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "将作者公开周期定义转成A股证据检查项，经营与信用指标为本系统需要核查的输入，不冒充作者给出的量化模型或周期时钟。",
+    "citations": [
+      {
+        "document_id": "KS-MARKS-TEMPERATURE-2023",
+        "end": 34469,
+        "quote": "On cycles : In my book Mastering the Market Cycle , I defined cycles not as a series of up and down movements, each of which regularly precedes the next – which I believe is the usual definition – but as a series of events, each of which causes the next. This causality holds the key to understanding cycles. In particular, I think economies, investor psychology, and thus markets eventually go too far in one direction or another – they become too positive or too negative – and afterward they eventually swing back toward moderation (and then usually toward excess in the opposite direction). Thus, in my opinion, these cycles are best understood as stemming from “excesses and corrections.” Overlooking the details of the individual episodes, it’s clear from the descriptions of these five calls that the greatest opportunities for bargain purchases result from overly negative prevailing psychology and the greatest opportunities to sell at too-high prices arise from excessive optimism.",
+        "start": 33478,
+        "version": "22d82c764cf95fb6e077fd118a299fbc7a52335172bca02e9b5795a04e5b6891"
+      }
+    ],
+    "conditions": [
+      "有可核查的同窗证据并注明缺项与不确定性；没有证据时不得给市场贴确定的周期阶段标签。"
+    ],
+    "conflict_group": "周期定位与交易时机",
+    "counterexamples": [
+      "宽松资金可能使高估持续，信用收缩也可能令低估更便宜；周期判断合理不代表反转及时发生。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得断言周期有固定长度、预测准确拐点日期、保证反转，或仅凭该规则给出明日方向及无条件买卖指令。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "周期",
+      "因果链",
+      "市场环境",
+      "估值",
+      "情绪",
+      "信用"
+    ],
+    "kind": "市场环境",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "同一截止时点的经营与信用事实",
+      "估值与群体情绪证据",
+      "因果假设与反证",
+      "资金期限与风险约束"
+    ],
+    "rule_id": "KR-CYCLE-CAUSAL-BOUNDARY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "马克斯在官方备忘录解释《周期》的定义：周期是一连串相互导致的事件，经济与投资者心理可能走向过度并随后修正。",
+    "steps": [
+      "区分已观察事实和周期传导假设，解释每个环节如何影响下一环节。",
+      "列出能推翻周期定位的变化，再讨论有约束的风险姿态调整。"
+    ],
+    "system_rule": "评估市场环境时记录经营、信用、估值和群体情绪的因果链，把周期位置作为风险姿态的条件性参考，不按固定日历或单一涨跌幅断言拐点。",
+    "title": "周期判断先说明因果链而非套固定日历",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "48392f2284bd5fa2355a1ffe8e59c4ae98d925cc6a49c2a4577cfb754dd4f7a5",
+  "source_families": [
+    "OAKTREE-MARKS"
+  ],
+  "rule_id": "KR-CYCLE-CAUSAL-BOUNDARY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-18T05:49:20.258924+00:00",
+      "review_id": "451e3df1aa4a449b20f41df648d9f23c4321a339acf6d87db14e9164726db3dd",
+      "rule_id": "KR-CYCLE-CAUSAL-BOUNDARY",
+      "version": "48392f2284bd5fa2355a1ffe8e59c4ae98d925cc6a49c2a4577cfb754dd4f7a5"
+    }
+  ],
+  "review_ids": [
+    "451e3df1aa4a449b20f41df648d9f23c4321a339acf6d87db14e9164726db3dd"
+  ]
+}

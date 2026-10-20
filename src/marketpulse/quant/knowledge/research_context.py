@@ -27,6 +27,7 @@ def analysis_basis(context, plan=None, *, scoped=False):
     selected = {s["security_id"]: s["route_id"] for s in plan["selections"]}
     # Account capacity is applied locally; the public analyst has no private position inputs.
     required = {"KR-AVOID-RUIN", "KR-EXPECTATION-EXIT"}
+    required.update(r for s in context.get("research_selection", []) for r in s["method_rule_ids"])
     for rid in selected.values():
         required.update(
             ("KR-TREND-MARKET", "KR-TREND-ENTRY-DISCIPLINE")
@@ -53,7 +54,7 @@ def analysis_plan(plan, compact=False):
     )
 
 
-def analyst_context(context, version, plan=None, *, scoped=False, compact=False):
+def analyst_context(context, version, plan=None, *, scoped=False, compact=False, structured=False):
     """Lossless window interning for the new technical prompt's bounded input."""
 
     from ..contracts import canonical
@@ -67,6 +68,14 @@ def analyst_context(context, version, plan=None, *, scoped=False, compact=False)
         version = TECHNICAL_PROMPT_VERSION
 
     result = analysis_basis(context, plan, scoped=scoped)
+    if structured:
+        from .structured_contract import requirements
+
+        result["citation_requirements"] = requirements(result)
+    if result.get("active_research_version"):
+        from .active_research import model_view
+
+        result = model_view(result)
     if version in {TECHNICAL_PROMPT_VERSION, "investment-technicals-roles-v2"}:
         windows, keys = {}, {}
         for fact in result["evidence"]:
@@ -108,6 +117,10 @@ def review_context(
         proposal=analysis,
         review_round=review_round,
     )
+    if result.get("active_research_version"):
+        from .active_research import model_view
+
+        result = model_view(result)
     if compact:
         from ..contracts import canonical
 
@@ -189,11 +202,11 @@ def direction_check_context(previous_context, previous_review):
     return result
 
 
-def knowledge_snapshot(rules, cutoff):
+def knowledge_snapshot(rules, cutoff, *, dynamic=False):
     from .routing import RULE_IDS
 
-    selected = [r for r in rules.current(cutoff) if r["rule_id"] in RULE_IDS]
-    if {r["rule_id"] for r in selected} != set(RULE_IDS):
+    selected = [r for r in rules.current(cutoff) if dynamic or r["rule_id"] in RULE_IDS]
+    if not set(RULE_IDS) <= {r["rule_id"] for r in selected}:
         raise ValueError("必要方法的发布版本不可用")
     documents = {}
     fragments = []

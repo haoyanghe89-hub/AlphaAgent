@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-10-16T07:03:54.238452+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-HOUSEL-RISK",
+        "end": 2120,
+        "quote": "One is a decision that can’t easily be reversed . What you value changes over time. So long-term commitments that can’t be reneged on – concentrated illiquid assets, or debt that can’t be discharged – is a risk landmine. Stuff you can change your mind about – careers, employers, friends, liquid investments – don’t have to be long-term regrettable, even if dealing with them hurts for a while. Another is a decision with downside so severe that it prevents eventual recovery . Getting wiped out. Getting banned. Getting convicted. Severe reputational harm. You’ll regret decisions that lead you there because their stench will stick to you long after you try to scrub them off and move on. So risk management comes down to serially avoiding decisions that can’t easily be reversed, whose downsides will demolish you and prevent recovery. I think tha",
+        "start": 1270,
+        "version": "c4930c292d3bac7625907e26a0eead88ec1c459f43f538882d8f45bdb06543a5"
+      }
+    ],
+    "conditions": [
+      "可承受损失需用户约束和工具核算，不能由模型自行推定或保证停损可成交。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "持仓分散但都受同一融资风险影响时，表面分散仍可能发生共同损失。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "风险",
+      "避免破产",
+      "杠杆",
+      "集中度"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "债务约束",
+      "组合集中度",
+      "资产流动性",
+      "可承受损失"
+    ],
+    "rule_id": "KR-AVOID-RUIN",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Housel提醒难以逆转的承诺和严重到无法恢复的下行风险，集中非流动资产与不可解除债务是例子。",
+    "steps": [
+      "研究投资路线前检查债务、集中与流动性约束，优先列出哪些失败会破坏持续参与能力。"
+    ],
+    "system_rule": "研究投资路线前检查债务、集中与流动性约束，优先列出哪些失败会破坏持续参与能力。",
+    "title": "先排除难以恢复和难以逆转的损失",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "1615027d53ef498d79c7b62329d3b1fbf35be50078f2ade40b44e5e826cb9773",
+  "source_families": [
+    "HOUSEL-COLLAB"
+  ],
+  "rule_id": "KR-AVOID-RUIN",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:07.624573+00:00",
+      "review_id": "0d8ed2397b378992b4722d312f46f73e364d33c68bec5fcadbb57e6e95920dfe",
+      "rule_id": "KR-AVOID-RUIN",
+      "version": "1615027d53ef498d79c7b62329d3b1fbf35be50078f2ade40b44e5e826cb9773"
+    }
+  ],
+  "review_ids": [
+    "0d8ed2397b378992b4722d312f46f73e364d33c68bec5fcadbb57e6e95920dfe"
+  ]
+}

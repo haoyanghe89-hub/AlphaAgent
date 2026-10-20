@@ -429,6 +429,50 @@ def test_auto_observation_claim_survives_restart_without_repeating(base, monkeyp
     assert len(calls) == 2
 
 
+@pytest.mark.parametrize("kind", ["NEXT", "INVESTMENT"])
+def test_observation_integrity_reads_do_not_block_page_requests(base, monkeypatch, kind):
+    from threading import Event
+
+    from marketpulse.quant.daily import runtime as module
+
+    worker = runtime(base)
+    state = dict(
+        run_id="RUN-NS-" + "b" * 32 if kind == "NEXT" else "RUN-IR-" + "b" * 32,
+        status="COMPLETED",
+        request=dict(schema_version="investment-research-v4"),
+        prediction_ids=["p"] if kind == "NEXT" else [],
+    )
+    page_served = Event()
+    verified = []
+
+    def read(_):
+        assert page_served.wait(2), "自动核对的完整性复算阻塞了页面请求"
+        verified.append(kind)
+        return state
+
+    monkeypatch.setattr(
+        worker.events,
+        "records",
+        lambda prefix: [state] if state["run_id"].startswith(prefix) else [],
+    )
+    monkeypatch.setattr(worker.events, "get_run", read)
+    monkeypatch.setattr(module, "InvestmentStore", lambda _: SimpleNamespace(get=read))
+    monkeypatch.setattr(module, "ObservationStore", lambda _: SimpleNamespace(view=lambda _: {}))
+    monkeypatch.setattr(module, "pending_next", lambda *_: False)
+    monkeypatch.setattr(module, "pending_investment", lambda *_: False)
+
+    async def check():
+        task = asyncio.create_task(
+            worker.observe_one(datetime.fromisoformat("2026-10-18T18:30:00+08:00"), ["20261016"])
+        )
+        await asyncio.sleep(0)
+        page_served.set()
+        await task
+
+    asyncio.run(check())
+    assert verified == [kind]
+
+
 def test_early_draft_is_held_until_publish_time(monkeypatch):
     from marketpulse.quant.daily import api
 

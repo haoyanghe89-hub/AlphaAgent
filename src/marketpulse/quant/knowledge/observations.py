@@ -400,8 +400,15 @@ class ObservationStore:
             state = self.repo.get(rid)
             view = self.view(state)
             spec = view["protocol"]
+            mode = (
+                {"research_protocol": spec["research_protocol"]}
+                if spec.get("research_protocol")
+                else {}
+            )
             if view["latest"]:
-                samples.extend(view["latest"]["evaluation"]["stocks"])
+                samples.extend(
+                    dict(stock, **mode) for stock in view["latest"]["evaluation"]["stocks"]
+                )
                 continue
             candidates = state.get("data", {}).get("candidates")
             for c in candidates or [
@@ -413,6 +420,7 @@ class ObservationStore:
                         route_id=c["selected_route"],
                         profile_group=spec["profile_group"],
                         horizon_sessions=spec["horizon_sessions"],
+                        **mode,
                         status="PENDING_OBSERVATION"
                         if state["status"] == "COMPLETED"
                         else "RESEARCH_" + state["status"],

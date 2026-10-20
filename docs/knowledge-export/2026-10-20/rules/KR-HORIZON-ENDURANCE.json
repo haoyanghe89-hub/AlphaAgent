@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:54.378669+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-HOUSEL-ENDURANCE",
+        "end": 3159,
+        "quote": "Having the endurance to make long time horizons work means your allocation, cash flow, and mindset are intentionally designed to deal with the nonsense that occurs within short time horizons. Tyler Cowen wrote: Plenty of companies have made big mistakes from t",
+        "start": 2899,
+        "version": "3617a3130ffc357a316eb98689a1be3972c3f29ab6a872b884991bcbd5e962dc"
+      }
+    ],
+    "conditions": [
+      "期限和承受能力分别确认，不能以用户选择未来几个月就假定能够承受全部波动。"
+    ],
+    "conflict_group": "风险与容量",
+    "counterexamples": [
+      "基本面长期未变但用户被迫赎回或需要现金时，理论上的长期回报可能无法获得。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "持有",
+      "期限",
+      "现金流",
+      "回撤控制"
+    ],
+    "kind": "持有",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "现金需求",
+      "配置约束",
+      "阶段亏损承受能力"
+    ],
+    "rule_id": "KR-HORIZON-ENDURANCE",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Housel指出长期视角需要配置、现金流和心态能够应对短期发生的问题，长期计划本身不等于坚持能力。",
+    "steps": [
+      "声明中长期持有前核查现金需求和阶段性亏损承受能力，按固定条件复核而非用长期口号回避短期风险。"
+    ],
+    "system_rule": "声明中长期持有前核查现金需求和阶段性亏损承受能力，按固定条件复核而非用长期口号回避短期风险。",
+    "title": "持有期限必须有现金流和承受能力支撑",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "7664fd879dc2d113316b16e310806075fc21f653daa51fbd45fa87a73c3016a2",
+  "source_families": [
+    "HOUSEL-COLLAB"
+  ],
+  "rule_id": "KR-HORIZON-ENDURANCE",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:08.076083+00:00",
+      "review_id": "bcbfa4a404c23869d8912f95f456e7c6315c427c32315b6b3c23e6fe0905c41a",
+      "rule_id": "KR-HORIZON-ENDURANCE",
+      "version": "7664fd879dc2d113316b16e310806075fc21f653daa51fbd45fa87a73c3016a2"
+    }
+  ],
+  "review_ids": [
+    "bcbfa4a404c23869d8912f95f456e7c6315c427c32315b6b3c23e6fe0905c41a"
+  ]
+}

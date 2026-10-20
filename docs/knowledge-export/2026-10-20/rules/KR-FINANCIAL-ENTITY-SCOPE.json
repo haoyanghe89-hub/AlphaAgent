@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-10-18T06:05:38.978700+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "书摘仅为旧版公开片段，不代表新准则升级版全文；本规则采用主体区分思想，不采用书摘中的历史法律比例。分配金额和合法性另按适用时点法律、章程及公告核查。",
+    "citations": [
+      {
+        "document_id": "KS-TANG-XHSD-EXCERPT",
+        "end": 474,
+        "quote": "请投资者注意一点，法定盈余公积的10％提取要求，是以上市公司本部净利润（母公司利润表净利润）为基数的。“法定”管的是法律实体。合并报表是会计意义上的单位，不是法律意义的公司。投资人关心合并报表习惯了，很容易忘记这一点。",
+        "start": 365,
+        "version": "a4948bf0b1f1ee15a599c6a53d09c514cbd1a0af13eeeea74fd208de70d65452"
+      },
+      {
+        "document_id": "KS-MOF-CAS33",
+        "end": 322,
+        "quote": "第二条 合并财务报表，是指反映母公司和其全部子公司形成的企业集团整体财务状况、经营成果和现金流量的财务报表。 母公司，是指控制一个或一个以上主体（含企业、被投资单位中可分割的部分，以及企业所控制的结构化主体等,下同）的主体。 子公司，是指被母公司控制的主体。 第三条 合并财务报表至少应当包括下列组成部分： （一）合并资产负债表； （二）合并利润表； （三）合并现金流量表； （四）合并所有者权益（或股东权益，下同）变动表； （五）附注。 企业集团中期期末编制合并财务报表的，至少应当包括合并资产负债表、合并利润表、合并现金流量表和附注。",
+        "start": 53,
+        "version": "fa895f8dcecf7c012bc3e2169d189c8098ed172fd8995cc10e20331ac75ea2ec"
+      }
+    ],
+    "conditions": [
+      "所有引用数字注明主体、报告期和币种；缺少母公司或上划资料时，分配能力只能作条件性判断。"
+    ],
+    "conflict_group": "集团经营与法律实体分配",
+    "counterexamples": [
+      "控股型母公司可能依靠合法子公司分红获得现金，不能因母公司主营收入少就认定不能分红；集团盈利充足也可能因子公司限制而无法及时上划。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得把合并现金直接视为母公司可用现金，或仅凭账面未分配利润承诺分红金额；不得把旧版书摘比例当作现行通用法律规则。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "母公司",
+      "合并报表",
+      "分红",
+      "主体",
+      "可用现金"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "同一报告期的合并与母公司报表",
+      "合并范围及变更附注",
+      "子公司分红与资金上划资料",
+      "分配方案、债务和资金使用约束"
+    ],
+    "rule_id": "KR-FINANCIAL-ENTITY-SCOPE",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "唐朝公开书摘区分合并报表的会计主体与法律实体，并指出盈余公积相关计算使用母公司利润口径；财政部合并财务报表准则定义集团合并报表和控制范围。",
+    "steps": [
+      "先区分集团经营事实与母公司自身的利润、现金和债务。",
+      "检查可上划资金及限制；涉及分红金额时另核现行规则和公司公告。"
+    ],
+    "system_rule": "研究集团经营质量时明确合并范围；讨论上市母公司的分红或偿债能力时另查母公司报表、子公司资金上划与约束，不能用集团利润和现金直接替代母公司的可分配利润与可用现金。",
+    "title": "集团经营与母公司分配能力分开核对",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "f7a9c8959df367fe64be9dc165c51f566b4a75787a3d158f849c2c3cb3fd1209",
+  "source_families": [
+    "MOF-ACCOUNTING-STANDARDS",
+    "TANG-PUBLISHED-EXCERPT"
+  ],
+  "rule_id": "KR-FINANCIAL-ENTITY-SCOPE",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-18T06:06:03.243800+00:00",
+      "review_id": "556f45b4d3a1e3ccd829d03ad4bc8646f660606e618015c6b3ecdbc243c24c4c",
+      "rule_id": "KR-FINANCIAL-ENTITY-SCOPE",
+      "version": "f7a9c8959df367fe64be9dc165c51f566b4a75787a3d158f849c2c3cb3fd1209"
+    }
+  ],
+  "review_ids": [
+    "556f45b4d3a1e3ccd829d03ad4bc8646f660606e618015c6b3ecdbc243c24c4c"
+  ]
+}

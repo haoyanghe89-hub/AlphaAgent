@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:51.798645+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-DAMODARAN-VALUATION",
+        "end": 21194,
+        "quote": "In relative valuation, the value of an asset is derived from the pricing of 'comparable' assets, standardized using a common variable such as earnings, cashflows, book value or revenues. One illustration of this approach is the use of an industry-average price-earnings ratio to value a firm. This assumes that the other firms in the industry are comparable to the firm being valued and that the market, on average, prices these firms correctly. Another multiple in wide use is the price to book value ratio, with firms selling at a discount on book value, relative to comparable firms, being considered undervalued. The multiple of price to sales is also used to value firms, with the average price-sales ratios of firm",
+        "start": 20474,
+        "version": "24de32735013499834e0ec2b720427be1192d357d2024fcb5e9fb62a088b1c69"
+      }
+    ],
+    "conditions": [
+      "样本必须有同一时点和统一口径；负利润企业不能机械使用市盈率。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "同行整体高估或业务结构差异较大时，低于行业平均倍数仍可能不便宜。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "相对估值",
+      "可比公司",
+      "市盈率",
+      "行业估值"
+    ],
+    "kind": "估值",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "可比公司样本",
+      "估值倍数",
+      "增长与风险差异"
+    ],
+    "rule_id": "KR-RELATIVE-COMPARABILITY",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Damodaran指出相对估值用共同变量标准化可比资产价格，行业平均市盈率隐含企业可比且同行定价正确等前提。",
+    "steps": [
+      "使用估值倍数前列明业务、增长、风险及会计口径可比性，并检查整个比较组可能共同高估的风险。"
+    ],
+    "system_rule": "使用估值倍数前列明业务、增长、风险及会计口径可比性，并检查整个比较组可能共同高估的风险。",
+    "title": "同一行业并不自动构成估值可比样本",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "45fd737529015b7e9580302eddd81717051f7ca08f51b2aaba93048f9af270a0",
+  "source_families": [
+    "DAMODARAN-NYU"
+  ],
+  "rule_id": "KR-RELATIVE-COMPARABILITY",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:01.720867+00:00",
+      "review_id": "51a9b562645242151ccd98f0f7421d49a292b6022ee28a648c5636d0077d52e2",
+      "rule_id": "KR-RELATIVE-COMPARABILITY",
+      "version": "45fd737529015b7e9580302eddd81717051f7ca08f51b2aaba93048f9af270a0"
+    }
+  ],
+  "review_ids": [
+    "51a9b562645242151ccd98f0f7421d49a292b6022ee28a648c5636d0077d52e2"
+  ]
+}

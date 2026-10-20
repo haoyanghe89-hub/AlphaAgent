@@ -238,8 +238,11 @@ def guard_valuation(text):
             raise ValueError("valuation level needs a supplied comparable benchmark")
 
 
-def guard_analysis(proposal, ctx):
-    if [c.security_id for c in proposal.candidates] != ctx["selected"]:
+def guard_analysis(proposal, ctx, *, expected_ids=None):
+    expected = ctx["selected"] if expected_ids is None else expected_ids
+    if not set(expected) <= set(ctx["selected"]) or [
+        c.security_id for c in proposal.candidates
+    ] != expected:
         raise ValueError("candidate membership/order must match deterministic selection")
     by_id = {e["evidence_id"]: e for e in ctx["evidence"]}
     companies = {r["security_id"]: r for r in ctx["companies"]}
@@ -366,8 +369,14 @@ def screening_result(data):
     ).model_dump(mode="json")
 
 
-async def run(repo, run_id, stop, settings, *, port=None, collector=None):
+async def run(repo, run_id, stop, settings, *, port=None, collector=None, rules=None):
     state = repo.get(run_id, with_data=False)
+    if state["request"].get("enhanced_research") is True:
+        from . import candidate_enhanced
+
+        return await candidate_enhanced.run(
+            repo, run_id, stop, settings, port=port, collector=collector, rules=rules
+        )
     pinned_prompt_version = state.get("config", {}).get("prompt_version")
     before, started = state.get("elapsed_seconds", 0), time.monotonic()
     budget = state["request"]["budget_profile"]
@@ -541,6 +550,10 @@ async def run(repo, run_id, stop, settings, *, port=None, collector=None):
 
 
 def verify(repo, data):
+    if "enhanced_research" in data:
+        from . import candidate_enhanced
+
+        return candidate_enhanced.verify(repo, data)
     snapshot = repo.value(data["candidate_snapshot_ref"])
     rebuilt = candidate_sources.rebuild(repo, snapshot)
     for key in (

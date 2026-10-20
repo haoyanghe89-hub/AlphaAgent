@@ -168,7 +168,11 @@ async def run(
             save()
         if "core_ref" not in state:
             check()
-            knowledge = knowledge_snapshot(rules, datetime.fromisoformat(state["created_at"]))
+            knowledge = (
+                knowledge_snapshot(rules, datetime.fromisoformat(state["created_at"]), dynamic=True)
+                if state["config"].get("agentic_research_v1")
+                else knowledge_snapshot(rules, datetime.fromisoformat(state["created_at"]))
+            )
             bindings = [
                 dict(
                     rule_id=r["rule_id"],
@@ -182,6 +186,8 @@ async def run(
             trading = verify_trading_rules(packet, repo.raw_bytes)
             core = build_report(request.calculation_request(), packet, bindings, trading)
             context, evidence = public_context(core, packet, knowledge, request.horizon_sessions)
+            if request.analysis_focus:
+                context["user_analysis_focus"] = list(request.analysis_focus)
             if state.get("context_report_ref"):
                 context, evidence = enrich(
                     context, evidence, repo.value(state["context_report_ref"])
@@ -217,6 +223,39 @@ async def run(
             reserve_limit=45000,
             transport_attempts=2,
         ) as roles:
+            if state["config"].get("agentic_research_v1"):
+                from . import active_research
+
+                if "base_public_context_ref" not in state:
+                    state["base_public_context_ref"] = state["public_context_ref"]
+                    state["base_evidence_ref"] = state["evidence_ref"]
+                    save()
+                context = await active_research.execute(
+                    repo,
+                    state,
+                    save,
+                    roles,
+                    repo.value(state["base_public_context_ref"]),
+                    knowledge,
+                    SourceClient(
+                        repo,
+                        state,
+                        save,
+                        stop,
+                        max_requests=80,
+                        budget_profile=dict(max_seconds=900),
+                    ),
+                )
+                state["public_context_ref"] = repo.blob(context)
+                state["evidence_ref"] = repo.blob(
+                    repo.value(state["base_evidence_ref"])
+                    + active_research.additional_evidence(context["tool_results"])
+                )
+                state["source_refs"] += sorted(
+                    set(re.findall(r"blob://sha256/[0-9a-f]{64}", json.dumps(context)))
+                    - set(state["source_refs"])
+                )
+                save()
 
             async def step(
                 key,
@@ -230,6 +269,20 @@ async def run(
                 previous_review_step=None,
             ):
                 check()
+                from . import structured_contract as structured
+
+                structured_analysis = schema is agents.Analysis and bool(
+                    state["config"].get("execution_contract")
+                )
+                canonical_schema = schema
+                canonical_guard = guard
+                if structured_analysis:
+                    schema = structured.WireAnalysis
+
+                    def guard(output):
+                        canonical_guard(structured.analysis(output))
+
+                    output_kind = "structured_analysis"
                 version = version or state["config"]["prompt_version"]
                 active_prompts = agents.role_prompts(dict(state["config"], prompt_version=version))
                 roles.prompts = active_prompts
@@ -257,8 +310,8 @@ async def run(
                 state["stage"] = role.upper()
                 save()
                 if key in state["model_steps"]:
-                    output = repo.output(state, key, schema)
-                    guard(output)
+                    output = repo.output(state, key, canonical_schema)
+                    canonical_guard(output)
                     return output
                 for index, prior in reversed(list(enumerate(state["calls"]))):
                     if prior.get("role") != role or prior["status"] != "COMPLETED":
@@ -269,6 +322,7 @@ async def run(
                         and recorded.get("instructions") == active_prompts[role]
                         and recorded.get("prompt_version") == version
                         and recorded.get("schema") == schema.model_json_schema()
+                        and roles.matches_request_profile(recorded, role)
                     ):
                         output = schema.model_validate(repo.value(prior["response_ref"]))
                         guard(output)
@@ -282,7 +336,7 @@ async def run(
                             previous_review_step=previous_review_step,
                         )
                         save()
-                        return output
+                        return structured.analysis(output) if structured_analysis else output
                 output, call = await roles.call(
                     role, schema, model_context, guard, prompt_version=version
                 )
@@ -296,12 +350,14 @@ async def run(
                     previous_review_step=previous_review_step,
                 )
                 save()
-                return output
+                return structured.analysis(output) if structured_analysis else output
 
             planner_context = {
                 k: context[k]
                 for k in ("horizon", "horizon_sessions", "stocks", "methods", "limitations")
             }
+            if context.get("user_analysis_focus"):
+                planner_context["user_analysis_focus"] = context["user_analysis_focus"]
             plan = await step(
                 "Planner",
                 "Planner",
@@ -402,6 +458,7 @@ async def run(
                         plan.model_dump(mode="json"),
                         scoped=state["config"].get("scoped_analysis", False),
                         compact=state["config"].get("portfolio_compact_v1", False),
+                        structured=bool(state["config"].get("execution_contract")),
                     ),
                     plan=analysis_plan(
                         plan.model_dump(mode="json"),
@@ -475,13 +532,26 @@ async def run(
                     for o in approved["opinions"]
                 ],
             )
-            await step(
-                "Writer",
-                "Writer",
-                agents.Writing,
-                writing_context,
-                lambda w: agents.guard_writing(w, approved),
-            )
+            if state["config"].get("agentic_research_v1") or state["config"].get(
+                "execution_contract"
+            ):
+                writing = agents.Writing.model_validate(writing_context)
+                agents.guard_writing(writing, approved)
+                state["model_steps"]["Writer"] = dict(
+                    role="Writer",
+                    context_ref=repo.blob(writing_context),
+                    response_ref=repo.blob(writing.model_dump(mode="json")),
+                    output_kind="deterministic_publication",
+                )
+                save()
+            else:
+                await step(
+                    "Writer",
+                    "Writer",
+                    agents.Writing,
+                    writing_context,
+                    lambda w: agents.guard_writing(w, approved),
+                )
         report = copy.deepcopy(core)
         selections = {s.security_id: s for s in plan.selections}
         opinions = {o["security_id"]: o for o in approved["opinions"]}
@@ -525,6 +595,12 @@ async def run(
             report["sources"] += [s for s in external["sources"] if s not in report["sources"]]
         if state.get("technicals_ref"):
             report["technicals"] = repo.value(state["technicals_ref"])
+        if state["config"].get("agentic_research_v1"):
+            report["sources"] += [
+                t["source"]
+                for t in context["tool_results"]
+                if t.get("source") and t["source"] not in report["sources"]
+            ]
         if state.get("forward_protocol_ref"):
             report["forward_protocol"] = repo.value(state["forward_protocol_ref"])
             report["issued_at"] = datetime.now(UTC).isoformat()

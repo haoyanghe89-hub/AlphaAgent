@@ -3,6 +3,9 @@ import {computed,onMounted,onUnmounted,ref,watch} from 'vue'
 import {createHoldingAdvisor,advisorChart} from './useHoldingAdvisor.js'
 import {dateTime} from './model.js'
 import PrototypeChart from './PrototypeChart.vue'
+import AdvisorDialogue from './AdvisorDialogue.vue'
+import {pendingTaskDraft} from './questionUnderstanding.js'
+import ResearchDepth from './ResearchDepth.vue'
 const props=defineProps({id:String}),emit=defineEmits(['started'])
 const ctl=createHoldingAdvisor({started:r=>emit('started',r)}),{state,error,busy}=ctl
 const developer=new URLSearchParams(location.search).get('developer')==='1'
@@ -31,7 +34,7 @@ async function submit(text){
 }
 onMounted(async()=>{
   if(props.id)await ctl.load(props.id)
-  else{try{const seed=JSON.parse(sessionStorage.getItem('alpha-holding-question')||'null');if(seed){entity.value=seed.entity||'';question.value=seed.question}}catch{}sessionStorage.removeItem('alpha-holding-question')}
+  else{try{const seed=JSON.parse(sessionStorage.getItem('alpha-holding-question')||'null')||pendingTaskDraft(sessionStorage,'holding');if(seed){entity.value=seed.entity||'';question.value=seed.question;if(seed.horizon)horizon.value=seed.horizon;if(seed.horizon_sessions)sessions.value=seed.horizon_sessions}}catch{}sessionStorage.removeItem('alpha-holding-question')}
   initialLoading.value=false
 })
 onUnmounted(ctl.dispose)
@@ -43,9 +46,10 @@ onUnmounted(ctl.dispose)
     <section class="panel rep-section holding-inputs">
       <details class="input-disclosure" :open="!data"><summary>{{ data?'更新持仓并继续咨询':'填写这笔持仓' }}</summary>
       <form @submit.prevent="submit()">
+        <ResearchDepth :continuing="Boolean(props.id)" />
         <div class="fields"><label class="wide">股票名称或代码<input v-model="entity" required maxlength="30" placeholder="如：美的集团 / 000333" :readonly="Boolean(props.id)"></label><label>每股成本（元）<input v-model="cost" required type="number" min="0.001" step="any"></label><label>总持股数<input v-model="shares" required type="number" min="1" step="1"></label><label>当前可卖股数<input v-model="sellable" required type="number" min="0" step="1"></label><label>今日买入股数<input v-model="boughtToday" type="number" min="0" step="1"></label><label class="wide">账户总资产（元，含其他持仓）<input v-model="assets" required type="number" min="0.01" step="0.01"></label><label>持有周期<select v-model="horizon" :disabled="Boolean(props.id)"><option value="SWING">波段</option><option value="MEDIUM">中期</option></select></label><label>交易日数<input v-model="sessions" required type="number" :min="horizon==='SWING'?10:41" :max="horizon==='SWING'?40:120" :readonly="Boolean(props.id)"></label></div>
         <details><summary>风控与分批偏好</summary><div class="fields"><label class="wide">原持仓路线<select v-model="route" :disabled="Boolean(props.id)"><option value="AUTO">按统一知识体系匹配</option><option value="TREND_SWING">趋势波段</option><option value="QUALITY_GROWTH">质量成长</option></select></label><label>单股上限（%）<input v-model="singleCap" type="number" min="0.01" max="100" step="0.01"></label><label>本笔风险预算（%）<input v-model="risk" type="number" min="0.01" max="5" step="0.01"></label><label>分批减仓比例（%）<input v-model="trim" type="number" min="0.01" max="100" step="0.01"></label><label>首次买入日<input v-model="buyDate" type="date"></label><label>佣金假设（%）<input v-model="commission" type="number" min="0" max="1" step="0.001"></label><label>最低佣金（元）<input v-model="minimum" type="number" min="0" max="100" step="0.01"></label><label class="wide">卖出其他费用假设（%）<input v-model="otherCost" type="number" min="0" max="1" step="0.001"></label></div><p class="condition-note">默认单股上限 10%、本笔风险预算 0.5%、分批比例 50%；这些是可修改的执行偏好，费用以实际券商账单为准。</p></details>
-        <p class="condition-note">成本、股数、资金和问题留在本地。股票公开资料与已审核方法通过现有模型研究。成交或调仓后，请修改资料再咨询。</p>
+        <p class="condition-note">成本、股数、资金和原问题留在本地；模型接收脱敏后的问题语义、公开股票资料与已审核方法。成交或调仓后，请修改资料再咨询。</p>
         <label>本轮问题<textarea v-model="question" required rows="3" maxlength="2000" placeholder="例如：现在仓位是否偏大？到多少可以卖？"></textarea></label>
         <label>假设价格（可选，元）<input v-model="scenario" type="number" min="0.001" step="any" placeholder="只做情景试算，不作为真实报价"></label>
         <label v-if="props.id" class="checkbox"><input v-model="refresh" type="checkbox">更新公开资料，重新形成研究</label>
@@ -60,6 +64,7 @@ onUnmounted(ctl.dispose)
       <section v-else-if="!data" class="panel rep-section"><h2>把股票分析落到这笔持仓</h2><p>填写成本、持股数、可卖股数和总资产，即可查看持有建议、仓位是否超限、下行防守与上行观察位。</p><p class="muted">支持波段和中期。系统复用已审核投资知识，每轮建议与原始资料长期保留。</p></section>
       <template v-if="data">
         <p v-if="data.request.position.input_origin==='SYNTHETIC_ACCEPTANCE'" class="notice">示例持仓：使用真实行情，成本和股数为假设。</p>
+        <AdvisorDialogue :dialogue="data.dialogue" />
         <section class="panel rep-section conclusion">
           <div class="section-heading"><h2>{{ data.name }} <small class="muted">{{ data.security_id }}</small></h2><span class="tag">{{ data.route_title }}</span></div>
           <p class="condition-note">你的问题：{{ state.request.question }}</p><h2 class="headline">{{ data.headline }}</h2>
@@ -72,6 +77,7 @@ onUnmounted(ctl.dispose)
         <section v-if="data.scenario" class="panel rep-section"><h2>假设价格 ¥{{ fmt(data.scenario.price) }}</h2><p><strong>{{ data.scenario.conclusion }}</strong></p><div class="numbers"><span>条件数量<b>{{ fmt(data.scenario.shares,0) }} 股</b></span><span>情景浮盈亏<b>{{ fmt(data.scenario.floating_pnl) }} 元</b></span><span>情景持仓占比<b>{{ fmt(Number(data.scenario.portfolio_weight)*100) }}%</b></span><span>卖出净额试算<b>{{ fmt(data.scenario.estimated_net_proceeds) }} 元</b></span></div><p class="condition-note">这是你提出的假设价格；其他资产、可卖股数保持本轮值，估算卖出费用 {{ fmt(data.scenario.estimated_sell_cost) }} 元，不包含额外滑点。</p></section>
         <details class="panel rep-section research-details"><summary>理由、反证与改变判断的条件</summary><p v-for="claim in data.opinion.claims" :key="claim.claim_id">{{ claim.text }}</p><div class="counter"><strong>反证</strong><p v-for="claim in data.opinion.opposing" :key="claim.claim_id">{{ claim.text }}</p></div><p v-for="condition in data.invalidation" :key="condition" class="condition-note">{{ condition }}</p><details><summary>本轮采用的投资方法</summary><div v-for="method in data.knowledge" :key="method.rule_id" class="method"><strong>{{ method.title }}</strong><p>{{ method.system_rule }}</p><a v-if="method.url" :href="method.url" target="_blank" rel="noopener noreferrer">{{ method.authors.join('、') }} · {{ method.source_title }}</a></div></details><p v-for="note in data.caveats" :key="note" class="condition-note">{{ note }}</p><div class="bt-actions"><a class="btn" :href="'#/investment-research/'+data.research_run_id">查看完整股票研究</a><a class="btn" :href="'/api/quant/holding-advisor/turns/'+state.run_id+'/export'">导出本地咨询记录</a></div></details>
         <section class="panel rep-section"><h2>继续围绕这笔持仓追问</h2><div class="ask-chips"><button v-for="text in suggestions" :key="text" class="chip" :disabled="running" @click="submit(text)">{{ text }}</button></div><p class="condition-note">也可以展开上方持仓资料，修改问题或假设价格后发送；每轮另存，不改写旧建议。</p><details v-if="past.length"><summary>查看此前 {{ past.length }} 轮对话</summary><article v-for="turn in past" :key="turn.run_id" class="past-turn"><p><strong>你：</strong>{{ turn.question }}</p><p><strong>顾问：</strong>{{ turn.data?.headline||'该轮尚未完成' }}</p><p v-for="line in turn.data?.answer||[]" :key="line">{{ line }}</p><p v-if="turn.data?.scenario">假设 {{ turn.data.scenario.price }} 元：{{ turn.data.scenario.conclusion }}</p><a :href="'#/holding-advisor/'+turn.run_id">回看该轮完整输入和建议 · {{ dateTime(turn.issued_at||turn.created_at) }}</a></article></details></section>
+        <details v-if="developer&&state.understanding" class="panel rep-section"><summary>开发者：语义理解与脱敏投影</summary><pre>{{ state.understanding }}</pre></details>
         <details v-if="developer" class="panel rep-section"><summary>开发者：固定知识版本与本地计算</summary><pre>{{ {run_id:state.run_id,previous_run_id:state.request.previous_run_id,research_run_id:data.research_run_id,research_sha256:data.research_sha256,knowledge:data.knowledge,privacy:data.privacy,engine_version:data.engine_version,trading_rules:data.trading_rules} }}</pre></details>
       </template>
     </div>

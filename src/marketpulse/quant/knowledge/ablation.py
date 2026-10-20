@@ -3,6 +3,7 @@
 import copy
 import time
 from datetime import UTC, datetime
+from types import SimpleNamespace
 
 from pydantic import Field
 
@@ -13,6 +14,8 @@ from .research_context import analyst_context, review_context
 from .research_store import BUDGET
 
 VERSION = "investment-method-ablation-v1"
+REPAIRED_VERSION = "investment-method-ablation-v2"
+TOKEN_VERSION = "investment-method-ablation-v6"
 ARMS = ("NO_METHOD", "FIXED_TREND", "ADAPTIVE_ROUTE")
 COMMON_RULES = {"KR-CAPACITY-LIQUIDITY", "KR-AVOID-RUIN", "KR-EXPECTATION-EXIT"}
 ROUTE_RULES = {
@@ -37,6 +40,59 @@ class ComparisonOpinion(agents.Opinion):
 
 class ComparisonAnalysis(agents.Analysis):
     opinions: tuple[ComparisonOpinion, ...] = Field(min_length=1, max_length=4)
+
+
+def config_for(version):
+    result = dict(prompt_version=version, budget=BUDGET)
+    if version in {REPAIRED_VERSION, TOKEN_VERSION}:
+        from .structured_contract import configure
+
+        configure(result, False)
+    if version == TOKEN_VERSION:
+        from ..decision.next_session.input_reservation import POLICY
+
+        result["input_reservation"] = dict(POLICY)
+        result["json_minimum_tokens"] = 1000
+    return result
+
+
+def prompts_for(version):
+    if version == VERSION:
+        return PROMPTS
+    if version not in {REPAIRED_VERSION, TOKEN_VERSION}:
+        raise ValueError("未知方法对照版本")
+    result = dict(PROMPTS)
+    result["Analyst"] = agents.role_prompts(
+        dict(
+            prompt_version=agents.CHECKS_PROMPT_VERSION,
+            execution_contract="investment-structured-v2",
+        )
+    )["Analyst"]
+    result["Analyst"] += (
+        "methods为空时method_rule_ids必须空；有方法时只引用输入规则。单次封存输入论证对照，不是历史预测测验。"
+    )
+    if version == TOKEN_VERSION:
+        result["Analyst"] += (
+            "evidence_ids每项最多四个；逐只覆盖citation_requirements非空的技术、资金、政策类别。"
+            "先分配各类引用到支持和反证，再写定性判断；不得遗漏类别。"
+        )
+        result["Verifier"] += (
+            "verdict必须和decisions、direction_supported、conditions_respected一致；"
+            "全部事实APPROVE且方向、条件均真时必须APPROVE，否则说明对应拒绝项。"
+        )
+    return result
+
+
+def guard_review(review, analysis, version):
+    agents.guard_review(review, analysis)
+    if version == TOKEN_VERSION and any(
+        r.verdict == "REJECT"
+        and r.direction_supported
+        and r.conditions_respected
+        and all(d.verdict == "APPROVE" for d in r.decisions)
+        for r in review.reviews
+    ):
+        raise ValueError("复核结论与逐项事实、方向及条件检查矛盾，必须重新复核，不能代写批准")
 
 
 def context_for(base, security_id, horizon, sessions, arm):
@@ -82,7 +138,7 @@ def context_for(base, security_id, horizon, sessions, arm):
     return result, plan
 
 
-def freeze(repo, state, model):
+def freeze(repo, state, model, *, version=VERSION):
     if state["status"] != "COMPLETED":
         raise ValueError("需要已核验完成的公开研究输入")
     base = repo.value(state["public_context_ref"])
@@ -108,7 +164,7 @@ def freeze(repo, state, model):
                 )
             )
     return dict(
-        version=VERSION,
+        version=version,
         frozen_at=datetime.now(UTC).isoformat(),
         source_run_id=state["run_id"],
         source_result_sha256=state["result_sha256"],
@@ -118,8 +174,8 @@ def freeze(repo, state, model):
         knowledge_ref=state["knowledge_ref"],
         market_date=state["data"]["market_date"],
         model=model,
-        prompt_version=PROMPT_VERSION,
-        prompts=PROMPTS,
+        prompt_version=version,
+        prompts=prompts_for(version),
         budget=BUDGET,
         scenarios=scenarios,
         purpose="PUBLIC_INPUT_REPLAY_NOT_PROSPECTIVE;METHOD_AND_ROUTE_CONTEXT_ABLATION",
@@ -175,7 +231,7 @@ def summary(value, state):
             )
         )
     return dict(
-        version=VERSION,
+        version=manifest["version"],
         rows=rows,
         completed=sum(r["status"] == "APPROVED" for r in rows),
         declared=len(rows),
@@ -192,14 +248,17 @@ def summary(value, state):
 
 def verify(value, state):
     manifest = value(state["manifest_ref"])
+    version = manifest["version"]
+    prompts = prompts_for(version)
+    repaired = version in {REPAIRED_VERSION, TOKEN_VERSION}
     if (
-        state["version"] != VERSION
-        or manifest["prompts"] != PROMPTS
+        state["version"] != version
+        or manifest["prompts"] != prompts
         or manifest["budget"] != BUDGET
-        or manifest["prompt_version"] != PROMPT_VERSION
+        or manifest["prompt_version"] != version
     ):
         raise ValueError("对照协议或提示版本不一致")
-    if state["config"] != dict(prompt_version=PROMPT_VERSION, budget=BUDGET):
+    if state["config"] != config_for(version):
         raise ValueError("对照运行预算不一致")
     if len(manifest["scenarios"]) != 6 or {
         (s["case_id"], s["arm"]) for s in manifest["scenarios"]
@@ -233,7 +292,7 @@ def verify(value, state):
         analysis = ComparisonAnalysis.model_validate(value(result["analysis_ref"]))
         review = agents.Review.model_validate(value(result["review_ref"]))
         guard_analysis(analysis, context)
-        agents.guard_review(review, analysis)
+        guard_review(review, analysis, version)
         if any(r.verdict != "APPROVE" for r in review.reviews):
             raise ValueError("未通过复核的对照结果")
         for index, role, schema in (
@@ -242,17 +301,38 @@ def verify(value, state):
         ):
             call = state["calls"][index]
             request = value(call["request_ref"])
+            if repaired and role == "Analyst":
+                from .structured_contract import WireAnalysis
+                from .structured_contract import analysis as convert
+
+                schema = WireAnalysis
+                if (
+                    convert(schema.model_validate(value(call["response_ref"])), ComparisonAnalysis)
+                    != analysis
+                ):
+                    raise ValueError("方法对照结构分析与原输出不一致")
             if (
                 call["status"] != "COMPLETED"
-                or request["instructions"] != PROMPTS[role]
+                or request["instructions"] != prompts[role]
                 or request["schema"] != schema.model_json_schema()
                 or request["model"] != manifest["model"]
-                or request["prompt_version"] != PROMPT_VERSION
+                or request["prompt_version"] != version
             ):
                 raise ValueError("对照模型调用绑定失败")
+            if repaired:
+                from .active_research import verify_profile
+
+                verify_profile(
+                    state,
+                    request,
+                    call,
+                    role,
+                    repo=SimpleNamespace(value=value),
+                )
             if role == "Analyst":
                 expected_context = dict(
-                    analyst_context(context, agents.TECHNICAL_PROMPT_VERSION), plan=plan
+                    analyst_context(context, agents.TECHNICAL_PROMPT_VERSION, structured=repaired),
+                    plan=plan,
                 )
                 # Retry feedback is separately bound to its rejected review below.
                 feedback = []
@@ -269,9 +349,10 @@ def verify(value, state):
                         raise ValueError("对照反馈未绑定真实拒绝记录")
                     feedback = rejected.model_dump(mode="json")["reviews"]
                 expected_context["review_feedback"] = feedback
-                if (
-                    request["context"] != expected_context
-                    or call["response_ref"] != result["analysis_ref"]
+                if request["context"] != expected_context or (
+                    call["response_ref"] != result.get("wire_ref")
+                    if repaired
+                    else call["response_ref"] != result["analysis_ref"]
                 ):
                     raise ValueError("对照分析输入不一致")
             else:
@@ -324,6 +405,8 @@ async def execute(repo, rules, state, settings, persist, *, port=None):
             raise ValueError("对照达到时间上限")
 
     manifest = repo.value(state["manifest_ref"])
+    repaired = manifest["version"] in {REPAIRED_VERSION, TOKEN_VERSION}
+    prompts = prompts_for(manifest["version"])
     if settings.model != manifest["model"]:
         raise ValueError("不能变更冻结对照模型")
     state.update(status="RUNNING", error=None)
@@ -336,28 +419,44 @@ async def execute(repo, rules, state, settings, persist, *, port=None):
             save,
             check,
             port=port,
-            prompts=PROMPTS,
-            schema_version=VERSION,
+            prompts=prompts,
+            schema_version=manifest["version"],
             output_tokens=2400,
+            min_output_tokens=state["config"].get("json_minimum_tokens"),
             reserve_limit=22000,
             transport_attempts=2,
         ) as roles:
 
             async def step(role, schema, context, guard):
+                from .structured_contract import WireAnalysis
+                from .structured_contract import analysis as convert
+
+                wired = repaired and role == "Analyst"
+                original_guard = guard
+                if wired:
+                    schema = WireAnalysis
+
+                    def guard(output):
+                        original_guard(convert(output, ComparisonAnalysis))
+
                 for index, call in reversed(list(enumerate(state["calls"]))):
                     if call["status"] != "COMPLETED" or call["role"] != role:
                         continue
                     request = repo.value(call["request_ref"])
                     if (
                         request["context"] == context
-                        and request["instructions"] == PROMPTS[role]
+                        and request["instructions"] == prompts[role]
                         and request["schema"] == schema.model_json_schema()
                     ):
                         output = schema.model_validate(repo.value(call["response_ref"]))
                         guard(output)
-                        return output, call, index
+                        return convert(output, ComparisonAnalysis) if wired else output, call, index
                 output, call = await roles.call(role, schema, context, guard)
-                return output, call, len(state["calls"]) - 1
+                return (
+                    convert(output, ComparisonAnalysis) if wired else output,
+                    call,
+                    len(state["calls"]) - 1,
+                )
 
             for scenario in manifest["scenarios"]:
                 key = scenario["case_id"] + ":" + scenario["arm"]
@@ -371,7 +470,9 @@ async def execute(repo, rules, state, settings, persist, *, port=None):
                     state["active_scenario"] = key
                     save()
                     model_context = dict(
-                        analyst_context(context, agents.TECHNICAL_PROMPT_VERSION),
+                        analyst_context(
+                            context, agents.TECHNICAL_PROMPT_VERSION, structured=repaired
+                        ),
                         plan=scenario["plan"],
                         review_feedback=feedback,
                     )
@@ -393,12 +494,15 @@ async def execute(repo, rules, state, settings, persist, *, port=None):
                         "Verifier",
                         agents.Review,
                         review_input,
-                        lambda r, analysis=analysis: agents.guard_review(r, analysis),
+                        lambda r, analysis=analysis: guard_review(r, analysis, manifest["version"]),
                     )
                     roles.output_tokens = 2400
                     if all(r.verdict == "APPROVE" for r in review.reviews):
                         state["results"][key] = dict(
-                            analysis_ref=acall["response_ref"],
+                            analysis_ref=repo.blob(analysis.model_dump(mode="json"))
+                            if repaired
+                            else acall["response_ref"],
+                            **(dict(wire_ref=acall["response_ref"]) if repaired else {}),
                             review_ref=rcall["response_ref"],
                             analysis_index=analysis_index,
                             review_index=review_index,

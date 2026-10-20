@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:52.361938+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-FRENCH-5F",
+        "end": 1777,
+        "quote": "CMA (Conservative Minus Aggressive) is the average return on the two conservative investment portfolios minus the average return on the two aggressive investment portfolios, CMA = 1/2 (Small Conservative + Big Conservative) - 1/2 (Small Aggressive + Big Aggressive). R m -R f , the excess return on the market, valu",
+        "start": 1462,
+        "version": "3eafb817b1e536b08cfab80b0ccfc19bb32f8fbfcf52e9b45b757d7adca19ba7"
+      }
+    ],
+    "conditions": [
+      "来源是因子定义，未提供当前A股个股投资强度的最佳阈值或有效性证明。"
+    ],
+    "conflict_group": "因子研究",
+    "counterexamples": [
+      "高回报的新项目可能需要大量投入，低投资也可能来自企业缺少机会或衰退。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "因子投资",
+      "投资因子",
+      "资本扩张",
+      "CMA"
+    ],
+    "kind": "筛选",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "资本投资指标",
+      "组合构造",
+      "收益样本"
+    ],
+    "rule_id": "KR-FACTOR-INVESTMENT",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "Fama–French资料将投资因子定义为保守投资组合与激进投资组合的平均收益差。",
+    "steps": [
+      "研究资本扩张强度时先统一投资口径和样本定义，不把低投资或高投资本身写成必然买卖理由。"
+    ],
+    "system_rule": "研究资本扩张强度时先统一投资口径和样本定义，不把低投资或高投资本身写成必然买卖理由。",
+    "title": "投资因子需区分资本扩张与实际价值创造",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "0daffacbb44f370bb7e41cb39d580eac470d00b1d29a310653c17aad9b4482b0",
+  "source_families": [
+    "FAMA-FRENCH"
+  ],
+  "rule_id": "KR-FACTOR-INVESTMENT",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:23:03.352866+00:00",
+      "review_id": "450693fcfe1489f96fc48d41eb90eb1c4364b2356a4005926138e8fc25d3ab73",
+      "rule_id": "KR-FACTOR-INVESTMENT",
+      "version": "0daffacbb44f370bb7e41cb39d580eac470d00b1d29a310653c17aad9b4482b0"
+    }
+  ],
+  "review_ids": [
+    "450693fcfe1489f96fc48d41eb90eb1c4364b2356a4005926138e8fc25d3ab73"
+  ]
+}

@@ -173,6 +173,24 @@ def test_split_factor_does_not_create_false_loss():
     assert value["status"] == "MATURED" and value["actual_direction"] == "UP"
 
 
+def test_enhanced_and_fixed_research_are_not_pooled_in_accuracy():
+    initial, report, update = fixture()
+    sample = e.evaluate(report, initial, update)["stocks"][0]
+    enhanced = dict(sample, research_protocol="active-public-research-v1")
+    summary = e.summarize([sample, enhanced])
+    assert summary["registered_samples"] == 2
+    assert len(summary["groups"]) == 2
+    assert all(g["registered"] == 1 for g in summary["groups"])
+    state = dict(
+        request=dict(report["request"], horizon_sessions=10),
+        run_id="synthetic",
+        created_at=report["issued_at"],
+    )
+    assert "research_protocol" not in e.protocol(state)
+    state["request"]["enhanced_research"] = True
+    assert e.protocol(state)["research_protocol"] == "active-public-research-v1"
+
+
 def archived_calendar(repo, initial, spec):
     start = min(r["cal_date"] for rows in initial["calendars"].values() for r in rows)
     end = (datetime.strptime(spec["start_after"], "%Y%m%d") + timedelta(days=400)).strftime(

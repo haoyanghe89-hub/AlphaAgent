@@ -1,10 +1,10 @@
 <script setup>
 import {ref,onMounted,onUnmounted} from 'vue'
 import request from '../api/request.js'
-const props=defineProps({id:String,page:{type:String,default:'decision'}})
+const props=defineProps({id:String,page:{type:String,default:'decision'},parentId:{type:String,default:undefined}})
 const comparison=ref(null),error=ref('')
 let disposed=false
-onMounted(async()=>{try{const value=await request('/quant/decision/runs/'+props.id+'/comparison');if(!disposed)comparison.value=value}catch(e){if(!disposed)error.value=e.message}})
+onMounted(async()=>{if(props.parentId===null)return;try{const value=await request('/quant/decision/runs/'+props.id+'/comparison',{timeoutMs:60000});if(!disposed)comparison.value=value}catch(e){if(!disposed)error.value=e.message}})
 onUnmounted(()=>{disposed=true})
 function text(value){
   if(value==null)return '此版本未提供'

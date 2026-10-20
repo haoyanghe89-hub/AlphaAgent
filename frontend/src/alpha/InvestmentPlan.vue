@@ -7,6 +7,9 @@ import InvestmentContext from './InvestmentContext.vue'
 import InvestmentTechnicals from './InvestmentTechnicals.vue'
 import InvestmentObservations from './InvestmentObservations.vue'
 import PrototypeChart from './PrototypeChart.vue'
+import {pendingTaskDraft} from './questionUnderstanding.js'
+import ResearchDepth from './ResearchDepth.vue'
+import {structuredResearch} from './researchDepth.js'
 const props=defineProps({id:String,research:Boolean})
 const emit=defineEmits(['started'])
 const ctl=createInvestmentPlan({started:r=>emit('started',r),root:props.research?'/quant/investment-research/runs':'/quant/investment-plans'})
@@ -15,7 +18,7 @@ const developer=new URLSearchParams(location.search).get('developer')==='1'
 const entities=ref(''),horizon=ref('SWING'),personal=ref(false),capital=ref(''),cash=ref(''),reserve=ref('0'),holdingText=ref(''),formError=ref('')
 const totalRisk=ref('2'),risk=ref('0.5'),single=ref('10'),industry=ref('25'),trend=ref('40'),quality=ref('40'),liquidity=ref('0.1'),commission=ref('0.03'),minimumFee=ref('5'),otherFee=ref('0.1')
 const data=computed(()=>state.value?.status==='COMPLETED'?state.value.data:null)
-const sessions=ref(20),audit=ref(null),auditError=ref('')
+const sessions=ref(20),audit=ref(null),auditError=ref(''),analysisFocus=ref([])
 watch(horizon,v=>{sessions.value=v==='MEDIUM'?60:20},{flush:'sync'})
 const opinion=c=>data.value?.research_opinions?.find(o=>o.security_id===c.security_id)
 async function loadAudit(){auditError.value='';try{audit.value=await request('/quant/investment-research/runs/'+state.value.run_id+'/audit')}catch(e){auditError.value=e.message}}
@@ -30,17 +33,18 @@ async function submit(){
     const list=entities.value.split(/[\s,，、;；]+/).filter(Boolean)
     if(!list.length||list.length>4)throw new Error('请输入一至四只股票，名称或代码以空格分隔。')
     const profile=personal.value?{capital:capital.value,available_cash:cash.value,reserve_cash:reserve.value,risk_per_trade:String(Number(risk.value)/100),total_new_risk:String(Number(totalRisk.value)/100),single_cap:String(Number(single.value)/100),industry_cap:String(Number(industry.value)/100),trend_allocation:String(Number(trend.value)/100),quality_allocation:String(Number(quality.value)/100),liquidity_cap:String(Number(liquidity.value)/100),commission_rate:String(Number(commission.value)/100),minimum_commission:minimumFee.value,other_cost_rate:String(Number(otherFee.value)/100),holdings:holdingText.value.trim()?holdingText.value.trim().split('\n').map(line=>{const p=line.trim().split(/[,，\s]+/);if(p.length!==4)throw new Error('每行持仓须填写：证券代码 路线 行业代码 市值。');return {security_id:p[0],route_id:p[1],industry_code:p[2],market_value:p[3]}}):[]}:null
-    await ctl.submit({entities:list,horizon:horizon.value,profile,...(props.research?{schema_version:'investment-research-v4',horizon_sessions:Number(sessions.value)}:{})})
+    await ctl.submit({entities:list,horizon:horizon.value,profile,...(props.research?{schema_version:'investment-research-v4',horizon_sessions:Number(sessions.value),...structuredResearch(),...(analysisFocus.value.length?{analysis_focus:analysisFocus.value}:{})}:{})})
   }catch(e){formError.value=e.message}
 }
-function fill(r){entities.value=r.entities.join(' ');horizon.value=r.horizon;sessions.value=r.horizon_sessions||(r.horizon==='MEDIUM'?60:20);if(r.profile){const p=r.profile;personal.value=true;capital.value=p.capital;cash.value=p.available_cash;reserve.value=p.reserve_cash;risk.value=String(Number(p.risk_per_trade)*100);totalRisk.value=String(Number(p.total_new_risk)*100);single.value=String(Number(p.single_cap)*100);industry.value=String(Number(p.industry_cap)*100);trend.value=String(Number(p.trend_allocation)*100);quality.value=String(Number(p.quality_allocation)*100);liquidity.value=String(Number(p.liquidity_cap)*100);commission.value=String(Number(p.commission_rate)*100);minimumFee.value=p.minimum_commission;otherFee.value=String(Number(p.other_cost_rate)*100);holdingText.value=p.holdings.map(h=>[h.security_id,h.route_id,h.industry_code,h.market_value].join(' ')).join('\n')}}
+function fill(r){analysisFocus.value=r.analysis_focus||[];entities.value=r.entities.join(' ');horizon.value=r.horizon;sessions.value=r.horizon_sessions||(r.horizon==='MEDIUM'?60:20);if(r.profile){const p=r.profile;personal.value=true;capital.value=p.capital;cash.value=p.available_cash;reserve.value=p.reserve_cash;risk.value=String(Number(p.risk_per_trade)*100);totalRisk.value=String(Number(p.total_new_risk)*100);single.value=String(Number(p.single_cap)*100);industry.value=String(Number(p.industry_cap)*100);trend.value=String(Number(p.trend_allocation)*100);quality.value=String(Number(p.quality_allocation)*100);liquidity.value=String(Number(p.liquidity_cap)*100);commission.value=String(Number(p.commission_rate)*100);minimumFee.value=p.minimum_commission;otherFee.value=String(Number(p.other_cost_rate)*100);holdingText.value=p.holdings.map(h=>[h.security_id,h.route_id,h.industry_code,h.market_value].join(' ')).join('\n')}}
 let hydrated=false
 watch(state,value=>{if(props.id&&!hydrated&&value?.request){hydrated=true;fill(value.request)}})
 onMounted(async()=>{
   if(props.id)await ctl.load(props.id)
   else{
-    const saved=sessionStorage.getItem('alpha-investment-draft')
-    if(saved){try{const draft=JSON.parse(saved);entities.value=draft.entities||'';horizon.value=draft.horizon==='MEDIUM'?'MEDIUM':'SWING';sessions.value=draft.horizon_sessions||(horizon.value==='MEDIUM'?60:20)}catch{entities.value=''}}
+    const pending=props.research?pendingTaskDraft(sessionStorage,'investment'):null
+    const saved=sessionStorage.getItem('alpha-investment-draft')||(pending?JSON.stringify(pending):null)
+    if(saved){try{const draft=JSON.parse(saved);analysisFocus.value=draft.analysis_focus||[];entities.value=draft.entities||'';horizon.value=draft.horizon==='MEDIUM'?'MEDIUM':'SWING';sessions.value=draft.horizon_sessions||(horizon.value==='MEDIUM'?60:20)}catch{entities.value=''}}
     else entities.value=sessionStorage.getItem('alpha-investment-entities')||''
     sessionStorage.removeItem('alpha-investment-draft');sessionStorage.removeItem('alpha-investment-entities')
   }
@@ -55,6 +59,7 @@ onUnmounted(ctl.dispose)
     <details class="input-disclosure" :open="!data"><summary>{{ data?'调整股票、周期与资金':'设置本次投资计划' }}</summary>
     <form @submit.prevent="submit">
       <div class="plan-inputs"><label>股票（最多四只）<input v-model="entities" placeholder="如：美的集团 600036 601088" required maxlength="150"></label><label>持有周期<select v-model="horizon"><option value="SWING">波段</option><option value="MEDIUM">中期</option></select></label><label v-if="research">研究期限（交易日）<input v-model="sessions" type="number" :min="horizon==='SWING'?10:41" :max="horizon==='SWING'?40:120" required></label><button class="btn btn-primary" :disabled="busy||state?.status==='RUNNING'">{{ busy?'正在保存…':research?'生成投资计划':'生成条件计划' }}</button></div>
+      <ResearchDepth v-if="research" />
       <label class="profile-toggle"><input v-model="personal" type="checkbox">结合我的资金与持仓试算</label>
       <div v-if="personal" class="profile-fields">
         <label>总资产（元）<input v-model="capital" type="number" min="1" step="0.01" required></label><label>可用现金（元）<input v-model="cash" type="number" min="0" step="0.01" required></label><label>保留现金（元）<input v-model="reserve" type="number" min="0" step="0.01" required></label>
@@ -91,7 +96,7 @@ onUnmounted(ctl.dispose)
     </section>
     <InvestmentObservations v-if="research" :run-id="state.run_id" :report="data" :developer="developer" />
     <section class="panel rep-section"><h2>组合安排</h2><template v-if="data.portfolio.status==='NO_PROFILE'"><p>{{ data.portfolio.message }}</p></template><template v-else><div class="plan-numbers"><span>条件预留 <b>{{ fmt(data.portfolio.reserved_cash) }} 元</b></span><span>剩余可分配 <b>{{ fmt(data.portfolio.remaining_cash) }} 元</b></span></div><p v-for="note in data.portfolio.caveats" :key="note" class="condition-note">{{ note }}</p><p v-for="h in data.holdings_review" :key="h.security_id+h.route_id">{{ h.security_id }} · {{ h.route_id==='TREND_SWING'?'趋势波段':'质量成长' }}：{{ h.action }}。{{ h.invalidation }}</p></template></section>
-    <details v-if="developer&&research" class="panel rep-section"><summary>开发者：四职责记录与公开模型上下文</summary><p>资金和持仓留在本地；同模型职责复核，未宣称外部独立验证。</p><p>模型调用 {{ state.model_calls }} 次 · 已计费或预留 {{ state.charged_tokens }} 令牌 · 活跃耗时 {{ fmt(state.elapsed_seconds) }} 秒</p><button class="btn" @click="loadAudit">读取分析与复核记录</button><p v-if="auditError" class="error-text">{{ auditError }}</p><pre v-if="audit">{{ audit }}</pre></details><details v-if="developer" class="panel rep-section"><summary>开发者：输入、规则版本与计算核验</summary><p>系统研究参数，尚未证明盈利效果；来源规则的 REFERENCE_ONLY 状态不变。</p><pre>{{ {run_id:state.run_id,input_digest:data.input_digest,route_version:data.route_version,knowledge:data.knowledge,trading_rules:data.trading_rules,features:data.features.stocks.map(c=>({security_id:c.security_id,metrics:c.metrics,financials:c.financials}))} }}</pre></details>
+    <details v-if="developer&&research" class="panel rep-section"><summary>开发者：模型分析、工具与公开上下文</summary><p>资金和持仓留在本地；同模型职责复核，未宣称外部独立验证。</p><p v-if="state.request.enhanced_research">增强研究：动态选择方法，模型提出工具请求；按角色启用推理，按已批准摘要发布。</p><p>模型调用 {{ state.model_calls }} 次 · 已计费或预留 {{ state.charged_tokens }} 令牌 · 活跃耗时 {{ fmt(state.elapsed_seconds) }} 秒</p><button class="btn" @click="loadAudit">读取分析与复核记录</button><p v-if="auditError" class="error-text">{{ auditError }}</p><pre v-if="audit">{{ audit }}</pre></details><details v-if="developer" class="panel rep-section"><summary>开发者：输入、规则版本与计算核验</summary><p>系统研究参数，尚未证明盈利效果；来源规则的 REFERENCE_ONLY 状态不变。</p><pre>{{ {run_id:state.run_id,input_digest:data.input_digest,route_version:data.route_version,knowledge:data.knowledge,trading_rules:data.trading_rules,features:data.features.stocks.map(c=>({security_id:c.security_id,metrics:c.metrics,financials:c.financials}))} }}</pre></details>
   </template>
 </div>
 </template>

@@ -30,6 +30,8 @@ class AdvisorStore(DecisionStore):
         if old["status"] != "COMPLETED":
             raise ValueError("上一轮完成后才能继续追问。")
         before = AdvisorRequest.model_validate(old["request"])
+        if not request.refresh_research and request.enhanced_research != before.enhanced_research:
+            raise ValueError("更换研究流程时请勾选更新公开资料，原研究会保留。")
         if (
             request.position.entity != before.position.entity
             or request.horizon != before.horizon
@@ -69,6 +71,8 @@ class AdvisorStore(DecisionStore):
         )
         if parent and not request.refresh_research:
             state["research_run_id"] = parent["research_run_id"]
+        if request.semantic_understanding:
+            state["dialogue_version"] = "question-dialogue-v2"
         try:
             with self.base.sessions.begin() as session:
                 session.add(
@@ -106,6 +110,8 @@ class AdvisorStore(DecisionStore):
                 research["request"]["entities"] != [definition.position.entity]
                 or research["request"]["horizon"] != definition.horizon
                 or research["request"]["horizon_sessions"] != definition.horizon_sessions
+                or bool(research["request"].get("enhanced_research"))
+                != definition.enhanced_research
             ):
                 raise ValueError("公开研究与持仓股票或周期不一致。")
             previous = definition.previous_run_id
@@ -132,16 +138,33 @@ class AdvisorStore(DecisionStore):
                     research["data"], self.raw_bytes, data["security_id"]
                 )
             trading = self._trading[research_id]
+            understanding = None
+            if definition.semantic_understanding:
+                from .question_understanding import bound_understanding
+
+                understanding = bound_understanding(self, state, [research])
             expected = build_answer(
                 state["request"],
                 research["data"],
                 data["quote"],
                 trading,
                 pinned_route=state.get("pinned_route"),
+                understanding=understanding,
             )
             expected.update(
                 research_run_id=research["run_id"], research_sha256=research["result_sha256"]
             )
+            if definition.semantic_understanding:
+                from .question_understanding import dialogue
+
+                expected["dialogue"] = dialogue(
+                    expected,
+                    understanding,
+                    version=state.get("dialogue_version", "question-dialogue-v1"),
+                )
+                expected["privacy"]["anonymous_semantics_sent_to_model"] = (
+                    state["understanding"]["model_calls"] > 0
+                )
             if expected != data or digest(data) != state["result_sha256"]:
                 raise ValueError("持仓回答与固定输入、知识或本地计算不一致。")
         return copy.deepcopy(state)

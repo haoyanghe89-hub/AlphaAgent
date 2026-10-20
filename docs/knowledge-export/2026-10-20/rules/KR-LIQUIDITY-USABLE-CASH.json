@@ -1,0 +1,87 @@
+{
+  "created_at": "2026-10-18T06:05:39.143249+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "依据官方现金定义及披露要求补充系统流动性检查；受限原因、期限匹配和营运需求是本系统核查项，不是作者给出的固定安全比例，也不是法定偿债能力结论。",
+    "citations": [
+      {
+        "document_id": "KS-MOF-CAS31",
+        "end": 240,
+        "quote": "第二条 现金流量表，是指反映企业在一定会计期间现金和现金等价物流入和流出的报表。 现金，是指企业库存现金以及可以随时用于支付的存款。 现金等价物，是指企业持有的期限短、流动性强、易于转换为已知金额现金、价值变动风险很小的投资。 本准则提及现金时，除非同时提及现金等价物，均包括现金和现金等价物。 第三条 合并现金流量表的编制和列报，适用《企业会计准则第33号——合并财务报表》。",
+        "start": 51,
+        "version": "c29913b3fc63927d394ed8bf87654ca13b76a88739d7b320f4ce0ac45e58c2c4"
+      },
+      {
+        "document_id": "KS-MOF-CAS31",
+        "end": 2162,
+        "quote": "第十八条 企业应当在附注中披露不涉及当期现金收支、但影响企业财务状况或在未来可能影响企业现金流量的重大投资和筹资活动。 第十九条 企业应当在附注中披露与现金和现金等价物有关的下列信息： （一）现金和现金等价物的构成及其在资产负债表中的相应金额。 （二）企业持有但不能由母公司或 集团内 其他子公司使用的大额现金和现金等价物 金 额。",
+        "start": 1996,
+        "version": "c29913b3fc63927d394ed8bf87654ca13b76a88739d7b320f4ce0ac45e58c2c4"
+      }
+    ],
+    "conditions": [
+      "资产与债务必须主体、币种和时间匹配，不把所有货币资金与现金等价物差额机械认定为受限资金。",
+      "金融企业需结合流动性监管口径和存贷款业务；资金用途不明时保留缺口，不出确定安全结论。"
+    ],
+    "conflict_group": "资金余额与实际可用性",
+    "counterexamples": [
+      "保证金可能在特定债务结算时释放，不能简单永久剔除；账面现金充足但位于无法上划的子公司仍可能无法偿还母公司债务；未使用授信不等同到账现金。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得把货币资金余额全部当作可用现金，或只凭现金与负债固定比值认定安全、造假、必然违约或自动买卖。"
+    ],
+    "horizons": [
+      "SWING",
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "货币资金",
+      "受限资金",
+      "现金等价物",
+      "偿债",
+      "流动性",
+      "到期债务"
+    ],
+    "kind": "风险",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "货币资金与现金等价物附注",
+      "受限用途和解限期限",
+      "主体间资金使用约束",
+      "债务期限和契约",
+      "经营资金需求与可验证资金来源"
+    ],
+    "rule_id": "KR-LIQUIDITY-USABLE-CASH",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "财政部现金流量表准则将现金界定为库存现金和可随时支付的存款，并要求附注披露现金等价物构成、对应资产负债表金额及集团内不可使用的大额现金。",
+    "steps": [
+      "逐项解释账面资金和现金等价物差额，核对可动用时间与用途。",
+      "与到期债务、经营需求和可验证融资来源匹配，给出证据支持的风险解释及缺口。"
+    ],
+    "system_rule": "评估流动性时分别核对货币资金、现金及现金等价物和受限或无法跨主体使用的金额，再与同一主体的到期债务、可验证资金来源及经营资金需求比较；账面资金总额不能直接视为可偿债余额。",
+    "title": "偿债能力先核对资金可用性而非只看余额",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "a8e25a924a0c41d9b03ada355ff65905b13bfd00291504fd40b7df48e00b301d",
+  "source_families": [
+    "MOF-ACCOUNTING-STANDARDS"
+  ],
+  "rule_id": "KR-LIQUIDITY-USABLE-CASH",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-18T06:06:03.664793+00:00",
+      "review_id": "aa2e9573a4fa3b66b9d6165e13bb3126f1537f3162a6d383328d2cf97cee10a2",
+      "rule_id": "KR-LIQUIDITY-USABLE-CASH",
+      "version": "a8e25a924a0c41d9b03ada355ff65905b13bfd00291504fd40b7df48e00b301d"
+    }
+  ],
+  "review_ids": [
+    "aa2e9573a4fa3b66b9d6165e13bb3126f1537f3162a6d383328d2cf97cee10a2"
+  ]
+}

@@ -1,4 +1,5 @@
 import { onMounted, onUnmounted, ref } from 'vue'
+import {deepResearch} from './researchDepth.js'
 import request from '../api/request.js'
 
 export function createDecisionResearch(id, { api = request, navigate = rid => { window.location.hash = '#/decision/' + rid } } = {}) {
@@ -15,7 +16,7 @@ export function createDecisionResearch(id, { api = request, navigate = rid => { 
     const ticket = ++generation
     loading.value = true
     try {
-      const value = await api('/quant/decision/runs/' + encodeURIComponent(id))
+      const value = await api('/quant/decision/runs/' + encodeURIComponent(id), {timeoutMs:60000})
       if (disposed || ticket !== generation) return
       state.value = value; error.value = ''
       if (active(value)) timer = setTimeout(load, 1500)
@@ -30,8 +31,9 @@ export function createDecisionResearch(id, { api = request, navigate = rid => { 
     if (submitting.value || disposed) return
     clearTimeout(timer); generation++
     submitting.value = true; error.value = ''; state.value = null
-    const signature = JSON.stringify(conditions)
-    if (pending?.signature !== signature) pending = { signature, body:{ ...conditions, request_key:crypto.randomUUID() } }
+    const values = ['market_scan','candidates'].includes(conditions.research_mode) ? {...conditions,enhanced_research:conditions.enhanced_research??deepResearch()} : conditions
+    const signature = JSON.stringify(values)
+    if (pending?.signature !== signature) pending = { signature, body:{ ...values, request_key:crypto.randomUUID() } }
     try {
       const value = await api('/quant/decision/runs', { method:'POST', body:JSON.stringify(pending.body), timeoutMs:45000 })
       if (!disposed) { pending = undefined; navigate(value.run_id) }
@@ -64,7 +66,9 @@ export function createDecisionResearch(id, { api = request, navigate = rid => { 
     submitting.value = true; error.value = ''
     refreshKey ||= crypto.randomUUID()
     try {
-      const value = await api('/quant/decision/runs/' + encodeURIComponent(id) + '/refresh', { method:'POST', body:JSON.stringify({request_key:refreshKey}), timeoutMs:45000 })
+      const body = {request_key:refreshKey}
+      if (['market_scan','candidates'].includes(state.value?.request?.research_mode)) body.enhanced_research=deepResearch()
+      const value = await api('/quant/decision/runs/' + encodeURIComponent(id) + '/refresh', { method:'POST', body:JSON.stringify(body), timeoutMs:45000 })
       if (!disposed) { refreshKey = undefined; navigate(value.run_id) }
     } catch(e) { if (!disposed) error.value = e.message }
     finally { if (!disposed) submitting.value = false }

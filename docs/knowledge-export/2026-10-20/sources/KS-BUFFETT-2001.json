@@ -1,0 +1,67 @@
+{
+  "body_characters": 73604,
+  "created_at": "2026-10-16T04:04:45.631460+00:00",
+  "document_id": "KS-BUFFETT-2001",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T04:01:09.757467+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "risk",
+      "end": 22992,
+      "start": 22488
+    },
+    {
+      "anchor": "investment",
+      "end": 3589,
+      "start": 3079
+    }
+  ],
+  "raw_ref": "blob://sha256/0f05ccf7980e0597e4327d73969d824361f1507eeddba3e2467c218e27e07492",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "risk",
+      "investment"
+    ],
+    "authors": [
+      "Warren Buffett"
+    ],
+    "category": "风险与纪律",
+    "encoding": "windows-1252",
+    "media_type": "text/html",
+    "publication_label": "2001年度股东信",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "BERKSHIRE",
+    "source_id": "KS-BUFFETT-2001",
+    "tags": [
+      "风险控制",
+      "资本配置",
+      "巴菲特",
+      "分散"
+    ],
+    "title": "巴菲特原信：风险与资本配置",
+    "url": "https://www.berkshirehathaway.com/2001ar/2001letter.html"
+  },
+  "text_ref": "blob://sha256/ca227afb979b7bcbb0e75ec677c3b2a960bc5fc7af918cdb4ba29b986e8ec760",
+  "version": "a5bd05a6baa1cb21005d12286a9ed91a47685d5bc04ea95ef295aaefdcbcc6d1",
+  "manifest_ref": "blob://sha256/b80fad1ea6f60ca54f99c58df8c7a9cbdb37ef7568f672241cb63278ba998817",
+  "title": "巴菲特原信：风险与资本配置",
+  "excerpts": [
+    {
+      "start": 22488,
+      "end": 22992,
+      "anchor": "risk",
+      "text": " results. What counts in this business is underwriting discipline. The winners are those that unfailingly stick to three key principles: They accept only those risks that they are able to properly evaluate (staying within their circle of competence) and that, after they have evaluated all relevant factors including remote loss scenarios, carry the expectancy of profit. These insurers ignore market-share considerations and are sanguine about losing business to competitors that are offering foolish pr"
+    },
+    {
+      "start": 3079,
+      "end": 3589,
+      "anchor": "investment",
+      "text": "th the worst absolute and relative performance in our history. I added that \"relative results are what concern us,\" a viewpoint I’ve had since forming my first investment partnership on May 5, 1956. Meeting with my seven founding limited partners that evening, I gave them a short paper titled \"The Ground Rules\" that included this sentence: \"Whether we do a good job or a poor job is to be measured against the general experience in securities.\" We initially used the Dow Jones Industrials as our benchmark, b"
+    }
+  ]
+}

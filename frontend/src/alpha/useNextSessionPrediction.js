@@ -1,6 +1,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import request from '../api/request.js'
 import {postSavedTask} from '../api/savedTask.js'
+import {deepResearch} from './researchDepth.js'
 
 export const nextSessionRoot = '/quant/decision/experiments/next-session'
 export function createNextSessionPrediction(id, { api=request, navigate=rid => { window.location.hash='#/decision/'+rid }, developer=false }={}) {
@@ -31,8 +32,8 @@ export function createNextSessionPrediction(id, { api=request, navigate=rid => {
     try {
       if(!status.value?.enabled)await api(nextSessionRoot+'/enable',{method:'POST',body:'{}',timeoutMs:60000})
       const selection = typeof entity==='string' ? entity.trim() : ''
-      if ((pending?.entity || '') !== selection) pending=null
-      pending ||= {request_key:crypto.randomUUID(),experiment_id:status.value?.experiment_id || 'ALPHA_NEXT_SESSION_V1',...(selection?{entity:selection,exploratory:true}:{})}
+      if ((pending?.entity || '') !== selection || Boolean(pending?.enhanced_research)!==Boolean(selection&&deepResearch())) pending=null
+      pending ||= {request_key:crypto.randomUUID(),experiment_id:status.value?.experiment_id || 'ALPHA_NEXT_SESSION_V1',...(selection?{entity:selection,exploratory:true,...(deepResearch()?{enhanced_research:true}:{})}:{})}
       const options={method:'POST',body:JSON.stringify(pending),timeoutMs:45000}
       const run=await postSavedTask(api,nextSessionRoot+'/runs',options,{disposed:()=>disposed,waiting:m=>{error.value=m}})
       if(!disposed){pending=null;navigate(run.run_id)}

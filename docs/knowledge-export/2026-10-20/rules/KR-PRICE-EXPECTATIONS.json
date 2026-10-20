@@ -1,0 +1,73 @@
+{
+  "created_at": "2026-10-16T07:03:44.323572+00:00",
+  "curator": "CODEX_SOURCE_READING",
+  "rule": {
+    "adaptation": "系统将原文转为研究检查项；A股指标口径、交易约束及效果仍需单独核验，当前不能自动执行。",
+    "citations": [
+      {
+        "document_id": "KS-EXPECTATIONS",
+        "end": 6475,
+        "quote": "Estimate Price-Implied Expectations. The expectations investor “reads” the expectations for cash flow embedded in a company's current stock price. Identify Expectations Opportunities. The expectations investor then assesses those expectations, evaluates the company's competitive position, and considers the likelihood of upward or downward revisions in those expectations. Buy, Sell, or Hold? The expectations investor makes a buy, sell, or hold decision, making sure that all investments have a clear-cut after-tax “margin of safety” between the stock's price today and the expected price tomorrow. Do I need to be a financial guru to understand an",
+        "start": 5825,
+        "version": "11abb69f49ea2df66b47171fdbc97fd1adf3fef5576f7922816a2eee9aeb3c5b"
+      }
+    ],
+    "conditions": [
+      "只采用取得的公开方法介绍，不能声称已覆盖整本书或精确预测明日价格。"
+    ],
+    "conflict_group": "基本面估值",
+    "counterexamples": [
+      "相同价格可由不同增长与折现假设解释；反推得到单个参数不代表市场只有一种预期。"
+    ],
+    "execution_status": "REFERENCE_ONLY",
+    "forbidden_inferences": [
+      "不得据此推出下一交易日涨跌、保证收益或生成未经工具核算的交易数量。"
+    ],
+    "horizons": [
+      "MEDIUM",
+      "LONG"
+    ],
+    "keywords": [
+      "预期差",
+      "价格隐含预期",
+      "现金流",
+      "估值"
+    ],
+    "kind": "估值",
+    "market_scope": "CN_A_REFERENCE",
+    "parameters": [],
+    "required_inputs": [
+      "真实价格",
+      "现金流估值模型",
+      "经营情景"
+    ],
+    "rule_id": "KR-PRICE-EXPECTATIONS",
+    "schema_version": "investment-rule-v1",
+    "source_claim": "预期投资先读取当前价格隐含的现金流预期，再判断预期修正机会并作买卖持有决策。",
+    "steps": [
+      "把价格隐含的增长和现金流要求，与有来源的经营情景比较；显式保留反推模型假设。"
+    ],
+    "system_rule": "把价格隐含的增长和现金流要求，与有来源的经营情景比较；显式保留反推模型假设。",
+    "title": "先反推价格隐含的经营预期",
+    "validation_status": "UNVALIDATED"
+  },
+  "validation_status": "UNVALIDATED",
+  "version": "46836c3386c3991c287faf07c4aa35fad4ef671f2c2cb79f6597b2e893b798f3",
+  "source_families": [
+    "EXPECTATIONS-INVESTING"
+  ],
+  "rule_id": "KR-PRICE-EXPECTATIONS",
+  "status": "PUBLISHED",
+  "events": [
+    {
+      "action": "PUBLISHED",
+      "created_at": "2026-10-16T07:22:45.873876+00:00",
+      "review_id": "98fb32ccecf0ee0768909ca28e1213ffe19ef0905af80601817451b2eab24176",
+      "rule_id": "KR-PRICE-EXPECTATIONS",
+      "version": "46836c3386c3991c287faf07c4aa35fad4ef671f2c2cb79f6597b2e893b798f3"
+    }
+  ],
+  "review_ids": [
+    "98fb32ccecf0ee0768909ca28e1213ffe19ef0905af80601817451b2eab24176"
+  ]
+}

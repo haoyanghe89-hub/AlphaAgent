@@ -2,6 +2,7 @@
 
 import io
 import re
+from functools import lru_cache
 
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
@@ -13,6 +14,13 @@ MAX_BYTES = 5 * 1024 * 1024
 
 
 def extract(raw: bytes, source: SourceDefinition) -> tuple[str, list[dict]]:
+    # Cache parsing only; callers still read and hash-check original and saved text each time.
+    normalized, locators = _extract(raw, source)
+    return normalized, [dict(locator) for locator in locators]
+
+
+@lru_cache(maxsize=64)
+def _extract(raw: bytes, source: SourceDefinition) -> tuple[str, list[dict]]:
     if not raw or len(raw) > MAX_BYTES:
         raise ValueError("original is empty or exceeds the source limit")
     if source.media_type == "application/pdf":

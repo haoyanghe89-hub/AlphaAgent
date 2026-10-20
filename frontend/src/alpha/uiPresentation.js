@@ -13,5 +13,5 @@ export function investmentIntent(text,selected) {
 }
 
 export function userHistoryItem(item) {
-  return item.scenario!=='backtest'&&!item.title?.includes('定向取证')
+  return item.scenario!=='backtest'&&item.scenario!=='research_evaluation'&&!item.title?.includes('定向取证')
 }

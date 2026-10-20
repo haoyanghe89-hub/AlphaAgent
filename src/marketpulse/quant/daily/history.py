@@ -9,7 +9,9 @@ from ..live.store import ResearchRunRow
 
 
 def page(base, *, limit=50, cursor=None, query="", scenario=""):
-    statement = select(ResearchRunRow).where(ResearchRunRow.run_id.like("RUN-%"))
+    statement = select(ResearchRunRow).where(
+        ResearchRunRow.run_id.like("RUN-%"), ~ResearchRunRow.run_id.like("RUN-QU-%")
+    )
     if query:
         # Search the declared title/identity, never private profiles or model traces.
         title = ResearchRunRow.payload["title"].as_string()

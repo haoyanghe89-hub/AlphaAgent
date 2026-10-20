@@ -107,6 +107,7 @@ class ResearchStore:
                     ~ResearchRunRow.run_id.like("RUN-MB-%"),
                     ~ResearchRunRow.run_id.like("RUN-HA-%"),
                     ~ResearchRunRow.run_id.like("RUN-PA-%"),
+                    ~ResearchRunRow.run_id.like("RUN-EV-%"),
                     ~ResearchRunRow.run_id.like("DEC-%"),
                 )
             )

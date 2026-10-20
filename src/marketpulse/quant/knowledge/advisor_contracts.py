@@ -5,7 +5,7 @@ from decimal import Decimal
 from typing import Literal
 from uuid import UUID
 
-from pydantic import Field, model_validator
+from pydantic import Field, model_serializer, model_validator
 
 from ..domain import FrozenModel
 
@@ -46,6 +46,20 @@ class AdvisorRequest(FrozenModel):
     question: str = Field(min_length=1, max_length=2000)
     scenario_price: Decimal | None = Field(default=None, gt=0, le=1000000)
     refresh_research: bool = False
+    enhanced_research: bool = False
+    semantic_understanding: bool = False
+    structured_research: bool = False
+
+    @model_serializer(mode="wrap")
+    def serialize(self, handler):
+        value = handler(self)
+        if not self.enhanced_research:
+            value.pop("enhanced_research", None)
+        if not self.semantic_understanding:
+            value.pop("semantic_understanding", None)
+        if not self.structured_research:
+            value.pop("structured_research", None)
+        return value
 
     @model_validator(mode="after")
     def consistent(self):

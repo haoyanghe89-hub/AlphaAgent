@@ -1,0 +1,67 @@
+{
+  "body_characters": 7023,
+  "created_at": "2026-10-16T04:04:47.575968+00:00",
+  "document_id": "KS-HOUSEL-REASONABLE",
+  "extractor_version": "knowledge-original-text-v1",
+  "fetched_at": "2026-10-16T03:53:44.913710+00:00",
+  "investment_validation": "UNVALIDATED",
+  "locators": [
+    {
+      "anchor": "most investment models maximize",
+      "end": 3161,
+      "start": 2630
+    },
+    {
+      "anchor": "A rational investor makes decisions",
+      "end": 3906,
+      "start": 3371
+    }
+  ],
+  "raw_ref": "blob://sha256/ba5cb6f6f3e1fcd0ef2adb4765bea48600f72cbae20ed998ff377313f4c2cf16",
+  "reading_scope": "EXCERPT_CAPTURED",
+  "rules_published": 0,
+  "source": {
+    "anchors": [
+      "most investment models maximize",
+      "A rational investor makes decisions"
+    ],
+    "authors": [
+      "Morgan Housel"
+    ],
+    "category": "风险与纪律",
+    "encoding": "utf-8-sig",
+    "media_type": "text/html",
+    "publication_label": "公开方法资料",
+    "reading_note": "编目说明：按所列主题定位公开原文段落；尚未蒸馏为执行规则，不代表整书阅读或投资效果验证。",
+    "rights_note": "公开原始资料，本机私有归档；不授予再分发权限。",
+    "selector": "body",
+    "source_family": "HOUSEL-COLLAB",
+    "source_id": "KS-HOUSEL-REASONABLE",
+    "tags": [
+      "行为金融",
+      "持有纪律",
+      "风险承受",
+      "投资路线"
+    ],
+    "title": "Housel：理性与可坚持的投资行为",
+    "url": "https://collabfund.com/blog/rational-vs-reasonable/"
+  },
+  "text_ref": "blob://sha256/40a91fcb6b145e3aab57393814b699b5a205b9d4ad19012f3c89ed58be38f977",
+  "version": "73fe4c0624bd05d0d15fb36340bad9a054994650d2e4bb866cc016293433895d",
+  "manifest_ref": "blob://sha256/9a7eda85f9cf12661fabce2d8b381e8321d73c508d926c7988e9b669c6018284",
+  "title": "Housel：理性与可坚持的投资行为",
+  "excerpts": [
+    {
+      "start": 2630,
+      "end": 3161,
+      "anchor": "most investment models maximize",
+      "text": " for most people it’s not reasonable. And that framework—aiming to be reasonable instead of coldly rational—is one investors should consider. My theory is that most investment models maximize for risk-adjusted returns, but in the real world every investor wants to maximize for sleeping well at night and being proud of themselves in a complicated world. Harry Markowitz won the Nobel Prize for exploring the mathematical tradeoff between risk and return. A few years ago the Wall Street Journal asked him how, given his work, he s"
+    },
+    {
+      "start": 3371,
+      "end": 3906,
+      "anchor": "A rational investor makes decisions",
+      "text": "ret. So I split my contributions 50/50 between bonds and equities. “Minimizing future regret” is hard to rationalize on paper but easy to justify in real life. A rational investor makes decisions based on facts. A reasonable investor makes them in a conference room surrounded by coworkers who need to be persuaded, at the dinner table with a spouse you don’t want to let down, or judged against the silly but realistic “competitors” that are your brother-in-law, your neighbor, and your own personal doubts. That’s OK. It’s real life."
+    }
+  ]
+}
