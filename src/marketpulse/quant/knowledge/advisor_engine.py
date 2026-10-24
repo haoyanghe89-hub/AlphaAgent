@@ -5,6 +5,8 @@ from datetime import datetime
 from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal, localcontext
 from functools import lru_cache
 
+from marketpulse.telemetry.tracing import stage
+
 from ..decision.next_session.calendar import plain, rule_text
 from .advisor_contracts import AdvisorRequest
 from .features import number
@@ -137,6 +139,7 @@ def sell_cost(position, price, shares):
     )
 
 
+@stage("local_account.compute", as_type="span")
 def build_answer(request, report, quote, trading, *, pinned_route=None, understanding=None):
     request = AdvisorRequest.model_validate(request)
     with localcontext() as ctx:

@@ -2,6 +2,8 @@
 
 from ..contracts import digest
 from . import research_agents as agents
+from .numeric_grounding import VERSION as NUMERIC_GROUNDING_VERSION
+from .original_search import VERSION as ORIGINAL_SEARCH_VERSION
 from .planning_store import PlanningStore
 from .research_context import analysis_basis, analysis_plan, direction_check_context
 from .research_context import analyst_context as expected_analysis_context
@@ -37,6 +39,7 @@ class InvestmentStore(PlanningStore):
             state.update(
                 config=dict(
                     prompt_version=agents.prompt_version(request["schema_version"]),
+                    numeric_grounding=NUMERIC_GROUNDING_VERSION,
                     budget=BUDGET,
                 ),
                 model_calls=0,
@@ -49,6 +52,8 @@ class InvestmentStore(PlanningStore):
                 state["config"]["scoped_analysis"] = True
                 state["config"]["explicit_contract_v1"] = True
                 state["config"]["literal_text_contract_v1"] = True
+            if not request.get("enhancement_stage"):
+                state["config"]["original_search_version"] = ORIGINAL_SEARCH_VERSION
             if request.get("execution_contract"):
                 from .structured_contract import configure
 
@@ -78,6 +83,10 @@ class InvestmentStore(PlanningStore):
         return state
 
     def verify(self, state):
+        if self.value(state["public_context_ref"]).get("numeric_grounding") != state["config"].get(
+            "numeric_grounding"
+        ):
+            raise ValueError("数字引用校验版本与封存上下文不一致")
         if state["request"].get("enhancement_stage") != state["config"].get("enhancement_stage"):
             raise ValueError("组件对照与原请求不一致")
         if state["request"].get("input_reservation") != state["config"].get(
@@ -115,6 +124,20 @@ class InvestmentStore(PlanningStore):
             )
             if context != reconstructed:
                 raise ValueError("主动研究与公开上下文不一致")
+        else:
+            from . import original_search
+
+            reconstructed = original_search.attach(
+                self,
+                state,
+                {k: v for k, v in context.items() if k != "original_research"},
+                self.value(state["knowledge_ref"]),
+                state.get("original_search_ref"),
+            )
+            if reconstructed != context:
+                raise ValueError("研究原文与封存上下文不一致")
+        if data.get("original_research") != context.get("original_research"):
+            raise ValueError("报告原文引用与本次研究不一致")
         plan = self.output(state, "Planner", agents.Plan)
         agents.guard_plan(plan, context)
         planner_context = self.value(state["model_steps"]["Planner"]["context_ref"])
@@ -124,6 +147,8 @@ class InvestmentStore(PlanningStore):
         }
         if context.get("user_analysis_focus"):
             expected_planner["user_analysis_focus"] = context["user_analysis_focus"]
+        if context.get("original_research"):
+            expected_planner["original_research"] = context["original_research"]
         if planner_context != expected_planner:
             raise ValueError("规划上下文与封存输入不一致")
         analysis = self.output(state, state["approved_analysis_step"], agents.Analysis)

@@ -15,6 +15,7 @@ from marketpulse.quant.contracts import canonical, digest
 from marketpulse.quant.decision import api
 from marketpulse.quant.decision.store import DecisionStore
 from marketpulse.quant.decision.tools import SourceClient
+from marketpulse.quant.knowledge.models import KnowledgeDocumentRow
 from marketpulse.quant.live.store import ResearchRunRow, ResearchStore
 
 
@@ -25,6 +26,7 @@ def setup(tmp_path):
         connect_args={"check_same_thread": False},
     )
     ResearchRunRow.__table__.create(engine)
+    KnowledgeDocumentRow.__table__.create(engine)
     old = ResearchStore(
         sessionmaker(engine), LocalContentAddressedBlobStorage(tmp_path / "blobs"), tmp_path / "old"
     )

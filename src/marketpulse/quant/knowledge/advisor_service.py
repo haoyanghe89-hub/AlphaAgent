@@ -5,6 +5,8 @@ import re
 from datetime import UTC, datetime
 from uuid import UUID, uuid5
 
+from marketpulse.telemetry.tracing import workflow
+
 from ..contracts import digest
 from ..decision.next_session.labels import SHANGHAI
 from ..decision.tools import SourceClient, Stopped
@@ -16,6 +18,7 @@ from .research_service import run as research_run
 from .research_store import InvestmentStore
 
 
+@workflow("alphaagent.holding_advisor", id_parameter="run_id")
 async def run(
     repo,
     rules,

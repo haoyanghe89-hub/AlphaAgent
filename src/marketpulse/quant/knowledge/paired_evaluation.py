@@ -12,6 +12,8 @@ from uuid import NAMESPACE_URL, UUID, uuid5
 
 from pydantic import BaseModel, ConfigDict
 
+from marketpulse.telemetry.tracing import workflow
+
 from ..contracts import digest
 from ..decision.store import DecisionStore
 from ..decision.tools import SourceClient
@@ -660,6 +662,7 @@ def seal(repo, rid):
     return repo.get(rid)
 
 
+@workflow("alphaagent.evaluation", id_parameter="rid")
 async def execute(repo, rules, rid, stop, settings, *, port=None):
     state = repo.get(rid, with_data=False)
     if state.get("version") == "research-effectiveness-v1":

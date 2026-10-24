@@ -2,3 +2,4 @@
 src/marketpulse/quant/decision/next_session/assets/tokenizer*.json -text
 # Archived excerpts retain their source whitespace as part of the byte hashes.
 docs/knowledge-export/** -text -whitespace
+docs/research-context-examples/** -text whitespace=cr-at-eol

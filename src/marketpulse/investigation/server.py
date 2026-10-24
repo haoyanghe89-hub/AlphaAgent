@@ -34,6 +34,7 @@ from marketpulse.investigation.persistence.base import (
 )
 from marketpulse.investigation.persistence.repositories import InvestigationRepository
 from marketpulse.investigation.review.api import router as review_router
+from marketpulse.telemetry.tracing import configure as configure_tracing
 
 LOGGER = logging.getLogger("marketpulse.investigation.server")
 
@@ -68,6 +69,9 @@ def create_app(
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         engine = create_investigation_engine(database_url)
         with ExitStack() as resources:
+            tracing = configure_tracing()
+            resources.callback(tracing.close)
+            app.state.tracing = tracing
             resources.callback(engine.dispose)
             ownership = ServerOwnership(engine, database_url)
             ownership.acquire()
@@ -182,9 +186,15 @@ def create_app(
             allow_headers=["Content-Type", "Idempotency-Key", "X-Requested-With"],
         )
     app.include_router(investigation_router)
+    from marketpulse.telemetry.http import install_http_tracing
+
+    install_http_tracing(app)
     from marketpulse.quant.api import router as quant_router
 
     app.include_router(quant_router)
+    from marketpulse.quant.observability_api import router as observability_router
+
+    app.include_router(observability_router)
     from marketpulse.quant.live.research_api import compat_router
     from marketpulse.quant.live.research_api import router as research_router
 
@@ -252,6 +262,7 @@ def create_app(
     }:
         frontend_root = Path(__file__).resolve().parents[3] / "frontend" / "dist"
         if frontend_root.is_dir():
+
             @app.middleware("http")
             async def revalidate_frontend_entry(request: Request, call_next):
                 response = await call_next(request)

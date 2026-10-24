@@ -9,6 +9,7 @@ from urllib.parse import urljoin, urlsplit
 import requests
 
 from marketpulse.infrastructure.storage.models import BlobRef
+from marketpulse.telemetry.tracing import link_call, observation, stage
 
 from ..contracts import digest
 from ..live.securities import PROFILE, SMARTBOX, choose, financial_type, parse_candidates
@@ -76,6 +77,7 @@ class SourceClient:
         if time.monotonic() >= self.deadline:
             raise Stopped("取证达到时间上限")
 
+    @stage("source.fetch", as_type="tool")
     def fetch(self, key, url, *, params=None, data=None, family, encoding=None, binary=False):
         for attempt in range(2):
             try:
@@ -96,13 +98,18 @@ class SourceClient:
                 ):
                     raise
 
+    @stage("request.attempt")
     def _fetch_once(self, key, url, *, params=None, data=None, family, encoding=None, binary=False):
         self.check()
         definition = dict(tool=key, url=url, params=params, data=data, family=family)
         cache_key = digest(definition)
         for previous in self.state["calls"]:
             if previous.get("cache_key") == cache_key and previous["status"] == "COMPLETED":
-                raw = self.repo.raw_bytes(previous["response_ref"])
+                with observation(
+                    "checkpoint.reuse",
+                    metadata={"cache_hit": True, "response_ref": previous["response_ref"]},
+                ):
+                    raw = self.repo.raw_bytes(previous["response_ref"])
                 return previous["source"], self.decode(raw, encoding, binary)
         if len(self.state["calls"]) >= self.max_requests:
             raise SourceUnavailable(f"达到本任务{self.max_requests}次来源请求上限（含失败）")
@@ -115,7 +122,9 @@ class SourceClient:
             started_at=datetime.now(UTC).isoformat(),
         )
         self.state["calls"].append(call)
+        call_index = len(self.state["calls"]) - 1
         self.save()
+        link_call(self.state, call_index, "tool", "RUNNING")
         try:
             is_tushare = url == "https://api.tushare.pro"
             if is_tushare:
@@ -132,6 +141,7 @@ class SourceClient:
                         finished_at=datetime.now(UTC).isoformat(),
                     )
                     self.save()
+                    link_call(self.state, call_index, "tool", "COMPLETED")
                     return source, self.decode(raw, encoding, binary)
                 private_body = tushare.request_body(definition)
             target = url
@@ -145,27 +155,36 @@ class SourceClient:
                     or parsed.port not in (None, 443)
                 ):
                     raise SourceUnavailable("未批准的来源 URL")
-                with requests.request(
-                    "POST" if data is not None else "GET",
-                    target,
-                    params=params,
-                    **({"json": private_body} if is_tushare else {"data": data}),
-                    headers={
-                        "User-Agent": "Mozilla/5.0",
-                        "Referer": "https://finance.sina.com.cn/"
-                        if parsed.hostname == "hq.sinajs.cn"
-                        else "https://www.sse.com.cn/"
-                        if parsed.hostname == "query.sse.com.cn"
-                        else "https://fundf10.eastmoney.com/"
-                        if parsed.hostname == "api.fund.eastmoney.com"
-                        else "https://quote.eastmoney.com/"
-                        if parsed.hostname in {"push2his.eastmoney.com", "push2.eastmoney.com"}
-                        else "https://www.cninfo.com.cn/",
-                    },
-                    timeout=(5, min(15, max(1, self.deadline - time.monotonic()))),
-                    stream=True,
-                    allow_redirects=False,
-                ) as response:
+                with (
+                    observation(
+                        "http.request",
+                        metadata={
+                            "host": parsed.hostname,
+                            "method": "POST" if data is not None else "GET",
+                        },
+                    ),
+                    requests.request(
+                        "POST" if data is not None else "GET",
+                        target,
+                        params=params,
+                        **({"json": private_body} if is_tushare else {"data": data}),
+                        headers={
+                            "User-Agent": "Mozilla/5.0",
+                            "Referer": "https://finance.sina.com.cn/"
+                            if parsed.hostname == "hq.sinajs.cn"
+                            else "https://www.sse.com.cn/"
+                            if parsed.hostname == "query.sse.com.cn"
+                            else "https://fundf10.eastmoney.com/"
+                            if parsed.hostname == "api.fund.eastmoney.com"
+                            else "https://quote.eastmoney.com/"
+                            if parsed.hostname in {"push2his.eastmoney.com", "push2.eastmoney.com"}
+                            else "https://www.cninfo.com.cn/",
+                        },
+                        timeout=(5, min(15, max(1, self.deadline - time.monotonic()))),
+                        stream=True,
+                        allow_redirects=False,
+                    ) as response,
+                ):
                     if response.is_redirect:
                         if is_tushare:
                             raise ValueError("Tushare credential requests cannot redirect")
@@ -214,8 +233,10 @@ class SourceClient:
                 finished_at=source["fetched_at"],
             )
             self.save()
+            link_call(self.state, call_index, "tool", "COMPLETED")
             return source, value
         except Stopped:
+            link_call(self.state, call_index, "tool", "UNKNOWN")
             raise
         except (requests.RequestException, ValueError, KeyError, UnicodeError) as error:
             call.update(
@@ -224,6 +245,7 @@ class SourceClient:
                 finished_at=datetime.now(UTC).isoformat(),
             )
             self.save()
+            link_call(self.state, call_index, "tool", "FAILED")
             raise SourceUnavailable(
                 f"{key} 本次未取得有效响应（{type(error).__name__}）"
             ) from error

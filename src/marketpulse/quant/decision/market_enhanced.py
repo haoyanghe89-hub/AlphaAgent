@@ -9,6 +9,7 @@ from pydantic import Field
 
 from ..contracts import canonical, digest
 from ..domain import FrozenModel
+from ..knowledge import original_search
 from ..knowledge.active_research import verify_profile
 from ..knowledge.research_agents import qualitative
 from ..knowledge.research_context import knowledge_snapshot
@@ -393,6 +394,13 @@ async def analyze(repo, state, data, settings, save, stop, *, port=None, rules=N
             selections=plan.model_dump(mode="json")["selections"],
             tool_results=results,
         )
+        original_ref = await asyncio.to_thread(
+            original_search.collect, repo, state, analysis_context, knowledge
+        )
+        analysis_context = original_search.attach(
+            repo, state, analysis_context, knowledge, original_ref
+        )
+        save()
         focus = await step(
             "Planner",
             "Planner",
@@ -435,6 +443,8 @@ async def analyze(repo, state, data, settings, save, stop, *, port=None, rules=N
         conclusion=proposal.model_dump(mode="json"),
         review=review.model_dump(mode="json"),
     )
+    if original_ref is not None:
+        manifest["original_search_ref"] = original_ref
     save()
     return dict(
         version=VERSION,
@@ -446,6 +456,7 @@ async def analyze(repo, state, data, settings, save, stop, *, port=None, rules=N
         manifest_ref=repo.blob(manifest),
         research_state_ref=repo.blob(frozen_state(state)),
         role_records=[c for c in state["calls"] if c.get("kind") == "model"],
+        **({"original_research": analysis_context["original_research"]} if original_ref else {}),
     )
 
 
@@ -534,6 +545,11 @@ def verify_result(repo, data):
         selections=plan.model_dump(mode="json")["selections"],
         tool_results=results,
     )
+    base = original_search.attach(
+        repo, state, base, knowledge, manifest.get("original_search_ref")
+    )
+    if block.get("original_research") != base.get("original_research"):
+        raise ValueError("市场方法原文与封存检索不一致。")
     focus = output(
         "Planner",
         "Planner",

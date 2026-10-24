@@ -1,5 +1,9 @@
 """Public-only model context and fixed knowledge/citation snapshots."""
 
+from marketpulse.telemetry import investment as trace_content
+from marketpulse.telemetry.content import PUBLIC_CONTENT_POLICY
+from marketpulse.telemetry.tracing import stage
+
 LABELS = dict(
     close="收盘价",
     ma_20="二十日均线",
@@ -54,6 +58,13 @@ def analysis_plan(plan, compact=False):
     )
 
 
+@stage(
+    "context.analyst_pack",
+    as_type="chain",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.context_input,
+    outputs=trace_content.context_output,
+)
 def analyst_context(context, version, plan=None, *, scoped=False, compact=False, structured=False):
     """Lossless window interning for the new technical prompt's bounded input."""
 
@@ -68,6 +79,16 @@ def analyst_context(context, version, plan=None, *, scoped=False, compact=False,
         version = TECHNICAL_PROMPT_VERSION
 
     result = analysis_basis(context, plan, scoped=scoped)
+    from . import numeric_grounding
+
+    if numeric_grounding.enabled(result):
+        result["numeric_quotes"] = {
+            f["evidence_id"]: numeric_grounding.quotes(f, result.get("windows"))
+            for f in result["evidence"]
+        }
+        result["route_numeric_quotes"] = {
+            s["security_id"]: numeric_grounding.route_quotes(s) for s in result["stocks"]
+        }
     if structured:
         from .structured_contract import requirements
 
@@ -98,6 +119,13 @@ def analyst_context(context, version, plan=None, *, scoped=False, compact=False,
     return result
 
 
+@stage(
+    "context.verifier_pack",
+    as_type="chain",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.context_input,
+    outputs=trace_content.context_output,
+)
 def review_context(
     context, plan, analysis, review_round, *, compact=False, portfolio_compact=False
 ):
@@ -178,6 +206,7 @@ def direction_check_context(previous_context, previous_review):
             "proposal",
             "plan",
             "review_round",
+            "original_research",
         )
         if k in previous_context
     }
@@ -202,6 +231,13 @@ def direction_check_context(previous_context, previous_review):
     return result
 
 
+@stage(
+    "knowledge.snapshot",
+    as_type="retriever",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.knowledge_input,
+    outputs=trace_content.knowledge_output,
+)
 def knowledge_snapshot(rules, cutoff, *, dynamic=False):
     from .routing import RULE_IDS
 
@@ -241,7 +277,14 @@ def knowledge_snapshot(rules, cutoff, *, dynamic=False):
     return dict(rules=selected, documents=list(documents.values()), fragments=fragments)
 
 
-def public_context(core, packet, knowledge, sessions):
+@stage(
+    "context.public_projection",
+    as_type="chain",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.context_input,
+    outputs=trace_content.context_output,
+)
+def public_context(core, packet, knowledge, sessions, *, numeric_grounding=None):
     evidence, stocks = [], []
     for c in core["candidates"]:
         if c["status"] != "COMPUTED":
@@ -301,6 +344,7 @@ def public_context(core, packet, knowledge, sessions):
         )
     # Account details and local position calculations never enter this public object.
     return dict(
+        **({"numeric_grounding": numeric_grounding} if numeric_grounding is not None else {}),
         protocol="public-investment-context-v1",
         cutoff=packet["captured_at"],
         market_date=packet["market_date"],

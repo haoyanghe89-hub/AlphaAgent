@@ -394,6 +394,12 @@ def test_disabled_request_bytes_and_original_policy_are_unchanged():
     assert state == original and service.policy_hash() == policy
 
 
+def test_resuming_old_enhanced_protocol_does_not_enable_new_original_search():
+    state = dict(request=dict(enhanced_research=True), config=dict(agentic_research_v1=True))
+    enhanced.enable(state)
+    assert "original_search_version" not in state["config"]
+
+
 def test_enhanced_workflow_seals_tools_references_and_restores_history(completed):
     repo, state, port, seen = completed
     assert state["status"] == "COMPLETED", state.get("error") or state.get("attempt_ids")
@@ -415,6 +421,7 @@ def test_enhanced_workflow_seals_tools_references_and_restores_history(completed
         "KR-AVOID-RUIN",
         "KR-COST-NET-RETURN",
     }
+    assert snap.model_context["original_research"]["status"] == "MISSING"
     facts = {e.evidence_id: e for e in snap.evidence.items}
     assert facts["R-688012SH-pb"].value == 2.5
     assert facts["R-688012SH-total_mv"].value == 10000000

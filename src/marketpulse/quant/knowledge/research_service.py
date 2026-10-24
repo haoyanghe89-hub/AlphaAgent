@@ -9,11 +9,14 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 
+from marketpulse.telemetry.content import PUBLIC_CONTENT_POLICY
+from marketpulse.telemetry.tracing import observation, workflow
+
 from ..contracts import digest
 from ..decision.next_session.agents import DailyRoles
 from ..decision.tools import SourceClient, Stopped
+from . import original_search, technicals
 from . import research_agents as agents
-from . import technicals
 from .context import collect as collect_context
 from .context import enrich, rebuild
 from .inputs import capture_inputs
@@ -33,6 +36,7 @@ from .research_store import BUDGET
 from .trading_rules import verify_trading_rules
 
 
+@workflow("alphaagent.investment_research", id_parameter="run_id")
 async def run_with_recovery(repo, rules, run_id, stop, settings, **options):
     """Continue correctable role failures on the same sealed task and original budget."""
     while True:
@@ -53,6 +57,7 @@ async def run_with_recovery(repo, rules, run_id, stop, settings, **options):
         repo.save(state)
 
 
+@workflow("alphaagent.investment_research", id_parameter="run_id")
 async def run(
     repo,
     rules,
@@ -185,7 +190,13 @@ async def run(
             ]
             trading = verify_trading_rules(packet, repo.raw_bytes)
             core = build_report(request.calculation_request(), packet, bindings, trading)
-            context, evidence = public_context(core, packet, knowledge, request.horizon_sessions)
+            context, evidence = public_context(
+                core,
+                packet,
+                knowledge,
+                request.horizon_sessions,
+                numeric_grounding=state["config"].get("numeric_grounding"),
+            )
             if request.analysis_focus:
                 context["user_analysis_focus"] = list(request.analysis_focus)
             if state.get("context_report_ref"):
@@ -255,6 +266,14 @@ async def run(
                     set(re.findall(r"blob://sha256/[0-9a-f]{64}", json.dumps(context)))
                     - set(state["source_refs"])
                 )
+                save()
+
+            elif original_search.enabled(state):
+                ref = await asyncio.to_thread(
+                    original_search.collect, repo, state, context, knowledge
+                )
+                context = original_search.attach(repo, state, context, knowledge, ref)
+                state["public_context_ref"] = repo.blob(context)
                 save()
 
             async def step(
@@ -358,6 +377,8 @@ async def run(
             }
             if context.get("user_analysis_focus"):
                 planner_context["user_analysis_focus"] = context["user_analysis_focus"]
+            if context.get("original_research"):
+                planner_context["original_research"] = context["original_research"]
             plan = await step(
                 "Planner",
                 "Planner",
@@ -535,8 +556,14 @@ async def run(
             if state["config"].get("agentic_research_v1") or state["config"].get(
                 "execution_contract"
             ):
-                writing = agents.Writing.model_validate(writing_context)
-                agents.guard_writing(writing, approved)
+                with observation(
+                    "publication.render",
+                    content_policy=PUBLIC_CONTENT_POLICY,
+                    input=writing_context,
+                ) as publication:
+                    writing = agents.Writing.model_validate(writing_context)
+                    agents.guard_writing(writing, approved)
+                    publication.update(output=writing.model_dump(mode="json"))
                 state["model_steps"]["Writer"] = dict(
                     role="Writer",
                     context_ref=repo.blob(writing_context),
@@ -593,6 +620,8 @@ async def run(
             external = repo.value(state["context_report_ref"])
             report["external_context"] = external
             report["sources"] += [s for s in external["sources"] if s not in report["sources"]]
+        if context.get("original_research"):
+            report["original_research"] = context["original_research"]
         if state.get("technicals_ref"):
             report["technicals"] = repo.value(state["technicals_ref"])
         if state["config"].get("agentic_research_v1"):

@@ -9,6 +9,7 @@ from decimal import Decimal
 
 from ...contracts import digest
 from ...knowledge import active_research as active
+from ...knowledge import original_search
 from ...knowledge.research_context import knowledge_snapshot
 from ...knowledge.rule_store import RuleStore
 from ...knowledge.store import KnowledgeStore
@@ -36,12 +37,15 @@ PROMPTS["Verifier"] += (
 def enable(state):
     if state["request"].get("enhanced_research") is not True:
         return
+    fresh_protocol = state["config"].get("agentic_research_v1") is not True
     state["config"].update(
         agentic_research_v1=True,
         bounded_context_v1=True,
         prompt_version=PROMPT_VERSION,
         method_version=METHOD_VERSION,
     )
+    if fresh_protocol:
+        state["config"]["original_search_version"] = original_search.VERSION
 
 
 def analysis_context(context, config):
@@ -146,6 +150,8 @@ def material(repo, base_ref, base, knowledge_ref, research_state_ref, sealed_at)
         active_research_version=active.VERSION,
         method_version=METHOD_VERSION,
     )
+    if enriched.get("original_research"):
+        context["original_research"] = enriched["original_research"]
     # Presentation facts retain the same IDs as the model's verified tool evidence.
     presentation = {e.evidence_id: e for e in additional}
     for fact in context["evidence"]:
@@ -188,10 +194,12 @@ async def build(repo, state, base_ref, base, roles, client, save):
         binding["knowledge_ref"] = repo.blob(knowledge)
         save()
     knowledge = repo.value(binding["knowledge_ref"])
-    worker = dict(binding, config=state["config"], calls=state["calls"])
+    worker = dict(
+        binding, config=state["config"], calls=state["calls"], created_at=state["created_at"]
+    )
 
     def checkpoint():
-        for key in ("active_research", "active_manifest_ref"):
+        for key in ("active_research", "active_manifest_ref", "original_search_ref", "source_refs"):
             if key in worker:
                 binding[key] = worker[key]
         save()
@@ -206,6 +214,7 @@ async def build(repo, state, base_ref, base, roles, client, save):
             active_manifest_ref=worker["active_manifest_ref"],
             config=copy.deepcopy(state["config"]),
             calls=copy.deepcopy(state["calls"]),
+            **({"created_at": state["created_at"]} if original_search.enabled(state) else {}),
         )
     )
     value = material(
@@ -217,6 +226,7 @@ async def build(repo, state, base_ref, base, roles, client, save):
     # Root transitive refs in run metadata for the existing backup/GC scanners.
     state["source_refs"] = sorted(
         set(state.get("source_refs", []))
+        | set(worker.get("source_refs", []))
         | {base_ref, research_ref}
         | set(
             re.findall(

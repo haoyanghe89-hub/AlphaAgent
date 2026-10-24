@@ -24,6 +24,10 @@ SHANGHAI = ZoneInfo("Asia/Shanghai")
 SYMBOL = re.compile(r"(?:sh(?:60|68)|sz(?:00|30))\d{4}")
 
 
+class _AwaitingTrades(ValueError):
+    """Complete pre-open quotes have reset, but today's trading has not begun."""
+
+
 def write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + "." + uuid4().hex + ".tmp")
@@ -377,6 +381,13 @@ class MarketDashboard:
             raise ValueError("no timestamped market quotes")
         dates = sorted({q["quoted_at"][:10] for q in quotes.values()})
         quote_date = dates[-1]
+        if (
+            len(quotes) == len(symbols)
+            and dates == [now.date().isoformat()]
+            and now.hour * 60 + now.minute < 570
+            and not any(q["amount"] > 0 for q in quotes.values())
+        ):
+            raise _AwaitingTrades("pre-open quotes have no executed turnover yet")
         rows = rank_groups(groups, quotes, quote_date)
         industries = sorted(
             (r for r in rows if r["kind"] == "industry"), key=lambda r: (-r["change"], r["id"])
@@ -436,6 +447,8 @@ class MarketDashboard:
                         raise ValueError("incomplete market refresh cannot replace a full snapshot")
                     write(self.root / "snapshot.json", current)
                     self.last, self.error = current, None
+                except _AwaitingTrades:
+                    self.error = None
                 except (OSError, ValueError, KeyError, TypeError, requests.RequestException):
                     self.error = "行情源刷新失败，保留上次真实快照；请查看报价日期与时间。"
                 self.attempted = time.monotonic()

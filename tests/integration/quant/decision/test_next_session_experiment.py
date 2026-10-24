@@ -24,6 +24,7 @@ from marketpulse.quant.decision.next_session.contracts import (
     VerifiedSessionCalendar,
 )
 from marketpulse.quant.decision.next_session.store import ExperimentStore
+from marketpulse.quant.knowledge.models import KnowledgeDocumentRow
 from marketpulse.quant.live.store import ResearchRunRow, ResearchStore
 
 ANNUAL = "2026年休市安排 " + "".join(
@@ -47,6 +48,7 @@ def repo(tmp_path):
         "sqlite:///" + str(tmp_path / "test.sqlite"), connect_args={"check_same_thread": False}
     )
     ResearchRunRow.__table__.create(engine)
+    KnowledgeDocumentRow.__table__.create(engine)
     base = ResearchStore(
         sessionmaker(engine),
         LocalContentAddressedBlobStorage(tmp_path / "blobs"),

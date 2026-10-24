@@ -7,8 +7,11 @@ from typing import Literal
 
 from pydantic import Field
 
+from marketpulse.telemetry.tracing import stage
+
 from ..contracts import digest
 from ..domain import FrozenModel
+from . import original_search
 from .retrieval import tokens
 from .routing import RULE_IDS
 
@@ -51,6 +54,7 @@ def tool_key(request):
     return digest(value)
 
 
+@stage("research_plan.validate", as_type="span")
 def guard(plan, context, knowledge, *, stage=None):
     if stage == "METHODS" and plan.tools:
         raise ValueError("本组只选择方法，不得请求额外工具")
@@ -151,6 +155,7 @@ def manifest_hash(plan, results):
     return digest(dict(plan=plan.model_dump(mode="json"), results=results))
 
 
+@stage("evidence.assemble", as_type="chain")
 def apply(context, knowledge, plan, results):
     result = copy.deepcopy(context)
     guard(plan, context, knowledge)
@@ -226,6 +231,7 @@ def model_view(context):
     return result
 
 
+@stage("research.iterations", as_type="agent")
 async def execute(repo, state, save, roles, context, knowledge, client):
     """At most two model planning turns and four read-only tool requests."""
     from .research_tools import capture_valuation
@@ -343,6 +349,16 @@ async def execute(repo, state, save, roles, context, knowledge, client):
         manifest["contract_version"] = journal["contract_version"]
     if stage:
         manifest["enhancement_stage"] = stage
+    original_ref = await asyncio.to_thread(
+        original_search.collect,
+        repo,
+        state,
+        apply(context, knowledge, final, journal["results"]),
+        knowledge,
+    )
+    if original_ref is not None:
+        manifest["original_search_ref"] = original_ref
+        manifest["sealed_at"] = datetime.now().astimezone().isoformat()
     state["active_manifest_ref"] = repo.blob(manifest)
     save()
     return verify(repo, state, context, knowledge)
@@ -560,4 +576,10 @@ def verify(repo, state, context, knowledge):
         or final.model_dump(mode="json") != manifest["final_plan"]
     ):
         raise ValueError("最终研究选择或工具清单不一致")
-    return apply(context, knowledge, final, results)
+    return original_search.attach(
+        repo,
+        state,
+        apply(context, knowledge, final, results),
+        knowledge,
+        manifest.get("original_search_ref"),
+    )

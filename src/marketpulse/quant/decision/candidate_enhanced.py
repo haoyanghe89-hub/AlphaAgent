@@ -12,6 +12,7 @@ from pydantic import Field
 
 from ..contracts import canonical, digest
 from ..domain import FrozenModel
+from ..knowledge import original_search
 from ..knowledge.active_research import MethodSelection, verify_profile
 from ..knowledge.research_context import knowledge_snapshot
 from ..knowledge.rule_store import RuleStore
@@ -611,6 +612,16 @@ async def research(repo, state, roles, base, knowledge, data, save):
         knowledge_ref=state["candidate_knowledge_ref"],
         sealed_at=datetime.now(UTC).isoformat(),
     )
+    original_ref = await asyncio.to_thread(
+        original_search.collect,
+        repo,
+        state,
+        enriched(base, knowledge, plan, journal["results"]),
+        knowledge,
+    )
+    if original_ref is not None:
+        manifest["original_search_ref"] = original_ref
+        manifest["sealed_at"] = datetime.now(UTC).isoformat()
     state["candidate_manifest_ref"] = repo.blob(manifest)
     save()
     return await asyncio.to_thread(verify_manifest, repo, state, base, knowledge, data)
@@ -681,7 +692,13 @@ def verify_manifest(repo, state, base, knowledge, data):
         or plan.model_dump(mode="json") != manifest["final_plan"]
     ):
         raise ValueError("候选研究最终方法或工具清单变化")
-    return enriched(base, knowledge, plan, manifest["results"])
+    return original_search.attach(
+        repo,
+        state,
+        enriched(base, knowledge, plan, manifest["results"]),
+        knowledge,
+        manifest.get("original_search_ref"),
+    )
 
 
 async def run(repo, run_id, stop, settings, *, port=None, collector=None, rules=None):
@@ -872,6 +889,11 @@ async def run(repo, run_id, stop, settings, *, port=None, collector=None, rules=
                 publication_ref=state["candidate_publication_ref"],
                 methods=ctx["methods"],
                 selections=ctx["research_selection"],
+                **(
+                    {"original_research": ctx["original_research"]}
+                    if "original_research" in ctx
+                    else {}
+                ),
             ),
             role_records=[
                 c for c in state["calls"] if c.get("role") and c["status"] == "COMPLETED"
@@ -973,6 +995,7 @@ def verify(repo, data):
         repo.value(data["analysis_context_ref"]) != ctx
         or meta["methods"] != ctx["methods"]
         or meta["selections"] != ctx["research_selection"]
+        or meta.get("original_research") != ctx.get("original_research")
     ):
         raise ValueError("候选增强分析方法或输入已变化")
     packed = packed_input(research)

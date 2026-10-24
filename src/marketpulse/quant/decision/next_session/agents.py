@@ -14,6 +14,9 @@ from marketpulse.investigation.harness.model_retry import retryable_model_error
 from marketpulse.investigation.ports.external import ModelMessage, ModelRequest
 from marketpulse.investigation.recording.diagnostics import provider_diagnostics
 from marketpulse.investigation.recording.errors import InvalidProviderResponseError
+from marketpulse.telemetry.content import PUBLIC_CONTENT_POLICY, public_research, validation_failure
+from marketpulse.telemetry.model import wrap_model
+from marketpulse.telemetry.tracing import observation, stage
 
 from ...contracts import canonical, digest
 from ...domain import FrozenModel
@@ -290,6 +293,9 @@ class DailyRoles:
             )
         if self.state.get("independent_backup_used") and self.fallback_port is not None:
             self.port = self.fallback_port
+        self.port = wrap_model(self.port, self.state)
+        if self.fallback_port is not None:
+            self.fallback_port = wrap_model(self.fallback_port, self.state)
         return self
 
     async def __aexit__(self, *args):
@@ -390,6 +396,7 @@ class DailyRoles:
                 raise
             raise ValueError("输入计量未完成，原预算与调用记录保留") from error
 
+    @stage("agent.role", as_type="agent")
     async def call(self, role, schema, context, guard=None, *, prompt_version=None):
         budget = self.state["config"]["budget"]
         profile = self.request_profile(role)
@@ -581,7 +588,22 @@ class DailyRoles:
                 if self.state["charged_tokens"] > budget["max_tokens"]:
                     raise ValueError("实际令牌预算已用尽")
                 if guard:
-                    guard(response.output)
+                    public = public_research(self.state)
+                    with observation(
+                        "output.validate",
+                        content_policy=PUBLIC_CONTENT_POLICY if public else None,
+                        input=response.output.model_dump(mode="json") if public else {},
+                    ) as validation:
+                        try:
+                            guard(response.output)
+                        except Exception as error:
+                            if public:
+                                validation.update(output=validation_failure(error))
+                            raise
+                        if public:
+                            validation.update(
+                                output="校验通过：结构化响应已通过本次角色的业务约束。"
+                            )
                 call.update(status="COMPLETED", finished_at=datetime.now(UTC).isoformat())
                 self.state.setdefault("model_choice", model)
                 self.state.pop("model_recovery", None)

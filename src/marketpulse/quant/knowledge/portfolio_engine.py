@@ -3,6 +3,8 @@
 from datetime import datetime
 from decimal import ROUND_FLOOR, Decimal, localcontext
 
+from marketpulse.telemetry.tracing import stage
+
 from .advisor_contracts import AdvisorRequest, Position
 from .advisor_engine import build_answer, money, sell_quantity
 from .features import number
@@ -230,6 +232,7 @@ def weaker(row):
     )
 
 
+@stage("portfolio_risk.compute", as_type="span")
 def build(request, studies, quotes, trading, sessions, pinned=None):
     request = PortfolioRequest.model_validate(request)
     with localcontext() as ctx:

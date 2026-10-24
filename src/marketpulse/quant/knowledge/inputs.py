@@ -4,6 +4,8 @@ import re
 from datetime import timedelta
 from zoneinfo import ZoneInfo
 
+from marketpulse.telemetry.tracing import stage
+
 from ..decision import tushare
 from ..decision.next_session.calendar import URLS
 
@@ -12,6 +14,7 @@ SSE_NOTICE = "https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universa
 SSE_DEFERRED = "https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/10816492/files/7476908baade49b8b14881439d2f89b6.docx"
 
 
+@stage("public_data.collect", as_type="retriever")
 def capture_inputs(client, entities, captured_at):
     if captured_at.tzinfo is None or not 1 <= len(entities) <= 4:
         raise ValueError("aware capture time and one to four stocks required")

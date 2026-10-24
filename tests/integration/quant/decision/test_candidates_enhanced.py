@@ -129,7 +129,7 @@ def runtime(setup, monkeypatch):  # noqa: F811
         payload(), enhanced_research=True, budget_profile=BudgetProfile().model_dump(mode="json")
     )
     state, _ = repo.create(request, "synthetic-enhanced")
-    state["config"] = dict(
+    state["config"].update(
         agentic_research_v1=True, prompt_version=enhanced.VERSION, budget=request["budget_profile"]
     )
     repo.save(state)
@@ -186,6 +186,8 @@ def test_candidate_enhanced_publication_methods_original_search_and_state_bindin
     assert analyst_context["plan"] == result["plan"]
     assert "plan" not in review_context and "coverage" not in review_context
     assert review_context["research_selection"] == analyst_context["research_selection"]
+    assert analyst_context["original_research"]["status"] == "MISSING"
+    assert review_context["original_research"] == analyst_context["original_research"]
     assert repo.value(meta["focus_ref"])["output_kind"] == "deterministic_research_focus"
     assert "evidence" not in port.contexts[0]
     assert {e["evidence_id"] for e in port.contexts[0]["evidence_catalog"]} <= {

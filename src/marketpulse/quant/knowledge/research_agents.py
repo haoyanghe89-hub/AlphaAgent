@@ -5,8 +5,13 @@ from typing import Literal
 
 from pydantic import Field
 
+from marketpulse.telemetry import investment as trace_content
+from marketpulse.telemetry.content import PUBLIC_CONTENT_POLICY
+from marketpulse.telemetry.tracing import stage
+
 from ..contracts import digest
 from ..domain import FrozenModel
+from . import numeric_grounding
 
 PROMPT_VERSION = "investment-research-roles-v1"
 COMMON = (
@@ -241,6 +246,9 @@ def role_prompts(config):
             "每项evidence_ids最多四个，每只先安排技术、资金、政策各一处真实引用，分配到支持或反证后再写正文。"
             "citation_requirements非空类别一项也不可遗漏；避免把全部引用堆入同项。"
         )
+    if numeric_grounding.enabled(config):
+        result = dict(result)
+        result["Analyst"] = numeric_grounding.analyst_prompt(result["Analyst"])
     return result
 
 
@@ -364,12 +372,30 @@ class Writing(FrozenModel):
     items: tuple[PublishedItem, ...] = Field(min_length=1, max_length=4)
 
 
-def qualitative(text):
+def qualitative(text, *, numeric_quotes=None):
+    if numeric_quotes is not None:
+        unsafe = re.search(r"概率|胜率|必涨|必跌|保证盈利|立即买|满仓|稳赚|百分之|千分之", text)
+        if unsafe:
+            raise ValueError("数字引用未通过：仍禁止概率、收益承诺或无条件交易指令。")
+        if re.search(r"\d|[％%]", text) and re.search(
+            r"目标|止损价|止盈价|建仓价|买入价|卖出价|仓位|预计|预测|涨至|跌至|设为"
+            r"|风险参考[为是在]|(?:买入|卖出)(?:收盘价|价格|[为在])",
+            text,
+        ):
+            raise ValueError("数字引用未通过：不得把事实数字改作新的交易参数。")
+        for quote in sorted(set(numeric_quotes), key=len, reverse=True):
+            text = re.sub(
+                re.escape(quote) + r"(?![\d.％%/]|每|(?:万|亿|美|港)?元|股|倍|吨)", "", text
+            )
     blocked = re.search(
         r"[0-9％%]|概率|胜率|必涨|必跌|保证盈利|\d|[一二三四五六七八九十百千万亿]+(?:元|股|倍|成|个交易日)|立即买|满仓|稳赚",
         text,
     )
     if blocked:
+        if numeric_quotes is not None:
+            raise ValueError(
+                "数字引用未绑定本条证据的指标、数值、单位或窗口；请逐字引用封存表达或改为定性判断。"
+            )
         raise ValueError(
             "正文含未绑定数字、概率或无条件交易指令："
             + blocked.group()
@@ -383,6 +409,12 @@ def coverage(items, expected):
         raise ValueError("证券覆盖或身份不一致")
 
 
+@stage(
+    "planning.validate",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.validation_input,
+    outputs=trace_content.validation_output,
+)
 def guard_plan(plan, context):
     stocks = {s["security_id"]: s for s in context["stocks"]}
     coverage(plan.selections, stocks)
@@ -394,11 +426,20 @@ def guard_plan(plan, context):
             qualitative(text)
 
 
+@stage(
+    "analysis.validate",
+    as_type="span",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.validation_input,
+    outputs=trace_content.validation_output,
+)
 def guard_analysis(analysis, context):
     stocks = {s["security_id"] for s in context["stocks"]}
     coverage(analysis.opinions, stocks)
     facts = {f["evidence_id"]: f for f in context["evidence"]}
     rules = {r["rule_id"] for r in context["methods"]}
+    grounded = numeric_grounding.enabled(context)
+    stock_views = {s["security_id"]: s for s in context["stocks"]}
     for opinion in analysis.opinions:
         claims = opinion.claims + opinion.opposing
         ids = [c.claim_id for c in claims]
@@ -417,7 +458,6 @@ def guard_analysis(analysis, context):
             if not set(opinion.method_rule_ids) <= set(RULE_IDS) | set(selected["method_rule_ids"]):
                 raise ValueError("方法引用不属于本证券研究选择或必要风控方法")
         for claim in claims:
-            qualitative(claim.text)
             invalid = [
                 e
                 for e in claim.evidence_ids
@@ -429,12 +469,38 @@ def guard_analysis(analysis, context):
                     + ",".join(invalid)
                     + "；请从该证券evidence逐字复制ID，保留点号，不要重新拼写。"
                 )
+            qualitative(
+                claim.text,
+                numeric_quotes=[
+                    q
+                    for eid in claim.evidence_ids
+                    for q in numeric_grounding.quotes(facts[eid], context.get("windows"))
+                ]
+                if grounded
+                else None,
+            )
         if not opinion.summary.startswith(
             "倾向看多" if opinion.direction == "FAVORABLE" else "倾向看空"
         ):
             raise ValueError("摘要与明确方向不一致")
-        for text in (opinion.summary, *opinion.invalidation, *opinion.next_checks):
-            qualitative(text)
+        used = {eid for claim in claims for eid in claim.evidence_ids}
+        qualitative(
+            opinion.summary,
+            numeric_quotes=[
+                q
+                for eid in used
+                for q in numeric_grounding.quotes(facts[eid], context.get("windows"))
+            ]
+            if grounded
+            else None,
+        )
+        for text in (*opinion.invalidation, *opinion.next_checks):
+            qualitative(
+                text,
+                numeric_quotes=numeric_grounding.route_quotes(stock_views[opinion.security_id])
+                if grounded
+                else None,
+            )
         if context.get("protocol") in {
             "public-investment-context-v2",
             "public-investment-context-v3",
@@ -466,6 +532,13 @@ def guard_analysis(analysis, context):
                     )
 
 
+@stage(
+    "review.consistency_check",
+    as_type="span",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.validation_input,
+    outputs=trace_content.validation_output,
+)
 def guard_review(review, analysis):
     opinions = {i.security_id: i for i in analysis.opinions}
     coverage(review.reviews, opinions)
@@ -485,6 +558,13 @@ def guard_review(review, analysis):
             raise ValueError("未通过全部复核的内容不能批准")
 
 
+@stage(
+    "publication.validate",
+    as_type="span",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.validation_input,
+    outputs=trace_content.validation_output,
+)
 def guard_writing(writing, approved):
     expected = [
         dict(security_id=o["security_id"], direction=o["direction"], summary=o["summary"])

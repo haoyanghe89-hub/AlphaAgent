@@ -7,6 +7,8 @@ from datetime import UTC, datetime
 
 from pypdf import PdfReader
 
+from marketpulse.telemetry.tracing import stage
+
 from ..contracts import digest
 from .contracts import EvidenceItem, Locator
 
@@ -126,6 +128,7 @@ def terms(question):
     }
 
 
+@stage("evidence.retrieve", as_type="retriever")
 def retrieve(documents, question, cutoff, *, limit=12):
     wanted = terms(question) | {"业务", "经营", "收入", "利润", "现金", "需求", "订单", "风险"}
     selected = []

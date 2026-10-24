@@ -9,6 +9,8 @@ from uuid import NAMESPACE_URL, uuid5
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
+from marketpulse.telemetry.tracing import stage
+
 from ..contracts import digest
 from ..decision import tushare
 from ..decision.tools import SourceClient
@@ -41,6 +43,7 @@ def calendars(client, initial, spec):
     return dict(calendars=tables, calendar_sources=sources)
 
 
+@stage("forward_observation.collect", as_type="retriever")
 def collect(client, state, now):
     report = state["data"]
     spec = report["forward_protocol"]

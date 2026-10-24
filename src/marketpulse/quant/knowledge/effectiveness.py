@@ -8,6 +8,8 @@ import time
 from datetime import UTC, datetime
 from uuid import NAMESPACE_URL, UUID, uuid5
 
+from marketpulse.telemetry.tracing import workflow
+
 from ..contracts import digest
 from ..decision.next_session.agents import DailyRoles
 from ..decision.tools import SourceClient
@@ -332,6 +334,7 @@ def report(repo, state):
     )
 
 
+@workflow("alphaagent.effectiveness", id_parameter="rid")
 async def execute(repo, rules, rid, stop, settings, *, port=None):
     state = repo.get(rid, with_data=False)
     if state["status"] == "COMPLETED":

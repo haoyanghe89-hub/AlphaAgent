@@ -7,6 +7,10 @@ from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from urllib.parse import parse_qs, urlsplit
 
+from marketpulse.telemetry import investment as trace_content
+from marketpulse.telemetry.content import PUBLIC_CONTENT_POLICY
+from marketpulse.telemetry.tracing import stage
+
 from ..contracts import digest
 from ..decision import tushare
 from ..decision.tools import SourceUnavailable, Stopped
@@ -81,6 +85,13 @@ def endpoint(url, expected):
     )
 
 
+@stage(
+    "external_context.collect",
+    as_type="retriever",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.collect_input,
+    outputs=trace_content.collected_output,
+)
 def collect(repo, client, packet):
     snapshot = dict(version=VERSION, market_date=packet["market_date"], entries=[], gaps=[])
     for stock in packet["stocks"]:
@@ -170,6 +181,13 @@ def collect(repo, client, packet):
     return snapshot
 
 
+@stage(
+    "external_context.assemble",
+    as_type="chain",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.sources_input,
+    outputs=trace_content.external_output,
+)
 def rebuild(repo, packet, snapshot):
     legacy_url_rules = snapshot["version"] == "investment-context-v1"
     if (
@@ -301,6 +319,13 @@ def rebuild(repo, packet, snapshot):
     return result
 
 
+@stage(
+    "context.enrich",
+    as_type="chain",
+    content_policy=PUBLIC_CONTENT_POLICY,
+    inputs=trace_content.context_input,
+    outputs=trace_content.context_output,
+)
 def enrich(context, evidence, report):
     result, facts = copy.deepcopy(context), copy.deepcopy(evidence)
     result.update(protocol="public-investment-context-v2", cutoff=report["cutoff"])
@@ -441,6 +466,7 @@ def verify(repo, state):
         packet,
         repo.value(state["knowledge_ref"]),
         state["request"]["horizon_sessions"],
+        numeric_grounding=state["config"].get("numeric_grounding"),
     )
     if state["request"].get("analysis_focus"):
         base["user_analysis_focus"] = state["request"]["analysis_focus"]
@@ -462,6 +488,16 @@ def verify(repo, state):
             raise ValueError("增强研究基础证据不等于原文复算")
         expected = active_research.verify(repo, state, expected, repo.value(state["knowledge_ref"]))
         evidence += active_research.additional_evidence(expected["tool_results"])
+    else:
+        from . import original_search
+
+        expected = original_search.attach(
+            repo,
+            state,
+            expected,
+            repo.value(state["knowledge_ref"]),
+            state.get("original_search_ref"),
+        )
     if expected != repo.value(state["public_context_ref"]) or evidence != state["data"]["evidence"]:
         raise ValueError("模型上下文或证据不等于原文复算")
     return report

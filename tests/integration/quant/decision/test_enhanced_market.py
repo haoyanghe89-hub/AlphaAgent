@@ -215,6 +215,7 @@ def test_enhanced_market_seals_actual_roles_tools_methods_and_unchanged_scope(en
     assert len(collections) == 1
     data = result["data"]
     block = data["enhanced_research"]
+    assert block["original_research"]["status"] == "MISSING"
     model = [c for c in result["calls"] if c.get("kind") == "model"]
     completed = [c for c in model if c["status"] == "COMPLETED"]
     assert [c["role"] for c in completed] == ["Researcher", "Planner", "Analyst", "Verifier"]
@@ -235,6 +236,10 @@ def test_enhanced_market_seals_actual_roles_tools_methods_and_unchanged_scope(en
     assert all(t["evidence_ids"] for t in block["tool_results"])
     for call in model:
         assert PRIVATE_QUESTION not in canonical(repo.value(call["request_ref"]))
+        if call["role"] in {"Planner", "Analyst", "Verifier"}:
+            assert repo.value(call["request_ref"])["context"]["original_research"] == block[
+                "original_research"
+            ]
     original = market_scan.rebuild(repo, repo.value(data["market_snapshot_ref"]))
     assert {
         k: v for k, v in data.items() if k not in {"market_snapshot_ref", "enhanced_research"}

@@ -287,7 +287,7 @@ def test_rejected_explanations_can_continue_with_new_feedback_round(runtime):
     assert resumed["direction_review_recovery"]["previous_review_step"] == "Verifier-2"
 
 
-def test_api_idempotence_local_guard_and_self_contained_export(runtime, monkeypatch):
+def test_api_idempotence_local_guard_and_self_contained_export(runtime, monkeypatch, tmp_path):
     repo, packet, settings = runtime
     app = FastAPI()
     app.include_router(router)
@@ -335,7 +335,7 @@ def test_api_idempotence_local_guard_and_self_contained_export(runtime, monkeypa
             assert "record.json" in bundle.namelist()
             assert len([n for n in bundle.namelist() if n.startswith("blobs/")]) > 4
         # UI fixture only: never register synthetic data in the user's real database.
-        fixture = Path(".phase3-quant-o/investment-knowledge-20261016-04/synthetic-ui-fixture.json")
+        fixture = tmp_path / "synthetic-ui-fixture.json"
         fixture.write_text(json.dumps(result.json(), ensure_ascii=False), encoding="utf8")
         monkeypatch.setattr(
             "marketpulse.quant.knowledge.research_service.knowledge_snapshot",

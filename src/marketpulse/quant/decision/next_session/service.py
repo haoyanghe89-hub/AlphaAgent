@@ -6,6 +6,8 @@ import time
 from datetime import UTC, date, datetime
 from uuid import uuid4
 
+from marketpulse.telemetry.tracing import workflow
+
 from ...contracts import digest
 from ..backup_model import open_backup
 from ..methods import load_config
@@ -240,6 +242,7 @@ async def analyze_verified(roles, context, *, repairs=0, report=None):
     raise ValueError("语义审核未通过：" + review.reason)
 
 
+@workflow("alphaagent.next_session", id_parameter="rid")
 async def run(
     repo,
     rid,

@@ -168,6 +168,96 @@ def test_partial_quote_refresh_never_erases_complete_market(tmp_path):
     assert result["retrieved_at"] == complete["retrieved_at"]
 
 
+@pytest.fixture
+def preopen_market(monkeypatch, tmp_path):
+    class Clock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return cls.fromisoformat("2026-10-15T09:20:00+08:00").astimezone(tz)
+
+    monkeypatch.setattr(m, "datetime", Clock)
+    symbols = ["sh600000", "sz000001"]
+    feed = m.MarketDashboard(tmp_path)
+    feed.classification = lambda: dict(
+        groups=[
+            dict(id="i", name="合成行业", kind="industry", symbols=symbols),
+            dict(id="c", name="合成概念", kind="concept", symbols=symbols),
+        ],
+        sources=[],
+        expected=2,
+        industry_expected=1,
+        concept_expected=1,
+        unclassified=0,
+        retrieved_at="2026-10-15T00:00:00+00:00",
+    )
+    feed.fetch = lambda url: (
+        "".join(raw_quote(s, stamp="20261015091959", amount="0") for s in symbols),
+        {},
+    )
+    previous = dict(example(), quoted_to="2026-10-14T15:00:00+08:00")
+    m.write(tmp_path / "snapshot.json", previous)
+    return feed, previous
+
+
+def test_preopen_zero_turnover_retains_snapshot_without_refresh_error(preopen_market):
+    feed, previous = preopen_market
+    feed.error = "previous refresh failed"
+    result = feed.snapshot()
+    assert result["refresh_error"] is None
+    assert result["freshness"] == "LATEST_QUOTE"
+    assert result["quoted_to"] == previous["quoted_to"]
+    assert result["retrieved_at"] == previous["retrieved_at"]
+    assert json.loads((feed.root / "snapshot.json").read_text(encoding="utf8")) == previous
+
+
+def test_preopen_executed_trades_refresh_rankings(preopen_market):
+    feed, _ = preopen_market
+    feed.fetch = lambda url: (
+        "".join(raw_quote(s, stamp="20261015091959") for s in ["sh600000", "sz000001"]),
+        {},
+    )
+    result = feed.snapshot()
+    assert result["refresh_error"] is None
+    assert result["quote_date"] == "2026-10-15"
+    assert result["coverage"]["stocks_quoted"] == 2
+    assert len(result["industries"]) == len(result["hot_sectors"]) == 1
+
+
+@pytest.mark.parametrize("failure", ["missing", "network", "past_date", "after_open"])
+def test_zero_turnover_does_not_hide_feed_failures(preopen_market, monkeypatch, failure):
+    feed, previous = preopen_market
+    if failure == "network":
+        def fetch(url):
+            raise m.requests.ConnectionError("synthetic outage")
+
+        feed.fetch = fetch
+    elif failure == "after_open":
+        class Clock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls.fromisoformat("2026-10-15T09:30:00+08:00").astimezone(tz)
+
+        monkeypatch.setattr(m, "datetime", Clock)
+    else:
+        symbols = ["sh600000"] if failure == "missing" else ["sh600000", "sz000001"]
+        stamp = "20261014091959" if failure == "past_date" else "20261015091959"
+        feed.fetch = lambda url: (
+            "".join(raw_quote(s, stamp=stamp, amount="0") for s in symbols),
+            {},
+        )
+    result = feed.snapshot()
+    assert result["refresh_error"]
+    assert result["freshness"] == "DELAYED"
+    assert result["quoted_to"] == previous["quoted_to"]
+
+
+def test_preopen_without_history_does_not_invent_rankings(preopen_market):
+    feed, _ = preopen_market
+    (feed.root / "snapshot.json").unlink()
+    with pytest.raises(ValueError, match="unavailable"):
+        feed.snapshot()
+
+
 def test_industry_master_membership_and_private_cache(monkeypatch, tmp_path):
 
     calls = []

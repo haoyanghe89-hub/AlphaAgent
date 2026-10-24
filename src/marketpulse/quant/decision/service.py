@@ -6,6 +6,7 @@ from datetime import UTC, datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from marketpulse.infrastructure.storage.models import BlobError
+from marketpulse.telemetry.tracing import stage, workflow
 
 from . import industry, market, report
 from .contracts import CoverageReport, EvidenceBundle, EvidenceItem, SourceCapability
@@ -40,6 +41,7 @@ def source_capability(source):
     )
 
 
+@stage("decision.sources.collect", as_type="retriever")
 def collect(repo, state, stop, *, publish=True):
     request = state["request"]
     prior_seconds, attempt_started = state.get("elapsed_seconds", 0), time.monotonic()
@@ -231,6 +233,7 @@ def collect(repo, state, stop, *, publish=True):
     return state
 
 
+@workflow("alphaagent.decision_research", id_parameter="run_id")
 async def run(repo, run_id, stop, *, collector=collect):
     state = repo.get(run_id, with_data=False)
     started, prior_seconds = time.monotonic(), state.get("elapsed_seconds", 0)

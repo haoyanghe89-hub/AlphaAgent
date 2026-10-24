@@ -23,6 +23,8 @@
 
 策略回测继续沿用既有5.2准入门禁；研究完成、引用可复算或方法审核通过不代表预测有效、策略盈利或正式回测准入。原有单股估值、比较、策略及调查档案继续可读。**原型计算代码不得移植或复制**，新增计算须遵守原有 [重构约束](docs/superpowers/specs/2026-10-06-alphaagent-redesign.md) 和 [评测门禁](docs/evaluation.md)。
 
+Langfuse 全链路观测与运行检查见 [Langfuse 接入说明](docs/alphaagent-langfuse.md)。已有业务记录和账户资料继续保存在本地，Trace 使用结构化摘要、调用身份和证据引用。
+
 ## 本地开发
 
 量化运行使用 Python 3.12–3.13。Windows 时区数据库由 `tzdata` 基础依赖提供。

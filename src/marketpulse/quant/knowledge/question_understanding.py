@@ -12,6 +12,8 @@ from uuid import UUID, uuid5
 from pydantic import Field
 from sqlalchemy.exc import IntegrityError
 
+from marketpulse.telemetry.tracing import workflow
+
 from ..contracts import canonical, digest
 from ..decision.next_session.agents import DailyRoles
 from ..decision.store import DecisionStore
@@ -441,6 +443,7 @@ def collect_registry(client, question, previous):
     return registry, source
 
 
+@workflow("alphaagent.question_understanding", id_parameter="run_id")
 async def run(repo, run_id, stop, settings, *, port=None, catalog=collect_registry):
     state = repo.get(run_id, with_data=False)
     if state["status"] == "COMPLETED":

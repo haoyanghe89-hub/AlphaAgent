@@ -7,6 +7,8 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+from marketpulse.telemetry.tracing import stage, workflow
+
 from ..contracts import digest
 from ..decision.tools import SourceClient
 from .features import compute_features
@@ -17,6 +19,7 @@ from .routing import CATALOG, RULE_IDS, VERSION, evaluate_routes
 from .trading_rules import verify_trading_rules
 
 
+@stage("deterministic.compute", as_type="span")
 def build_report(request, packet, knowledge, trading_rules):
     request = PlanRequest.model_validate(request).model_dump(mode="json")
     features = compute_features(packet, strict=False)
@@ -140,6 +143,7 @@ def execute(repo, rule_store, run_id, stop, *, collector=capture_inputs):
     return repo.get(run_id)
 
 
+@workflow("alphaagent.investment_plan", id_parameter="run_id")
 async def run(repo, rules, run_id, stop, **kwargs):
     work = asyncio.create_task(asyncio.to_thread(execute, repo, rules, run_id, stop, **kwargs))
     try:

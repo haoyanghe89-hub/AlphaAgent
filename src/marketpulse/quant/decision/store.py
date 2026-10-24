@@ -82,8 +82,14 @@ class DecisionStore:
             tokens=0,
         )
         if request.get("enhanced_research"):
+            from ..knowledge.original_search import VERSION as ORIGINAL_SEARCH_VERSION
+
             state.update(
-                config=dict(agentic_research_v1=True, budget=request["budget_profile"]),
+                config=dict(
+                    agentic_research_v1=True,
+                    budget=request["budget_profile"],
+                    original_search_version=ORIGINAL_SEARCH_VERSION,
+                ),
                 charged_tokens=0,
             )
         try:

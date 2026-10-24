@@ -14,6 +14,8 @@ from zoneinfo import ZoneInfo
 
 from pydantic import Field
 
+from marketpulse.telemetry.tracing import workflow
+
 from ..contracts import digest
 from ..decision import tushare
 from ..decision.next_session.agents import DailyRoles
@@ -323,6 +325,7 @@ def create(base, date, kind="SCHEDULED"):
     return state, True
 
 
+@workflow("alphaagent.market_briefing", id_parameter="rid")
 async def run(base, rules, rid, settings, *, collector=collect, port=None):
     repo = DecisionStore(base)
     state = base.get(rid, with_data=False)

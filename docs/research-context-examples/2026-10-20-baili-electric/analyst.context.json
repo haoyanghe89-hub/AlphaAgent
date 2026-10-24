@@ -1,0 +1,377 @@
+{
+  "citation_requirements": [
+    {
+      "funding": [
+        "X-600468.SH-daily-20",
+        "X-600468.SH-daily-5",
+        "X-600468.SH-minute"
+      ],
+      "policy": [
+        "X-600468.SH-CN-RENEWAL-2024"
+      ],
+      "security_id": "600468.SH",
+      "technical": [
+        "T-600468.SH-atr_ratio",
+        "T-600468.SH-macd_histogram",
+        "T-600468.SH-rsi_14"
+      ]
+    }
+  ],
+  "cutoff": "2026-10-20T02:04:57.122827+00:00",
+  "evidence": [
+    {
+      "evidence_id": "F-600468SH-annualized_volatility_20",
+      "unit": "ratio",
+      "value": "0.3366865866642921982582262924649040",
+      "window": "W1"
+    },
+    {
+      "evidence_id": "F-600468SH-average_turnover_20",
+      "unit": "CNY/session",
+      "value": "130389584.800",
+      "window": "W2"
+    },
+    {
+      "evidence_id": "F-600468SH-benchmark_return_20",
+      "unit": "ratio",
+      "value": "-0.0744143982267218553045866224476434",
+      "window": "W1"
+    },
+    {
+      "evidence_id": "F-600468SH-cash_conversion",
+      "unit": "ratio",
+      "value": "2.326616455672320078430156612304899",
+      "window": "W3"
+    },
+    {
+      "evidence_id": "F-600468SH-close",
+      "unit": "CNY/share",
+      "value": "5.6",
+      "window": "W4"
+    },
+    {
+      "evidence_id": "F-600468SH-ma_20",
+      "unit": "CNY/share",
+      "value": "6.031",
+      "window": "W2"
+    },
+    {
+      "evidence_id": "F-600468SH-ma_60",
+      "unit": "CNY/share",
+      "value": "6.076",
+      "window": "W5"
+    },
+    {
+      "evidence_id": "F-600468SH-relative_return_20",
+      "unit": "ratio",
+      "value": "-0.0834803386153834078533081143944619",
+      "window": "W1"
+    },
+    {
+      "evidence_id": "F-600468SH-return_20",
+      "unit": "ratio",
+      "value": "-0.1578947368421052631578947368421053",
+      "window": "W1"
+    },
+    {
+      "evidence_id": "F-600468SH-revenue_growth_ttm",
+      "unit": "ratio",
+      "value": "0.158387661250347781977301265220495",
+      "window": "W3"
+    },
+    {
+      "evidence_id": "F-600468SH-roe_ttm",
+      "unit": "ratio",
+      "value": "0.03677045785288161433350917131546795",
+      "window": "W3"
+    },
+    {
+      "evidence_id": "F-600468SH-turnover_ratio_5_20",
+      "unit": "ratio",
+      "value": "0.5912900046292654503490680645222823",
+      "window": "W2"
+    },
+    {
+      "evidence_id": "T-600468.SH-atr_ratio",
+      "kind": "TECHNICAL",
+      "unit": "ratio",
+      "value": "0.03964631665419652151037893237912517318838",
+      "window": "W6"
+    },
+    {
+      "evidence_id": "T-600468.SH-macd_histogram",
+      "kind": "TECHNICAL",
+      "unit": "CNY/share",
+      "value": "-0.0560815815369590199758684752019194906464",
+      "window": "W6"
+    },
+    {
+      "evidence_id": "T-600468.SH-rsi_14",
+      "kind": "TECHNICAL",
+      "unit": "index_0_100",
+      "value": "35.99541305030124222125976610644946117065",
+      "window": "W6"
+    },
+    {
+      "evidence_id": "X-600468.SH-CN-RENEWAL-2024",
+      "kind": "POLICY_CLAUSE",
+      "policy_state": {
+        "amendment_status": "UNKNOWN",
+        "company_link_status": "HYPOTHESIS",
+        "current_validity": "UNKNOWN",
+        "declared_scope_end": null,
+        "effective_at": null,
+        "qualification_status": "UNKNOWN",
+        "temporal_status": "UNKNOWN"
+      },
+      "text": "（一）推进重点行业设备更新改造。 围绕推进新型工业化，以节能降碳、超低排放、安全生产、数字化转型、智能化升级为重要方向，聚焦钢铁、有色、石化、化工、建材、电力、机械、航空、船舶、轻纺、电子等重点行业，大力推动生产设备、用能设备、发输配电设备等更新和技术改造。加快推广能效达到先进水平和节能水平的用能设备，分行业分领域实施节能降碳改造。推广应用智能制造设备和软件，加快工业互联网建设和普及应用，培育数字",
+      "unit": "text",
+      "value": null,
+      "window": "W7"
+    },
+    {
+      "evidence_id": "X-600468.SH-business",
+      "kind": "BUSINESS_TEXT",
+      "text": "研发、生产、销售输配电及控制设备、智能电网电气设备、泵等",
+      "unit": "text",
+      "value": null,
+      "window": "W8"
+    },
+    {
+      "evidence_id": "X-600468.SH-daily-20",
+      "kind": "DAILY_FLOW",
+      "unit": "CNY",
+      "value": "-127741500.00",
+      "window": "W9"
+    },
+    {
+      "evidence_id": "X-600468.SH-daily-5",
+      "kind": "DAILY_FLOW",
+      "unit": "CNY",
+      "value": "-12282000.00",
+      "window": "W10"
+    },
+    {
+      "evidence_id": "X-600468.SH-minute",
+      "kind": "MINUTE_FLOW",
+      "unit": "CNY",
+      "value": "-2369190.0",
+      "window": "W11"
+    }
+  ],
+  "horizon": "SWING",
+  "horizon_sessions": 20,
+  "limitations": [
+    "资金是供应商主力代理，不识别机构身份；日频与分钟分列，不能相加或凭共时变动认定因果。",
+    "政策资格及修订覆盖未核定，公司受益与受限均为待核假设；无完整估值、新闻和独立财报审计。",
+    "原始资料仅用于本次研究，首次取得不是历史连续监测；方法效果未验证。"
+  ],
+  "market_date": "20261019",
+  "methods": [
+    {
+      "counterexamples": [
+        "持仓分散但都受同一融资风险影响时，表面分散仍可能发生共同损失。"
+      ],
+      "quote": "One is a decision that can’t easily be reversed . What you value changes over time. So long-term commitments that can’t be reneged on – concentrated illiquid assets, or debt that c",
+      "rule_id": "KR-AVOID-RUIN",
+      "system_rule": "研究投资路线前检查债务、集中与流动性约束，优先列出哪些失败会破坏持续参与能力。",
+      "title": "先排除难以恢复和难以逆转的损失"
+    },
+    {
+      "counterexamples": [
+        "账面收益良好但急需现金时无法卖出，仍可能导致实际财务目标失败。"
+      ],
+      "quote": "Illiquidity – If an investor needs money with which to pay for surgery in three months or buy a home in a year, he may be unable to make an investment that can’t be counted on for ",
+      "rule_id": "KR-CAPACITY-LIQUIDITY",
+      "system_rule": "把投资期限、近期现金用途与证券可成交能力一起核查，资金规模不能单独决定适合哪条路线。",
+      "title": "用现金需求日期约束可承受的流动性"
+    },
+    {
+      "counterexamples": [
+        "把濒临失败企业当作正常周期反转会高估价值；把暂时低谷永久化也会误判。"
+      ],
+      "quote": "(1) Firms in trouble: A distressed firm generally has negative earnings and cashflows. It expects to lose money for some time in the future. For these firms, estimating future cash",
+      "rule_id": "KR-DCF-DISTRESS",
+      "system_rule": "遇到亏损、偿债压力或周期低谷，先区分持续经营、重整和恢复情景，不把单期亏损外推为永续现金流。",
+      "title": "困境与周期企业需要调整持续经营假设"
+    },
+    {
+      "counterexamples": [
+        "短时放量突破可能是虚假信号；跳空与无法成交会使图形买点不能按预期执行。"
+      ],
+      "quote": "Review the stock’s chart and look for a breakout from a chart pattern on high volume. Buy within 5% of the chart pattern’s buy point. 3 How to When you’re considering buying a stoc",
+      "rule_id": "KR-TREND-ENTRY-DISCIPLINE",
+      "system_rule": "趋势研究必须先定义可复算的形态买点与成交量条件，再检查是否追高；不能根据一日上涨宣称有效突破。",
+      "title": "突破入场需要量价证据并防止追高"
+    },
+    {
+      "counterexamples": [
+        "市场总体转弱时个股突破可能失败；总体走强也不能替代个股条件核查。"
+      ],
+      "quote": "Check the Stock Market Exposure indicator on investors.com to make sure buying a new position will keep your portfolio aligned with the current market conditions. Go to the IBD Sto",
+      "rule_id": "KR-TREND-MARKET",
+      "system_rule": "A股趋势研究先检查有真实数据的市场状态，再评估个股信号；不把IBD专有指标冒充本地已实现指标。",
+      "title": "趋势入场先检查整体市场环境"
+    },
+    {
+      "counterexamples": [
+        "更好机会的预期不可靠或换手成本较高时，频繁替换可能降低实际收益。"
+      ],
+      "quote": "Sell stocks that trade at sufficient premiums over expected value The higher a stock price’s premium to its expected value, the more compelling the selling opportunity. Investors s",
+      "rule_id": "KR-EXPECTATION-EXIT",
+      "system_rule": "定期复核原持有依据、估值和可比机会，列清退出触发条件及成本，不能只因上涨或下跌机械换股。",
+      "title": "退出理由同时考虑价值、替代机会和成本"
+    },
+    {
+      "counterexamples": [
+        "高增长由低回报扩张支撑时会损害价值；历史高回报也不保证新增项目延续。"
+      ],
+      "quote": "Leaving the question of price aside, the best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return. The ",
+      "rule_id": "KR-GROWTH-RETURN",
+      "system_rule": "持续跟踪增长是否伴随有质量的资本回报；增长消耗资本且回报恶化时重新评估持有逻辑。",
+      "title": "增长要与增量资本回报一起判断"
+    },
+    {
+      "counterexamples": [
+        "行业经济特征持续恶化时，即使管理者优秀且估值低，也可能形成价值陷阱。"
+      ],
+      "quote": "It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price. Charlie understood this early; I was a slow learner. But now, when buying compa",
+      "rule_id": "KR-QUALITY-ECONOMICS",
+      "system_rule": "研究低估值股票时同时检查业务回报、竞争优势与资本消耗，不能只凭低价格判定便宜。",
+      "title": "先看企业经济特征，再看便宜程度"
+    }
+  ],
+  "plan": {
+    "selections": [
+      {
+        "focus": [
+          "核查市场状态与个股均线、突破条件是否同步改善",
+          "核查近期成交额强度能否持续，避免单日放量误判"
+        ],
+        "rationale": "期限偏波段，仅趋势路线准入；但市场处于下行状态，股价未站上均线、未突破近期高点且相对强弱不足，成交额强度也未确认，故看多方向成立仍须等待触发。",
+        "route_id": "TREND_SWING",
+        "security_id": "600468.SH"
+      }
+    ]
+  },
+  "protocol": "public-investment-context-v3",
+  "review_feedback": [],
+  "review_round": 0,
+  "stocks": [
+    {
+      "eligible_routes": [
+        "TREND_SWING"
+      ],
+      "external": {
+        "business_basis": "公开主营范围，供应商转录，未独立核对公司披露",
+        "daily_asof": "20261019",
+        "minute_asof": "2026-10-20T10:04:00+08:00",
+        "minute_freshness": "LIVE",
+        "policy_scope": "只覆盖本次定向官方原文，非完整政策库"
+      },
+      "financial_scope": "NON_FINANCIAL_CONSOLIDATED",
+      "industry": "电力设备",
+      "market_regime": "DOWNTREND",
+      "name": "百利电气",
+      "preferred_route": "TREND_SWING",
+      "routes": [
+        {
+          "conditions": [
+            {
+              "label": "市场未处于均线下行状态",
+              "passed": false
+            },
+            {
+              "label": "股价站上20日和60日均线",
+              "passed": false
+            },
+            {
+              "label": "突破前20个交易日最高价",
+              "passed": false
+            },
+            {
+              "label": "20日表现强于沪深300",
+              "passed": false
+            },
+            {
+              "label": "近5日成交额强度不低于20日均值",
+              "passed": false
+            }
+          ],
+          "eligible": true,
+          "invalidation": "跌破20日低点时重新评估；趋势失效不能改成长线补仓理由。",
+          "route_id": "TREND_SWING",
+          "status": "WAIT_TRIGGER"
+        },
+        {
+          "conditions": [
+            {
+              "label": "市场未处于均线下行状态",
+              "passed": false
+            },
+            {
+              "label": "股价站上20日和60日均线",
+              "passed": false
+            },
+            {
+              "label": "收入与净利润TTM同比均为正增长",
+              "passed": false
+            },
+            {
+              "label": "经营现金流为正且覆盖合并净利润",
+              "passed": true
+            }
+          ],
+          "eligible": false,
+          "invalidation": "增长或现金回收恶化时复核；价格跌破风险参考也需重新评估。",
+          "route_id": "QUALITY_GROWTH",
+          "status": "NOT_APPLICABLE"
+        }
+      ],
+      "security_id": "600468.SH"
+    }
+  ],
+  "technical_guidance": [
+    "MACD和均线属于同源价格证据，不能作为互相独立的确认票；交叉仅是当期状态，不保证趋势。",
+    "MACD在震荡中可能频繁反复；RSI高低不是立即反转或买卖指令，强趋势可持续极端。",
+    "ATR只衡量波动、不判断方向；仅辅助理解风险距离，不替代原路线退出纪律，不承诺止损成交。"
+  ],
+  "windows": {
+    "W1": {
+      "benchmark_id": "000300.SH",
+      "end": "20261019",
+      "return_sessions": 20,
+      "start": "20260911"
+    },
+    "W10": "20261013—20261019",
+    "W11": "2026-10-20T10:04:00+08:00",
+    "W2": {
+      "benchmark_id": "000300.SH",
+      "end": "20261019",
+      "return_sessions": 20,
+      "start": "20260914"
+    },
+    "W3": "20260630",
+    "W4": {
+      "benchmark_id": "000300.SH",
+      "end": "20261019",
+      "return_sessions": 20,
+      "start": "20261019"
+    },
+    "W5": {
+      "benchmark_id": "000300.SH",
+      "end": "20261019",
+      "return_sessions": 20,
+      "start": "20260720"
+    },
+    "W6": {
+      "adjustment": "provider_factor_normalized_to_cutoff",
+      "end": "20261019",
+      "start": "20260421",
+      "warmup": "reset_on_missing;fixed_120_session_max"
+    },
+    "W7": "2024-03-13",
+    "W8": "2026-10-20T02:04:57.122827+00:00",
+    "W9": "20260914—20261019"
+  }
+}

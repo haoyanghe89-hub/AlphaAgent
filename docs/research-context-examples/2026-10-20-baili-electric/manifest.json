@@ -1,0 +1,68 @@
+{
+  "run_id": "RUN-IR-0bbb76ffce754d44847ce8dc76b08807",
+  "status": "COMPLETED",
+  "security_id": "600468.SH",
+  "name": "百利电气",
+  "research_mode": "STANDARD",
+  "schema_version": "investment-research-v4",
+  "created_at": "2026-10-20T02:04:50.103599+00:00",
+  "profile_was_null": true,
+  "redactions": [],
+  "export_scope": "Only archived Planner/approved Analyst context and messages; no application mutations or model requests",
+  "roles": {
+    "Planner": {
+      "request_ref": "blob://sha256/dc89161aae936ae323c6e621c3b6a281fdea2edb9d53b699095ce57ddd4ba7ca",
+      "context_ref": "blob://sha256/a21096dc7d377e8f1aa164d41c2c319bd81ce7de01f63e725c6c393d1c256c78",
+      "response_ref": "blob://sha256/0c1c4446bc5f062cf8e38fbfb55df5683a98bc9b647f7f8f55bd4097975d0c92",
+      "model": "deepseek-flash",
+      "started_at": "2026-10-20T02:05:03.684689+00:00",
+      "prompt_version": "investment-review-checks-roles-v1",
+      "call_index": 17,
+      "user_message_is_exact_context": true
+    },
+    "Analyst": {
+      "request_ref": "blob://sha256/85405d67e00eda925142bed681d22475aa8ceff4d2f450ec05f1933cccd51aa0",
+      "context_ref": "blob://sha256/208f3d5409da0701fabd0b9aa361309e96eddbf0bc324766771423d7265fc4c1",
+      "response_ref": "blob://sha256/0f74bca857b3cb19865a611fe48a2faa28d7843f04ab26986f5d9403bd05cfd3",
+      "model": "deepseek-flash",
+      "started_at": "2026-10-20T02:05:04.986836+00:00",
+      "prompt_version": "investment-review-checks-roles-v1",
+      "call_index": 18,
+      "user_message_is_exact_context": true
+    }
+  },
+  "knowledge_ref": "blob://sha256/612a74fb61092ccc2a41a974f68d795d2014d363c69e31064543cea63d2ed101",
+  "method_versions": {
+    "KR-AVOID-RUIN": "1615027d53ef498d79c7b62329d3b1fbf35be50078f2ade40b44e5e826cb9773",
+    "KR-CAPACITY-LIQUIDITY": "17b8c791d28f51cedfd74d810fbfcf22dc0bac01cd0fb8e85c1a9b67322fd40a",
+    "KR-DCF-DISTRESS": "56508280b01283466e14a8c7d84d86c6d6972c7ab9e7569c0130e0aadea14877",
+    "KR-TREND-ENTRY-DISCIPLINE": "248671ba9031e1657fabbacbac015769f1dae987e63d6f58d320ad4f6c4d5f18",
+    "KR-TREND-MARKET": "3cdfa7d12bc6cbaffda9ae9d16761b89f236046b837beadf149030514cc36be9",
+    "KR-EXPECTATION-EXIT": "12c95f541f54aa0826b19edf78952dca28eb9e7c8f7552664fa85918527ce544",
+    "KR-GROWTH-RETURN": "955b2c3550391b916e9c886a2fb786d2fccb883dba9529cdc4fec4896f0f0452",
+    "KR-QUALITY-ECONOMICS": "c7e6f2b0df8e10ac42adc6811810943fc611c6d7b2d1d6b255bf6865877bdec9"
+  },
+  "verified_blob_count": 8,
+  "files": {
+    "analyst.context.json": {
+      "sha256": "8cf811276e64dc47fa50bc1d89ade8ea37aace2b493e24746b26dafe548e61b0",
+      "bytes": 14813
+    },
+    "analyst.messages.json": {
+      "sha256": "13b3b4db6841b74db617ba59de39d311aebffbdab40a63ad83ab4bdbdf0cd01e",
+      "bytes": 14579
+    },
+    "planner.context.json": {
+      "sha256": "c855382040e9ee9f643b5c1bc05ec4e3e36929acff775ae35f5e18af2aa193d5",
+      "bytes": 7863
+    },
+    "planner.messages.json": {
+      "sha256": "3c3094c44eb095594a4cf1cc49041420b9ef0f0303c81226220efdd935b4373a",
+      "bytes": 9132
+    },
+    "README.md": {
+      "sha256": "d7ec7b01a9cb04716a6df9ba98adb96c105370e44714e781c24d0b5901670f05",
+      "bytes": 8419
+    }
+  }
+}
